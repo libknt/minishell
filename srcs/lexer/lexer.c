@@ -6,13 +6,13 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/02/11 08:01:03 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/11 08:19:15 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	qq_flag(bool *sq,bool *dq ,char c)
+void	qq_flag(bool *sq, bool *dq, char c)
 {
 	if (c == '\"')
 	{
@@ -67,7 +67,7 @@ char	*ft_join_free(char *s1, char *s2, int flag1, int flag2)
 		free(s2);
 	return (tmp);
 }
-void	continue_read(bool *sq,bool *dq, char *prompt, char **line)
+void	continue_read(bool *sq, bool *dq, char *prompt, char **line)
 {
 	char	*new;
 	size_t	num;
@@ -85,6 +85,7 @@ void	continue_read(bool *sq,bool *dq, char *prompt, char **line)
 				break ;
 			if (!new[0])
 				continue ;
+			*line = ft_join_free(*line, "\n", 1, 0);
 			*line = ft_join_free(*line, new, 1, 0);
 			tmp = new;
 			while (1)
@@ -99,13 +100,11 @@ void	continue_read(bool *sq,bool *dq, char *prompt, char **line)
 			{
 				return ;
 			}
-			// if (*new)
-			// 	add_history(new);
 			free(new);
 		}
 		free(new);
 	}
-	else if(*sq)
+	else if (*sq)
 	{
 		while (1)
 		{
@@ -114,6 +113,7 @@ void	continue_read(bool *sq,bool *dq, char *prompt, char **line)
 				break ;
 			if (!new[0])
 				continue ;
+			*line = ft_join_free(*line, "\n", 1, 0);
 			*line = ft_join_free(*line, new, 1, 0);
 			tmp = new;
 			while (1)
@@ -128,40 +128,28 @@ void	continue_read(bool *sq,bool *dq, char *prompt, char **line)
 			{
 				return ;
 			}
-			// if (*new)
-			// 	add_history(new);
 			free(new);
 		}
 		free(new);
 	}
-
 }
 
 size_t	wordlen(char *prompt, char **line, size_t i)
 {
 	size_t	len;
-	// bool	*qq;
-	bool dq;
-	bool sq;
+	bool	dq;
+	bool	sq;
 
-	printf("line =%s\n", *line);
-	sq =false;
-	dq =false;
-	printf("ppp =%s\n", prompt);
-	// qq = calloc(1, sizeof(bool));
-	// if (!qq)
-	// 	_err("bool");
+	sq = false;
+	dq = false;
 	len = 0;
 	if (is_ope(prompt))
 		return (is_ope(prompt));
 	while (1)
 	{
-		printf("<%c>", prompt[len]);
-		printf("%d,%d;\n",sq,dq);
-		fflush(stdout);
 		if (prompt[len] == '\"' || prompt[len] == '\'')
 		{
-			qq_flag(&sq,&dq, prompt[len]);
+			qq_flag(&sq, &dq, prompt[len]);
 			len++;
 			continue ;
 		}
@@ -173,64 +161,41 @@ size_t	wordlen(char *prompt, char **line, size_t i)
 		}
 		if ((sq || dq) && prompt[len] == '\0')
 		{
-			continue_read(&sq,&dq, prompt, line);
-			// free(qq);
-			// return (1);
-			// printf("line = %ld\n",i);
-			printf("linesss = %s\n", (*line) + i);
+			continue_read(&sq, &dq, prompt, line);
 			return (wordlen((*line) + i, line, i));
-			// return (i);
 		}
 		len++;
 	}
-	// free(qq);
 	return (len);
 }
-/*
-size_t	wordlen(char *line)
+t_token	*token_last(t_token *token)
 {
-	size_t	len;
-	bool	*qq;
+	t_token	*tmp;
 
-	qq = calloc(1, sizeof(bool));
-	if (!qq)
-		_err("bool");
-	len = 0;
-	if (is_ope(line))
-		return (is_ope(line));
-	while (1)
+	tmp = token;
+	while (tmp)
 	{
-		if ((qq[0] || qq[1]) && line == '\0')
-		{
-			continue_read(qq, &line);
-			return (len);
-		}
-		if (*line == '\"' || *line == '\'')
-		{
-			qq_flag(qq, *line);
-			len++;
-			line++;
-			continue ;
-		}
-		if (!qq[0] && !qq[1])
-		{
-			if (is_blank(*line) || *line == '\0' || is_ope(line))
-				break ;
-		}
-		line++;
-		len++;
+		if (!(tmp->next))
+			break ;
+		tmp = tmp->next;
 	}
-	free(qq);
-	return (len);
+	return (tmp);
 }
-*/
-// void	make_token(t_token *token, t_token *new)
-// {
-// 	if(!new)
-// 		_err("new_token malloc");
+void	token_addback(t_token **head, t_token *new)
+{
+	t_token	*tmp;
 
-// }
-
+	if (head)
+	{
+		if (*head)
+		{
+			tmp = token_last(*head);
+			tmp->next = new;
+		}
+		else
+			*head = new;
+	}
+}
 t_token	*new_token(char *str, t_token_type type)
 {
 	t_token	*new;
@@ -250,17 +215,32 @@ t_token_type	find_type(char *tmp)
 	return (WORD);
 }
 
+void	print_t(t_token *token)
+{
+	t_token	*tmp;
+
+	tmp = token;
+	while (tmp)
+	{
+		if (!(tmp))
+			break ;
+		printf("w =%s;t=%d;p=%p\n", tmp->word, tmp->type, tmp->next);
+		tmp = tmp->next;
+	}
+}
+
 t_token	*lexer(char **line)
 {
 	size_t	len;
 	size_t	i;
+	t_token	*head;
 	t_token	*token;
 	char	*word;
 	char	*prompt;
 
 	i = 0;
 	prompt = *line;
-	token = NULL;
+	head = NULL;
 	while (1)
 	{
 		while (is_blank(prompt[i]))
@@ -279,7 +259,8 @@ t_token	*lexer(char **line)
 			// printf("%ld :%s:\n", len,word);
 			i += len;
 			token = new_token(word, find_type(word));
-			printf("%p: %d: %s\n", token->next, token->type, token->word);
+			token_addback(&head, token);
+			// printf("%p: %d: %s\n", token->next, token->type, token->word);
 			// make_token(&token, new_token(word, find_type(word)));
 		}
 		// len = word(prompt);
@@ -289,5 +270,8 @@ t_token	*lexer(char **line)
 		// 	// set
 		// }
 	}
+	token = new_token(NULL, TK_EOF);
+	token_addback(&head, token);
+	print_t(head);
 	return (NULL);
 }
