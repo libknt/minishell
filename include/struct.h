@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/02/10 16:15:17 by keys             ###   ########.fr       */
+/*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
+/*   Updated: 2023/02/10 16:28:11 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef STRUCT_H
+# define STRUCT_H
 
-int	main(void)
+typedef enum e_token_type	t_token_type;
+enum						e_token_type
 {
-	char	*prompt;
+	WORD,
+	TK_RESERVED,
+	TK_OP,
+	TK_EOF,
+};
 
-	rl_outstream = stderr;
-	while (1)
-	{
-		prompt = readline("minishell>");
-		if (prompt == NULL)
-			break ;
-		if (*prompt)
-			add_history(prompt);
-		lexer(prompt);
-		exe(prompt);
-		free(prompt);
-	}
-	exit(0);
-}
+typedef struct s_token		t_token;
+struct						s_token
+{
+	t_token					*next;
+	t_token_type			*type;
+	char					*word;
+};
+#endif

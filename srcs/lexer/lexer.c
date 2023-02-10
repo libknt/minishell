@@ -1,32 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/02/10 16:15:17 by keys             ###   ########.fr       */
+/*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
+/*   Updated: 2023/02/10 16:33:28 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+bool	is_blank(char c)
 {
-	char	*prompt;
+	return (c == ' ' || c == '\t');
+}
 
-	rl_outstream = stderr;
-	while (1)
+bool	is_metacharacter(char c)
+{
+	char	*is;
+
+	is = strchr("|&;()<> \t", c);
+	if (is == NULL)
+		return (false);
+	return (true);
+}
+
+t_token	*lexer(char *prompt)
+{
+	size_t	len;
+	t_token *token;
+
+	while(1)
 	{
-		prompt = readline("minishell>");
-		if (prompt == NULL)
-			break ;
-		if (*prompt)
-			add_history(prompt);
-		lexer(prompt);
-		exe(prompt);
-		free(prompt);
+		while(is_blank(*prompt))
+			prompt++;
+		if(!*prompt)
+			break;
+		len = word(prompt);
+		if(len == 0)
+			break;
+		else{
+			// set
+		}
 	}
-	exit(0);
+
 }

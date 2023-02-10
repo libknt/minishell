@@ -15,6 +15,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include "struct.h"
 
 int	exe(char *prompt);
 char	**ft_split(char const *s, char c);
