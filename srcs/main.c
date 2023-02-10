@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/02/11 05:48:11 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/11 08:21:43 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,24 @@ void	_err(const char *e)
 	exit(1);
 }
 
+void	print_t(t_token *token)
+{
+	t_token	*tmp;
+
+	tmp = token;
+	while (tmp)
+	{
+		if (!(tmp))
+			break ;
+		printf("w =%s;t=%d;p=%p\n", tmp->word, tmp->type, tmp->next);
+		tmp = tmp->next;
+	}
+}
+
 int	main(void)
 {
 	char	*prompt;
+	t_token *token;
 
 	rl_outstream = stderr;
 	while (1)
@@ -31,7 +46,8 @@ int	main(void)
 			break ;
 		if (!prompt[0])
 			continue ;
-		lexer(&prompt);
+		token = lexer(&prompt);
+		print_t(token);
 		// exe(prompt);
 		if (*prompt)
 			add_history(prompt);

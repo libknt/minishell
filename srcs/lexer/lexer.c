@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/02/11 08:19:15 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/11 08:21:53 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,20 +215,6 @@ t_token_type	find_type(char *tmp)
 	return (WORD);
 }
 
-void	print_t(t_token *token)
-{
-	t_token	*tmp;
-
-	tmp = token;
-	while (tmp)
-	{
-		if (!(tmp))
-			break ;
-		printf("w =%s;t=%d;p=%p\n", tmp->word, tmp->type, tmp->next);
-		tmp = tmp->next;
-	}
-}
-
 t_token	*lexer(char **line)
 {
 	size_t	len;
@@ -272,6 +258,5 @@ t_token	*lexer(char **line)
 	}
 	token = new_token(NULL, TK_EOF);
 	token_addback(&head, token);
-	print_t(head);
-	return (NULL);
+	return (head);
 }
