@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/02/11 08:21:53 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/11 08:30:53 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	continue_read(bool *sq, bool *dq, char *prompt, char **line)
 	{
 		while (1)
 		{
-			new = readline("dq>");
+			new = readline("dquote>");
 			if (new == NULL)
 				break ;
 			if (!new[0])
@@ -108,7 +108,7 @@ void	continue_read(bool *sq, bool *dq, char *prompt, char **line)
 	{
 		while (1)
 		{
-			new = readline("sq>");
+			new = readline("quote>");
 			if (new == NULL)
 				break ;
 			if (!new[0])
