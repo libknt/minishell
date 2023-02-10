@@ -20,4 +20,7 @@
 int	exe(char *prompt);
 char	**ft_split(char const *s, char c);
 char	*exec_filename( char *prompt);
+t_token	*lexer(char **line);
+void	_err(const char *e);
+char	*ft_strjoin(char const *s1, char const *s2);
 #endif

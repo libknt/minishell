@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/02/10 16:28:11 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/11 00:22:20 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_token		t_token;
 struct						s_token
 {
 	t_token					*next;
-	t_token_type			*type;
+	t_token_type			type;
 	char					*word;
 };
 #endif

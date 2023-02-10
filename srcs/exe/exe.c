@@ -6,17 +6,11 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:58:36 by keys              #+#    #+#             */
-/*   Updated: 2023/02/10 15:42:41 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/11 00:19:13 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-void _err(const char *e)__attribute__((noreturn));
-void	_err(const char *e)
-{
-	dprintf(STDERR_FILENO, "Fatal Error: %s\n", e);
-	exit(1);
-}
 
 int	exe(char *prompt)
 {
