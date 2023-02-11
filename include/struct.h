@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/02/11 00:22:20 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/11 08:52:56 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ enum						e_token_type
 	TK_RESERVED,
 	TK_OP,
 	TK_EOF,
+	T_HEAD,
 };
 
 typedef struct s_token		t_token;

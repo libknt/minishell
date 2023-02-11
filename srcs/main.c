@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/02/11 08:21:43 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/11 08:55:53 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	main(void)
 		if (!prompt[0])
 			continue ;
 		token = lexer(&prompt);
-		print_t(token);
-		// exe(prompt);
+		// print_t(token);
+		exe(token);
 		if (*prompt)
 			add_history(prompt);
 		free(prompt);

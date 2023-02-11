@@ -1,6 +1,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "struct.h"
 # include <ctype.h>
 # include <limits.h>
 # include <math.h>
@@ -15,12 +16,12 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
-# include "struct.h"
 
-int	exe(char *prompt);
+int		exe(t_token *token);
 char	**ft_split(char const *s, char c);
-char	*exec_filename( char *prompt);
+char	*exec_filename(char *prompt);
 t_token	*lexer(char **line);
 void	_err(const char *e);
 char	*ft_strjoin(char const *s1, char const *s2);
+void	ft_split_free(char **dst);
 #endif

@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/02/11 08:30:53 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/11 09:07:41 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,15 @@ t_token	*token_last(t_token *token)
 	}
 	return (tmp);
 }
+
+// void	token_addfront(t_token **lst, t_token *new)
+// {
+// 	if (!lst || !new)
+// 		return ;
+// 	if (*lst)
+// 		new->next = *lst;
+// 	*lst = new;
+// }
 void	token_addback(t_token **head, t_token *new)
 {
 	t_token	*tmp;
@@ -258,5 +267,10 @@ t_token	*lexer(char **line)
 	}
 	token = new_token(NULL, TK_EOF);
 	token_addback(&head, token);
+	// word = strdup(*line);
+	// if (!word)
+	// 	_err("malloc");
+	// token = new_token(word, T_HEAD);
+	// token_addfront(&head, token);
 	return (head);
 }
