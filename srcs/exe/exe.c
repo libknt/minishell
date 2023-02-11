@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:58:36 by keys              #+#    #+#             */
-/*   Updated: 2023/02/11 09:08:11 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/11 09:12:13 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	exe(t_token *token)
 				execve(cmd_path, argv, environ);
 		}
 		_err("execve");
-}
+	}
 	else
 	{
 		wait(&waitstatus);
