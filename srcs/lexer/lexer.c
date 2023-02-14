@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 09:26:59 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/02/14 09:33:19 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,67 +74,73 @@ void	continue_read(bool *sq, bool *dq, char **line)
 	char	*tmp;
 
 	num = 0;
-	if (*dq)
+	// if (*dq)
+	// {
+	while (1)
 	{
-		while (1)
-		{
+		if (*dq)
 			new = readline("dquote>");
-			if (new == NULL)
-				break ;
-			if (!new[0])
-			{
-				free(new);
-				continue ;
-			}
-			*line = ft_join_free(*line, "\n", 1, 0);
-			*line = ft_join_free(*line, new, 1, 0);
-			tmp = new;
-			while (1)
-			{
-				tmp = strchr(tmp, '\"');
-				if (tmp == NULL)
-				{
-					break ;
-				}
-				num++;
-				tmp++;
-			}
-			if (num && (num % 2 == 1))
-			{
-				free(new);
-				return ;
-			}
+		else if (*sq)
+			new = readline("quote>");
+		if (new == NULL)
+			break ;
+		if (!new[0])
+		{
 			free(new);
+			continue ;
 		}
-	}
-	else if (*sq)
-	{
+		*line = ft_join_free(*line, "\n", 1, 0);
+		*line = ft_join_free(*line, new, 1, 0);
+		tmp = new;
 		while (1)
 		{
-			new = readline("quote>");
-			if (new == NULL)
+			if(*dq)
+			tmp = strchr(tmp, '\"');
+			if(*sq)
+			tmp = strchr(tmp, '\'');
+			if (tmp == NULL)
+			{
 				break ;
-			if (!new[0])
-				continue ;
-			*line = ft_join_free(*line, "\n", 1, 0);
-			*line = ft_join_free(*line, new, 1, 0);
-			tmp = new;
-			while (1)
-			{
-				tmp = strchr(tmp, '\'');
-				if (tmp == NULL)
-					break ;
-				num++;
-				tmp++;
 			}
-			if (num && (num % 2 == 1))
-			{
-				free(new);
-				return ;
-			}
-			free(new);
+			num++;
+			tmp++;
 		}
+		if (num && (num % 2 == 1))
+		{
+			free(new);
+			return ;
+		}
+		free(new);
 	}
+	// }
+	// else if (*sq)
+	// {
+	// 	while (1)
+	// 	{
+	// 		new = readline("quote>");
+	// 		if (new == NULL)
+	// 			break ;
+	// 		if (!new[0])
+	// 			continue ;
+	// 		*line = ft_join_free(*line, "\n", 1, 0);
+	// 		*line = ft_join_free(*line, new, 1, 0);
+	// 		tmp = new;
+	// 		while (1)
+	// 		{
+	// 			tmp = strchr(tmp, '\'');
+	// 			if (tmp == NULL)
+	// 				break ;
+	// 			num++;
+	// 			tmp++;
+	// 		}
+	// 		if (num && (num % 2 == 1))
+	// 		{
+	// 			free(new);
+	// 			return ;
+	// 		}
+	// 		free(new);
+	// 	}
+	// }
 	free(new);
 }
 
