@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:06:21 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 16:16:04 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/14 18:33:50 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,24 @@ void	print_t(t_token *token)
 
 void	print_n(t_node *node)
 {
+	t_line	*tmp;
+
 	printf("%p\t%p\t%p\t", node, node->left, node->right);
-	if (node->t->type == OP)
-		printf("%s\n", node->t->word);
+	if (node->line->type == PIPE)
+		printf("%s\n", node->line->token->word);
 	else
 	{
+		tmp = node->line;
 		while (1)
 		{
-			if (node->t->type != WORD)
+			if (tmp->type == T_EOF_R)
 				break ;
-			printf("%s ", node->t->word);
-			node->t = node->t->next;
+			printf("%d %s ", tmp->type, tmp->token->word);
+			tmp = tmp->next;
+			// if (node->t->type != WORD)
+			// 	break ;
+			// printf("%s ", node->t->word);
+			// node->t = node->t->next;
 		}
 	}
 }
@@ -56,12 +63,5 @@ void	print_node(t_node *node)
 
 void	print_tree(t_node *node)
 {
-	// if ((node->t->type == OP) && (strncmp(node->t->word, ";", 1) == 0))
-	// {
-	// 	print_tree(node->left);
-	// }
 	print_node(node);
-	// printf("%p\t%p\t%p\t", node, node->left, node->right);
-	// printf("%s ", node->t->word);
-	// printf("\n");
 }
