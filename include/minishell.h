@@ -34,4 +34,9 @@ bool	parse_err(t_node *node);
 
 void	print_t(t_token *token);
 void	print_tree(t_node *node);
+void	print_n(t_node *node);
+
+void	print_line(t_line *line);
+
+
 #endif

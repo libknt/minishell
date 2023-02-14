@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 15:24:44 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/14 22:27:41 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,15 @@ size_t	is_ope(char *line)
 		|| strncmp(line, "(", 1) == 0 ||
 		strncmp(line, ")", 1) == 0 || strncmp(line, "|", 1) == 0
 			|| strncmp(line, "\n", 1) == 0)
+		return (1);
+	return (0);
+}
+
+size_t	is_redirect(char *line)
+{
+	if ((strncmp(line, "<<", 2) == 0) || (strncmp(line, ">>", 2) == 0))
+		return (2);
+	if ((strncmp(line, "<", 1) == 0) || (strncmp(line, ">", 1) == 0))
 		return (1);
 	return (0);
 }
@@ -124,6 +133,8 @@ size_t	wordlen(char *prompt, char **line, size_t i)
 	len = 0;
 	if (is_ope(prompt))
 		return (is_ope(prompt));
+	if (is_redirect(prompt))
+		return (is_redirect(prompt));
 	while (1)
 	{
 		if (prompt[len] == '\"' || prompt[len] == '\'')
@@ -134,8 +145,9 @@ size_t	wordlen(char *prompt, char **line, size_t i)
 		}
 		if (!dq && !sq)
 		{
-			if (is_blank(prompt[len]) || prompt[len] == '\0'
-				|| is_ope(&prompt[len]))
+			if (is_blank(prompt[len]) || prompt[len] == '\0' ||
+				is_ope(&prompt[len]) || (strncmp(&prompt[len], "<", 1) == 0) ||
+				(strncmp(&prompt[len], ">", 1) == 0))
 				break ;
 		}
 		if ((sq || dq) && prompt[len] == '\0')

@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 18:21:15 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/14 23:29:02 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	main(void)
 			free(prompt);
 			continue ;
 		}
+		if (*prompt)
+			add_history(prompt);
 		token = lexer(&prompt);
 		flag = token_error(token);
 		if (flag)
@@ -46,19 +48,16 @@ int	main(void)
 			continue ;
 		}
 		tree = parser(token);
-		print_tree(tree);
-		// flag = parse_err(tree);
-		// if (flag)
-		// {
-		// 	tree_free(tree);
-		// 	token_free(&token);
-		// 	free(prompt);
-		// 	continue ;
-		// }
-		print_tree(tree);
+		flag = parse_err(tree);
+		if (flag)
+		{
+			tree_free(tree);
+			token_free(&token);
+			free(prompt);
+			continue ;
+		}
+		// print_tree(tree);
 		// exe(token);
-		if (*prompt)
-			add_history(prompt);
 		tree_free(tree);
 		token_free(&token);
 		free(prompt);

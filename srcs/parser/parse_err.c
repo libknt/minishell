@@ -6,38 +6,88 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:21:12 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 17:37:06 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/14 23:38:18 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// bool	g_parse_err = false;
+bool	g_parse_err = false;
 
-// void	_err_syntax_parse(char *mes)
-// {
-// 	g_parse_err = true;
-// 	dprintf(STDERR_FILENO, "minishell: syntax error near %s\n", mes);
-// }
+void	_err_syntax_p(char *mes)
+{
+	g_parse_err = true;
+	dprintf(STDERR_FILENO, "1minishell: syntax error near %s\n", mes);
+}
 
-// void	syntax_parse(t_node *node)
-// {
-// 	if (node->left)
-// 		syntax_parse(node->left);
-// 	if (node->line->type == )
-// 	if (node->t->type == WORD)
-// 		return ;
-// 	if (node->right == NULL)
-// 	{
-// 		_err_syntax_parse("syntax::parse");
-// 	}
-// }
+void	_err_parse_p(char *mes)
+{
+	g_parse_err = true;
+	dprintf(STDERR_FILENO, "minishell: parse error near %s\n", mes);
+}
 
-// bool	parse_err(t_node *node)
-// {
-// 	bool	re;
+void	check_syntax(t_node *node)
+{
+	t_line	*line;
 
-// 	syntax_parse(node);
-// 	re = g_parse_err;
-// 	return (re);
-// }
+	if (node->line->type == PIPE)
+		_err_parse_p(node->line->token->word);
+	else
+	{
+		line = node->line;
+		while (1)
+		{
+			if ((line == NULL) || (line->type == T_EOF_R))
+			{
+				break ;
+			}
+			else
+			{
+				if (line->type == REDIRECT)
+				{
+					if ((!(line->next) || line->next->type != FILENAME))
+					{
+						_err_syntax_p(line->token->word);
+						break ;
+					}
+					line = line->next;
+				}
+				else
+				{
+					line = line->next;
+				}
+			}
+		}
+	}
+}
+
+void	syntax_parse(t_node *node)
+{
+	if (!node->left && !node->right)
+	{
+		check_syntax(node);
+		return ;
+	}
+	if (node->left == NULL)
+	{
+		_err_syntax_p(node->line->token->word);
+		return ;
+	}
+	if (node->right == NULL)
+	{
+		_err_syntax_p(node->line->token->word);
+		return ;
+	}
+	syntax_parse(node->left);
+	syntax_parse(node->right);
+	return ;
+}
+
+bool	parse_err(t_node *node)
+{
+	bool	re;
+
+	syntax_parse(node);
+	re = g_parse_err;
+	return (re);
+}

@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:06:21 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 18:33:50 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/14 23:30:39 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	print_n(t_node *node)
 
 	printf("%p\t%p\t%p\t", node, node->left, node->right);
 	if (node->line->type == PIPE)
-		printf("%s\n", node->line->token->word);
+		printf("%d  %s\n", node->line->type, node->line->token->word);
 	else
 	{
 		tmp = node->line;
@@ -64,4 +64,22 @@ void	print_node(t_node *node)
 void	print_tree(t_node *node)
 {
 	print_node(node);
+}
+
+void	print_line(t_line *line)
+{
+	if (line)
+	{
+		while (1)
+		{
+			if (line == NULL || line->type == T_EOF_R)
+			{
+				printf("EOF");
+				break ;
+			}
+			printf("%d:%s ",line->type, line->token->word);
+			line = line->next;
+		}
+		printf("\n\n");
+	}
 }
