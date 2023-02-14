@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 09:03:49 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/02/14 09:26:59 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,8 +223,12 @@ t_token	*new_token(char *str, t_token_type type)
 
 t_token_type	find_type(char *tmp)
 {
-	if (tmp)
-		return (WORD);
+	if (strncmp(tmp, "||", 2) == 0 || strncmp(tmp, "&&", 2) == 0 ||
+		strncmp(tmp, ";;", 2) == 0 || strncmp(tmp, "|&", 2) == 0 ||
+		strncmp(tmp, "&", 1) == 0 || strncmp(tmp, ";", 1) == 0 ||
+		strncmp(tmp, "(", 1) == 0 || strncmp(tmp, ")", 1) == 0 ||
+		strncmp(tmp, "|", 1) == 0 || strncmp(tmp, "\n", 1) == 0)
+		return (TK_OP);
 	return (WORD);
 }
 
@@ -260,7 +264,6 @@ t_token	*lexer(char **line)
 			token = new_token(word, find_type(word));
 			token_addback(&head, token);
 			// printf("%p: %d: %s\n", token->next, token->type, token->word);
-			// make_token(&token, new_token(word, find_type(word)));
 		}
 	}
 	token = new_token(NULL, TK_EOF);

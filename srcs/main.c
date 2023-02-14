@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 09:06:58 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/02/14 09:15:49 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	print_t(t_token *token)
 	{
 		if (!(tmp))
 			break ;
-		printf("w =%s;t=%d;p=%p\n", tmp->word, tmp->type, tmp->next);
+		printf("w =%s;\tt=%d;\t%p\t,p=%p\n", tmp->word, tmp->type, tmp,
+				tmp->next);
 		tmp = tmp->next;
 	}
 }
@@ -50,7 +51,7 @@ int	main(void)
 			continue ;
 		}
 		token = lexer(&prompt);
-		// print_t(token);
+		print_t(token);
 		exe(token);
 		if (*prompt)
 			add_history(prompt);
