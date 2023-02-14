@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 09:49:17 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/02/14 16:26:17 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,12 @@ void	_err(const char *e)
 	exit(1);
 }
 
-void	print_t(t_token *token)
-{
-	t_token	*tmp;
-
-	tmp = token;
-	while (tmp)
-	{
-		if (!(tmp))
-			break ;
-		printf("w =%s;\tt=%d;\t%p\t,p=%p\n", tmp->word, tmp->type, tmp,
-				tmp->next);
-		tmp = tmp->next;
-	}
-}
-
 int	main(void)
 {
 	char	*prompt;
+	bool	flag;
 	t_token	*token;
+	t_node	*tree;
 
 	rl_outstream = stderr;
 	while (1)
@@ -51,10 +38,27 @@ int	main(void)
 			continue ;
 		}
 		token = lexer(&prompt);
-		print_t(token);
-		exe(token);
+		flag = token_error(token);
+		if (flag)
+		{
+			token_free(&token);
+			free(prompt);
+			continue ;
+		}
+		tree = parser(token);
+		flag = parse_err(tree);
+		if (flag)
+		{
+			tree_free(tree);
+			token_free(&token);
+			free(prompt);
+			continue ;
+		}
+		// print_tree(tree);
+		// exe(token);
 		if (*prompt)
 			add_history(prompt);
+		tree_free(tree);
 		token_free(&token);
 		free(prompt);
 	}

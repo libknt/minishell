@@ -6,6 +6,7 @@
 		"ctype.h": "c",
 		"struct.h": "c",
 		"limits.h": "c",
-		"functional": "c"
+		"functional": "c",
+		"stdio.h": "c"
 	}
 }

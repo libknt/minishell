@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 09:39:10 by kyoda             #+#    #+#             */
-/*   Updated: 2023/02/14 10:19:19 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/02/14 12:24:57 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*trim_quote(char *word)
 
 void	remake_token(t_token *token)
 {
-	if (token->type == TK_EOF)
+	if (token->type == T_EOF)
 		return ;
 	else
 	{

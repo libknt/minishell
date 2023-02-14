@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:58:36 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 10:15:14 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/02/14 12:25:41 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	**make_arr(t_token *t)
 		_err("malloc");
 	while (1)
 	{
-		if (t->type == TK_EOF)
+		if (t->type == T_EOF)
 			break ;
 		arr[i] = strdup(t->word);
 		if (!arr[i])

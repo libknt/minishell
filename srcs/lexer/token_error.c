@@ -3,43 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   token_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:06:46 by kyoda             #+#    #+#             */
-/*   Updated: 2023/02/14 10:50:11 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/02/14 16:00:13 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "minishell.h"'
+#include "minishell.h"
 
-// void	err_syntax(char *op)
-// {
-// 	if (strncmp(op, "||", 2) == 0)
-//         _err();
-//         strncmp(op, "&&", 2) == 0 ||
-// 		strncmp(op, ";;", 2) == 0 || 
-//         strncmp(op, "|&", 2) == 0 ||
-// 		strncmp(op, "&", 1) == 0 || 
-//         strncmp(op, ";", 1) == 0 ||
-// 		strncmp(op, "(", 1) == 0 || 
-//         strncmp(op, ")", 1) == 0 ||
-// 		return (TK_OP);
-// 	return (WORD);
-// }
+bool	g_syntax_err = false;
 
-// void	syntax_check(t_token *token)
-// {
-// 	if (token->type == TK_EOF)
-// 		return ;
-// 	else
-// 	{
-// 		if (token->type == TK_OP)
-// 			err_syntax(token->word);
-// 		syntax_check(token->next);
-// 	}
-// }
+void	_err_syntax(char *mes)
+{
+	g_syntax_err = true;
+	dprintf(STDERR_FILENO, "minishell: syntax error near %s\n", mes);
+}
 
-// void	token_error(t_token *token)
-// {
-// 	syntax_check(token);
-// }
+void	err_syntax(char *op)
+{
+	if (strncmp(op, "||", 2) == 0)
+		_err_syntax("||");
+	if (strncmp(op, "&&", 2) == 0)
+		_err_syntax("&&");
+	if (strncmp(op, ";;", 2) == 0)
+		_err_syntax(";;");
+	if (strncmp(op, "|&", 2) == 0)
+		_err_syntax("|&");
+	if (strncmp(op, "&", 1) == 0)
+		_err_syntax("&");
+	if (strncmp(op, "(", 1) == 0)
+		_err_syntax("()");
+	if (strncmp(op, ")", 1) == 0)
+		_err_syntax(")");
+	if (strncmp(op, ";", 1) == 0)
+		_err_syntax(";");
+}
+
+void	syntax_check(t_token *token)
+{
+	if (token->type == T_EOF)
+		return ;
+	else
+	{
+		if (token->type == OP)
+			err_syntax(token->word);
+		syntax_check(token->next);
+	}
+}
+
+bool	token_error(t_token *token)
+{
+	bool	re;
+
+	syntax_check(token);
+	re = g_syntax_err;
+	return (re);
+}

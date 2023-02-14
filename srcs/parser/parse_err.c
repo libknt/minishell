@@ -1,41 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   parse_err.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 08:27:16 by kyoda             #+#    #+#             */
-/*   Updated: 2023/02/14 16:17:05 by keys             ###   ########.fr       */
+/*   Created: 2023/02/14 15:21:12 by keys              #+#    #+#             */
+/*   Updated: 2023/02/14 16:26:36 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	token_free(t_token **token)
-{
-	t_token	*tmp;
+bool	g_parse_err = false;
 
-	if (token)
+void	_err_syntax_parse(char *mes)
+{
+	g_parse_err = true;
+	dprintf(STDERR_FILENO, "minishell: syntax error near %s\n", mes);
+}
+
+void	syntax_parse(t_node *node)
+{
+	if (node->left)
+		syntax_parse(node->left);
+	if (node->t->type == WORD)
+		return ;
+	if (node->right == NULL)
 	{
-		while (1)
-		{
-			if (!(*token))
-				break ;
-			tmp = (*token)->next;
-			free((*token)->word);
-			free(*token);
-			(*token) = tmp;
-		}
+		_err_syntax_parse("syntax::parse");
 	}
 }
 
-void	tree_free(t_node *tree)
+bool	parse_err(t_node *node)
 {
-	if (tree->left)
-		tree_free(tree->left);
-	if (tree->right)
-		tree_free(tree->right);
-	if (tree)
-		free(tree);
+	bool	re;
+
+	syntax_parse(node);
+	re = g_parse_err;
+	return (re);
 }

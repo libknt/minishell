@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 09:38:52 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/02/14 15:24:44 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ t_token_type	find_type(char *tmp)
 		strncmp(tmp, "&", 1) == 0 || strncmp(tmp, ";", 1) == 0 ||
 		strncmp(tmp, "(", 1) == 0 || strncmp(tmp, ")", 1) == 0 ||
 		strncmp(tmp, "|", 1) == 0 || strncmp(tmp, "\n", 1) == 0)
-		return (TK_OP);
+		return (OP);
 	return (WORD);
 }
 
@@ -226,14 +226,12 @@ t_token	*make_token(char **line)
 			word = strndup(&prompt[i], len);
 			if (!word)
 				_err("malloc");
-			// printf("%ld :%s:\n", len,word);
 			i += len;
 			token = new_token(word, find_type(word));
 			token_addback(&head, token);
-			// printf("%p: %d: %s\n", token->next, token->type, token->word);
 		}
 	}
-	token = new_token(NULL, TK_EOF);
+	token = new_token(NULL, T_EOF);
 	token_addback(&head, token);
 	return (head);
 }
