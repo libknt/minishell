@@ -5,6 +5,7 @@
 		"minishell.h": "c",
 		"ctype.h": "c",
 		"struct.h": "c",
-		"limits.h": "c"
+		"limits.h": "c",
+		"functional": "c"
 	}
 }

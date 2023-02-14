@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:58:36 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 09:12:39 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/02/14 10:15:14 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	exe(t_token *token)
 			if (cmd_path != NULL)
 				execve(cmd_path, argv, environ);
 		}
-		_err("execve");
+		_err("execve: command not found");
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 09:39:10 by kyoda             #+#    #+#             */
-/*   Updated: 2023/02/14 10:00:48 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/02/14 10:19:19 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*trim_quote(char *word)
 	free(word);
 	return (new);
 }
+
 void	remake_token(t_token *token)
 {
 	if (token->type == TK_EOF)
