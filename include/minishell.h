@@ -24,5 +24,7 @@ t_token	*lexer(char **line);
 void	_err(const char *e);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_split_free(char **dst);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	token_free(t_token **token);
+void	expand(t_token *token);
 #endif

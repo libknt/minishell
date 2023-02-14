@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 09:33:19 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/02/14 09:38:52 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void	continue_read(bool *sq, bool *dq, char **line)
 	char	*tmp;
 
 	num = 0;
-	// if (*dq)
-	// {
 	while (1)
 	{
 		if (*dq)
@@ -94,10 +92,10 @@ void	continue_read(bool *sq, bool *dq, char **line)
 		tmp = new;
 		while (1)
 		{
-			if(*dq)
-			tmp = strchr(tmp, '\"');
-			if(*sq)
-			tmp = strchr(tmp, '\'');
+			if (*dq)
+				tmp = strchr(tmp, '\"');
+			if (*sq)
+				tmp = strchr(tmp, '\'');
 			if (tmp == NULL)
 			{
 				break ;
@@ -112,35 +110,6 @@ void	continue_read(bool *sq, bool *dq, char **line)
 		}
 		free(new);
 	}
-	// }
-	// else if (*sq)
-	// {
-	// 	while (1)
-	// 	{
-	// 		new = readline("quote>");
-	// 		if (new == NULL)
-	// 			break ;
-	// 		if (!new[0])
-	// 			continue ;
-	// 		*line = ft_join_free(*line, "\n", 1, 0);
-	// 		*line = ft_join_free(*line, new, 1, 0);
-	// 		tmp = new;
-	// 		while (1)
-	// 		{
-	// 			tmp = strchr(tmp, '\'');
-	// 			if (tmp == NULL)
-	// 				break ;
-	// 			num++;
-	// 			tmp++;
-	// 		}
-	// 		if (num && (num % 2 == 1))
-	// 		{
-	// 			free(new);
-	// 			return ;
-	// 		}
-	// 		free(new);
-	// 	}
-	// }
 	free(new);
 }
 
@@ -192,14 +161,6 @@ t_token	*token_last(t_token *token)
 	return (tmp);
 }
 
-// void	token_addfront(t_token **lst, t_token *new)
-// {
-// 	if (!lst || !new)
-// 		return ;
-// 	if (*lst)
-// 		new->next = *lst;
-// 	*lst = new;
-// }
 void	token_addback(t_token **head, t_token *new)
 {
 	t_token	*tmp;
@@ -238,7 +199,7 @@ t_token_type	find_type(char *tmp)
 	return (WORD);
 }
 
-t_token	*lexer(char **line)
+t_token	*make_token(char **line)
 {
 	size_t	len;
 	size_t	i;
@@ -275,4 +236,13 @@ t_token	*lexer(char **line)
 	token = new_token(NULL, TK_EOF);
 	token_addback(&head, token);
 	return (head);
+}
+
+t_token	*lexer(char **line)
+{
+	t_token	*token;
+
+	token = make_token(line);
+	expand(token);
+	return (token);
 }
