@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/02/11 08:55:53 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/14 09:06:58 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	print_t(t_token *token)
 int	main(void)
 {
 	char	*prompt;
-	t_token *token;
+	t_token	*token;
 
 	rl_outstream = stderr;
 	while (1)
@@ -45,13 +45,17 @@ int	main(void)
 		if (prompt == NULL)
 			break ;
 		if (!prompt[0])
+		{
+			free(prompt);
 			continue ;
+		}
 		token = lexer(&prompt);
 		// print_t(token);
 		exe(token);
 		if (*prompt)
 			add_history(prompt);
+		token_free(&token);
 		free(prompt);
 	}
-	exit(0);
+	return (0);
 }

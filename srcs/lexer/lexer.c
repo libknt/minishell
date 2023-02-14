@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/02/11 09:07:41 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/14 09:03:49 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,12 @@ char	*ft_join_free(char *s1, char *s2, int flag1, int flag2)
 		free(s2);
 	return (tmp);
 }
-void	continue_read(bool *sq, bool *dq, char *prompt, char **line)
+void	continue_read(bool *sq, bool *dq, char **line)
 {
 	char	*new;
 	size_t	num;
 	char	*tmp;
 
-	if (prompt)
-		num = 0;
 	num = 0;
 	if (*dq)
 	{
@@ -84,7 +82,10 @@ void	continue_read(bool *sq, bool *dq, char *prompt, char **line)
 			if (new == NULL)
 				break ;
 			if (!new[0])
+			{
+				free(new);
 				continue ;
+			}
 			*line = ft_join_free(*line, "\n", 1, 0);
 			*line = ft_join_free(*line, new, 1, 0);
 			tmp = new;
@@ -92,17 +93,19 @@ void	continue_read(bool *sq, bool *dq, char *prompt, char **line)
 			{
 				tmp = strchr(tmp, '\"');
 				if (tmp == NULL)
+				{
 					break ;
+				}
 				num++;
 				tmp++;
 			}
 			if (num && (num % 2 == 1))
 			{
+				free(new);
 				return ;
 			}
 			free(new);
 		}
-		free(new);
 	}
 	else if (*sq)
 	{
@@ -126,12 +129,13 @@ void	continue_read(bool *sq, bool *dq, char *prompt, char **line)
 			}
 			if (num && (num % 2 == 1))
 			{
+				free(new);
 				return ;
 			}
 			free(new);
 		}
-		free(new);
 	}
+	free(new);
 }
 
 size_t	wordlen(char *prompt, char **line, size_t i)
@@ -161,7 +165,7 @@ size_t	wordlen(char *prompt, char **line, size_t i)
 		}
 		if ((sq || dq) && prompt[len] == '\0')
 		{
-			continue_read(&sq, &dq, prompt, line);
+			continue_read(&sq, &dq, line);
 			return (wordlen((*line) + i, line, i));
 		}
 		len++;
@@ -258,19 +262,8 @@ t_token	*lexer(char **line)
 			// printf("%p: %d: %s\n", token->next, token->type, token->word);
 			// make_token(&token, new_token(word, find_type(word)));
 		}
-		// len = word(prompt);
-		// if(len == 0)
-		// 	break ;
-		// else{
-		// 	// set
-		// }
 	}
 	token = new_token(NULL, TK_EOF);
 	token_addback(&head, token);
-	// word = strdup(*line);
-	// if (!word)
-	// 	_err("malloc");
-	// token = new_token(word, T_HEAD);
-	// token_addfront(&head, token);
 	return (head);
 }

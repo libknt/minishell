@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:58:36 by keys              #+#    #+#             */
-/*   Updated: 2023/02/11 09:12:13 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/14 09:12:39 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,12 @@ char	**make_arr(t_token *t)
 	{
 		if (t->type == TK_EOF)
 			break ;
-		size = strlen(t->word);
-		arr[i] = malloc(sizeof(char *) * (size + 1));
+		arr[i] = strdup(t->word);
 		if (!arr[i])
 		{
 			ft_split_free(arr);
 			_err("malloc");
 		}
-		arr[i] = strdup(t->word);
 		i++;
 		t = t->next;
 	}
@@ -106,8 +104,10 @@ int	exe(t_token *token)
 	}
 	else
 	{
+		ft_split_free(argv);
 		wait(&waitstatus);
 		return (WEXITSTATUS(waitstatus));
 	}
+	ft_split_free(argv);
 	return (0);
 }

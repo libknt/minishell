@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_filename.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:17:23 by keys              #+#    #+#             */
-/*   Updated: 2023/02/09 17:37:32 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/14 08:35:54 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,6 @@ char	*exec_filename(char *prompt)
 		k++;
 	}
 	free(s);
-			ft_split_free(tmp);
+	ft_split_free(tmp);
 	return (NULL);
 }
