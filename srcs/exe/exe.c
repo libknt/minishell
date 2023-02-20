@@ -6,108 +6,114 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:58:36 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 12:25:41 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/20 15:32:17 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	tokensize(t_token *lst)
+size_t	line_size(t_line *line)
 {
-	size_t	size;
+	size_t	len;
 
-	size = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		size++;
-	}
-	return (size);
-}
-void	print_spl(char **argv)
-{
-	int	i;
-
-	i = 0;
-	printf("-------------------------------------\n");
+	len = 0;
 	while (1)
 	{
-		if (argv[i] == NULL)
+		if (line->type == T_EOF_R)
 			break ;
-		printf("%s\n", argv[i]);
-		i++;
+		if (line->type == CMDLINE)
+			len++;
+		line = line->next;
 	}
-	printf("-------------------------------------\n");
+	return (len);
 }
-// t_token	*tmp;
 
-// tmp = token;
-// while (tmp)
-// {
-// 	if (!(tmp->next))
-// 		break ;
-// 	tmp = tmp->next;
-// }
-// return (tmp);
-
-char	**make_arr(t_token *t)
+char	**make_arr(t_node *node)
 {
 	char	**arr;
+	t_line	*line;
+	size_t	len;
 	size_t	i;
-	size_t	size;
 
+	arr = NULL;
 	i = 0;
-	size = tokensize(t);
-	arr = malloc(sizeof(char **) * size);
+	line = node->line;
+	len = line_size(line);
+	printf("len = %ld\n", len);
+	arr = malloc(len + 1);
 	if (!arr)
 		_err("malloc");
 	while (1)
 	{
-		if (t->type == T_EOF)
+		if (line->type == T_EOF_R)
 			break ;
-		arr[i] = strdup(t->word);
-		if (!arr[i])
+		else if (line->type == CMDLINE)
 		{
-			ft_split_free(arr);
-			_err("malloc");
+			arr[i] = line->token->word;
 		}
+		else
+		{
+			printf("%s\n", line->token->word);
+		}
+		line = line->next;
 		i++;
-		t = t->next;
 	}
-	arr[i] = NULL;
+	arr[++i] = NULL;
 	return (arr);
 }
 
-int	exe(t_token *token)
+void	print_split(char **t)
 {
-	extern char	**environ;
-	pid_t		pid;
-	char		**argv;
-	char		*cmd_path;
-	int			waitstatus;
+	int	i;
 
-	argv = make_arr(token);
-	pid = fork();
-	if (pid < 0)
-		_err("fork");
-	else if (pid == 0)
+	i = 0;
+	while (t[i])
 	{
-		if (access(argv[0], X_OK) == 0)
-			execve(argv[0], argv, environ);
-		else
-		{
-			cmd_path = exec_filename(argv[0]);
-			if (cmd_path != NULL)
-				execve(cmd_path, argv, environ);
-		}
-		_err("execve: command not found");
+		printf("sp = %s\n", t[i]);
+		i++;
 	}
-	else
-	{
-		ft_split_free(argv);
-		wait(&waitstatus);
-		return (WEXITSTATUS(waitstatus));
-	}
-	ft_split_free(argv);
+}
+
+int	exe(t_node *node)
+{
+	char	**argv;
+
+	// extern char	**environ;
+	// pid_t		pid;
+	// char		*cmd_path;
+	// int			waitstatus;
+	argv = make_arr(node);
+	printf("%s\n",argv[0]);
+	printf("%s\n",argv[1]);
+	printf("%s\n",argv[2]);
+	printf("%s\n",argv[3]);
+	printf("%s\n",argv[4]);
+	// print_split(argv);
+	// printf("fin\n");
+	// fflush(stdout);
+	// pid = fork();
+	// if (pid < 0)
+	// 	_err("fork");
+	// else if (pid == 0)
+	// {
+	// 	if (access(argv[0], X_OK) == 0)
+	// 		execve(argv[0], argv, environ);
+	// 	else
+	// 	{
+	// 		cmd_path = exec_filename(argv[0]);
+	// 		if (cmd_path != NULL)
+	// 			execve(cmd_path, argv, environ);
+	// 	}
+	// 	_err("execve: command not found");
+	// }
+	// else
+	// {
+	// 	ft_split_free(argv);
+	// 	wait(&waitstatus);
+	// 	return (WEXITSTATUS(waitstatus));
+	// }
+	// (void)argv;
+	// ft_split_free(argv);
+	// free(argv);
 	return (0);
 }

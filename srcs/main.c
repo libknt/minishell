@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/02/20 13:13:00 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/02/20 15:32:50 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,12 @@ int	main(void)
 			continue ;
 		}
 		// print_tree(tree);
-		// exe(token);
+		// exe(tree);
 		tree_free(tree);
 		token_free(&token);
 		free(prompt);
-		printf("finish\n");
+		// printf("finish\n");
 	}
+	// rl_clear_history();
 	return (0);
 }
