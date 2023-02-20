@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 09:39:10 by kyoda             #+#    #+#             */
-/*   Updated: 2023/02/14 12:24:57 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/20 13:12:28 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ char	*trim_quote(char *word)
 	char	*new;
 
 	len = strlen(word);
-	new = malloc(sizeof(len - 1));
+	new = ft_substr(word, 1, len - 2);
 	if (!new)
 		_err("malloc");
-	new = ft_substr(word, 1, len - 2);
 	free(word);
 	return (new);
 }
@@ -34,7 +33,7 @@ void	remake_token(t_token *token)
 	{
 		if (token->type == WORD)
 		{
-			if (strncmp(token->word, "\"", 1) == 0 ||\
+			if (strncmp(token->word, "\"", 1) == 0 ||
 				strncmp(token->word, "\'", 1) == 0)
 				token->word = trim_quote(token->word);
 		}
