@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 23:29:02 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/17 16:58:41 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int	main(void)
 	{
 		prompt = readline("minishell>");
 		if (prompt == NULL)
+		{
+			printf("Ctr + D\n");
 			break ;
+		}
 		if (!prompt[0])
 		{
 			free(prompt);
@@ -61,6 +64,7 @@ int	main(void)
 		tree_free(tree);
 		token_free(&token);
 		free(prompt);
+		printf("finish\n");
 	}
 	return (0);
 }

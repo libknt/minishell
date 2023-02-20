@@ -2,8 +2,8 @@ NAME 		=	minishell
 CC			=	cc
 
 # CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
-# CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=leak
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=leak
+# CFLAGS		=	-Wall -Wextra -Werror
 INCLUDE		=	-I ./include/
 # SRCS		= srcs/main.c\
 # 			  srcs/exe/exe.c
@@ -37,6 +37,13 @@ re : fclean all
 
 t :re
 	sh test.sh
+
+var:
+	rm -f log/log.txt
+	valgrind --leak-check=full --show-leak-kinds=all -s -q ./minishell
+varl:
+	rm -f log/log.txt
+	valgrind --log-file="log/log.txt" --leak-check=full --show-leak-kinds=all -s -q ./minishell
 
 
 
