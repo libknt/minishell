@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:58:36 by keys              #+#    #+#             */
-/*   Updated: 2023/02/23 22:42:19 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/23 22:48:30 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	exe(t_node *node)
 	else
 	{
 		wait(&waitstatus);
-		ft_split_free(argv);
+		// ft_split_free(argv);
 		return (WEXITSTATUS(waitstatus));
 	}
 	ft_split_free(argv);
