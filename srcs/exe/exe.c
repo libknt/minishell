@@ -6,36 +6,36 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:58:36 by keys              #+#    #+#             */
-/*   Updated: 2023/02/23 22:48:30 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/23 22:52:55 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void	_redirect(int oldfd, t_node *node)
-// {
-// 	int		fd;
-// 	t_line	*line;
+void	_redirect(int oldfd, t_node *node)
+{
+	int		fd;
+	t_line	*line;
 
-// 	line = node->line;
-// 	while (1)
-// 	{
-// 		if (line->type == T_EOF_R)
-// 			break ;
-// 		if (line->type == REDIRECT)
-// 		{
-// 			fd = open(line->next->token->word, O_CREAT | O_WRONLY | O_TRUNC,
-// 					0644);
-// 			if (oldfd != fd)
-// 			{
-// 				dup2(fd, oldfd);
-// 				close(fd);
-// 			}
-// 			line = line->next;
-// 		}
-// 		line = line->next;
-// 	}
-// }
+	line = node->line;
+	while (1)
+	{
+		if (line->type == T_EOF_R)
+			break ;
+		if (line->type == REDIRECT)
+		{
+			fd = open(line->next->token->word, O_CREAT | O_WRONLY | O_TRUNC,
+					0644);
+			if (oldfd != fd)
+			{
+				dup2(fd, oldfd);
+				close(fd);
+			}
+			line = line->next;
+		}
+		line = line->next;
+	}
+}
 
 int	exe(t_node *node)
 {
@@ -51,7 +51,7 @@ int	exe(t_node *node)
 		_err("fork");
 	else if (pid == 0)
 	{
-		// _redirect(1,node);
+		_redirect(1,node);
 		if (access(argv[0], X_OK) == 0)
 			execve(argv[0], argv, environ);
 		else
@@ -65,9 +65,8 @@ int	exe(t_node *node)
 	else
 	{
 		wait(&waitstatus);
-		// ft_split_free(argv);
+		free(argv);
 		return (WEXITSTATUS(waitstatus));
 	}
-	ft_split_free(argv);
 	return (0);
 }
