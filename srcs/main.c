@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/02/20 15:32:50 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/21 14:41:33 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(void)
 			continue ;
 		}
 		// print_tree(tree);
-		// exe(tree);
+		exe(tree);
 		tree_free(tree);
 		token_free(&token);
 		free(prompt);

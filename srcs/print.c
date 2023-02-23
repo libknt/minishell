@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:06:21 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 23:30:39 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/21 14:35:29 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,17 @@ void	print_line(t_line *line)
 			line = line->next;
 		}
 		printf("\n\n");
+	}
+}
+
+void	print_split(char **t)
+{
+	int	i;
+
+	i = 0;
+	while (t[i])
+	{
+		printf("sp = %s\n", t[i]);
+		i++;
 	}
 }

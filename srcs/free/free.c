@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 08:27:16 by kyoda             #+#    #+#             */
-/*   Updated: 2023/02/20 13:06:16 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/02/21 14:45:22 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	token_free(t_token **token)
 				break ;
 			tmp = (*token)->next;
 			free((*token)->word);
+			(*token)->word = NULL;
 			free(*token);
 			(*token) = tmp;
 		}

@@ -3,6 +3,7 @@
 
 # include "struct.h"
 # include <ctype.h>
+# include <fcntl.h>
 # include <limits.h>
 # include <math.h>
 # include <readline/history.h>
@@ -13,6 +14,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
@@ -36,7 +38,9 @@ void	print_t(t_token *token);
 void	print_tree(t_node *node);
 void	print_n(t_node *node);
 
-void	print_line(t_line *line);
+char	**make_arr(t_node *node);
 
+void	print_line(t_line *line);
+void	print_split(char **t);
 
 #endif
