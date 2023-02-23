@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 22:27:41 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/23 23:05:45 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ void	token_addback(t_token **head, t_token *new)
 			*head = new;
 	}
 }
+
 t_token	*new_token(char *str, t_token_type type)
 {
 	t_token	*new;

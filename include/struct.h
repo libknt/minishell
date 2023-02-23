@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/02/23 22:32:08 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/23 23:38:53 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,23 @@ enum						e_redirect
 typedef struct s_line		t_line;
 struct						s_line
 {
-	int						fd;
 	t_redirect				type;
 	t_token					*token;
 	t_line					*next;
 };
 
+typedef struct s_fd			t_fd;
+struct						s_fd
+{
+	int						fd;
+	t_fd					*prev;
+	t_fd					*next;
+};
+
 typedef struct s_node		t_node;
 struct						s_node
 {
+	t_fd					*fd;
 	t_line					*line;
 	t_node					*left;
 	t_node					*right;
