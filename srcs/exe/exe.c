@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:58:36 by keys              #+#    #+#             */
-/*   Updated: 2023/02/25 15:18:18 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/25 19:33:35 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ int	exe(t_node *node)
 	int			waitstatus;
 
 	argv = make_arr(node);
+	here_documents(node);
+	// _redirect(node);
+	printf("-------------------------------------\n");
+	fflush(stdout);
 	pid = fork();
-	_redirect(node);
 	if (pid < 0)
 		_err("fork");
 	else if (pid == 0)

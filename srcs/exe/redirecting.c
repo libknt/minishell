@@ -80,6 +80,11 @@ void	make_fd_struct_r(t_node *node, t_line *line)
 			break ;
 		else if (line->type == REDIRECT)
 		{
+			if (strncmp(line->token->word, "<<", 2) == 0)
+			{
+				line = line->next->next;
+				continue ;
+			}
 			if (node->fd != NULL)
 			{
 				dup2(_fd->newfd, _fd->oldfd);
