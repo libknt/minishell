@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:58:36 by keys              #+#    #+#             */
-/*   Updated: 2023/02/23 23:56:32 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/25 12:07:29 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	exe(t_node *node)
 		_err("fork");
 	else if (pid == 0)
 	{
-		_redirect(node);
+		// _redirect(node);
 		if (access(argv[0], X_OK) == 0)
 			execve(argv[0], argv, environ);
 		else

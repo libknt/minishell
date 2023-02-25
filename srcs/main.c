@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/02/21 14:41:33 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/25 12:10:51 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	_err(const char *e)
 
 int	main(void)
 {
-	char	*prompt;
+	char	*line;
 	bool	flag;
 	t_token	*token;
 	t_node	*tree;
@@ -29,25 +29,25 @@ int	main(void)
 	rl_outstream = stderr;
 	while (1)
 	{
-		prompt = readline("minishell>");
-		if (prompt == NULL)
+		line = readline("minishell>");
+		if (line == NULL)
 		{
 			printf("Ctr + D\n");
 			break ;
 		}
-		if (!prompt[0])
+		if (!line[0])
 		{
-			free(prompt);
+			free(line);
 			continue ;
 		}
-		if (*prompt)
-			add_history(prompt);
-		token = lexer(&prompt);
+		if (*line)
+			add_history(line);
+		token = lexer(&line);
 		flag = token_error(token);
 		if (flag)
 		{
 			token_free(&token);
-			free(prompt);
+			free(line);
 			continue ;
 		}
 		tree = parser(token);
@@ -56,14 +56,14 @@ int	main(void)
 		{
 			tree_free(tree);
 			token_free(&token);
-			free(prompt);
+			free(line);
 			continue ;
 		}
 		// print_tree(tree);
-		exe(tree);
+		// exe(tree);
 		tree_free(tree);
 		token_free(&token);
-		free(prompt);
+		free(line);
 		// printf("finish\n");
 	}
 	// rl_clear_history();

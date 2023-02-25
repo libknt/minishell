@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 22:11:36 by keys              #+#    #+#             */
-/*   Updated: 2023/02/24 00:01:18 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/25 12:05:28 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	_redirect(t_node *node)
 	t_fd	*_fd;
 	int		oldfd;
 
-	oldfd = 0;
+	oldfd = 1;
 	make_fd_struct_r(node, node->line);
 	_fd = node->fd;
 	while (1)
