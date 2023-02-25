@@ -40,6 +40,7 @@ void	print_n(t_node *node);
 
 char	**make_arr(t_node *node);
 void	_redirect(t_node *node);
+void	restore_fd(t_node *node);
 
 void	print_line(t_line *line);
 void	print_split(char **t);

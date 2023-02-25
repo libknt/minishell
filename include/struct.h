@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/02/23 23:38:53 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/25 16:53:52 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ typedef struct s_fd			t_fd;
 struct						s_fd
 {
 	int						fd;
-	t_fd					*prev;
-	t_fd					*next;
+	int						oldfd;
+	int						newfd;
 };
 
 typedef struct s_node		t_node;
