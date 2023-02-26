@@ -44,10 +44,13 @@ void	_redirect(t_node *node);
 void	restore_fd(t_node *node);
 void	here_documents(t_node *node);
 char	*get_next_line(int fd);
-int exec_tree(t_node	*node);
-int exe_(t_node *node);
+int		exec_tree(t_node *node);
+int		exe_(t_node *node);
+void	set_signal(void);
+void	make_lstenv(t_env **s_env, char **envp);
 
 void	print_line(t_line *line);
 void	print_split(char **t);
 
+void test(t_node *node);
 #endif

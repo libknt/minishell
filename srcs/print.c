@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:06:21 by keys              #+#    #+#             */
-/*   Updated: 2023/02/21 14:35:29 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/26 20:21:41 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	print_n(t_node *node)
 			// printf("%s ", node->t->word);
 			// node->t = node->t->next;
 		}
+		printf("ptr %p",node->next);
+		// print_n(node->next);
 	}
 }
 
