@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 03:00:10 by kyoda             #+#    #+#             */
-/*   Updated: 2023/02/25 19:48:39 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/26 12:00:59 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include <string.h>
 # include <unistd.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
+// # ifndef BUFFER_SIZE
+// #  define BUFFER_SIZE 1024
+// # endif
 
 # define MAX 1000
 # define MAX_FD 256

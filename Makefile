@@ -34,6 +34,7 @@ fclean: clean
 	$(RM) $(NAME)
 
 re : fclean all
+	./minishell
 
 t :re
 	sh test.sh
