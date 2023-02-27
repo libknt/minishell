@@ -80,13 +80,14 @@ int	exec(t_node *node, int k3)
 	if (!node)
 		return (0);
 	pipe(rw);
+	// _redirect(node->left);
+	// here_documents(node);
 	pid = fork();
 	if (pid < 0)
 		_err("fork");
 	else if (pid == 0)
 	{
 		// if (node->left->line->type != PIPE)
-		// 	_redirect(node->left);
 		if (node->next == NULL)
 		{
 			close(rw[0]);
@@ -124,6 +125,7 @@ int	exec(t_node *node, int k3)
 		close(rw[0]);
 		//return (WEXITSTATUS(waitstatus));
 	}
+	// restore_fd(node);
 	//_redirect(node->right);
 	return (1);
 }
