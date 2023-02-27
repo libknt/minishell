@@ -55,20 +55,30 @@ int	exec_si(t_node *node)
 	}
 	return (0);
 }
+int	t_escape_fd(int fd)
+{
+	int	newfd;
 
+	newfd = fcntl(fd, F_DUPFD, 10);
+	fflush(stdout);
+	if (newfd < 0)
+		_err("fcntl");
+	if (close(fd) < 0)
+		_err("close");
+	return (newfd);
+}
 
-
-int	exec(t_node *node)
+int	exec(t_node *node, int k3)
 {
 	char		**argv;
 	extern char	**environ;
 	pid_t		pid;
 	char		*cmd_path;
 	int			rw[2];
-	//int			waitstatus;
 
+	//int			waitstatus;
 	if (!node)
-		return 0;
+		return (0);
 	pipe(rw);
 	pid = fork();
 	if (pid < 0)
@@ -77,9 +87,19 @@ int	exec(t_node *node)
 	{
 		// if (node->left->line->type != PIPE)
 		// 	_redirect(node->left);
-		close(rw[0]);
-		dup2(rw[1], 1);
-		close(rw[1]);
+		if (node->next == NULL)
+		{
+			close(rw[0]);
+			close(rw[1]);
+			dup2(k3, 1);
+			close(k3);
+		}
+		else
+		{
+			close(rw[0]);
+			dup2(rw[1], 1);
+			close(rw[1]);
+		}
 		//_redirect(node);
 		argv = make_arr(node);
 		if (access(argv[0], X_OK) == 0)
@@ -92,20 +112,21 @@ int	exec(t_node *node)
 			else
 				_err("command not found");
 		}
+		exit(0);
 	}
 	else
 	{
 		//wait(&waitstatus);
+		// k = t_escape_fd(rw[0]);
 		close(rw[1]);
 		dup2(rw[0], 0);
+		// *k1 = t_escape_fd(rw[0]);
 		close(rw[0]);
 		//return (WEXITSTATUS(waitstatus));
 	}
-
 	//_redirect(node->right);
-	return (rw[0]);
+	return (1);
 }
-
 
 // int	exec_1(t_node *node)
 // {
@@ -126,7 +147,7 @@ int	exec(t_node *node)
 // 	}
 // 	return (0);
 // }
-void print_nodes(t_node *node)
+void	print_nodes(t_node *node)
 {
 	while (node)
 	{
@@ -136,14 +157,24 @@ void print_nodes(t_node *node)
 		node = node->next;
 	}
 }
+#include <err.h>
+#include <errno.h>
 int	exec_tree(t_node *node)
 {
-	
-	//pid_t	pid;
-	t_node *tmp;
-	tmp = node;
-	int		waitstatus;
+	pid_t	pid;
+	int		status;
+	int		k2;
+	int		k3;
 
+	// int		tmp;
+	// int fd3;
+	// fd3= open("Makefile",O_RDONLY);
+	k2 = fcntl(0, F_DUPFD, 10);
+	k3 = fcntl(1, F_DUPFD, 10);
+	//pid_t	pid;
+	// t_node *tmp;
+	// tmp = node;
+	// int		waitstatus;
 	// char		**argv;
 	// extern char	**environ;
 	// char		*cmd_path;
@@ -156,24 +187,64 @@ int	exec_tree(t_node *node)
 	//print_nodes(node);
 	while (node != NULL)
 	{
-		exec(node);
+		exec(node, k3);
 		node = node->next;
 	}
-	while(tmp->next != NULL)
+	// close(k1);
+	// 	void	restore_fd(t_node *node)
+	// {
+	// 	t_fd	*_fd;
+	// 	_fd = node->fd;
+	// 	if (_fd == NULL)
+	// 		return ;
+	// 	dup2(_fd->newfd, _fd->oldfd);
+	// 	close(_fd->newfd);
+	// }
+	// }
+	// while(tmp->next != NULL)
+	// {
+	// 	wait(&waitstatus);
+	// 	tmp = tmp->next;
+	// }
+	// sleep(5);
+	for (;;)
 	{
-		wait(&waitstatus);
-		tmp = tmp->next;
+		status = 0;
+		pid = wait(&status);
+		if (pid == -1)
+		{
+			if (ECHILD == errno)
+			{
+				// 子プロセスが存在しない
+				break ;
+			}
+			else if (EINTR == errno)
+			{
+				continue ;
+			}
+			// wait が失敗した
+			err(EXIT_FAILURE, "wait error");
+		}
+		// (void)printf("parent: child = %d, status=%d\n", pid, status);
 	}
+	// sleep(5);
+	dup2(k2, 0);
+	close(k2);
+	// sleep(5);
+	(void)printf("testtest\n");
+	fflush(stdout);
+	// sleep(2);
+	// close()
 	//wait(&waitstatus);
-		// // _res direct(node);
-		// if (access(argv[0], X_OK) == 0)
-		// 	execve(argv[0], argv, environ);
-		// else
-		// {
-		// 	cmd_path = exec_filename(argv[0]);
-		// 	if (cmd_path != NULL)
-		// 		execve(cmd_path, argv, environ);
-		// }
+	// // _res direct(node);
+	// if (access(argv[0], X_OK) == 0)
+	// 	execve(argv[0], argv, environ);
+	// else
+	// {
+	// 	cmd_path = exec_filename(argv[0]);
+	// 	if (cmd_path != NULL)
+	// 		execve(cmd_path, argv, environ);
+	// }
 	/*
 	else
 	{
@@ -267,7 +338,6 @@ int	exe_(t_node *node)
 		exec_si(node);
 	else
 	{
-
 		exec_tree(node);
 	}
 	return (0);
