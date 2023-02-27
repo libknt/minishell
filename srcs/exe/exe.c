@@ -65,7 +65,7 @@ int	exec(t_node *node)
 	pid_t		pid;
 	char		*cmd_path;
 	int			rw[2];
-	int			waitstatus;
+	//int			waitstatus;
 
 	if (!node)
 		return 0;
@@ -93,12 +93,17 @@ int	exec(t_node *node)
 				_err("command not found");
 		}
 	}
-	close(rw[1]);
-	dup2(rw[0], 0);
-	close(rw[0]);
+	else
+	{
+		//wait(&waitstatus);
+		close(rw[1]);
+		dup2(rw[0], 0);
+		close(rw[0]);
+		//return (WEXITSTATUS(waitstatus));
+	}
+
 	//_redirect(node->right);
-	wait(&waitstatus);
-	return (pid);
+	return (rw[0]);
 }
 
 
@@ -121,10 +126,22 @@ int	exec(t_node *node)
 // 	}
 // 	return (0);
 // }
-
+void print_nodes(t_node *node)
+{
+	while (node)
+	{
+		printf("-------\n");
+		printf("now %p\n", node);
+		printf("next %p\n", node->next);
+		node = node->next;
+	}
+}
 int	exec_tree(t_node *node)
 {
-	pid_t	pid;
+	
+	//pid_t	pid;
+	t_node *tmp;
+	tmp = node;
 	int		waitstatus;
 
 	// char		**argv;
@@ -136,17 +153,19 @@ int	exec_tree(t_node *node)
 	add_node(node);
 	while (node && node->line->type == PIPE)
 		node = node->left;
-	pid = fork();
-	if (pid < 0)
-		_err("fork");
-	else if (pid == 0)
+	//print_nodes(node);
+	while (node != NULL)
 	{
-		while (node)
-		{
-			exec(node);
-			node = node->next;
-		}
-		// // _redirect(node);
+		exec(node);
+		node = node->next;
+	}
+	while(tmp->next != NULL)
+	{
+		wait(&waitstatus);
+		tmp = tmp->next;
+	}
+	//wait(&waitstatus);
+		// // _res direct(node);
 		// if (access(argv[0], X_OK) == 0)
 		// 	execve(argv[0], argv, environ);
 		// else
@@ -155,15 +174,16 @@ int	exec_tree(t_node *node)
 		// 	if (cmd_path != NULL)
 		// 		execve(cmd_path, argv, environ);
 		// }
-	}
+	/*
 	else
 	{
 		wait(&waitstatus);
 		return (WEXITSTATUS(waitstatus));
 	}
+	*/
 	return (0);
 }
-
+/*
 int	exec_tr(t_node *node)
 {
 	char		**argv;
@@ -240,13 +260,14 @@ int	exec_tr(t_node *node)
 	}
 	return (0);
 }
-
+*/
 int	exe_(t_node *node)
 {
 	if (node->line->type != PIPE)
 		exec_si(node);
 	else
 	{
+
 		exec_tree(node);
 	}
 	return (0);
