@@ -11,10 +11,12 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <err.h>
+#include <errno.h>
 
 #define WRITE 1
 #define READ 0
-
+int	wait_pipeline(pid_t last_pid);
 int	exec_si(t_node *node)
 {
 	char		**argv;
@@ -54,8 +56,27 @@ int	exec_si(t_node *node)
 		return (WEXITSTATUS(waitstatus));
 	}
 	return (0);
-}
 
+}
+int	wait_pipeline(pid_t last_pid)
+{
+	pid_t	wait_result;
+	int		status;
+	int		wstatus;
+
+	while (1)
+	{
+		wait_result = wait(&wstatus);
+		if (wait_result == last_pid)
+			status = WEXITSTATUS(wstatus);
+		else if (wait_result < 0)
+		{
+			if (errno == ECHILD)
+				break ;
+		}
+	}
+	return (status);
+}
 
 
 int	exec(t_node *node)
@@ -95,15 +116,15 @@ int	exec(t_node *node)
 	}
 	else
 	{
-		//wait(&waitstatus);
 		close(rw[1]);
 		dup2(rw[0], 0);
 		close(rw[0]);
+		//wait(&waitstatus);
 		//return (WEXITSTATUS(waitstatus));
 	}
 
 	//_redirect(node->right);
-	return (rw[0]);
+	return (pid);
 }
 
 
@@ -139,10 +160,10 @@ void print_nodes(t_node *node)
 int	exec_tree(t_node *node)
 {
 	
-	//pid_t	pid;
-	t_node *tmp;
-	tmp = node;
-	int		waitstatus;
+	pid_t	pid;
+	//t_node *tmp;
+	//tmp = node;
+	//int		waitstatus;
 
 	// char		**argv;
 	// extern char	**environ;
@@ -156,14 +177,15 @@ int	exec_tree(t_node *node)
 	//print_nodes(node);
 	while (node != NULL)
 	{
-		exec(node);
+		pid = exec(node);
 		node = node->next;
 	}
-	while(tmp->next != NULL)
-	{
-		wait(&waitstatus);
-		tmp = tmp->next;
-	}
+	wait_pipeline(pid);
+	//while(tmp->next != NULL)
+	//{
+	//	waitpid(-1, &waitstatus, 0);
+	//	tmp = tmp->next;
+	//}
 	//wait(&waitstatus);
 		// // _res direct(node);
 		// if (access(argv[0], X_OK) == 0)
