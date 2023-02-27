@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_add_node.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 20:07:03 by keys              #+#    #+#             */
-/*   Updated: 2023/02/26 20:22:44 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/27 00:13:15 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ t_node	**add_node(t_node *node)
 void test(t_node *node)
 {
 	add_node(node);
-	print_tree(node);
+	//print_tree(node);
 }

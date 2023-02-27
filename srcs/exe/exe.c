@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:58:36 by keys              #+#    #+#             */
-/*   Updated: 2023/02/26 20:01:48 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/26 23:3 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	exec_si(t_node *node)
 		return (-1);
 	argv = make_arr(node);
 	////
-	_redirect(node);
-	here_documents(node);
+	//_redirect(node);
+	//here_documents(node);
 	//
 	pid = fork();
 	if (pid < 0)
@@ -48,13 +48,15 @@ int	exec_si(t_node *node)
 	{
 		wait(&waitstatus);
 		////
-		restore_fd(node);
+		//restore_fd(node);
 		///
 		free(argv);
 		return (WEXITSTATUS(waitstatus));
 	}
 	return (0);
 }
+
+
 
 int	exec(t_node *node)
 {
@@ -65,6 +67,8 @@ int	exec(t_node *node)
 	int			rw[2];
 	int			waitstatus;
 
+	if (!node)
+		return 0;
 	pipe(rw);
 	pid = fork();
 	if (pid < 0)
@@ -76,33 +80,8 @@ int	exec(t_node *node)
 		close(rw[0]);
 		dup2(rw[1], 1);
 		close(rw[1]);
-		if (node->left->line->type == PIPE)
-			exec(node->left);
-		else
-		{
-			_redirect(node->left);
-			argv = make_arr(node->left);
-			if (access(argv[0], X_OK) == 0)
-				execve(argv[0], argv, environ);
-			else
-			{
-				cmd_path = exec_filename(argv[0]);
-				if (cmd_path != NULL)
-					execve(cmd_path, argv, environ);
-				else
-					_err("command not found");
-			}
-		}
-	}
-	else
-	{
-		wait(&waitstatus);
-		// _redirect(node->right);
-		close(rw[1]);
-		dup2(rw[0], 0);
-		close(rw[0]);
-		_redirect(node->right);
-		argv = make_arr(node->right);
+		//_redirect(node);
+		argv = make_arr(node);
 		if (access(argv[0], X_OK) == 0)
 			execve(argv[0], argv, environ);
 		else
@@ -113,10 +92,15 @@ int	exec(t_node *node)
 			else
 				_err("command not found");
 		}
-		return (WEXITSTATUS(waitstatus));
 	}
-	return (0);
+	close(rw[1]);
+	dup2(rw[0], 0);
+	close(rw[0]);
+	//_redirect(node->right);
+	wait(&waitstatus);
+	return (pid);
 }
+
 
 // int	exec_1(t_node *node)
 // {
@@ -149,12 +133,19 @@ int	exec_tree(t_node *node)
 	// if (node == NULL)
 	// 	return (-1);
 	// argv = make_arr(node);
+	add_node(node);
+	while (node && node->line->type == PIPE)
+		node = node->left;
 	pid = fork();
 	if (pid < 0)
 		_err("fork");
 	else if (pid == 0)
 	{
-		exec(node);
+		while (node)
+		{
+			exec(node);
+			node = node->next;
+		}
 		// // _redirect(node);
 		// if (access(argv[0], X_OK) == 0)
 		// 	execve(argv[0], argv, environ);

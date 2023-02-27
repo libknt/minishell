@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/02/26 20:14:48 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/26 23:18:51 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ int	main(int argc, char **argv, char **envp)
 			free(line);
 			continue ;
 		}
-		test(tree);
+		//test(tree);
 		// print_tree(tree);
-		// exec_tree(tree);
-		// exe_(tree);
+		//exec_tree(tree);
+		exe_(tree);
 		// exe(tree);
 		tree_free(tree);
 		token_free(&token);

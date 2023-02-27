@@ -51,6 +51,7 @@ void	make_lstenv(t_env **s_env, char **envp);
 
 void	print_line(t_line *line);
 void	print_split(char **t);
+t_node	**add_node(t_node *node);
 
 void test(t_node *node);
 #endif
