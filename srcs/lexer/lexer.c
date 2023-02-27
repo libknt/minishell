@@ -6,11 +6,13 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/02/23 23:05:45 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/27 19:47:55 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+size_t			wordlen(char *prompt, char **line, size_t i);
 
 void	qq_flag(bool *sq, bool *dq, char c)
 {
@@ -76,19 +78,47 @@ char	*ft_join_free(char *s1, char *s2, int flag1, int flag2)
 		free(s2);
 	return (tmp);
 }
+
+size_t	num_(bool *dq, bool *sq, char *tmp)
+{
+	size_t	num;
+
+	while (1)
+	{
+		if (*dq)
+			tmp = strchr(tmp, '\"');
+		if (*sq)
+			tmp = strchr(tmp, '\'');
+		if (tmp == NULL)
+		{
+			break ;
+		}
+		num++;
+		tmp++;
+	}
+	return (num);
+}
+
+char	*readline_quate(bool *dq, bool *sq)
+{
+	char	*new;
+
+	if (*dq)
+		new = readline("dquote>");
+	else if (*sq)
+		new = readline("quote>");
+	return (new);
+}
+
 void	continue_read(bool *sq, bool *dq, char **line)
 {
 	char	*new;
 	size_t	num;
-	char	*tmp;
 
 	num = 0;
 	while (1)
 	{
-		if (*dq)
-			new = readline("dquote>");
-		else if (*sq)
-			new = readline("quote>");
+		new = readline_quate(dq, sq);
 		if (new == NULL)
 			break ;
 		if (!new[0])
@@ -98,28 +128,38 @@ void	continue_read(bool *sq, bool *dq, char **line)
 		}
 		*line = ft_join_free(*line, "\n", 1, 0);
 		*line = ft_join_free(*line, new, 1, 0);
-		tmp = new;
-		while (1)
-		{
-			if (*dq)
-				tmp = strchr(tmp, '\"');
-			if (*sq)
-				tmp = strchr(tmp, '\'');
-			if (tmp == NULL)
-			{
-				break ;
-			}
-			num++;
-			tmp++;
-		}
-		if (num && (num % 2 == 1))
-		{
-			free(new);
-			return ;
-		}
+		num = num_(dq, sq, new);
 		free(new);
+		if (num && (num % 2 == 1))
+			return ;
 	}
 	free(new);
+}
+
+bool	is_ok(char *prompt, size_t len)
+{
+	if (is_blank(prompt[len]) || prompt[len] == '\0' ||
+		is_ope(&prompt[len]) || (strncmp(&prompt[len], "<", 1) == 0) ||
+		(strncmp(&prompt[len], ">", 1) == 0))
+		return (true);
+	return (false);
+}
+
+size_t	quate_wordlen(bool *dq, bool *sq, size_t i, char **line)
+{
+	continue_read(sq, dq, line);
+	return (wordlen((*line) + i, line, i));
+}
+
+bool	quate_flag(char *prompt, size_t *len, bool *dq, bool *sq)
+{
+	if (prompt[*len] == '\"' || prompt[*len] == '\'')
+	{
+		qq_flag(sq, dq, prompt[*len]);
+		*len += 1;
+		return (true);
+	}
+	return (false);
 }
 
 size_t	wordlen(char *prompt, char **line, size_t i)
@@ -137,28 +177,18 @@ size_t	wordlen(char *prompt, char **line, size_t i)
 		return (is_redirect(prompt));
 	while (1)
 	{
-		if (prompt[len] == '\"' || prompt[len] == '\'')
-		{
-			qq_flag(&sq, &dq, prompt[len]);
-			len++;
+		if (quate_flag(prompt, &len, &dq, &sq))
 			continue ;
-		}
 		if (!dq && !sq)
-		{
-			if (is_blank(prompt[len]) || prompt[len] == '\0' ||
-				is_ope(&prompt[len]) || (strncmp(&prompt[len], "<", 1) == 0) ||
-				(strncmp(&prompt[len], ">", 1) == 0))
+			if (is_ok(prompt, len))
 				break ;
-		}
 		if ((sq || dq) && prompt[len] == '\0')
-		{
-			continue_read(&sq, &dq, line);
-			return (wordlen((*line) + i, line, i));
-		}
+			return (quate_wordlen(&dq, &sq, i, line));
 		len++;
 	}
 	return (len);
 }
+
 t_token	*token_last(t_token *token)
 {
 	t_token	*tmp;
@@ -253,6 +283,8 @@ t_token	*lexer(char **line)
 {
 	t_token	*token;
 
+	if (!*line[0])
+		return (NULL);
 	token = make_token(line);
 	expand(token);
 	return (token);

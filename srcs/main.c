@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/02/26 23:18:51 by Marai            ###   ########.fr       */
+/*   Updated: 2023/02/27 22:03:17 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,37 +19,48 @@ void	_err(const char *e)
 	exit(1);
 }
 
+void print_env1(t_env *env)
+{
+	while(1)
+	{
+		if(env == NULL)
+			break;
+		printf("%s\t:\t%s\n\n\n",env->key,env->value);
+		env= env->next;
+	}
+
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	bool	flag;
 	t_token	*token;
 	t_node	*tree;
-	// t_env	*env;
+	t_env	*env;
 
 	(void)argc;
 	(void)argv;
-	(void)envp;
-	// env = NULL;
-	// make_lstenv(&env, envp);
+	// (void)envp;
+	env = NULL;
+	make_lstenv(&env, envp);
+	// print_env1(env);
 	set_signal();
 	rl_outstream = stderr;
 	while (1)
 	{
 		line = readline("minishell>");
 		if (line == NULL)
-		{
-			printf("Ctr + D\n");
 			break ;
-		}
-		if (!line[0])
+		if(!line[0])
 		{
 			free(line);
-			continue ;
+			continue;
 		}
 		if (*line)
 			add_history(line);
 		token = lexer(&line);
+		print_t(token);
 		flag = token_error(token);
 		if (flag)
 		{
@@ -66,16 +77,10 @@ int	main(int argc, char **argv, char **envp)
 			free(line);
 			continue ;
 		}
-		//test(tree);
-		// print_tree(tree);
-		//exec_tree(tree);
 		exe_(tree);
-		// exe(tree);
 		tree_free(tree);
 		token_free(&token);
 		free(line);
-		// printf("finish\n");
 	}
-	// rl_clear_history();
 	return (0);
 }

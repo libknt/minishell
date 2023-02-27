@@ -22,13 +22,14 @@ int	exec_si(t_node *node)
 	pid_t		pid;
 	char		*cmd_path;
 	int			waitstatus;
+	int flag;
 
 	if (node == NULL)
 		return (-1);
 	argv = make_arr(node);
 	////
-	//_redirect(node);
-	//here_documents(node);
+	_redirect(node,&flag);
+	here_documents(node);
 	//
 	pid = fork();
 	if (pid < 0)
@@ -48,7 +49,7 @@ int	exec_si(t_node *node)
 	{
 		wait(&waitstatus);
 		////
-		//restore_fd(node);
+		restore_fd(node);
 		///
 		free(argv);
 		return (WEXITSTATUS(waitstatus));
@@ -75,19 +76,30 @@ int	exec(t_node *node, int k3)
 	pid_t		pid;
 	char		*cmd_path;
 	int			rw[2];
+	int here;
+	here = 0;
+	// int flag;
+
+	// flag = 0;
 
 	//int			waitstatus;
 	if (!node)
 		return (0);
+	// _redirect(node,&flag);
+	here= here_documents(node);
 	pipe(rw);
-	// _redirect(node->left);
-	// here_documents(node);
 	pid = fork();
 	if (pid < 0)
 		_err("fork");
 	else if (pid == 0)
 	{
+		// here_documents(node);
 		// if (node->left->line->type != PIPE)
+		if(here)
+		{
+				dup2(here, 0);
+				close(here);
+		}
 		if (node->next == NULL)
 		{
 			close(rw[0]);
@@ -120,12 +132,14 @@ int	exec(t_node *node, int k3)
 		//wait(&waitstatus);
 		// k = t_escape_fd(rw[0]);
 		close(rw[1]);
-		dup2(rw[0], 0);
+		// if(flag ==0)
+			dup2(rw[0], 0);
 		// *k1 = t_escape_fd(rw[0]);
 		close(rw[0]);
+	// restore_fd(node);
 		//return (WEXITSTATUS(waitstatus));
 	}
-	// restore_fd(node);
+	close(here);
 	//_redirect(node->right);
 	return (1);
 }

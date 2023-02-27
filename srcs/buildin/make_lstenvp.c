@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 09:09:09 by keys              #+#    #+#             */
-/*   Updated: 2023/02/26 16:28:33 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/27 20:41:03 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,11 @@ void	make_lstenv(t_env **s_env, char **envp)
 	int		i;
 	t_env	*new;
 
-	return ;
 	i = 0;
-		printf("env\n\n");
 	while (envp[i])
 	{
 		new = new_lstenv(envp[i]);
 		ft_env_addback(s_env, new);
 		i++;
 	}
-	print_env(*s_env);
 }

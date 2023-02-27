@@ -1,0 +1,21 @@
+total 120
+drwxr-xr-x 8 keys keys  4096 Feb 27 20:51 .
+drwxr-xr-x 9 keys keys  4096 Feb 27 16:17 ..
+drwxr-xr-x 8 keys keys  4096 Feb 27 20:51 .git
+drwxr-xr-x 2 keys keys  4096 Feb 27 16:17 .vscode
+-rw-r--r-- 1 keys keys     0 Feb 27 20:51 1.txt
+-rw-r--r-- 1 keys keys  1513 Feb 27 16:17 Makefile
+-rwxr-xr-x 1 keys keys 16688 Feb 27 18:43 a.out
+-rw-r--r-- 1 keys keys  1256 Feb 27 16:17 a.txt
+-rw-r--r-- 1 keys keys     0 Feb 27 18:43 cmp
+drwxr-xr-x 2 keys keys  4096 Feb 27 16:17 include
+-rw-r--r-- 1 keys keys    47 Feb 27 16:17 leak.sh
+drwxr-xr-x 2 keys keys  4096 Feb 27 18:42 log
+-rwxr-xr-x 1 keys keys 38904 Feb 27 20:51 minishell
+drwxr-xr-x 3 keys keys  4096 Feb 27 20:51 obj
+-rw-r--r-- 1 keys keys    24 Feb 27 18:43 out
+drwxr-xr-x 8 keys keys  4096 Feb 27 16:17 srcs
+-rw-r--r-- 1 keys keys  1255 Feb 27 16:17 tags
+-rw-r--r-- 1 keys keys   575 Feb 27 16:17 test.sh
+-rw-r--r-- 1 keys keys     0 Feb 27 18:57 test.txt
+-rw-r--r-- 1 keys keys  1158 Feb 27 16:30 ttt.c

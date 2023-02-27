@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:06:46 by kyoda             #+#    #+#             */
-/*   Updated: 2023/02/26 17:20:50 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/27 19:07:49 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ bool	token_error(t_token *token)
 {
 	bool	re;
 
+	if (token == NULL)
+		return (true);
 	g_syntax_err = false;
 	syntax_check(token);
 	re = g_syntax_err;
