@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/02/28 14:21:49 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/28 20:21:11 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,15 @@ void	_err(const char *e)
 	exit(1);
 }
 
-void print_env1(t_env *env)
+void	print_env1(t_env *env)
 {
-	while(1)
+	while (1)
 	{
-		if(env == NULL)
-			break;
-		printf("%s\t:\t%s\n\n\n",env->key,env->value);
-		env= env->next;
+		if (env == NULL)
+			break ;
+		printf("%s\t:\t%s\n\n\n", env->key, env->value);
+		env = env->next;
 	}
-
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -42,6 +41,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	// (void)envp;
+	// sp = 0;
 	env = NULL;
 	make_lstenv(&env, envp);
 	// print_env1(env);
@@ -52,15 +52,14 @@ int	main(int argc, char **argv, char **envp)
 		line = readline("minishell>");
 		if (line == NULL)
 			break ;
-		if(!line[0])
+		if (!line[0])
 		{
 			free(line);
-			continue;
+			continue ;
 		}
 		if (*line)
 			add_history(line);
 		token = lexer(&line);
-		// print_t(token);
 		flag = token_error(token);
 		if (flag)
 		{

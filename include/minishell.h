@@ -20,6 +20,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
+extern int sp;
 char	**ft_split(char const *s, char c);
 char	*exec_filename(char *prompt);
 t_token	*lexer(char **line);
