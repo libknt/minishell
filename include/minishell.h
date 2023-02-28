@@ -39,10 +39,11 @@ void	print_t(t_token *token);
 void	print_tree(t_node *node);
 void	print_n(t_node *node);
 
-char	**make_arr(t_node *node);
-void	_redirect(t_node *node,int *flag);
+char	**make_arr(t_node *node, int here);
+void	_redirect_si(t_node *node);
+int		_redirect(t_node *node);
 void	restore_fd(t_node *node);
-int	here_documents(t_node *node);
+int		here_documents(t_node *node);
 // char	*get_next_line(int fd);
 int		exec_tree(t_node *node);
 int		exe_(t_node *node);
@@ -54,5 +55,5 @@ void	print_split(char **t);
 t_node	**add_node(t_node *node);
 void	print_t(t_token *token);
 
-void test(t_node *node);
+void	test(t_node *node);
 #endif

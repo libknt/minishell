@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/02/27 19:47:55 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/27 22:17:05 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*ft_join_free(char *s1, char *s2, int flag1, int flag2)
 
 size_t	num_(bool *dq, bool *sq, char *tmp)
 {
-	size_t	num;
+	size_t	num = 0;
 
 	while (1)
 	{

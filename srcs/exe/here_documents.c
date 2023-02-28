@@ -6,11 +6,9 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 17:40:25 by keys              #+#    #+#             */
-/*   Updated: 2023/02/27 21:20:42 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/28 16:41:50 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "minishell.h"
 
 #include "minishell.h"
 
@@ -46,18 +44,23 @@ int	here_doc_exe(char *end)
 	return (rw[READ]);
 }
 
-int	here_documents(t_node *node)
+int	here_doc(t_node *node)
 {
 	t_line	*line;
 	int		rw_read;
-	// char	buf[255];
+	int		flag;
 
+	flag = 0;
+	rw_read = -1;
+	// char	buf[255];
 	line = node->line;
 	while (1)
 	{
 		if (line->type == T_EOF_R)
 			break ;
-		else if (line->type == REDIRECT)
+		if (flag == 1)
+			close(rw_read);
+		if (line->type == REDIRECT)
 		{
 			if (strncmp(line->token->word, "<<", 2) == 0)
 			{
@@ -69,13 +72,24 @@ int	here_documents(t_node *node)
 				// printf("\n");
 				// // dup2(rw_read,0);
 				// close(rw_read);
+				flag = 1;
 			}
 			line = line->next;
 			continue ;
 		}
 		line = line->next;
 	}
-	return rw_read;
+	if(rw_read ==-1)
+		return 0;
+	return (rw_read);
+}
+
+int	here_documents(t_node *node)
+{
+	int	rw_read;
+
+	rw_read = here_doc(node);
+	return (rw_read);
 }
 
 // #define WRITE 1

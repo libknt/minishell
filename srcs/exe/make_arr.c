@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 14:21:21 by keys              #+#    #+#             */
-/*   Updated: 2023/02/21 14:44:22 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/28 16:43:26 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,20 @@ void	push_arr(char **arr, t_line *line)
 	arr[i] = NULL;
 }
 
-char	**make_arr(t_node *node)
+void	push_arr_here(char **arr, int here)
+{
+	char	buf[255];
+	int		fd;
+
+	fd = open(".heredoc.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	read(here, buf, 255);
+	write(fd, buf, strlen(buf) + 1);
+	close(fd);
+	close(here);
+	arr[1] = strdup(".heredoc.txt");
+}
+
+char	**make_arr(t_node *node, int here)
 {
 	t_line	*line;
 	size_t	len;
@@ -55,10 +68,17 @@ char	**make_arr(t_node *node)
 
 	line = node->line;
 	len = line_size(line);
+	if (len == 1 && here > 0)
+	{
+		arr = calloc(sizeof(char **), 3);
+		arr[0] = line->token->word;
+		arr[2] = NULL;
+		push_arr_here(arr, here);
+		return (arr);
+	}
 	arr = calloc(sizeof(char **), len + 1);
 	if (!arr)
 		_err("malloc");
 	push_arr(arr, line);
-	// print_split(arr);
 	return (arr);
 }

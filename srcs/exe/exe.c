@@ -22,15 +22,14 @@ int	exec_si(t_node *node)
 	pid_t		pid;
 	char		*cmd_path;
 	int			waitstatus;
-	int flag;
+	int			here;
 
 	if (node == NULL)
 		return (-1);
-	argv = make_arr(node);
-	////
-	_redirect(node,&flag);
-	here_documents(node);
-	//
+	_redirect_si(node);
+	here = here_documents(node);
+	argv = NULL;
+	argv = make_arr(node, here);
 	pid = fork();
 	if (pid < 0)
 		_err("fork");
@@ -45,17 +44,17 @@ int	exec_si(t_node *node)
 				execve(cmd_path, argv, environ);
 		}
 	}
-	else
+	wait(&waitstatus);
+	restore_fd(node);
+	if (argv[1] && strncmp(argv[1], ".heredoc.txt", 12) == 0)
 	{
-		wait(&waitstatus);
-		////
-		restore_fd(node);
-		///
-		free(argv);
-		return (WEXITSTATUS(waitstatus));
+		free(argv[1]);
+		argv[1] = NULL;
 	}
-	return (0);
+	free(argv);
+	return (WEXITSTATUS(waitstatus));
 }
+
 int	t_escape_fd(int fd)
 {
 	int	newfd;
@@ -76,17 +75,17 @@ int	exec(t_node *node, int k3)
 	pid_t		pid;
 	char		*cmd_path;
 	int			rw[2];
-	int here;
-	here = 0;
+
+	// int			here;
+	// here = 0;
 	// int flag;
-
 	// flag = 0;
-
 	//int			waitstatus;
 	if (!node)
 		return (0);
-	// _redirect(node,&flag);
-	here= here_documents(node);
+	argv = NULL;
+	_redirect_si(node);
+	// here = here_documents(node);
 	pipe(rw);
 	pid = fork();
 	if (pid < 0)
@@ -95,26 +94,29 @@ int	exec(t_node *node, int k3)
 	{
 		// here_documents(node);
 		// if (node->left->line->type != PIPE)
-		if(here)
+		if (node->fd == NULL)
 		{
-				dup2(here, 0);
-				close(here);
-		}
-		if (node->next == NULL)
-		{
-			close(rw[0]);
-			close(rw[1]);
-			dup2(k3, 1);
-			close(k3);
+			if (node->next == NULL)
+			{
+				close(rw[0]);
+				close(rw[1]);
+				dup2(k3, 1);
+				close(k3);
+			}
+			else
+			{
+				close(rw[0]);
+				dup2(rw[1], 1);
+				close(rw[1]);
+			}
 		}
 		else
 		{
 			close(rw[0]);
-			dup2(rw[1], 1);
 			close(rw[1]);
 		}
 		//_redirect(node);
-		argv = make_arr(node);
+		argv = make_arr(node, 0);
 		if (access(argv[0], X_OK) == 0)
 			execve(argv[0], argv, environ);
 		else
@@ -127,19 +129,21 @@ int	exec(t_node *node, int k3)
 		}
 		exit(0);
 	}
-	else
+	//wait(&waitstatus);
+	// k = t_escape_fd(rw[0]);
+	if (node->fd == NULL)
 	{
-		//wait(&waitstatus);
-		// k = t_escape_fd(rw[0]);
 		close(rw[1]);
-		// if(flag ==0)
-			dup2(rw[0], 0);
-		// *k1 = t_escape_fd(rw[0]);
+		dup2(rw[0], 0);
 		close(rw[0]);
-	// restore_fd(node);
-		//return (WEXITSTATUS(waitstatus));
 	}
-	close(here);
+	else
+		restore_fd(node);
+	// close(here);
+	// if(flag ==0)
+	// *k1 = t_escape_fd(rw[0]);
+	//return (WEXITSTATUS(waitstatus));
+	// close(here);
 	//_redirect(node->right);
 	return (1);
 }
@@ -247,7 +251,6 @@ int	exec_tree(t_node *node)
 	dup2(k2, 0);
 	close(k2);
 	// sleep(5);
-	(void)printf("testtest\n");
 	fflush(stdout);
 	// sleep(2);
 	// close()

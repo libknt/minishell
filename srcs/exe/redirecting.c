@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-#include "minishell.h"
-
 void	print_fd(t_fd *fd)
 {
 	while (1)
@@ -36,7 +34,7 @@ t_fd	*newfd(int fd, int oldfd)
 	return (new);
 }
 
-void	new_fd_num(t_line *line, int *fd, int *oldfd)
+static void	new_fd_num(t_line *line, int *fd, int *oldfd)
 {
 	if (strncmp(line->token->word, ">>", 2) == 0)
 	{
@@ -56,7 +54,7 @@ void	new_fd_num(t_line *line, int *fd, int *oldfd)
 	}
 }
 
-int	escape_fd(int fd)
+static int	escape_fd(int fd)
 {
 	int	newfd;
 
@@ -69,7 +67,7 @@ int	escape_fd(int fd)
 	return (newfd);
 }
 
-void	make_fd_struct_r(t_node *node, t_line *line)
+static void	make_fd_struct_r(t_node *node, t_line *line)
 {
 	int		fd;
 	int		oldfd;
@@ -107,14 +105,13 @@ void	make_fd_struct_r(t_node *node, t_line *line)
 	}
 }
 
-void	_redirect(t_node *node,int *flag)
+void	_redirect_si(t_node *node)
 {
 	t_fd	*_fd;
 
 	make_fd_struct_r(node, node->line);
 	if (node->fd == NULL)
 		return ;
-	*flag = 1;
 	_fd = node->fd;
 	if (_fd->oldfd != _fd->fd)
 	{
