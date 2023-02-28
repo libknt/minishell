@@ -42,6 +42,8 @@ int	exec_si(t_node *node)
 			cmd_path = exec_filename(argv[0]);
 			if (cmd_path != NULL)
 				execve(cmd_path, argv, environ);
+			else
+				_err("command not found");
 		}
 	}
 	wait(&waitstatus);
@@ -75,6 +77,7 @@ int	exec(t_node *node, int k3)
 	pid_t		pid;
 	char		*cmd_path;
 	int			rw[2];
+	int			here;
 
 	// int			here;
 	// here = 0;
@@ -85,7 +88,9 @@ int	exec(t_node *node, int k3)
 		return (0);
 	argv = NULL;
 	_redirect_si(node);
-	// here = here_documents(node);
+	here = here_documents(node);
+	// argv = NULL;
+	// argv = make_arr(node, here);
 	pipe(rw);
 	pid = fork();
 	if (pid < 0)
@@ -116,7 +121,7 @@ int	exec(t_node *node, int k3)
 			close(rw[1]);
 		}
 		//_redirect(node);
-		argv = make_arr(node, 0);
+		argv = make_arr(node, here);
 		if (access(argv[0], X_OK) == 0)
 			execve(argv[0], argv, environ);
 		else
@@ -139,6 +144,7 @@ int	exec(t_node *node, int k3)
 	}
 	else
 		restore_fd(node);
+	// close(here);
 	// close(here);
 	// if(flag ==0)
 	// *k1 = t_escape_fd(rw[0]);

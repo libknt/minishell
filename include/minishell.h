@@ -20,7 +20,6 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-int		exe(t_node *node);
 char	**ft_split(char const *s, char c);
 char	*exec_filename(char *prompt);
 t_token	*lexer(char **line);

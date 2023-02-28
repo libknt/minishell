@@ -1,0 +1,10 @@
+123
+Makefile
+include
+leak.sh
+log
+minishell
+obj
+srcs
+test.sh
+ttt.c

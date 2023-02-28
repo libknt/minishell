@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 14:21:21 by keys              #+#    #+#             */
-/*   Updated: 2023/02/28 16:43:26 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/28 17:15:50 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	push_arr_here(char **arr, int here)
 
 	fd = open(".heredoc.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	read(here, buf, 255);
-	write(fd, buf, strlen(buf) + 1);
+	write(fd, buf, strlen(buf));
 	close(fd);
 	close(here);
 	arr[1] = strdup(".heredoc.txt");
