@@ -182,9 +182,9 @@ char	*expand_quote(char *line)
 	if (!line)
 		return (NULL);
 	len = strlen(line);
-	line2 = malloc(sizeof(char) * len);
+	line2 = calloc(sizeof(char), len);
 	if (!line2)
-		return (NULL);
+		_err("calloc\n");
 	i = 0;
 	j = 0;
 	while (line[i])
@@ -201,7 +201,6 @@ char	*expand_quote(char *line)
 		}
 		else
 			line2[j] = line[i];
-		printf("%ld %ld\n", i, j);
 		i++;
 		j++;
 	}
