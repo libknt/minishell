@@ -208,3 +208,18 @@ char	*expand_quote(char *line)
 	free(line);
 	return (line2);
 }
+
+void	ex_toke(t_token **token, t_env *env)
+{
+	t_token	*tmp;
+
+	tmp = *token;
+	while (1)
+	{
+		if (tmp->type == T_EOF)
+			break ;
+		tmp->word = vari_expand(tmp->word, env);
+		tmp->word = expand_quote(tmp->word);
+		tmp = tmp->next;
+	}
+}

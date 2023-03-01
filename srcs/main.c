@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/02/28 20:21:11 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/01 12:35:31 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (*line)
 			add_history(line);
-		token = lexer(&line);
+		token = lexer(&line,env);
 		flag = token_error(token);
 		if (flag)
 		{

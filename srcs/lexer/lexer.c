@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/02/27 22:17:05 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/01 12:35:09 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,13 +279,14 @@ t_token	*make_token(char **line)
 	return (head);
 }
 
-t_token	*lexer(char **line)
+t_token	*lexer(char **line,t_env *env)
 {
 	t_token	*token;
 
 	if (!*line[0])
 		return (NULL);
 	token = make_token(line);
-	expand(token);
+	// expand(token);
+	ex_toke(&token ,env);
 	return (token);
 }
