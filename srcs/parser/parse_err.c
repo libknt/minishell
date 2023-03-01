@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:21:12 by keys              #+#    #+#             */
-/*   Updated: 2023/02/14 23:38:18 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/26 17:19:31 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ bool	parse_err(t_node *node)
 {
 	bool	re;
 
+	g_parse_err = false;
 	syntax_parse(node);
 	re = g_parse_err;
 	return (re);

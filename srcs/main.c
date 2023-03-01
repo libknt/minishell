@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/02/25 12:10:51 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/26 23:18:51 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,20 @@ void	_err(const char *e)
 	exit(1);
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	bool	flag;
 	t_token	*token;
 	t_node	*tree;
+	// t_env	*env;
 
+	(void)argc;
+	(void)argv;
+	(void)envp;
+	// env = NULL;
+	// make_lstenv(&env, envp);
+	set_signal();
 	rl_outstream = stderr;
 	while (1)
 	{
@@ -59,7 +66,10 @@ int	main(void)
 			free(line);
 			continue ;
 		}
+		//test(tree);
 		// print_tree(tree);
+		//exec_tree(tree);
+		exe_(tree);
 		// exe(tree);
 		tree_free(tree);
 		token_free(&token);

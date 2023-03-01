@@ -6,12 +6,21 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/02/23 23:38:53 by keys             ###   ########.fr       */
+/*   Updated: 2023/02/26 20:06:26 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+typedef struct s_env		t_env;
+struct						s_env
+{
+	char					*key;
+	char					*value;
+	t_env					*prev;
+	t_env					*next;
+};
 
 typedef enum e_token_type	t_token_type;
 enum						e_token_type
@@ -52,8 +61,8 @@ typedef struct s_fd			t_fd;
 struct						s_fd
 {
 	int						fd;
-	t_fd					*prev;
-	t_fd					*next;
+	int						oldfd;
+	int						newfd;
 };
 
 typedef struct s_node		t_node;
@@ -63,5 +72,6 @@ struct						s_node
 	t_line					*line;
 	t_node					*left;
 	t_node					*right;
+	t_node					*next;
 };
 #endif

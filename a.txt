@@ -1,0 +1,30 @@
+total 68
+-rw-r--r-- 1 masahitoarai masahitoarai     0 Feb 27 10:04 a.txt
+drwxrwxr-x 2 masahitoarai masahitoarai  4096 Feb 26 23:12 include
+-rw-rw-r-- 1 masahitoarai masahitoarai    47 Feb 26 23:12 leak.sh
+drwxrwxr-x 2 masahitoarai masahitoarai  4096 Feb 26 23:12 log
+-rw-rw-r-- 1 masahitoarai masahitoarai  1513 Feb 26 23:12 Makefile
+-rwxrwxr-x 1 masahitoarai masahitoarai 37824 Feb 27 10:04 minishell
+drwxrwxr-x 3 masahitoarai masahitoarai  4096 Feb 26 23:12 obj
+drwxrwxr-x 8 masahitoarai masahitoarai  4096 Feb 26 23:12 srcs
+-rw-rw-r-- 1 masahitoarai masahitoarai   575 Feb 26 23:12 test.sh
+a.txt
+include
+leak.sh
+log
+Makefile
+minishell
+obj
+srcs
+test.sh
+total 72
+-rw-r--r-- 1 masahitoarai masahitoarai   655 Feb 27 10:04 a.txt
+drwxrwxr-x 2 masahitoarai masahitoarai  4096 Feb 26 23:12 include
+-rw-rw-r-- 1 masahitoarai masahitoarai    47 Feb 26 23:12 leak.sh
+drwxrwxr-x 2 masahitoarai masahitoarai  4096 Feb 26 23:12 log
+-rw-rw-r-- 1 masahitoarai masahitoarai  1513 Feb 26 23:12 Makefile
+-rwxrwxr-x 1 masahitoarai masahitoarai 37824 Feb 27 10:04 minishell
+drwxrwxr-x 3 masahitoarai masahitoarai  4096 Feb 26 23:12 obj
+drwxrwxr-x 8 masahitoarai masahitoarai  4096 Feb 26 23:12 srcs
+-rw-rw-r-- 1 masahitoarai masahitoarai   575 Feb 26 23:12 test.sh
+Ctr + D
