@@ -1,0 +1,13 @@
+Makefile
+a.out
+cmp
+include
+leak.sh
+minishell
+obj
+out
+srcs
+test
+test.sh
+test.txt
+ttt.c
