@@ -1,3 +1,1 @@
-la
-la
-ls
+$PATH

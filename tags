@@ -1,0 +1,212 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/masahitoarai/Documents/42/minishell_yoda/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+$(NAME)	Makefile	/^$(NAME):$(OBJS)$/;"	t
+$(OBJDIR)/%.o	Makefile	/^$(OBJDIR)\/%.o: %.c$/;"	t
+CC	Makefile	/^CC			=	cc$/;"	m
+CFLAGS	Makefile	/^CFLAGS		=	-Wall -Wextra -Werror$/;"	m
+CMDLINE	include/struct.h	/^	CMDLINE,$/;"	e	enum:e_redirect
+EOF	test.sh	/^cat << EOF | gcc -xc -o a.out -$/;"	h
+FILENAME	include/struct.h	/^	FILENAME,$/;"	e	enum:e_redirect
+Fork	ttt.c	/^Fork ()$/;"	f	typeref:typename:pid_t
+GET_NEXT_LINE_H	include/get_next_line.h	/^# define GET_NEXT_LINE_H$/;"	d
+INCLUDE	Makefile	/^INCLUDE		=	-I .\/include\/$/;"	m
+MAX	include/get_next_line.h	/^# define MAX /;"	d
+MAXLEN	srcs/buildin/pwd.c	/^#define MAXLEN /;"	d	file:
+MAX_FD	include/get_next_line.h	/^# define MAX_FD /;"	d
+MINISHELL_H	include/minishell.h	/^# define MINISHELL_H$/;"	d
+NAME	Makefile	/^NAME 		=	minishell$/;"	m
+OBJDIR	Makefile	/^OBJDIR   = obj$/;"	m
+OBJS	Makefile	/^OBJS  = $(addprefix $(OBJDIR)\/, $(SRCS:.c=.o))$/;"	m
+OP	include/struct.h	/^	OP,$/;"	e	enum:e_token_type
+PIPE	include/struct.h	/^	PIPE,$/;"	e	enum:e_redirect
+READ	srcs/exe/exe.c	/^#define READ /;"	d	file:
+READ	srcs/exe/here_documents.c	/^#define READ /;"	d	file:
+REDIRECT	include/struct.h	/^	REDIRECT,$/;"	e	enum:e_redirect
+RESERVED	include/struct.h	/^	RESERVED,$/;"	e	enum:e_token_type
+SRCS	Makefile	/^SRCS		= $(shell find srcs\/ -name "*.c" )$/;"	m
+STRUCT_H	include/struct.h	/^# define STRUCT_H$/;"	d
+T_EOF	include/struct.h	/^	T_EOF,$/;"	e	enum:e_token_type
+T_EOF_R	include/struct.h	/^	T_EOF_R,$/;"	e	enum:e_redirect
+WORD	include/struct.h	/^	WORD,$/;"	e	enum:e_token_type
+WRITE	srcs/exe/exe.c	/^#define WRITE /;"	d	file:
+WRITE	srcs/exe/here_documents.c	/^#define WRITE /;"	d	file:
+_err	srcs/main.c	/^void	_err(const char *e)$/;"	f	typeref:typename:void
+_err_parse_p	srcs/parser/parse_err.c	/^void	_err_parse_p(char *mes)$/;"	f	typeref:typename:void
+_err_syntax	srcs/lexer/token_error.c	/^void	_err_syntax(char *mes)$/;"	f	typeref:typename:void
+_err_syntax_p	srcs/parser/parse_err.c	/^void	_err_syntax_p(char *mes)$/;"	f	typeref:typename:void
+_redirect_si	srcs/exe/redirecting.c	/^void	_redirect_si(t_node *node)$/;"	f	typeref:typename:void
+add_env	srcs/buildin/make_lstenvp.c	/^void	add_env(t_env **env, char *envp, size_t len)$/;"	f	typeref:typename:void
+add_node	srcs/parser/lst_add_node.c	/^t_node	**add_node(t_node *node)$/;"	f	typeref:typename:t_node **
+add_value	srcs/buildin/make_lstenvp.c	/^void	add_value(t_env **env, char *envp, size_t len)$/;"	f	typeref:typename:void
+all	Makefile	/^all: $(NAME)$/;"	t
+assert	test.sh	/^assert()$/;"	f
+calc_expand_len	srcs/buildin/env.c	/^ssize_t	calc_expand_len(char *line, t_env *env, ssize_t len)$/;"	f	typeref:typename:ssize_t
+check_syntax	srcs/parser/parse_err.c	/^void	check_syntax(t_node *node)$/;"	f	typeref:typename:void
+child	ttt.c	/^child ()$/;"	f	typeref:typename:void
+clean	Makefile	/^clean:$/;"	t
+continue_read	srcs/lexer/lexer.c	/^void	continue_read(bool *sq, bool *dq, char **line)$/;"	f	typeref:typename:void
+ctr_c	srcs/signal/signal.c	/^void	ctr_c(int sig)$/;"	f	typeref:typename:void
+ctype.h	.vscode/settings.json	/^		"ctype.h": "c",$/;"	s	object:files.associations
+e_redirect	include/struct.h	/^enum						e_redirect$/;"	g
+e_token_type	include/struct.h	/^enum						e_token_type$/;"	g
+env_last	srcs/buildin/make_lstenvp.c	/^t_env	*env_last(t_env *env)$/;"	f	typeref:typename:t_env *
+env_len	srcs/buildin/make_lstenvp.c	/^size_t	env_len(char *envp)$/;"	f	typeref:typename:size_t
+err_syntax	srcs/lexer/token_error.c	/^void	err_syntax(char *op)$/;"	f	typeref:typename:void
+escape_fd	srcs/exe/redirecting.c	/^static int	escape_fd(int fd)$/;"	f	typeref:typename:int	file:
+ex_toke	srcs/buildin/env.c	/^void	ex_toke(t_token **token, t_env *env)$/;"	f	typeref:typename:void
+exe_	srcs/exe/exe.c	/^int	exe_(t_node *node)$/;"	f	typeref:typename:int
+exec	srcs/exe/exe.c	/^int	exec(t_node *node, int k3)$/;"	f	typeref:typename:int
+exec_filename	srcs/exe/exec_filename.c	/^char	*exec_filename(char *prompt)$/;"	f	typeref:typename:char *
+exec_si	srcs/exe/exe.c	/^int	exec_si(t_node *node)$/;"	f	typeref:typename:int
+exec_tree	srcs/exe/exe.c	/^int	exec_tree(t_node *node)$/;"	f	typeref:typename:int
+expand	srcs/lexer/expand.c	/^void	expand(t_token *token)$/;"	f	typeref:typename:void
+expand_quote	srcs/buildin/env.c	/^char	*expand_quote(char *line)$/;"	f	typeref:typename:char *
+export	srcs/buildin/export.c	/^t_env	*export(t_env *env)$/;"	f	typeref:typename:t_env *
+fclean	Makefile	/^fclean: clean$/;"	t
+fd	include/struct.h	/^	int						fd;$/;"	m	struct:s_fd	typeref:typename:int
+fd	include/struct.h	/^	t_fd					*fd;$/;"	m	struct:s_node	typeref:typename:t_fd *
+files.associations	.vscode/settings.json	/^	"files.associations": {$/;"	o
+find_env	srcs/buildin/env.c	/^char	*find_env(char *str, t_env *env)$/;"	f	typeref:typename:char *
+find_env_len	srcs/buildin/env.c	/^ssize_t	find_env_len(char *str, t_env *env)$/;"	f	typeref:typename:ssize_t
+find_redirect	srcs/parser/parser.c	/^bool	find_redirect(t_token *token)$/;"	f	typeref:typename:bool
+find_type	srcs/lexer/lexer.c	/^t_token_type	find_type(char *tmp)$/;"	f	typeref:typename:t_token_type
+ft_echo	srcs/buildin/echo.c	/^void	ft_echo(char **argv, int fd)$/;"	f	typeref:typename:void
+ft_env_addback	srcs/buildin/make_lstenvp.c	/^void	ft_env_addback(t_env **env, t_env *new)$/;"	f	typeref:typename:void
+ft_get_split	srcs/exe/exec_filename.c	/^static char	**ft_get_split(char **dst, char const *s, char c)$/;"	f	typeref:typename:char **	file:
+ft_join_free	srcs/lexer/lexer.c	/^char	*ft_join_free(char *s1, char *s2, int flag1, int flag2)$/;"	f	typeref:typename:char *
+ft_putendl_fd	srcs/buildin/echo.c	/^void	ft_putendl_fd(char *s, int fd)$/;"	f	typeref:typename:void
+ft_putstr_fd	srcs/buildin/echo.c	/^void	ft_putstr_fd(char *s, int fd)$/;"	f	typeref:typename:void
+ft_pwd	srcs/buildin/pwd.c	/^void	ft_pwd(void)$/;"	f	typeref:typename:void
+ft_split	srcs/exe/exec_filename.c	/^char	**ft_split(char const *s, char c)$/;"	f	typeref:typename:char **
+ft_split_free	srcs/exe/exec_filename.c	/^void	ft_split_free(char **dst)$/;"	f	typeref:typename:void
+ft_split_len	srcs/exe/exec_filename.c	/^static size_t	ft_split_len(char const *s, char c)$/;"	f	typeref:typename:size_t	file:
+ft_split_size	srcs/exe/exec_filename.c	/^static size_t	ft_split_size(char const *s, char c)$/;"	f	typeref:typename:size_t	file:
+ft_strdup	srcs/exe/exec_filename.c	/^char	*ft_strdup(const char *s1)$/;"	f	typeref:typename:char *
+ft_strjoin	srcs/exe/exec_filename.c	/^char	*ft_strjoin(char const *s1, char const *s2)$/;"	f	typeref:typename:char *
+ft_strlcat	srcs/exe/exec_filename.c	/^size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)$/;"	f	typeref:typename:size_t
+ft_strlcpy	srcs/exe/exec_filename.c	/^size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)$/;"	f	typeref:typename:size_t
+ft_substr	srcs/exe/exec_filename.c	/^char	*ft_substr(char const *s, unsigned int start, size_t len)$/;"	f	typeref:typename:char *
+functional	.vscode/settings.json	/^		"functional": "c",$/;"	s	object:files.associations
+g_parse_err	srcs/parser/parse_err.c	/^bool	g_parse_err = false;$/;"	v	typeref:typename:bool
+g_syntax_err	srcs/lexer/token_error.c	/^bool	g_syntax_err = false;$/;"	v	typeref:typename:bool
+get_next_line.h	.vscode/settings.json	/^		"get_next_line.h": "c"$/;"	s	object:files.associations
+get_pwd	srcs/buildin/pwd.c	/^char	*get_pwd(char *buf, size_t size)$/;"	f	typeref:typename:char *
+here_doc	srcs/exe/here_documents.c	/^int	here_doc(t_node *node)$/;"	f	typeref:typename:int
+here_doc_exe	srcs/exe/here_documents.c	/^int	here_doc_exe(char *end)$/;"	f	typeref:typename:int
+here_documents	srcs/exe/here_documents.c	/^int	here_documents(t_node *node)$/;"	f	typeref:typename:int
+is_alpha_num_under	srcs/buildin/env.c	/^bool	is_alpha_num_under(char c)$/;"	f	typeref:typename:bool
+is_alpha_under	srcs/buildin/env.c	/^bool	is_alpha_under(char c)$/;"	f	typeref:typename:bool
+is_blank	srcs/lexer/lexer.c	/^bool	is_blank(char c)$/;"	f	typeref:typename:bool
+is_identifier	srcs/buildin/env.c	/^bool	is_identifier(const char *s)$/;"	f	typeref:typename:bool
+is_metacharacter	srcs/lexer/lexer.c	/^bool	is_metacharacter(char c)$/;"	f	typeref:typename:bool
+is_ok	srcs/lexer/lexer.c	/^bool	is_ok(char *prompt, size_t len)$/;"	f	typeref:typename:bool
+is_ope	srcs/lexer/lexer.c	/^size_t	is_ope(char *line)$/;"	f	typeref:typename:size_t
+is_quote	srcs/buildin/env.c	/^int	is_quote(char c)$/;"	f	typeref:typename:int
+is_redirect	srcs/lexer/lexer.c	/^size_t	is_redirect(char *line)$/;"	f	typeref:typename:size_t
+key	include/struct.h	/^	char					*key;$/;"	m	struct:s_env	typeref:typename:char *
+leak	Makefile	/^leak :$/;"	t
+left	include/struct.h	/^	t_node					*left;$/;"	m	struct:s_node	typeref:typename:t_node *
+lexer	srcs/lexer/lexer.c	/^t_token	*lexer(char **line,t_env *env)$/;"	f	typeref:typename:t_token *
+limits.h	.vscode/settings.json	/^		"limits.h": "c",$/;"	s	object:files.associations
+line	include/struct.h	/^	t_line					*line;$/;"	m	struct:s_node	typeref:typename:t_line *
+line_addback	srcs/parser/parser.c	/^void	line_addback(t_line **head, t_line *new)$/;"	f	typeref:typename:void
+line_free	srcs/free/free.c	/^void	line_free(t_line *line)$/;"	f	typeref:typename:void
+line_last	srcs/parser/parser.c	/^t_line	*line_last(t_line *token)$/;"	f	typeref:typename:t_line *
+line_size	srcs/exe/make_arr.c	/^size_t	line_size(t_line *line)$/;"	f	typeref:typename:size_t
+main	srcs/main.c	/^int	main(int argc, char **argv, char **envp)$/;"	f	typeref:typename:int
+main	ttt.c	/^main(int argc, char *argv[])$/;"	f	typeref:typename:int
+make_arr	srcs/exe/make_arr.c	/^char	**make_arr(t_node *node, int here)$/;"	f	typeref:typename:char **
+make_expand	srcs/buildin/env.c	/^ssize_t	make_expand(char *expanded, char *line, t_env *env)$/;"	f	typeref:typename:ssize_t
+make_fd_struct_r	srcs/exe/redirecting.c	/^static void	make_fd_struct_r(t_node *node, t_line *line)$/;"	f	typeref:typename:void	file:
+make_line	srcs/parser/parser.c	/^t_line	*make_line(t_token *token)$/;"	f	typeref:typename:t_line *
+make_lstenv	srcs/buildin/make_lstenvp.c	/^void	make_lstenv(t_env **s_env, char **envp)$/;"	f	typeref:typename:void
+make_token	srcs/lexer/lexer.c	/^t_token	*make_token(char **line)$/;"	f	typeref:typename:t_token *
+make_tree	srcs/parser/parser.c	/^void	make_tree(t_node **node, t_token *token)$/;"	f	typeref:typename:void
+math.h	.vscode/settings.json	/^		"math.h": "c",$/;"	s	object:files.associations
+minishell.h	.vscode/settings.json	/^		"minishell.h": "c",$/;"	s	object:files.associations
+multi_fork	ttt.c	/^multi_fork ()$/;"	f	typeref:typename:void
+multi_wait	ttt.c	/^multi_wait ()$/;"	f	typeref:typename:void
+new_fd_num	srcs/exe/redirecting.c	/^static void	new_fd_num(t_line *line, int *fd, int *oldfd)$/;"	f	typeref:typename:void	file:
+new_lstenv	srcs/buildin/make_lstenvp.c	/^t_env	*new_lstenv(char *envp)$/;"	f	typeref:typename:t_env *
+new_token	srcs/lexer/lexer.c	/^t_token	*new_token(char *str, t_token_type type)$/;"	f	typeref:typename:t_token *
+newfd	include/struct.h	/^	int						newfd;$/;"	m	struct:s_fd	typeref:typename:int
+newfd	srcs/exe/redirecting.c	/^t_fd	*newfd(int fd, int oldfd)$/;"	f	typeref:typename:t_fd *
+newline	srcs/parser/parser.c	/^t_line	*newline(t_token *token, t_redirect type)$/;"	f	typeref:typename:t_line *
+newnode	srcs/parser/parser.c	/^t_node	*newnode(t_token *token)$/;"	f	typeref:typename:t_node *
+next	include/struct.h	/^	t_env					*next;$/;"	m	struct:s_env	typeref:typename:t_env *
+next	include/struct.h	/^	t_line					*next;$/;"	m	struct:s_line	typeref:typename:t_line *
+next	include/struct.h	/^	t_node					*next;$/;"	m	struct:s_node	typeref:typename:t_node *
+next	include/struct.h	/^	t_token					*next;$/;"	m	struct:s_token	typeref:typename:t_token *
+node_addtree	srcs/parser/parser.c	/^void	node_addtree(t_node **node, t_node *new)$/;"	f	typeref:typename:void
+num_	srcs/lexer/lexer.c	/^size_t	num_(bool *dq, bool *sq, char *tmp)$/;"	f	typeref:typename:size_t
+oldfd	include/struct.h	/^	int						oldfd;$/;"	m	struct:s_fd	typeref:typename:int
+parse_err	srcs/parser/parse_err.c	/^bool	parse_err(t_node *node)$/;"	f	typeref:typename:bool
+parser	srcs/parser/parser.c	/^t_node	*parser(t_token *token)$/;"	f	typeref:typename:t_node *
+prev	include/struct.h	/^	t_env					*prev;$/;"	m	struct:s_env	typeref:typename:t_env *
+print_env	srcs/buildin/make_lstenvp.c	/^void	print_env(t_env *env)$/;"	f	typeref:typename:void
+print_env1	srcs/main.c	/^void	print_env1(t_env *env)$/;"	f	typeref:typename:void
+print_fd	srcs/exe/redirecting.c	/^void	print_fd(t_fd *fd)$/;"	f	typeref:typename:void
+print_line	srcs/print.c	/^void	print_line(t_line *line)$/;"	f	typeref:typename:void
+print_n	srcs/print.c	/^void	print_n(t_node *node)$/;"	f	typeref:typename:void
+print_node	srcs/print.c	/^void	print_node(t_node *node)$/;"	f	typeref:typename:void
+print_nodes	srcs/exe/exe.c	/^void	print_nodes(t_node *node)$/;"	f	typeref:typename:void
+print_split	srcs/print.c	/^void	print_split(char **t)$/;"	f	typeref:typename:void
+print_t	srcs/print.c	/^void	print_t(t_token *token)$/;"	f	typeref:typename:void
+print_tree	srcs/print.c	/^void	print_tree(t_node *node)$/;"	f	typeref:typename:void
+push_arr	srcs/exe/make_arr.c	/^void	push_arr(char **arr, t_line *line)$/;"	f	typeref:typename:void
+push_arr_here	srcs/exe/make_arr.c	/^void	push_arr_here(char **arr, int here)$/;"	f	typeref:typename:void
+qq_flag	srcs/lexer/lexer.c	/^void	qq_flag(bool *sq, bool *dq, char c)$/;"	f	typeref:typename:void
+quate_flag	srcs/lexer/lexer.c	/^bool	quate_flag(char *prompt, size_t *len, bool *dq, bool *sq)$/;"	f	typeref:typename:bool
+quate_wordlen	srcs/lexer/lexer.c	/^size_t	quate_wordlen(bool *dq, bool *sq, size_t i, char **line)$/;"	f	typeref:typename:size_t
+re	Makefile	/^re : fclean all$/;"	t
+readline.h	.vscode/settings.json	/^		"readline.h": "c",$/;"	s	object:files.associations
+readline_quate	srcs/lexer/lexer.c	/^char	*readline_quate(bool *dq, bool *sq)$/;"	f	typeref:typename:char *
+remake_token	srcs/lexer/expand.c	/^void	remake_token(t_token *token)$/;"	f	typeref:typename:void
+restore_fd	srcs/exe/redirecting.c	/^void	restore_fd(t_node *node)$/;"	f	typeref:typename:void
+right	include/struct.h	/^	t_node					*right;$/;"	m	struct:s_node	typeref:typename:t_node *
+s_env	include/struct.h	/^struct						s_env$/;"	s
+s_fd	include/struct.h	/^struct						s_fd$/;"	s
+s_line	include/struct.h	/^struct						s_line$/;"	s
+s_node	include/struct.h	/^struct						s_node$/;"	s
+s_token	include/struct.h	/^struct						s_token$/;"	s
+set_signal	srcs/signal/signal.c	/^void	set_signal(void)$/;"	f	typeref:typename:void
+stdio.h	.vscode/settings.json	/^		"stdio.h": "c",$/;"	s	object:files.associations
+struct.h	.vscode/settings.json	/^		"struct.h": "c",$/;"	s	object:files.associations
+syntax_check	srcs/lexer/token_error.c	/^void	syntax_check(t_token *token)$/;"	f	typeref:typename:void
+syntax_parse	srcs/parser/parse_err.c	/^void	syntax_parse(t_node *node)$/;"	f	typeref:typename:void
+t	Makefile	/^t :re$/;"	t
+t_env	include/struct.h	/^typedef struct s_env		t_env;$/;"	t	typeref:struct:s_env
+t_escape_fd	srcs/exe/exe.c	/^int	t_escape_fd(int fd)$/;"	f	typeref:typename:int
+t_fd	include/struct.h	/^typedef struct s_fd			t_fd;$/;"	t	typeref:struct:s_fd
+t_line	include/struct.h	/^typedef struct s_line		t_line;$/;"	t	typeref:struct:s_line
+t_node	include/struct.h	/^typedef struct s_node		t_node;$/;"	t	typeref:struct:s_node
+t_redirect	include/struct.h	/^typedef enum e_redirect		t_redirect;$/;"	t	typeref:enum:e_redirect
+t_token	include/struct.h	/^typedef struct s_token		t_token;$/;"	t	typeref:struct:s_token
+t_token_type	include/struct.h	/^typedef enum e_token_type	t_token_type;$/;"	t	typeref:enum:e_token_type
+test	srcs/parser/lst_add_node.c	/^void test(t_node *node)$/;"	f	typeref:typename:void
+token	include/struct.h	/^	t_token					*token;$/;"	m	struct:s_line	typeref:typename:t_token *
+token_addback	srcs/lexer/lexer.c	/^void	token_addback(t_token **head, t_token *new)$/;"	f	typeref:typename:void
+token_error	srcs/lexer/token_error.c	/^bool	token_error(t_token *token)$/;"	f	typeref:typename:bool
+token_free	srcs/free/free.c	/^void	token_free(t_token **token)$/;"	f	typeref:typename:void
+token_last	srcs/lexer/lexer.c	/^t_token	*token_last(t_token *token)$/;"	f	typeref:typename:t_token *
+tree_free	srcs/free/free.c	/^void	tree_free(t_node *tree)$/;"	f	typeref:typename:void
+trim_quote	srcs/lexer/expand.c	/^char	*trim_quote(char *word)$/;"	f	typeref:typename:char *
+type	include/struct.h	/^	t_redirect				type;$/;"	m	struct:s_line	typeref:typename:t_redirect
+type	include/struct.h	/^	t_token_type			type;$/;"	m	struct:s_token	typeref:typename:t_token_type
+value	include/struct.h	/^	char					*value;$/;"	m	struct:s_env	typeref:typename:char *
+var	Makefile	/^var:$/;"	t
+vari_end	srcs/buildin/env.c	/^ssize_t	vari_end(char *line)$/;"	f	typeref:typename:ssize_t
+vari_expand	srcs/buildin/env.c	/^char	*vari_expand(char *line, t_env *env)$/;"	f	typeref:typename:char *
+vari_expand_len	srcs/buildin/env.c	/^ssize_t	vari_expand_len(char *line, t_env *env)$/;"	f	typeref:typename:ssize_t
+varl	Makefile	/^varl:$/;"	t
+word	include/struct.h	/^	char					*word;$/;"	m	struct:s_token	typeref:typename:char *
+wordlen	srcs/lexer/lexer.c	/^size_t	wordlen(char *prompt, char **line, size_t i)$/;"	f	typeref:typename:size_t

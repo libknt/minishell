@@ -30,6 +30,7 @@ int	exec_si(t_node *node)
 	here = here_documents(node);
 	argv = NULL;
 	argv = make_arr(node, here);
+	//check buildin
 	pid = fork();
 	if (pid < 0)
 		_err("fork");
@@ -122,6 +123,7 @@ int	exec(t_node *node, int k3)
 		}
 		//_redirect(node);
 		argv = make_arr(node, here);
+		//check buildin
 		if (access(argv[0], X_OK) == 0)
 			execve(argv[0], argv, environ);
 		else

@@ -130,7 +130,7 @@ ssize_t	make_expand(char *expanded, char *line, t_env *env)
 	end = vari_end(line);
 	str = calloc(end + 1, sizeof(char));
 	if (str == NULL)
-		return (-1);
+		_err("calloc error\n");
 	ft_strlcpy(str, line, end + 1);
 	env_value = find_env(str, env);
 	if (env_value != NULL)
@@ -162,6 +162,7 @@ char	*vari_expand(char *line, t_env *env)
 			strncat(expanded, &line[i], 1);
 		i++;
 	}
+	free(line);
 	return (expanded);
 }
 
