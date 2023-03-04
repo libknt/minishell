@@ -47,8 +47,8 @@ int			here_documents(t_node *node);
 void		ex_toke(t_token **token, t_env *env);
 t_token		*lexer(char **line, t_env *env);
 // char	*get_next_line(int fd);
-int			exec_tree(t_node *node);
-int			exe_(t_node *node);
+int			exec_tree(t_node *node, t_env *env);
+int			exe_(t_node *node, t_env *env);
 void		set_signal(void);
 void		make_lstenv(t_env **s_env, char **envp);
 
@@ -57,5 +57,7 @@ void		print_split(char **t);
 t_node		**add_node(t_node *node);
 void		print_t(t_token *token);
 
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+int	cd(char *argv[], t_env *env);
 void		test(t_node *node);
 #endif
