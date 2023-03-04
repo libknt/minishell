@@ -59,5 +59,8 @@ void		print_t(t_token *token);
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 int	cd(char *argv[], t_env *env);
+void	ft_env_addback(t_env **env, t_env *new);
+t_env	*new_lstenv(char *envp);
+void	export(char *argv[], t_env **env);
 void		test(t_node *node);
 #endif

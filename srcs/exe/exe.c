@@ -30,9 +30,9 @@ int	exec_si(t_node *node, t_env *env)
 	here = here_documents(node);
 	argv = NULL;
 	argv = make_arr(node, here);
-	if(!strcmp(argv[0], "cd"))
+	if(!strcmp(argv[0], "export"))
 	{
-		cd(argv, env);
+		export(argv, &env);
 		return 1;
 	}
 	pid = fork();
@@ -83,27 +83,17 @@ int	exec(t_node *node, t_env *env, int k3)
 	char		*cmd_path;
 	int			rw[2];
 	int			here;
-	
-	// int			here;
-	// here = 0;
-	// int flag;
-	// flag = 0;
-	//int			waitstatus;
 	if (!node)
 		return (0);
 	argv = NULL;
 	_redirect_si(node);
 	here = here_documents(node);
-	// argv = NULL;
-	// argv = make_arr(node, here);
 	pipe(rw);
 	pid = fork();
 	if (pid < 0)
 		_err("fork");
 	else if (pid == 0)
 	{
-		// here_documents(node);
-		// if (node->left->line->type != PIPE)
 		if (node->fd == NULL)
 		{
 			if (node->next == NULL)
@@ -125,7 +115,6 @@ int	exec(t_node *node, t_env *env, int k3)
 			close(rw[0]);
 			close(rw[1]);
 		}
-		//_redirect(node);
 		argv = make_arr(node, here);
 		//check buildin
 		if(!strcmp(argv[0], "cd"))
@@ -142,8 +131,6 @@ int	exec(t_node *node, t_env *env, int k3)
 		}
 		exit(0);
 	}
-	//wait(&waitstatus);
-	// k = t_escape_fd(rw[0]);
 	if (node->fd == NULL)
 	{
 		close(rw[1]);
@@ -152,13 +139,6 @@ int	exec(t_node *node, t_env *env, int k3)
 	}
 	else
 		restore_fd(node);
-	// close(here);
-	// close(here);
-	// if(flag ==0)
-	// *k1 = t_escape_fd(rw[0]);
-	//return (WEXITSTATUS(waitstatus));
-	// close(here);
-	//_redirect(node->right);
 	return (1);
 }
 
@@ -186,7 +166,6 @@ int	exec_tree(t_node *node, t_env *env)
 	add_node(node);
 	while (node && node->line->type == PIPE)
 		node = node->left;
-	//print_nodes(node);
 	while (node != NULL)
 	{
 		exec(node, env, k3);
@@ -200,7 +179,6 @@ int	exec_tree(t_node *node, t_env *env)
 		{
 			if (ECHILD == errno)
 			{
-				// 子プロセスが存在しない
 				break ;
 			}
 			else if (EINTR == errno)

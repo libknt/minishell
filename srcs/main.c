@@ -6,7 +6,7 @@
 /*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/03/04 14:17:12 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/04 19:10:02 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char **argv, char **envp)
 	// sp = 0;
 	env = NULL;
 	make_lstenv(&env, envp);
-	// print_env1(env);
+	//print_env1(env);
 	set_signal();
 	rl_outstream = stderr;
 	while (1)
