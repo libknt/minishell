@@ -79,13 +79,13 @@ char	**make_env_args(t_env *env)
 	return (envp);
 }
 
-int	check_env_vari(char *agrv)
+int	check_env_vari(char *argv)
 {
-	if (!agrv)
+	if (!argv)
 		return (0);
-	if (agrv[0] == '=')
+	if (argv[0] == '=')
 	{
-		printf("`=b': not a valid identifier\n");
+		printf("`%s': not a valid identifier\n", argv);
 		return (0);
 	}
 	return (1);
