@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/03/06 11:54:34 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/06 12:51:07 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,13 @@ int	main(int argc, char **argv, char **envp)
 			free(line);
 			continue ;
 		}
-		// token = lexer(&line, env);
 		token = lexer(&line, NULL);
 		if (token == NULL)
 			continue ;
 		tree = parser(token, line);
 		if (tree == NULL)
 			continue ;
-		// exe_(tree);
+		exe_(tree);
 		tree_free(tree);
 		token_free(&token);
 		free(line);
