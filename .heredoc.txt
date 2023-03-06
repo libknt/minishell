@@ -1,1 +1,4 @@
-$PATH
+ls
+ls
+lslsllsls
+ажwF
