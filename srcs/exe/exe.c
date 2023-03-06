@@ -20,49 +20,6 @@ static void	_err_cmd_node_found(char *mes)
 	exit_status = 127;
 	dprintf(STDERR_FILENO, "%s\n", mes);
 }
-/*
-int	exec_si(t_node *node)
-{
-	char		**argv;
-	extern char	**environ;
-	pid_t		pid;
-	char		*cmd_path;
-	int			waitstatus;
-	int			here;
-
-	if (node == NULL)
-		return (-1);
-	_redirect_si(node);
-	here = here_documents(node);
-	argv = NULL;
-	argv = make_arr(node, here);
-	pid = fork();
-	if (pid < 0)
-		_err("fork");
-	else if (pid == 0)
-	{
-		if (access(argv[0], X_OK) == 0)
-			execve(argv[0], argv, environ);
-		else
-		{
-			cmd_path = exec_filename(argv[0]);
-			if (cmd_path != NULL)
-				execve(cmd_path, argv, environ);
-			else
-				_err("command not found");
-		}
-	}
-	wait(&waitstatus);
-	restore_fd(node);
-	if (argv[1] && strncmp(argv[1], ".heredoc.txt", 12) == 0)
-	{
-		free(argv[1]);
-		argv[1] = NULL;
-	}
-	free(argv);
-	return (WEXITSTATUS(waitstatus));
-}
-*/
 
 int	t_escape_fd(int fd)
 {
@@ -100,10 +57,11 @@ static char	**access_cmd_path(t_node *node, int here)
 	return (argv);
 }
 
-int	exec(t_node *node, int k3)
+int	exec(t_node *node, t_env *env, int fd1)
 {
 	char		**argv;
 	extern char	**environ;
+	//char		**envp;
 	pid_t		pid;
 	int			rw[2];
 	int			here;
@@ -111,8 +69,11 @@ int	exec(t_node *node, int k3)
 	if (!node)
 		return (0);
 	argv = NULL;
+	//envp = make_env_args(env);
 	_redirect_si(node);
 	here = here_documents(node);
+	//make buold in masahito
+	(void)env;
 	argv = access_cmd_path(node, here);
 	if (argv == NULL)
 	{
@@ -125,6 +86,7 @@ int	exec(t_node *node, int k3)
 		else
 			restore_fd(node);
 		_err_cmd_node_found("command not found");
+		//ft_split_free(envp);
 		return (1);
 	}
 	pipe(rw);
@@ -139,8 +101,8 @@ int	exec(t_node *node, int k3)
 			{
 				close(rw[0]);
 				close(rw[1]);
-				dup2(k3, 1);
-				close(k3);
+				dup2(fd1, 1);
+				close(fd1);
 			}
 			else
 			{
@@ -155,7 +117,6 @@ int	exec(t_node *node, int k3)
 			close(rw[1]);
 		}
 		execve(argv[0], argv, environ);
-		exit(0);
 	}
 	if (node->fd == NULL)
 	{
@@ -166,23 +127,24 @@ int	exec(t_node *node, int k3)
 	else
 		restore_fd(node);
 	ft_split_free(argv);
+	//ft_split_free(envp);
 	return (1);
 }
-/*
+
 void	print_nodes(t_node *node)
 {
 	while (node)
 	{
 		printf("-------\n");
-		printf("now %p\n", node);
+		printf("now %s\n", node->line->token->word);
 		printf("next %p\n", node->next);
 		node = node->next;
 	}
 }
-#include <err.h>
-#include <errno.h>
-int	exec_tree(t_node *node, t_env *env)
-*/
+// #include <err.h>
+// #include <errno.h>
+// int	exec_tree(t_node *node, t_env *env)
+
 void	wait_process(void)
 {
 	int		status;
@@ -203,43 +165,33 @@ void	wait_process(void)
 	}
 }
 
-int	exe_(t_node *node, t_env *env)
-{
-	if (node->line->type != PIPE)
-		exec_si(node, env);
-	else
-	{
-		exec_tree(node, env);
-	}
-	return (0);
-}
 
-int	exec_tree(t_node *node)
+int	exec_tree(t_node *node, t_env *env)
 {
-	int	k2;
-	int	k3;
+	int	fd0;
+	int	fd1;
 
-	k2 = fcntl(0, F_DUPFD, 10);
-	k3 = fcntl(1, F_DUPFD, 10);
+	fd0 = fcntl(0, F_DUPFD, 10);
+	fd1 = fcntl(1, F_DUPFD, 10);
 	add_node(node);
 	while (node && node->line->type == PIPE)
 		node = node->left;
 	while (node != NULL)
 	{
-		exec(node, k3);
+		exec(node, env, fd1);
 		node = node->next;
 	}
 	wait_process();
-	dup2(k2, 0);
-	close(k2);
+	dup2(fd0, 0);
+	close(fd0);
 	return (0);
 }
 
-int	exe_(t_node *node)
+int	exe_(t_node *node, t_env *env)
 {
 	if (node->line->type != PIPE)
-		execve_simple_cmd(node);
+		execve_simple_cmd(node, env);
 	else
-		exec_tree(node);
+		exec_tree(node, env);
 	return (0);
 }

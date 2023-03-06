@@ -92,7 +92,7 @@ int	check_env_vari(char *argv)
 	return (1);
 }
 
-void	export(char *argv[], t_env **env)
+void	ft_export(char *argv[], t_env **env)
 {
 	ssize_t	i;
 	char	**envp;

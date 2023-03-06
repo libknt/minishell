@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/03/06 12:51:07 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/06 14:49:08 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,13 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	t_token	*token;
-
 	t_node	*tree;
-	// t_env	*env;
+	t_env	*env;
+
 	if (argc != 1)
 		_err_arg(argc, argv);
-	// env = NULL;
-	(void)envp;
-	// make_lstenv(&env, envp);
-	// print_env1(env);
+	env = NULL;
+	make_lstenv(&env, envp);
 	set_signal();
 	rl_outstream = stderr;
 	while (1)
@@ -64,13 +62,13 @@ int	main(int argc, char **argv, char **envp)
 			free(line);
 			continue ;
 		}
-		token = lexer(&line, NULL);
+		token = lexer(&line, env);
 		if (token == NULL)
 			continue ;
 		tree = parser(token, line);
 		if (tree == NULL)
 			continue ;
-		exe_(tree);
+		exe_(tree, env);
 		tree_free(tree);
 		token_free(&token);
 		free(line);

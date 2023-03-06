@@ -51,7 +51,7 @@ t_line	*newline(t_token *token, t_redirect type);
 
 
 /*execve*/
-int	execve_simple_cmd(t_node *node);
+int	execve_simple_cmd(t_node *node, t_env *env);
 
 
 char	**ft_split(char const *s, char c);
@@ -76,7 +76,7 @@ void	_redirect_si(t_node *node);
 int		_redirect(t_node *node);
 void	restore_fd(t_node *node);
 int		here_documents(t_node *node);
-void	ex_toke(t_token **token, t_env *env);
+void	expand_token(t_token **token, t_env *env);
 // char	*get_next_line(int fd);
 
 int			exec_tree(t_node *node, t_env *env);
@@ -94,7 +94,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 int	cd(char *argv[], t_env *env);
 void	ft_env_addback(t_env **env, t_env *new);
 t_env	*new_lstenv(char *envp);
-void	export(char *argv[], t_env **env);
+void	ft_export(char *argv[], t_env **env);
+char	**make_env_args(t_env *env);
 void		test(t_node *node);
 
 #endif

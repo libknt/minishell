@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_simple_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/03/06 11:11:16 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/06 14:20:55 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ static char	**access_cmd_path(t_node *node, int here)
 	char	**argv;
 
 	argv = make_arr(node, here);
-	if (access(argv[0], X_OK) == 0)
-	{
-	}
-	else
+	if (access(argv[0], X_OK) != 0)
 	{
 		cmd_path = exec_filename(argv[0]);
 		free(argv[0]);
@@ -41,25 +38,23 @@ static char	**access_cmd_path(t_node *node, int here)
 	return (argv);
 }
 
-int	execve_simple_cmd(t_node *node)
+int	execve_simple_cmd(t_node *node, t_env *env)
 {
 	char		**argv;
 	extern char	**environ;
 	pid_t		pid;
-	char		*cmd_path;
 	int			waitstatus;
 	int			here;
 
-	if (node == NULL)
-		return (-1);
 	_redirect_si(node);
 	here = here_documents(node);
-	argv = NULL;
+	//make build in masahito
+	(void)*env;
 	argv = access_cmd_path(node, here);
 	if (argv == NULL)
 	{
 		restore_fd(node);
-		if(here)
+		if (here)
 			close(here);
 		/*if (argv[1] && strncmp(argv[1], ".heredoc.txt", 12) == 0)
 		{
@@ -75,18 +70,7 @@ int	execve_simple_cmd(t_node *node)
 	if (pid < 0)
 		_err("fork");
 	else if (pid == 0)
-	{
-		if (access(argv[0], X_OK) == 0)
-			execve(argv[0], argv, environ);
-		else
-		{
-			cmd_path = exec_filename(argv[0]);
-			if (cmd_path != NULL)
-				execve(cmd_path, argv, environ);
-			else
-				_err("command not found");
-		}
-	}
+		execve(argv[0], argv, environ);
 	wait(&waitstatus);
 	restore_fd(node);
 	ft_split_free(argv);

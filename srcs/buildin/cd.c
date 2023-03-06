@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:56 by keys              #+#    #+#             */
-/*   Updated: 2023/03/04 15:36:47 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/06 13:19:34 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#define PATH_MAX 4096
+#define PATH_MAXLEN 4096
 
 char	*get_home_dir(t_env *env)
 {
@@ -36,14 +36,14 @@ char	*make_abs_path(char *path, char *argv, char *home)
 	i = 0;
 	if (!strcmp(argv, "~"))
 	{
-		memset(path, '\0', PATH_MAX);
-		ft_strlcpy(path, home, PATH_MAX);
+		memset(path, '\0', PATH_MAXLEN);
+		ft_strlcpy(path, home, PATH_MAXLEN);
 		return (path);
 	}
 	if (!strncmp(argv, "~/", 2))
 	{
-		memset(path, '\0', PATH_MAX);
-		ft_strlcpy(path, home, PATH_MAX);
+		memset(path, '\0', PATH_MAXLEN);
+		ft_strlcpy(path, home, PATH_MAXLEN);
 		i = 2;
 	}
 	if (!strncmp(argv, "./", 2))
@@ -59,7 +59,7 @@ char	*make_abs_path(char *path, char *argv, char *home)
 
 int	cd(char *argv[], t_env *env)
 {
-	char	path[PATH_MAX];
+	char	path[PATH_MAXLEN];
 	char	*home;
 	int		status;
 
@@ -72,8 +72,8 @@ int	cd(char *argv[], t_env *env)
 		status = chdir(argv[1]);
 	else
 	{
-		memset(path, '\0', PATH_MAX);
-		getcwd(path, PATH_MAX);
+		memset(path, '\0', PATH_MAXLEN);
+		getcwd(path, PATH_MAXLEN);
 		make_abs_path(path, argv[1], home);
 		printf("path  %s\n", path);
 		status = chdir(path);

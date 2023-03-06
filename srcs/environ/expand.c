@@ -148,7 +148,7 @@ char	*vari_expand(char *line, t_env *env)
 	expanded_len = vari_expand_len(line, env);
 	expanded = calloc(expanded_len + 1, sizeof(char));
 	if (!expanded)
-		return (NULL);
+		_err("calloc");
 	i = 0;
 	quote_counter = 0;
 	while (i < strlen(line))
@@ -183,7 +183,7 @@ char	*expand_quote(char *line)
 	if (!line)
 		return (NULL);
 	len = strlen(line);
-	line2 = calloc(sizeof(char), len);
+	line2 = calloc(len + 1, sizeof(char));
 	if (!line2)
 		_err("calloc\n");
 	i = 0;
@@ -209,7 +209,7 @@ char	*expand_quote(char *line)
 	return (line2);
 }
 
-void	ex_toke(t_token **token, t_env *env)
+void	expand_token(t_token **token, t_env *env)
 {
 	t_token	*tmp;
 

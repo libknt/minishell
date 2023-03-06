@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 08:27:16 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/04 22:40:10 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/06 14:33:43 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	tree_free(t_node *tree)
 	if (tree)
 	{
 		line_free(tree->line);
+		if(tree->fd)
+			free(tree->fd);
 		free(tree);
 	}
 }

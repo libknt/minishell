@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_filename.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:17:23 by keys              #+#    #+#             */
-/*   Updated: 2023/03/01 12:33:25 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/06 14:17:53 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,8 @@ char	*exec_filename(char *prompt)
 	char	**tmp;
 	int		k;
 
+	if (*prompt == '\0')
+		return (NULL);
 	s = ft_strjoin("/", prompt);
 	k = 0;
 	pa = getenv("PATH");

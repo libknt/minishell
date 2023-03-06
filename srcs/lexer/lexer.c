@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/03/06 12:49:51 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/06 14:48:57 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ bool	make_token(char **line, t_data_t *d)
 			break ;
 		d->len = wordlen(&d->prompt[d->i], d);
 		if (d->len == -1)
-			return (1);
+			return (true);
 		else if (d->len == 0)
 			break ;
 		else
@@ -75,7 +75,7 @@ bool	make_token(char **line, t_data_t *d)
 			token_addback(&d->head, d->token);
 		}
 	}
-	return (0);
+	return (false);
 }
 
 static void	*lexer_err_free(char **line, t_token **token)
@@ -102,7 +102,6 @@ t_token	*lexer(char **line, t_env *env)
 	token = data.head;
 	if (token_error(token))
 		return (lexer_err_free(line, &token));
-	// ex_toke(&token, env);
-	(void)env;
+	expand_token(&token, env);
 	return (token);
 }

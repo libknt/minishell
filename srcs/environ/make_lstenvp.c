@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_lstenvp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 09:09:09 by keys              #+#    #+#             */
-/*   Updated: 2023/03/04 20:05:04 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/06 13:36:21 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void	add_env(t_env **env, char *envp, size_t len)
 {
 	(*env)->key = ft_substr(envp, 0, len);
 	if (!env)
-		exit(1);
+		_err("malloc");
 }
 
 void	add_value(t_env **env, char *envp, size_t len)
 {
 	(*env)->value = ft_substr(envp, len + 1, strlen(&envp[len + 1]));
 	if (!(*env)->value)
-		exit(1);
+		_err("malloc");
 }
 
 t_env	*new_lstenv(char *envp)
