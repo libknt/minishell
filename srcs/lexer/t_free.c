@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   t_free.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 08:27:16 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/04 22:40:10 by keys             ###   ########.fr       */
+/*   Created: 2023/03/04 22:40:13 by keys              #+#    #+#             */
+/*   Updated: 2023/03/04 23:12:26 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	line_free(t_line *line)
+void	token_free(t_token **token)
 {
-	t_line	*tmp;
+	t_token	*tmp;
 
-	while (1)
+	if (token)
 	{
-		if (line == NULL)
-			break ;
-		tmp = line->next;
-		free(line);
-		line = tmp;
+		while (1)
+		{
+			if (!(*token))
+				break ;
+			tmp = (*token)->next;
+			free((*token)->word);
+			(*token)->word = NULL;
+			free(*token);
+			(*token) = tmp;
+		}
 	}
-}
-
-void	tree_free(t_node *tree)
-{
-	if (tree->left)
-		tree_free(tree->left);
-	if (tree->right)
-		tree_free(tree->right);
-	if (tree)
-	{
-		line_free(tree->line);
-		free(tree);
-	}
+	*token = NULL;
+	token = NULL;
 }

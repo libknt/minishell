@@ -6,60 +6,63 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:06:46 by kyoda             #+#    #+#             */
-/*   Updated: 2023/02/27 19:07:49 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/05 22:03:18 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	g_syntax_err = false;
+// bool	g_syntax_err = false;
 
-void	_err_syntax(char *mes)
+bool	_err_syntax(char *mes)
 {
-	g_syntax_err = true;
+	exit_status = 2;
 	dprintf(STDERR_FILENO, "minishell: syntax error near %s\n", mes);
+	return (true);
 }
 
-void	err_syntax(char *op)
+bool	err_syntax(char *op)
 {
 	if (strncmp(op, "||", 2) == 0)
-		_err_syntax("||");
+		return (_err_syntax("||"));
 	if (strncmp(op, "&&", 2) == 0)
-		_err_syntax("&&");
+		return (_err_syntax("&&"));
 	if (strncmp(op, ";;", 2) == 0)
-		_err_syntax(";;");
+		return (_err_syntax(";;"));
 	if (strncmp(op, "|&", 2) == 0)
-		_err_syntax("|&");
+		return (_err_syntax("|&"));
 	if (strncmp(op, "&", 1) == 0)
-		_err_syntax("&");
+		return (_err_syntax("&"));
 	if (strncmp(op, "(", 1) == 0)
-		_err_syntax("()");
+		return (_err_syntax("()"));
 	if (strncmp(op, ")", 1) == 0)
-		_err_syntax(")");
+		return (_err_syntax(")"));
 	if (strncmp(op, ";", 1) == 0)
-		_err_syntax(";");
+		return (_err_syntax(");"));
+	return (false);
 }
 
-void	syntax_check(t_token *token)
+bool	syntax_check(t_token *token)
 {
-	if (token->type == T_EOF)
-		return ;
-	else
+	while (1)
 	{
+		if (token->type == T_EOF)
+			break ;
 		if (token->type == OP)
-			err_syntax(token->word);
-		syntax_check(token->next);
+		{
+			if (err_syntax(token->word))
+				return (true);
+		}
+		token = token->next;
 	}
+	return (false);
 }
 
 bool	token_error(t_token *token)
 {
-	bool	re;
-
 	if (token == NULL)
 		return (true);
-	g_syntax_err = false;
-	syntax_check(token);
-	re = g_syntax_err;
-	return (re);
+	if (syntax_check(token))
+		return (true);
+	return (false);
 }

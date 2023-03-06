@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:44:10 by keys              #+#    #+#             */
-/*   Updated: 2023/01/20 16:09:45 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/05 22:04:09 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 void	ctr_c(int sig)
 {
 	(void)sig;
+	exit_status =130;
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);

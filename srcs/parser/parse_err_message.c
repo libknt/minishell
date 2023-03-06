@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   parse_err_message.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 08:27:16 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/04 22:40:10 by keys             ###   ########.fr       */
+/*   Created: 2023/03/05 21:22:18 by keys              #+#    #+#             */
+/*   Updated: 2023/03/05 21:23:21 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	line_free(t_line *line)
+void	_err_syntax_p(char *mes, bool *r)
 {
-	t_line	*tmp;
-
-	while (1)
-	{
-		if (line == NULL)
-			break ;
-		tmp = line->next;
-		free(line);
-		line = tmp;
-	}
+	exit_status = 2;
+	*r = true;
+	dprintf(STDERR_FILENO, "1minishell: syntax error near %s\n", mes);
 }
 
-void	tree_free(t_node *tree)
+void	_err_parse_p(char *mes, bool *r)
 {
-	if (tree->left)
-		tree_free(tree->left);
-	if (tree->right)
-		tree_free(tree->right);
-	if (tree)
-	{
-		line_free(tree->line);
-		free(tree);
-	}
+	exit_status = 2;
+	*r = true;
+	dprintf(STDERR_FILENO, "minishell: parse error near %s\n", mes);
 }

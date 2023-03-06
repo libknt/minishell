@@ -6,22 +6,12 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/02/26 20:06:26 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/04 22:33:19 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
-
-typedef struct s_env		t_env;
-struct						s_env
-{
-	char					*key;
-	char					*value;
-	t_env					*prev;
-	t_env					*next;
-};
-
 typedef enum e_token_type	t_token_type;
 enum						e_token_type
 {
@@ -37,6 +27,28 @@ struct						s_token
 	t_token					*next;
 	t_token_type			type;
 	char					*word;
+};
+
+typedef struct s_data_t		t_data_t;
+struct						s_data_t
+{
+	ssize_t					len;
+	size_t					i;
+	bool					sq;
+	bool					dq;
+	t_token					*head;
+	t_token					*token;
+	char					*word;
+	char					*prompt;
+};
+
+typedef struct s_env		t_env;
+struct						s_env
+{
+	char					*key;
+	char					*value;
+	t_env					*prev;
+	t_env					*next;
 };
 
 typedef enum e_redirect		t_redirect;

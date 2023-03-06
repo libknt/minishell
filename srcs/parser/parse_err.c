@@ -6,89 +6,80 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:21:12 by keys              #+#    #+#             */
-/*   Updated: 2023/02/26 17:19:31 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/05 21:22:43 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	g_parse_err = false;
-
-void	_err_syntax_p(char *mes)
+void	check_line(t_line *line, bool *r)
 {
-	g_parse_err = true;
-	dprintf(STDERR_FILENO, "1minishell: syntax error near %s\n", mes);
-}
-
-void	_err_parse_p(char *mes)
-{
-	g_parse_err = true;
-	dprintf(STDERR_FILENO, "minishell: parse error near %s\n", mes);
-}
-
-void	check_syntax(t_node *node)
-{
-	t_line	*line;
-
-	if (node->line->type == PIPE)
-		_err_parse_p(node->line->token->word);
-	else
+	while (1)
 	{
-		line = node->line;
-		while (1)
+		if ((line == NULL) || (line->type == T_EOF_R))
+			break ;
+		else
 		{
-			if ((line == NULL) || (line->type == T_EOF_R))
+			if (line->type == REDIRECT)
 			{
-				break ;
+				if ((!(line->next) || line->next->type != FILENAME))
+				{
+					_err_syntax_p(line->token->word, r);
+					break ;
+				}
+				line = line->next;
 			}
 			else
-			{
-				if (line->type == REDIRECT)
-				{
-					if ((!(line->next) || line->next->type != FILENAME))
-					{
-						_err_syntax_p(line->token->word);
-						break ;
-					}
-					line = line->next;
-				}
-				else
-				{
-					line = line->next;
-				}
-			}
+				line = line->next;
 		}
 	}
 }
 
-void	syntax_parse(t_node *node)
+void	check_syntax(t_node *node, bool *r)
 {
+	t_line	*line;
+
+	if (*r == true)
+		return ;
+	if (node->line->type == PIPE)
+	{
+		_err_parse_p(node->line->token->word, r);
+	}
+	else
+	{
+		line = node->line;
+		check_line(line, r);
+	}
+}
+
+void	syntax_parse(t_node *node, bool *r)
+{
+	if (*r == true)
+		return ;
 	if (!node->left && !node->right)
 	{
-		check_syntax(node);
+		check_syntax(node, r);
 		return ;
 	}
 	if (node->left == NULL)
 	{
-		_err_syntax_p(node->line->token->word);
+		_err_syntax_p(node->line->token->word, r);
 		return ;
 	}
 	if (node->right == NULL)
 	{
-		_err_syntax_p(node->line->token->word);
+		_err_syntax_p(node->line->token->word, r);
 		return ;
 	}
-	syntax_parse(node->left);
-	syntax_parse(node->right);
-	return ;
+	syntax_parse(node->left, r);
+	syntax_parse(node->right, r);
 }
 
 bool	parse_err(t_node *node)
 {
-	bool	re;
+	bool	r;
 
-	g_parse_err = false;
-	syntax_parse(node);
-	re = g_parse_err;
-	return (re);
+	r = false;
+	syntax_parse(node, &r);
+	return (r);
 }

@@ -6,19 +6,13 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/03/01 12:35:31 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/05 22:04:40 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	_err(const char *e) __attribute__((noreturn));
-void	_err(const char *e)
-{
-	dprintf(STDERR_FILENO, "Fatal Error: %s\n", e);
-	exit(1);
-}
-
+extern int	exit_status;
 void	print_env1(t_env *env)
 {
 	while (1)
@@ -30,18 +24,27 @@ void	print_env1(t_env *env)
 	}
 }
 
+void	_err_arg(int argc, char **argv)
+{
+	(void)argc;
+	(void)argv;
+	// if (strncmp(&argv[1][strlen(argv[1]) - 3], ".sh", 3) == 0)
+	// 	write(1, ".sh files are not executable\n", 29);
+	// else
+	// 	write(1, "cannot execute binary file\n", 27);
+	write(2, "Please run it with ./{ executable file name }.\n", 47);
+	exit(127);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
-	bool	flag;
 	t_token	*token;
 	t_node	*tree;
 	t_env	*env;
 
-	(void)argc;
-	(void)argv;
-	// (void)envp;
-	// sp = 0;
+	if (argc != 1)
+		_err_arg(argc, argv);
 	env = NULL;
 	make_lstenv(&env, envp);
 	// print_env1(env);
@@ -52,30 +55,20 @@ int	main(int argc, char **argv, char **envp)
 		line = readline("minishell>");
 		if (line == NULL)
 			break ;
-		if (!line[0])
-		{
-			free(line);
-			continue ;
-		}
 		if (*line)
 			add_history(line);
-		token = lexer(&line,env);
-		flag = token_error(token);
-		if (flag)
+		if (strcmp(line, "echo $?") == 0)
 		{
-			token_free(&token);
+			printf("%d\n", exit_status);
 			free(line);
 			continue ;
 		}
-		tree = parser(token);
-		flag = parse_err(tree);
-		if (flag)
-		{
-			tree_free(tree);
-			token_free(&token);
-			free(line);
+		token = lexer(&line, env);
+		if (token == NULL)
 			continue ;
-		}
+		tree = parser(token, line);
+		if (tree == NULL)
+			continue ;
 		exe_(tree);
 		tree_free(tree);
 		token_free(&token);
