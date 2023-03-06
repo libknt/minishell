@@ -135,6 +135,7 @@ ssize_t	make_expand(char *expanded, char *line, t_env *env)
 	env_value = find_env(str, env);
 	if (env_value != NULL)
 		strncat(expanded, env_value, strlen(env_value));
+	free(env_value);
 	free(str);
 	return (end);
 }
