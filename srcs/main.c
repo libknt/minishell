@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/03/06 11:07:53 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/06 11:54:34 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	t_token	*token;
-	t_node	*tree;
-	t_env	*env;
 
+	t_node	*tree;
+	// t_env	*env;
 	if (argc != 1)
 		_err_arg(argc, argv);
-	env = NULL;
-	make_lstenv(&env, envp);
+	// env = NULL;
+	(void)envp;
+	// make_lstenv(&env, envp);
 	// print_env1(env);
 	set_signal();
 	rl_outstream = stderr;
@@ -63,13 +64,14 @@ int	main(int argc, char **argv, char **envp)
 			free(line);
 			continue ;
 		}
-		token = lexer(&line, env);
+		// token = lexer(&line, env);
+		token = lexer(&line, NULL);
 		if (token == NULL)
 			continue ;
 		tree = parser(token, line);
 		if (tree == NULL)
 			continue ;
-		exe_(tree);
+		// exe_(tree);
 		tree_free(tree);
 		token_free(&token);
 		free(line);

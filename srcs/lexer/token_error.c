@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:06:46 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/05 22:03:18 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/06 11:56:21 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool	err_syntax(char *op)
 	if (strncmp(op, ")", 1) == 0)
 		return (_err_syntax(")"));
 	if (strncmp(op, ";", 1) == 0)
-		return (_err_syntax(");"));
+		return (_err_syntax(";"));
 	return (false);
 }
 

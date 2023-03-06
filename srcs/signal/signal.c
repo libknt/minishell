@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:44:10 by keys              #+#    #+#             */
-/*   Updated: 2023/03/05 22:04:09 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/06 11:35:42 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ctr_c(int sig)
 	exit_status =130;
 	printf("\n");
 	rl_on_new_line();
-	rl_replace_line("", 0);
+	// rl_replace_line("", 0);
 	rl_redisplay();
 }
 
@@ -27,7 +27,7 @@ void	set_signal(void)
 {
 	if (signal(SIGINT, ctr_c) == SIG_ERR || signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 	{
-		rl_clear_history();
+		// rl_clear_history();
 		printf("SIGERR\n");
 		exit(1);
 	}

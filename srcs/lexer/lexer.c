@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/03/05 21:23:48 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/06 12:01:04 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,13 @@ bool	make_token(char **line, t_data_t *d)
 	return (0);
 }
 
+static void	*lexer_err_free(char **line, t_token **token)
+{
+	token_free(token);
+	free(*line);
+	return (NULL);
+}
+
 t_token	*lexer(char **line, t_env *env)
 {
 	t_data_t	data;
@@ -89,16 +96,12 @@ t_token	*lexer(char **line, t_env *env)
 	memset(&data, 0, sizeof(t_data_t));
 	data.prompt = *line;
 	if (make_token(line, &data))
-		return (NULL);
+		return (lexer_err_free(line, &data.head));
 	data.token = new_token(NULL, T_EOF);
 	token_addback(&data.head, data.token);
 	token = data.head;
 	if (token_error(token))
-	{
-		token_free(&token);
-		free(*line);
-		return (NULL);
-	}
+		return (lexer_err_free(line, &token));
 	// ex_toke(&token, env);
 	(void)env;
 	return (token);

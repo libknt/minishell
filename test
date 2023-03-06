@@ -1,97 +1,18 @@
-NAME 		=	minishell
-CC			=	cc
-
-# CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
-# CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=leak
-CFLAGS		=	-Wall -Wextra -Werror
-INCLUDE		=	-I ./include/
-# SRCS		= srcs/main.c\
-# 			  srcs/exe/exe.c
-SRCS		= $(shell find srcs/ -name "*.c" )
-
-
-OBJDIR   = obj
-OBJS  = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
-
-
-
-$(OBJDIR)/%.o: %.c
-	@mkdir -p $$(dirname $@)
-	$(CC) $(INCLUDE) $(CFLAGS) -o $@ -c $<
-
-all: $(NAME)
-
-$(NAME):$(OBJS)
-		$(CC) $^ $(CFLAGS) -o $@ -lreadline
-
-leak :
-	sh leak.sh
-
-clean:
-	$(RM) -r $(OBJDIR)
-
-fclean: clean
-	$(RM) $(NAME)
-
-re : fclean all
-	./minishell
-
-t :re
-	sh test.sh
-
-var:
-	rm -f log/log.txt
-	valgrind --leak-check=full --show-leak-kinds=all -s -q ./minishell
-varl:
-	rm -f log/log.txt
-	valgrind --log-file="log/log.txt" --leak-check=full --show-leak-kinds=all -s -q ./minishell
-
-
-
-
-
-# t:
-# 	make all
-# 	make -C minishell-tester
-# 	./minishell
-# 	make test -C minishell-tester
-
-# tc:
-# 	make fclean -C minishell-tester
-
-# ret:tc t
-
-# test :
-# 	@mkdir -p log
-# 	testcase
-
-# echo:
-# 	make echo -C minishell-tester
-
-# exit:
-# 	make exit -C minishell-tester
-# path:
-# 	make path -C minishell-tester
-# redirect:
-# 	make redirect -C minishell-tester
-
-# syntax_error:
-# 	make syntax_error -C minishell-tester
-
-# env:
-# 	make env -C minishell-tester
-
-# exp:
-# 	make exp -C minishell-tester
-
-# pwd:
-# 	make pwd -C minishell-tester
-
-# simple:
-# 	make simple -C minishell-tester
-
-# unset:
-# 	make unset -C minishell-tester
-
-.PHONY:
-		all clean fclean re libft t
+total 128
+drwxr-xr-x  17 kyoda  2020    578  3  6 11:35 .
+drwxr-xr-x   8 kyoda  2020    272  3  6 11:34 ..
+drwxr-xr-x  12 kyoda  2020    408  3  6 11:34 .git
+-rw-r--r--   1 kyoda  2020      8  3  6 11:34 .heredoc.txt
+drwxr-xr-x   3 kyoda  2020    102  3  6 11:34 .vscode
+-rw-r--r--   1 kyoda  2020     74  3  6 11:34 123
+-rw-r--r--   1 kyoda  2020   1513  3  6 11:34 Makefile
+drwxr-xr-x   5 kyoda  2020    170  3  6 11:34 include
+-rw-r--r--   1 kyoda  2020     47  3  6 11:34 leak.sh
+-rwxr-xr-x   1 kyoda  2020  35892  3  6 11:35 minishell
+drwxr-xr-x   3 kyoda  2020    102  3  6 11:35 obj
+drwxr-xr-x  11 kyoda  2020    374  3  6 11:34 srcs
+-rw-r--r--   1 kyoda  2020      0  3  6 11:36 test
+-rw-r--r--   1 kyoda  2020    575  3  6 11:34 test.sh
+drwxr-xr-x   7 kyoda  2020    238  3  6 11:34 tmp
+-rw-r--r--   1 kyoda  2020    743  3  6 11:34 tset
+-rw-r--r--   1 kyoda  2020    790  3  6 11:34 tst
