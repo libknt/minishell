@@ -1,4 +1,4 @@
-/* ************************************************************************* */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
@@ -15,12 +15,6 @@
 #define WRITE 1
 #define READ 0
 
-static void	_err_cmd_node_found(char *mes)
-{
-	exit_status = 127;
-	dprintf(STDERR_FILENO, "%s\n", mes);
-}
-/*
 int	exec_si(t_node *node)
 {
 	char		**argv;
@@ -62,7 +56,6 @@ int	exec_si(t_node *node)
 	free(argv);
 	return (WEXITSTATUS(waitstatus));
 }
-*/
 
 int	t_escape_fd(int fd)
 {
@@ -77,34 +70,12 @@ int	t_escape_fd(int fd)
 	return (newfd);
 }
 
-static char	**access_cmd_path(t_node *node, int here)
-{
-	char	*cmd_path;
-	char	**argv;
-
-	argv = make_arr(node, here);
-	if (access(argv[0], X_OK) == 0)
-	{
-	}
-	else
-	{
-		cmd_path = exec_filename(argv[0]);
-		free(argv[0]);
-		argv[0] = cmd_path;
-		if (cmd_path == NULL)
-		{
-			ft_split_free(argv);
-			return (NULL);
-		}
-	}
-	return (argv);
-}
-
 int	exec(t_node *node, int k3)
 {
 	char		**argv;
 	extern char	**environ;
 	pid_t		pid;
+	char		*cmd_path;
 	int			rw[2];
 	int			here;
 
@@ -113,20 +84,6 @@ int	exec(t_node *node, int k3)
 	argv = NULL;
 	_redirect_si(node);
 	here = here_documents(node);
-	argv = access_cmd_path(node, here);
-	if (argv == NULL)
-	{
-		if (node->fd == NULL)
-		{
-			close(rw[1]);
-			dup2(rw[0], 0);
-			close(rw[0]);
-		}
-		else
-			restore_fd(node);
-		_err_cmd_node_found("command not found");
-		return (1);
-	}
 	pipe(rw);
 	pid = fork();
 	if (pid < 0)
@@ -154,7 +111,17 @@ int	exec(t_node *node, int k3)
 			close(rw[0]);
 			close(rw[1]);
 		}
-		execve(argv[0], argv, environ);
+		argv = make_arr(node, here);
+		if (access(argv[0], X_OK) == 0)
+			execve(argv[0], argv, environ);
+		else
+		{
+			cmd_path = exec_filename(argv[0]);
+			if (cmd_path != NULL)
+				execve(cmd_path, argv, environ);
+			else
+				_err("command not found");
+		}
 		exit(0);
 	}
 	if (node->fd == NULL)
@@ -165,7 +132,6 @@ int	exec(t_node *node, int k3)
 	}
 	else
 		restore_fd(node);
-	ft_split_free(argv);
 	return (1);
 }
 /*
@@ -179,9 +145,6 @@ void	print_nodes(t_node *node)
 		node = node->next;
 	}
 }
-#include <err.h>
-#include <errno.h>
-int	exec_tree(t_node *node, t_env *env)
 */
 void	wait_process(void)
 {
@@ -201,17 +164,6 @@ void	wait_process(void)
 			_err("wait error");
 		}
 	}
-}
-
-int	exe_(t_node *node, t_env *env)
-{
-	if (node->line->type != PIPE)
-		exec_si(node, env);
-	else
-	{
-		exec_tree(node, env);
-	}
-	return (0);
 }
 
 int	exec_tree(t_node *node)
@@ -238,7 +190,7 @@ int	exec_tree(t_node *node)
 int	exe_(t_node *node)
 {
 	if (node->line->type != PIPE)
-		execve_simple_cmd(node);
+		exec_si(node);
 	else
 		exec_tree(node);
 	return (0);

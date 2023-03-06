@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_add_node.c                                     :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/26 20:07:03 by keys              #+#    #+#             */
-/*   Updated: 2023/02/27 00:13:15 by Marai            ###   ########.fr       */
+/*   Created: 2023/03/05 20:54:01 by keys              #+#    #+#             */
+/*   Updated: 2023/03/05 21:33:07 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 t_node	**add_node(t_node *node)
 {
@@ -24,10 +23,4 @@ t_node	**add_node(t_node *node)
 		return (&node->right->next);
 	}
 	return (&node->next);
-}
-
-void test(t_node *node)
-{
-	add_node(node);
-	//print_tree(node);
 }

@@ -1,35 +1,18 @@
-
-""
-''
-ctr+d
-Makefile
-a.out
-cmp
-include
-leak.sh
-minishell
-obj
-out
-srcs
-test
-test.sh
-test.txt
-ttt.c
-total 116
-drwxr-xr-x  7 keys keys  4096 Mar  1 11:52 .
-drwxr-xr-x 11 keys keys  4096 Mar  1 11:43 ..
-drwxr-xr-x  8 keys keys  4096 Mar  1 11:52 .git
-drwxr-xr-x  2 keys keys  4096 Mar  1 11:43 .vscode
--rw-r--r--  1 keys keys  1513 Mar  1 11:43 Makefile
--rwxr-xr-x  1 keys keys 15960 Mar  1 11:44 a.out
--rw-r--r--  1 keys keys     0 Mar  1 11:44 cmp
-drwxr-xr-x  2 keys keys  4096 Mar  1 11:43 include
--rw-r--r--  1 keys keys    47 Mar  1 11:43 leak.sh
--rwxr-xr-x  1 keys keys 43296 Mar  1 11:52 minishell
-drwxr-xr-x  3 keys keys  4096 Mar  1 11:52 obj
--rw-r--r--  1 keys keys    24 Mar  1 11:44 out
-drwxr-xr-x  8 keys keys  4096 Mar  1 11:43 srcs
--rw-r--r--  1 keys keys    99 Mar  1 11:52 test
--rw-r--r--  1 keys keys   575 Mar  1 11:43 test.sh
--rw-r--r--  1 keys keys    86 Mar  1 11:52 test.txt
--rw-r--r--  1 keys keys  1158 Mar  1 11:43 ttt.c
+total 128
+drwxr-xr-x  17 kyoda  2020    578  3  6 11:35 .
+drwxr-xr-x   8 kyoda  2020    272  3  6 11:34 ..
+drwxr-xr-x  12 kyoda  2020    408  3  6 11:34 .git
+-rw-r--r--   1 kyoda  2020      8  3  6 11:34 .heredoc.txt
+drwxr-xr-x   3 kyoda  2020    102  3  6 11:34 .vscode
+-rw-r--r--   1 kyoda  2020     74  3  6 11:34 123
+-rw-r--r--   1 kyoda  2020   1513  3  6 11:34 Makefile
+drwxr-xr-x   5 kyoda  2020    170  3  6 11:34 include
+-rw-r--r--   1 kyoda  2020     47  3  6 11:34 leak.sh
+-rwxr-xr-x   1 kyoda  2020  35892  3  6 11:35 minishell
+drwxr-xr-x   3 kyoda  2020    102  3  6 11:35 obj
+drwxr-xr-x  11 kyoda  2020    374  3  6 11:34 srcs
+-rw-r--r--   1 kyoda  2020      0  3  6 11:36 test
+-rw-r--r--   1 kyoda  2020    575  3  6 11:34 test.sh
+drwxr-xr-x   7 kyoda  2020    238  3  6 11:34 tmp
+-rw-r--r--   1 kyoda  2020    743  3  6 11:34 tset
+-rw-r--r--   1 kyoda  2020    790  3  6 11:34 tst

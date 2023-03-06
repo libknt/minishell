@@ -41,9 +41,9 @@ t_env	*new_lstenv(char *envp)
 	t_env	*env;
 	size_t	len;
 
-	env = malloc(sizeof(t_env));
+	env = calloc(sizeof(t_env), 1);
 	if (!env)
-		exit(1);
+		_err("calloc");
 	len = env_len(envp);
 	add_env(&env, envp, len);
 	add_value(&env, envp, len);
@@ -99,7 +99,7 @@ void	print_env(t_env *env)
 	{
 		if (env == NULL)
 			break ;
-		printf("%s %s\n", env->key, env->value);
+		// printf("%s %s\n", env->key, env->value);
 		env = env->next;
 	}
 }

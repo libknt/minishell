@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   lexer_utils_quote.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 08:27:16 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/04 22:40:10 by keys             ###   ########.fr       */
+/*   Created: 2023/03/04 21:23:14 by keys              #+#    #+#             */
+/*   Updated: 2023/03/04 21:30:30 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	line_free(t_line *line)
+void	qq_flag(bool *sq, bool *dq, char c)
 {
-	t_line	*tmp;
-
-	while (1)
+	if (c == '\"')
 	{
-		if (line == NULL)
-			break ;
-		tmp = line->next;
-		free(line);
-		line = tmp;
+		if (!(*sq))
+			*dq = !*dq;
+	}
+	else if (c == '\'')
+	{
+		if (!(*dq))
+			*sq = !*sq;
 	}
 }
 
-void	tree_free(t_node *tree)
+bool	quate_flag(char *prompt, size_t *len, bool *dq, bool *sq)
 {
-	if (tree->left)
-		tree_free(tree->left);
-	if (tree->right)
-		tree_free(tree->right);
-	if (tree)
+	if (prompt[*len] == '\"' || prompt[*len] == '\'')
 	{
-		line_free(tree->line);
-		free(tree);
+		qq_flag(sq, dq, prompt[*len]);
+		*len += 1;
+		return (true);
 	}
+	return (false);
 }
