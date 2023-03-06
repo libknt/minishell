@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   make_arr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 14:21:21 by keys              #+#    #+#             */
 /*   Updated: 2023/03/06 10:14:45 by keys             ###   ########.fr       */

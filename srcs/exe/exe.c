@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/* ************************************************************************* */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
@@ -179,6 +179,9 @@ void	print_nodes(t_node *node)
 		node = node->next;
 	}
 }
+#include <err.h>
+#include <errno.h>
+int	exec_tree(t_node *node, t_env *env)
 */
 void	wait_process(void)
 {
@@ -198,6 +201,17 @@ void	wait_process(void)
 			_err("wait error");
 		}
 	}
+}
+
+int	exe_(t_node *node, t_env *env)
+{
+	if (node->line->type != PIPE)
+		exec_si(node, env);
+	else
+	{
+		exec_tree(node, env);
+	}
+	return (0);
 }
 
 int	exec_tree(t_node *node)

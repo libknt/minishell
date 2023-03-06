@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_lstenvp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 09:09:09 by keys              #+#    #+#             */
-/*   Updated: 2023/03/01 23:49:34 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/04 20:05:04 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,29 @@ t_env	*env_last(t_env *env)
 
 void	ft_env_addback(t_env **env, t_env *new)
 {
-	t_env	*last;
+	t_env	*env_node;
 
 	if (env)
 	{
-		if (*env)
+		env_node = *env;
+		if (env_node)
 		{
-			last = env_last(*env);
-			last->next = new;
-			new->prev = last;
+			while (env_node)
+			{
+				if(!strcmp(env_node->key, new->key))
+				{
+					env_node->prev->next = new;
+					new->prev = env_node->prev;
+					new->next = env_node->next;
+					free(env_node);
+					return ;
+				}
+				if (!env_node->next)
+					break;
+				env_node = env_node->next;
+			}
+			env_node->next = new;
+			new->prev = env_node;
 		}
 		else
 			*env = new;
