@@ -19,6 +19,8 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+#include <err.h>
+#include <errno.h>
 
 int		exit_status;
 
@@ -48,7 +50,8 @@ void	line_addback(t_line **head, t_line *new);
 t_line	*newline(t_token *token, t_redirect type);
 
 
-
+/*execve*/
+int	execve_simple_cmd(t_node *node);
 
 
 char	**ft_split(char const *s, char c);
