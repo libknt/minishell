@@ -24,7 +24,7 @@ bool	is_identifier(const char *s)
 	s++;
 	while (*s)
 	{
-		if (!is_alpha_num_under(*s))
+		if (!is_alpha_num_under(*s) && *s != '=')
 			return (false);
 		s++;
 	}
@@ -38,6 +38,8 @@ ssize_t	vari_end(char *line)
 	if (!line)
 		return (-1);
 	i = 0;
+	if(isdigit(line[i]))
+		return (1);
 	if (!is_alpha_under(line[i]))
 		return (0);
 	i++;

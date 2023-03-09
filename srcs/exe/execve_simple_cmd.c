@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_simple_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/03/09 13:22:36 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/09 15:23:10 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	_err_cmd_node_found(char *mes)
 	dprintf(STDERR_FILENO, "%s\n", mes);
 }
 
-static char	**access_cmd_path(t_node *node)
+static char	**access_cmd_path(t_node *node, char **envp)
 {
 	char	*cmd_path;
 	char	**argv;
@@ -28,7 +28,7 @@ static char	**access_cmd_path(t_node *node)
 	{
 		cmd_path = NULL;
 		if(!is_buildin(argv[0]))
-			cmd_path = exec_filename(argv[0]);
+			cmd_path = exec_filename(argv[0], envp);
 		if (cmd_path != NULL)
 		{
 			free(argv[0]);
@@ -45,8 +45,8 @@ int	execve_simple_cmd(t_node *node, t_env *env)
 	pid_t		pid;
 	int			waitstatus;
 
-	argv = access_cmd_path(node);
 	envp = make_env_args(env);
+	argv = access_cmd_path(node, envp);
 	//make build in masahito
 	if(buildin(argv, &env))
 	{

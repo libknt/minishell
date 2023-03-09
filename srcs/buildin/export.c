@@ -93,7 +93,7 @@ int	check_env_vari(char *argv)
 {
 	if (!argv)
 		return (0);
-	if (argv[0] == '=')
+	if (argv[0] == '=' || !is_identifier(argv))
 	{
 		printf("`%s': not a valid identifier\n", argv);
 		return (0);

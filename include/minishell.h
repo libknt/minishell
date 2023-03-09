@@ -56,7 +56,7 @@ int	execve_simple_cmd(t_node *node, t_env *env);
 
 char	**ft_split(char const *s, char c);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-char	*exec_filename(char *prompt);
+char	*exec_filename(char *prompt, char **envp);
 void	_err(const char *e);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_split_free(char **dst);
@@ -99,6 +99,8 @@ void		test(t_node *node);
 char	**make_env_args(t_env *env);
 ssize_t	env_num(t_env *env);
 char	**free_envp(char **envp, ssize_t len);
+/*expand*/
+bool	is_identifier(const char *s);
 /*buildin*/
 bool	is_buildin(char *str);
 void	env_buildin(char *argv[], t_env *env);
