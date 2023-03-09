@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/03/06 14:20:55 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/09 10:10:50 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ static char	**access_cmd_path(t_node *node, int here)
 	argv = make_arr(node, here);
 	if (access(argv[0], X_OK) != 0)
 	{
-		cmd_path = exec_filename(argv[0]);
-		free(argv[0]);
-		argv[0] = cmd_path;
-		if (cmd_path == NULL)
+		cmd_path = NULL;
+		if(!is_buildin(argv[0]))
+			cmd_path = exec_filename(argv[0]);
+		if (cmd_path != NULL)
 		{
-			ft_split_free(argv);
-			return (NULL);
+			free(argv[0]);
+			argv[0] = cmd_path;
 		}
 	}
 	return (argv);
@@ -41,17 +41,23 @@ static char	**access_cmd_path(t_node *node, int here)
 int	execve_simple_cmd(t_node *node, t_env *env)
 {
 	char		**argv;
-	extern char	**environ;
+	char		**envp;;
 	pid_t		pid;
 	int			waitstatus;
 	int			here;
 
 	_redirect_si(node);
 	here = here_documents(node);
-	//make build in masahito
-	(void)*env;
 	argv = access_cmd_path(node, here);
-	if (argv == NULL)
+	envp = make_env_args(env);
+	//make build in masahito
+	if(buildin(argv, &env))
+	{
+		ft_split_free(envp);
+		ft_split_free(argv);
+		return 1;
+	}
+	if (access(argv[0], X_OK))
 	{
 		restore_fd(node);
 		if (here)
@@ -70,10 +76,11 @@ int	execve_simple_cmd(t_node *node, t_env *env)
 	if (pid < 0)
 		_err("fork");
 	else if (pid == 0)
-		execve(argv[0], argv, environ);
+		execve(argv[0], argv, envp);
 	wait(&waitstatus);
 	restore_fd(node);
 	ft_split_free(argv);
+	ft_split_free(envp);
 	/*if (argv[1] && strncmp(argv[1], ".heredoc.txt", 12) == 0)
 	{
 		free(argv[1]);

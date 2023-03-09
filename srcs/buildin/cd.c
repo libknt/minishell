@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:56 by keys              #+#    #+#             */
-/*   Updated: 2023/03/06 13:19:34 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/09 11:37:07 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	cd(char *argv[], t_env *env)
 		memset(path, '\0', PATH_MAXLEN);
 		getcwd(path, PATH_MAXLEN);
 		make_abs_path(path, argv[1], home);
-		printf("path  %s\n", path);
 		status = chdir(path);
 	}
 	free(home);

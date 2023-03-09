@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 09:09:09 by keys              #+#    #+#             */
-/*   Updated: 2023/03/06 13:36:21 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/09 11:26:53 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ size_t	env_len(char *envp)
 {
 	size_t	len;
 
+	if (!envp)
+		return 0;
 	len = 0;
-	while (envp[len] != '=')
+	while (envp[len] && envp[len] != '=')
 		len++;
 	return (len);
 }
@@ -31,9 +33,10 @@ void	add_env(t_env **env, char *envp, size_t len)
 
 void	add_value(t_env **env, char *envp, size_t len)
 {
-	(*env)->value = ft_substr(envp, len + 1, strlen(&envp[len + 1]));
-	if (!(*env)->value)
-		_err("malloc");
+	if(strlen(envp) != len)
+		(*env)->value = ft_substr(envp, len + 1, strlen(&envp[len + 1]));
+	else
+		(*env)->value = NULL;
 }
 
 t_env	*new_lstenv(char *envp)

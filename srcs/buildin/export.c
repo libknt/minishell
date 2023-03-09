@@ -53,11 +53,12 @@ ssize_t	env_num(t_env *env)
 	return (num);
 }
 
-char	**make_env_args(t_env *env)
+static char	**make_env_args(t_env *env)
 {
 	ssize_t	i;
 	ssize_t	num;
 	ssize_t	len;
+	ssize_t value_len;
 	char	**envp;
 
 	num = env_num(env);
@@ -65,14 +66,22 @@ char	**make_env_args(t_env *env)
 	i = 0;
 	while (i < num)
 	{
-		len = strlen(env->key) + strlen(env->value) + 2;
+		if (!env->value)
+			value_len = 0;
+		else
+			value_len = strlen(env->value);
+		len = strlen(env->key) + value_len + 4;
 		envp[i] = calloc(len, sizeof(char));
 		if (!envp[i])
 			return (free_envp(envp, i));
 		ft_strlcat(envp[i], env->key, len);
-		if (strlen(env->value))
+		if (env->value)
+		{
 			ft_strlcat(envp[i], "=", strlen(env->key) + 2);
-		ft_strlcat(envp[i], env->value, len);
+			ft_strlcat(envp[i], "\"", strlen(env->key) + 3);
+			ft_strlcat(envp[i], env->value, len);
+			ft_strlcat(envp[i], "\"", len);
+		}
 		i++;
 		env = env->next;
 	}

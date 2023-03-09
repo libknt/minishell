@@ -6,7 +6,7 @@
 /*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:58:36 by keys              #+#    #+#             */
-/*   Updated: 2023/02/26 23:3 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/09 10:07:26 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,15 @@ static char	**access_cmd_path(t_node *node, int here)
 	char	**argv;
 
 	argv = make_arr(node, here);
-	if (access(argv[0], X_OK) == 0)
+	if (access(argv[0], X_OK) != 0)
 	{
-	}
-	else
-	{
-		cmd_path = exec_filename(argv[0]);
-		free(argv[0]);
-		argv[0] = cmd_path;
-		if (cmd_path == NULL)
+		cmd_path = NULL;
+		if(!is_buildin(argv[0]))
+			cmd_path = exec_filename(argv[0]);
+		if (cmd_path != NULL)
 		{
-			ft_split_free(argv);
-			return (NULL);
+			free(argv[0]);
+			argv[0] = cmd_path;
 		}
 	}
 	return (argv);
@@ -60,22 +57,19 @@ static char	**access_cmd_path(t_node *node, int here)
 int	exec(t_node *node, t_env *env, int fd1)
 {
 	char		**argv;
-	extern char	**environ;
-	//char		**envp;
+	char		**envp;
 	pid_t		pid;
 	int			rw[2];
 	int			here;
 
 	if (!node)
 		return (0);
-	argv = NULL;
-	//envp = make_env_args(env);
 	_redirect_si(node);
 	here = here_documents(node);
-	//make buold in masahito
-	(void)env;
+	envp = make_env_args(env);
 	argv = access_cmd_path(node, here);
-	if (argv == NULL)
+	//make buold in masahito
+	if (access(argv[0], X_OK) && !is_buildin(argv[0]))
 	{
 		if (node->fd == NULL)
 		{
@@ -86,7 +80,7 @@ int	exec(t_node *node, t_env *env, int fd1)
 		else
 			restore_fd(node);
 		_err_cmd_node_found("command not found");
-		//ft_split_free(envp);
+		ft_split_free(envp);
 		return (1);
 	}
 	pipe(rw);
@@ -116,7 +110,11 @@ int	exec(t_node *node, t_env *env, int fd1)
 			close(rw[0]);
 			close(rw[1]);
 		}
-		execve(argv[0], argv, environ);
+		if(is_buildin(argv[0]))
+			buildin(argv, &env);
+		else
+			execve(argv[0], argv, envp);
+		exit(1);
 	}
 	if (node->fd == NULL)
 	{
@@ -127,7 +125,7 @@ int	exec(t_node *node, t_env *env, int fd1)
 	else
 		restore_fd(node);
 	ft_split_free(argv);
-	//ft_split_free(envp);
+	ft_split_free(envp);
 	return (1);
 }
 

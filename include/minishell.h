@@ -95,7 +95,13 @@ int	cd(char *argv[], t_env *env);
 void	ft_env_addback(t_env **env, t_env *new);
 t_env	*new_lstenv(char *envp);
 void	ft_export(char *argv[], t_env **env);
-char	**make_env_args(t_env *env);
 void		test(t_node *node);
-
+char	**make_env_args(t_env *env);
+ssize_t	env_num(t_env *env);
+char	**free_envp(char **envp, ssize_t len);
+/*buildin*/
+bool	is_buildin(char *str);
+void	env_buildin(char *argv[], t_env *env);
+int	buildin(char *argv[], t_env **env);
+int	cd(char *argv[], t_env *env);
 #endif
