@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:17:23 by keys              #+#    #+#             */
-/*   Updated: 2023/03/09 15:17:59 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/10 01:02:22 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,13 +193,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 char	*seach_path(char **envp)
 {
-	ssize_t i;
+	ssize_t	i;
 
 	i = 0;
 	while (envp[i])
 	{
-		if(!strncmp(envp[i], "PATH=", 5))
-			return(strdup(&envp[i][5]));
+		if (!strncmp(envp[i], "PATH=", 5))
+			return (strdup(&envp[i][5]));
 		i++;
 	}
 	return (NULL);
@@ -216,7 +216,7 @@ char	*exec_filename(char *prompt, char **envp)
 	s = ft_strjoin("/", prompt);
 	k = 0;
 	pa = seach_path(envp);
-	if(!pa)
+	if (!pa)
 		return (NULL);
 	tmp = ft_split(pa, ':');
 	while (tmp[k])
