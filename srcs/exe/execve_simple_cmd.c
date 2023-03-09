@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+extern int exit_status;
+
 static void	_err_cmd_node_found(char *mes)
 {
 	exit_status = 127;

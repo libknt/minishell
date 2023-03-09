@@ -13,6 +13,7 @@
 #include "minishell.h"
 
 // bool	g_syntax_err = false;
+extern int exit_status;
 
 bool	_err_syntax(char *mes)
 {

@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+extern int exit_status;
 void	_err_syntax_p(char *mes, bool *r)
 {
 	exit_status = 2;
