@@ -22,7 +22,6 @@
 #include <err.h>
 #include <errno.h>
 
-int		exit_status;
 
 /*lexer */
 t_token	*lexer(char **line, t_env *env);
