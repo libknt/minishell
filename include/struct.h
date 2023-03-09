@@ -6,19 +6,20 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/03/09 14:35:21 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/09 16:08:07 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-typedef struct s_fd	t_fd;
-struct				s_fd
+typedef struct s_fd			t_fd;
+struct						s_fd
 {
-	int				std_fd;
-	int				file;
-	int				std_fd_new;
+	int						std_fd;
+	int						file;
+	int						file_new;
+	int						std_fd_new;
 };
 
 typedef enum e_token_type	t_token_type;
