@@ -21,7 +21,7 @@ static void	_err_cmd_node_found(char *mes)
 	dprintf(STDERR_FILENO, "%s\n", mes);
 }
 
-static char	**access_cmd_path(t_node *node)
+static char	**access_cmd_path(t_node *node, char **envp)
 {
 	char	*cmd_path;
 	char	**argv;
@@ -31,7 +31,7 @@ static char	**access_cmd_path(t_node *node)
 	{
 		cmd_path = NULL;
 		if (!is_buildin(argv[0]))
-			cmd_path = exec_filename(argv[0]);
+			cmd_path = exec_filename(argv[0], envp);
 		if (cmd_path != NULL)
 		{
 			free(argv[0]);
@@ -51,7 +51,7 @@ int	exec(t_node *node, t_env *env, int fd1)
 	if (!node)
 		return (0);
 	envp = make_env_args(env);
-	argv = access_cmd_path(node);
+	argv = access_cmd_path(node, envp);
 	pipe(rw);
 	//make buold in masahito
 	if (access(argv[0], X_OK) && !is_buildin(argv[0]))

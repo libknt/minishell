@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_filename.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:17:23 by keys              #+#    #+#             */
-/*   Updated: 2023/03/08 13:11:44 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/09 15:17:59 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,20 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (p);
 }
 
-char	*exec_filename(char *prompt)
+char	*seach_path(char **envp)
+{
+	ssize_t i;
+
+	i = 0;
+	while (envp[i])
+	{
+		if(!strncmp(envp[i], "PATH=", 5))
+			return(strdup(&envp[i][5]));
+		i++;
+	}
+	return (NULL);
+}
+char	*exec_filename(char *prompt, char **envp)
 {
 	char	*pa;
 	char	*s;
@@ -202,7 +215,7 @@ char	*exec_filename(char *prompt)
 		return (NULL);
 	s = ft_strjoin("/", prompt);
 	k = 0;
-	pa = getenv("PATH");
+	pa = seach_path(envp);
 	tmp = ft_split(pa, ':');
 	while (tmp[k])
 	{
