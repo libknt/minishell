@@ -22,12 +22,13 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-
 int		exit_status;
 
 /*redirect*/
-t_fd *redirect_check(t_node *node);
-void	revert_redirect(t_fd *fd);
+t_fds	*redirect_check(t_node *node);
+void	revert_redirect(t_fds *fd);
+t_fd	*redirect_right(t_line *line);
+t_fd	*redirect_left(t_line *line);
 
 /*lexer */
 t_token	*lexer(char **line, t_env *env);

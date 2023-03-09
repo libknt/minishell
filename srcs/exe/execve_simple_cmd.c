@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/03/09 17:26:57 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/09 18:03:45 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	execve_simple_cmd(t_node *node, t_env *env)
 	char	**envp;
 	pid_t	pid;
 	int		waitstatus;
-	t_fd	*fd;
+	t_fds	*fd;
 
 	argv = access_cmd_path(node);
 	envp = make_env_args(env);

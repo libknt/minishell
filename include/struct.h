@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/03/09 16:08:07 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/09 17:56:59 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ struct						s_fd
 	int						file;
 	int						file_new;
 	int						std_fd_new;
+};
+typedef struct s_fds		t_fds;
+struct						s_fds
+{
+	t_fd					*fd_r;
+	t_fd					*fd_l;
 };
 
 typedef enum e_token_type	t_token_type;

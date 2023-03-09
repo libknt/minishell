@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect.c                                         :+:      :+:    :+:   */
+/*   redirect_simple_right.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/09 17:23:35 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/09 18:08:03 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	dup_redirect(t_fd *fd)
 	close(fd->file_new);
 }
 
-t_fd	*redirect(t_line *line)
+t_fd	*redirect_right(t_line *line)
 {
 	t_fd	*fd;
 
@@ -97,28 +97,11 @@ t_fd	*redirect(t_line *line)
 				fd = open_file_r(line->next->token->word);
 			line = line->next;
 		}
+		else if (line->type == REDIRECT)
+			line = line->next;
 		line = line->next;
 	}
 	dup_redirect(fd);
 	return (fd);
 }
 
-t_fd	*redirect_check(t_node *node)
-{
-	t_fd	*fd;
-
-	fd = redirect(node->line);
-	return (fd);
-}
-
-void	revert_redirect(t_fd *fd)
-{
-	if (fd == NULL)
-		return ;
-	dup2(fd->std_fd, fd->file_new);
-	close(fd->file_new);
-	dup2(fd->std_fd_new, fd->std_fd);
-	close(fd->std_fd_new);
-	close(fd->file);
-	free(fd);
-}
