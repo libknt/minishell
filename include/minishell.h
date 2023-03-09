@@ -22,7 +22,6 @@
 #include <err.h>
 #include <errno.h>
 
-int		exit_status;
 
 /*lexer */
 t_token	*lexer(char **line, t_env *env);
@@ -105,5 +104,6 @@ bool	is_identifier(const char *s);
 bool	is_buildin(char *str);
 void	env_buildin(char *argv[], t_env *env);
 int	buildin(char *argv[], t_env **env);
+void	unset(char *argv[], t_env **env);
 int	cd(char *argv[], t_env *env);
 #endif

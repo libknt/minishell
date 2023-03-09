@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-extern int	exit_status;
+int	exit_status;
 void	print_env1(t_env *env)
 {
 	while (1)

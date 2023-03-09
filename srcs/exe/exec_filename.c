@@ -216,6 +216,8 @@ char	*exec_filename(char *prompt, char **envp)
 	s = ft_strjoin("/", prompt);
 	k = 0;
 	pa = seach_path(envp);
+	if(!pa)
+		return (NULL);
 	tmp = ft_split(pa, ':');
 	while (tmp[k])
 	{
