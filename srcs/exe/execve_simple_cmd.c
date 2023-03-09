@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/03/09 13:22:36 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/09 14:29:01 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ int	execve_simple_cmd(t_node *node, t_env *env)
 	char		**envp;;
 	pid_t		pid;
 	int			waitstatus;
+	t_fd *fd;
 
 	argv = access_cmd_path(node);
 	envp = make_env_args(env);
+	fd = redirect_check(node);
 	//make build in masahito
 	if(buildin(argv, &env))
 	{
@@ -65,6 +67,7 @@ int	execve_simple_cmd(t_node *node, t_env *env)
 	else if (pid == 0)
 		execve(argv[0], argv, envp);
 	wait(&waitstatus);
+ 	revert_redirect(fd);
 	ft_split_free(argv);
 	ft_split_free(envp);
 	return (WEXITSTATUS(waitstatus));

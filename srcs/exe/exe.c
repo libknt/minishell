@@ -56,12 +56,9 @@ int	exec(t_node *node, t_env *env, int fd1)
 	//make buold in masahito
 	if (access(argv[0], X_OK) && !is_buildin(argv[0]))
 	{
-		if (node->fd == NULL)
-		{
-			close(rw[1]);
-			dup2(rw[0], 0);
-			close(rw[0]);
-		}
+		close(rw[1]);
+		dup2(rw[0], 0);
+		close(rw[0]);
 		_err_cmd_node_found("command not found");
 		ft_split_free(envp);
 		return (1);

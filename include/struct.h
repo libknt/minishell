@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/03/04 22:33:19 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/09 14:35:21 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+typedef struct s_fd	t_fd;
+struct				s_fd
+{
+	int				std_fd;
+	int				file;
+	int				std_fd_new;
+};
+
 typedef enum e_token_type	t_token_type;
 enum						e_token_type
 {
@@ -69,18 +78,9 @@ struct						s_line
 	t_line					*next;
 };
 
-typedef struct s_fd			t_fd;
-struct						s_fd
-{
-	int						fd;
-	int						oldfd;
-	int						newfd;
-};
-
 typedef struct s_node		t_node;
 struct						s_node
 {
-	t_fd					*fd;
 	t_line					*line;
 	t_node					*left;
 	t_node					*right;
