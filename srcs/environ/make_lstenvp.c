@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 09:09:09 by keys              #+#    #+#             */
-/*   Updated: 2023/03/09 11:26:53 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/10 00:36:28 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	env_len(char *envp)
 	size_t	len;
 
 	if (!envp)
-		return 0;
+		return (0);
 	len = 0;
 	while (envp[len] && envp[len] != '=')
 		len++;
@@ -33,7 +33,7 @@ void	add_env(t_env **env, char *envp, size_t len)
 
 void	add_value(t_env **env, char *envp, size_t len)
 {
-	if(strlen(envp) != len)
+	if (strlen(envp) != len)
 		(*env)->value = ft_substr(envp, len + 1, strlen(&envp[len + 1]));
 	else
 		(*env)->value = NULL;
@@ -76,7 +76,7 @@ void	ft_env_addback(t_env **env, t_env *new)
 		{
 			while (env_node)
 			{
-				if(!strcmp(env_node->key, new->key))
+				if (!strcmp(env_node->key, new->key))
 				{
 					env_node->prev->next = new;
 					new->prev = env_node->prev;
@@ -85,7 +85,7 @@ void	ft_env_addback(t_env **env, t_env *new)
 					return ;
 				}
 				if (!env_node->next)
-					break;
+					break ;
 				env_node = env_node->next;
 			}
 			env_node->next = new;

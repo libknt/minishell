@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marai <masadevs@gmail.com>                 +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/10 00:30:45 by marai             #+#    #+#             */
+/*   Updated: 2023/03/10 00:30:50 by marai            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -58,7 +69,7 @@ static char	**make_export_args(t_env *env)
 	ssize_t	i;
 	ssize_t	num;
 	ssize_t	len;
-	ssize_t value_len;
+	ssize_t	value_len;
 	char	**envp;
 
 	num = env_num(env);
@@ -133,4 +144,3 @@ void	ft_export(char *argv[], t_env **env)
 		i++;
 	}
 }
-
