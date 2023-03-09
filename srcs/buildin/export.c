@@ -53,7 +53,7 @@ ssize_t	env_num(t_env *env)
 	return (num);
 }
 
-static char	**make_env_args(t_env *env)
+static char	**make_export_args(t_env *env)
 {
 	ssize_t	i;
 	ssize_t	num;
@@ -109,7 +109,7 @@ void	ft_export(char *argv[], t_env **env)
 
 	if (!argv[1])
 	{
-		envp = make_env_args(*env);
+		envp = make_export_args(*env);
 		envp = env_sort(envp);
 		i = 0;
 		while (envp[i])

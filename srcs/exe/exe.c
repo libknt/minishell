@@ -68,6 +68,7 @@ int	exec(t_node *node, t_env *env, int fd1)
 	here = here_documents(node);
 	envp = make_env_args(env);
 	argv = access_cmd_path(node, here);
+	pipe(rw);
 	//make buold in masahito
 	if (access(argv[0], X_OK) && !is_buildin(argv[0]))
 	{
@@ -83,7 +84,6 @@ int	exec(t_node *node, t_env *env, int fd1)
 		ft_split_free(envp);
 		return (1);
 	}
-	pipe(rw);
 	pid = fork();
 	if (pid < 0)
 		_err("fork");
