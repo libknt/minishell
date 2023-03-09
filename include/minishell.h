@@ -105,5 +105,6 @@ bool	is_identifier(const char *s);
 bool	is_buildin(char *str);
 void	env_buildin(char *argv[], t_env *env);
 int	buildin(char *argv[], t_env **env);
+void	unset(char *argv[], t_env **env);
 int	cd(char *argv[], t_env *env);
 #endif

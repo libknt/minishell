@@ -10,6 +10,8 @@ bool	is_buildin(char *str)
 		return (true);
 	else if(!strcmp(str, "env"))
 		return (true);
+	else if(!strcmp(str, "unset"))
+		return (true);
 	return (false);
 }
 
@@ -32,6 +34,10 @@ int	buildin(char *argv[], t_env **env)
 		env_buildin(argv, *env);
 		return (1);
 	}
-	
+	else if(!strcmp(argv[0], "unset"))
+	{
+		unset(argv, env);
+		return (1);
+	}
 	return (0);
 }
