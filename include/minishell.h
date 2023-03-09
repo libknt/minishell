@@ -71,7 +71,7 @@ void	print_t(t_token *token);
 void	print_tree(t_node *node);
 void	print_n(t_node *node);
 
-char	**make_arr(t_node *node, int here);
+char	**make_arr(t_node *node);
 void	_redirect_si(t_node *node);
 int		_redirect(t_node *node);
 void	restore_fd(t_node *node);

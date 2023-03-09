@@ -21,29 +21,16 @@ static void	_err_cmd_node_found(char *mes)
 	dprintf(STDERR_FILENO, "%s\n", mes);
 }
 
-int	t_escape_fd(int fd)
-{
-	int	newfd;
-
-	newfd = fcntl(fd, F_DUPFD, 10);
-	fflush(stdout);
-	if (newfd < 0)
-		_err("fcntl");
-	if (close(fd) < 0)
-		_err("close");
-	return (newfd);
-}
-
-static char	**access_cmd_path(t_node *node, int here)
+static char	**access_cmd_path(t_node *node)
 {
 	char	*cmd_path;
 	char	**argv;
 
-	argv = make_arr(node, here);
+	argv = make_arr(node);
 	if (access(argv[0], X_OK) != 0)
 	{
 		cmd_path = NULL;
-		if(!is_buildin(argv[0]))
+		if (!is_buildin(argv[0]))
 			cmd_path = exec_filename(argv[0]);
 		if (cmd_path != NULL)
 		{
@@ -56,18 +43,15 @@ static char	**access_cmd_path(t_node *node, int here)
 
 int	exec(t_node *node, t_env *env, int fd1)
 {
-	char		**argv;
-	char		**envp;
-	pid_t		pid;
-	int			rw[2];
-	int			here;
+	char	**argv;
+	char	**envp;
+	pid_t	pid;
+	int		rw[2];
 
 	if (!node)
 		return (0);
-	_redirect_si(node);
-	here = here_documents(node);
 	envp = make_env_args(env);
-	argv = access_cmd_path(node, here);
+	argv = access_cmd_path(node);
 	pipe(rw);
 	//make buold in masahito
 	if (access(argv[0], X_OK) && !is_buildin(argv[0]))
@@ -78,8 +62,6 @@ int	exec(t_node *node, t_env *env, int fd1)
 			dup2(rw[0], 0);
 			close(rw[0]);
 		}
-		else
-			restore_fd(node);
 		_err_cmd_node_found("command not found");
 		ft_split_free(envp);
 		return (1);
@@ -89,41 +71,28 @@ int	exec(t_node *node, t_env *env, int fd1)
 		_err("fork");
 	else if (pid == 0)
 	{
-		if (node->fd == NULL)
+		if (node->next == NULL)
 		{
-			if (node->next == NULL)
-			{
-				close(rw[0]);
-				close(rw[1]);
-				dup2(fd1, 1);
-				close(fd1);
-			}
-			else
-			{
-				close(rw[0]);
-				dup2(rw[1], 1);
-				close(rw[1]);
-			}
+			close(rw[0]);
+			close(rw[1]);
+			dup2(fd1, 1);
+			close(fd1);
 		}
 		else
 		{
 			close(rw[0]);
+			dup2(rw[1], 1);
 			close(rw[1]);
 		}
-		if(is_buildin(argv[0]))
+		if (is_buildin(argv[0]))
 			buildin(argv, &env);
 		else
 			execve(argv[0], argv, envp);
 		exit(1);
 	}
-	if (node->fd == NULL)
-	{
-		close(rw[1]);
-		dup2(rw[0], 0);
-		close(rw[0]);
-	}
-	else
-		restore_fd(node);
+	close(rw[1]);
+	dup2(rw[0], 0);
+	close(rw[0]);
 	ft_split_free(argv);
 	ft_split_free(envp);
 	return (1);
@@ -139,9 +108,6 @@ void	print_nodes(t_node *node)
 		node = node->next;
 	}
 }
-// #include <err.h>
-// #include <errno.h>
-// int	exec_tree(t_node *node, t_env *env)
 
 void	wait_process(void)
 {
@@ -162,7 +128,6 @@ void	wait_process(void)
 		}
 	}
 }
-
 
 int	exec_tree(t_node *node, t_env *env)
 {

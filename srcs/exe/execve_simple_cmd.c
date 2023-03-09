@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/03/09 10:10:50 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/09 13:22:36 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ static void	_err_cmd_node_found(char *mes)
 	dprintf(STDERR_FILENO, "%s\n", mes);
 }
 
-static char	**access_cmd_path(t_node *node, int here)
+static char	**access_cmd_path(t_node *node)
 {
 	char	*cmd_path;
 	char	**argv;
 
-	argv = make_arr(node, here);
+	argv = make_arr(node);
 	if (access(argv[0], X_OK) != 0)
 	{
 		cmd_path = NULL;
@@ -44,11 +44,8 @@ int	execve_simple_cmd(t_node *node, t_env *env)
 	char		**envp;;
 	pid_t		pid;
 	int			waitstatus;
-	int			here;
 
-	_redirect_si(node);
-	here = here_documents(node);
-	argv = access_cmd_path(node, here);
+	argv = access_cmd_path(node);
 	envp = make_env_args(env);
 	//make build in masahito
 	if(buildin(argv, &env))
@@ -59,16 +56,6 @@ int	execve_simple_cmd(t_node *node, t_env *env)
 	}
 	if (access(argv[0], X_OK))
 	{
-		restore_fd(node);
-		if (here)
-			close(here);
-		/*if (argv[1] && strncmp(argv[1], ".heredoc.txt", 12) == 0)
-		{
-			free(argv[1]);
-			argv[1] = NULL;
-		}
-		free(argv);
-		*/
 		_err_cmd_node_found("command not found");
 		return (1);
 	}
@@ -78,15 +65,7 @@ int	execve_simple_cmd(t_node *node, t_env *env)
 	else if (pid == 0)
 		execve(argv[0], argv, envp);
 	wait(&waitstatus);
-	restore_fd(node);
 	ft_split_free(argv);
 	ft_split_free(envp);
-	/*if (argv[1] && strncmp(argv[1], ".heredoc.txt", 12) == 0)
-	{
-		free(argv[1]);
-		argv[1] = NULL;
-	}
-	free(argv);
-	*/
 	return (WEXITSTATUS(waitstatus));
 }

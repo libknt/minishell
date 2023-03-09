@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_arr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 14:21:21 by keys              #+#    #+#             */
-/*   Updated: 2023/03/06 10:14:45 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/09 13:23:05 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,7 @@ void	push_arr(char **arr, t_line *line)
 	arr[i] = NULL;
 }
 
-void	push_arr_here(char **arr, int here)
-{
-	char	buf[255];
-	int		fd;
-
-	fd = open(".heredoc.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	read(here, buf, 255);
-	write(fd, buf, strlen(buf));
-	close(fd);
-	close(here);
-	arr[1] = strdup(".heredoc.txt");
-}
-
-char	**make_arr(t_node *node, int here)
+char	**make_arr(t_node *node)
 {
 	t_line	*line;
 	size_t	len;
@@ -68,14 +55,6 @@ char	**make_arr(t_node *node, int here)
 
 	line = node->line;
 	len = line_size(line);
-	if (len == 1 && here > 0)
-	{
-		arr = calloc(sizeof(char **), 3);
-		arr[0] = line->token->word;
-		arr[2] = NULL;
-		push_arr_here(arr, here);
-		return (arr);
-	}
 	arr = calloc(sizeof(char **), len + 1);
 	if (!arr)
 		_err("malloc");
