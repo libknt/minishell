@@ -28,7 +28,8 @@ void	unset(char *argv[], t_env **env)
 			if (!strcmp(argv[i], env_node->key))
 			{
 				env_node->prev->next = env_node->next;
-				env_node->next->prev = env_node->prev;
+				if(env_node->next)
+					env_node->next->prev = env_node->prev;
 				free(env_node);
 			}
 			env_node = env_node->next;
