@@ -29,6 +29,7 @@ leak :
 
 clean:
 	$(RM) -r $(OBJDIR)
+	$(RM) .*.heredoc
 
 fclean: clean
 	$(RM) $(NAME)

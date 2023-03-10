@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect_simple_left.c                             :+:      :+:    :+:   */
+/*   redirect_left.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/10 15:30:15 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/10 18:30:09 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,6 @@ static t_fd	*open_file(char *name)
 	return (new);
 }
 
-static int	escape(int fd)
-{
-	int	newfd;
-
-	newfd = fcntl(fd, F_DUPFD, 10);
-	if (newfd < 0)
-		_err("fcntl");
-	if (close(fd) < 0)
-		_err("close");
-	return (newfd);
-}
-
-static void	dup_redirect(t_fd *fd)
-{
-	if (fd == NULL)
-		return ;
-	fd->std_fd_new = escape(fd->std_fd);
-	fd->file_new = escape(fd->file);
-	if (fd->file_new != fd->std_fd)
-		dup2(fd->file_new, fd->std_fd);
-	close(fd->file_new);
-}
 
 t_fd	*redirect_left(t_line *line,t_env *env)
 {
@@ -98,7 +76,7 @@ t_fd	*redirect_left(t_line *line,t_env *env)
 			line = line->next;
 		line = line->next;
 	}
-	dup_redirect(fd);
+	// dup_redirect(fd);
 	return (fd);
 }
 
