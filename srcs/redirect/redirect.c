@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 17:58:29 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/09 18:08:17 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/10 15:44:04 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ t_fds	*new_fds()
 	return (new);
 }
 
-t_fds	*redirect_check(t_node *node)
+t_fds	*redirect_check(t_node *node,t_env *env)
 {
 	t_fds	*fd;
 
 	fd = new_fds();
 	fd->fd_r = redirect_right(node->line);
-	fd->fd_l = redirect_left(node->line);
+	fd->fd_l = redirect_left(node->line, env);
 	if (fd->fd_r == NULL && fd->fd_l == NULL)
 	{
 		free(fd);

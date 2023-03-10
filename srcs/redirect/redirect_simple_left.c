@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/10 14:21:26 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/10 15:30:15 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	dup_redirect(t_fd *fd)
 	close(fd->file_new);
 }
 
-t_fd	*redirect_left(t_line *line)
+t_fd	*redirect_left(t_line *line,t_env *env)
 {
 	t_fd	*fd;
 
@@ -86,7 +86,7 @@ t_fd	*redirect_left(t_line *line)
 			// fd = open_file(line->next->token->word);
 			fd = close_file(fd);
 			line = line->next;
-			fd = heredoc(line->token->word);
+			fd = heredoc(line->token->word,env);
 		}
 		else if (line->type == REDIRECT && !strncmp(line->token->word, "<", 1))
 		{

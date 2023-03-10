@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/03/10 14:23:35 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/10 15:28:59 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	execve_simple_cmd(t_node *node, t_env *env)
 
 	argv = access_cmd_path(node);
 	envp = make_env_args(env);
-	fd = redirect_check(node);
+	fd = redirect_check(node,env);
 	//make build in masahito
 	if (buildin(argv, &env))
 	{

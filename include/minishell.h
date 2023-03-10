@@ -25,11 +25,13 @@
 int		exit_status;
 
 /*redirect*/
-t_fds	*redirect_check(t_node *node);
+char	*expand_quote(char *line);
+char	*vari_expand(char *line, t_env *env);
+t_fds	*redirect_check(t_node *node, t_env *env);
 void	revert_redirect(t_fds *fd);
 t_fd	*redirect_right(t_line *line);
-t_fd	*redirect_left(t_line *line);
-t_fd *heredoc(char *eof);
+t_fd	*redirect_left(t_line *line, t_env *env);
+t_fd	*heredoc(char *eof, t_env *env);
 
 /*lexer */
 t_token	*lexer(char **line, t_env *env);

@@ -41,17 +41,46 @@ static char	**access_cmd_path(t_node *node)
 	return (argv);
 }
 
+void	revert_redirect_pipe(t_fds *fd, int rw[2])
+{
+	dup2(rw[0], 0);
+	close(rw[0]);
+	close(rw[1]);
+	if (fd == NULL)
+		return ;
+	if (fd->fd_l)
+	{
+		dup2(fd->fd_l->std_fd, fd->fd_l->file_new);
+		close(fd->fd_l->file_new);
+		close(fd->fd_l->std_fd_new);
+		close(fd->fd_l->file);
+		free(fd->fd_l);
+	}
+	if (fd->fd_r)
+	{
+		dup2(fd->fd_r->std_fd, fd->fd_r->file_new);
+		close(fd->fd_r->file_new);
+		dup2(fd->fd_r->std_fd_new, fd->fd_r->std_fd);
+		close(fd->fd_r->std_fd_new);
+		close(fd->fd_r->file);
+		free(fd->fd_r);
+	}
+	free(fd);
+}
+
 int	exec(t_node *node, t_env *env, int fd1)
 {
 	char	**argv;
 	char	**envp;
 	pid_t	pid;
 	int		rw[2];
+	t_fds	*fd;
 
 	if (!node)
 		return (0);
 	envp = make_env_args(env);
 	argv = access_cmd_path(node);
+	fd = redirect_check(node, env);
 	pipe(rw);
 	//make buold in masahito
 	if (access(argv[0], X_OK) && !is_buildin(argv[0]))
@@ -72,13 +101,15 @@ int	exec(t_node *node, t_env *env, int fd1)
 		{
 			close(rw[0]);
 			close(rw[1]);
-			dup2(fd1, 1);
+			if (!fd || (fd && fd->fd_r == NULL))
+				dup2(fd1, 1);
 			close(fd1);
 		}
 		else
 		{
 			close(rw[0]);
-			dup2(rw[1], 1);
+			if (!fd || (fd && fd->fd_r == NULL))
+				dup2(rw[1], 1);
 			close(rw[1]);
 		}
 		if (is_buildin(argv[0]))
@@ -87,9 +118,10 @@ int	exec(t_node *node, t_env *env, int fd1)
 			execve(argv[0], argv, envp);
 		exit(1);
 	}
-	close(rw[1]);
-	dup2(rw[0], 0);
-	close(rw[0]);
+	revert_redirect_pipe(fd, rw);
+	// if (fd != NULL)
+	// 	revert_redirect(fd);
+	// else
 	ft_split_free(argv);
 	ft_split_free(envp);
 	return (1);

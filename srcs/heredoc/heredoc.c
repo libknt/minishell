@@ -6,18 +6,11 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 19:01:20 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/10 14:22:24 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/10 15:28:37 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-typedef struct s_h	t_h;
-struct				s_h
-{
-	char			*e;
-	t_h				*next;
-};
 
 bool	is_heredoc(t_line *line)
 {
@@ -41,7 +34,7 @@ char	*ft_rename(char *x)
 	return (file);
 }
 
-int	open_heredocfile(void)
+char	*open_heredocfile(t_fd **fds)
 {
 	int		fd;
 	char	*x;
@@ -51,7 +44,7 @@ int	open_heredocfile(void)
 		_err("malloc");
 	while (1)
 	{
-		fd = open(x, O_EXCL | O_CREAT | O_RDWR, 0644);
+		fd = open(x, O_EXCL | O_CREAT | O_WRONLY, 0644);
 		if (fd < 0)
 		{
 			x = ft_rename(x);
@@ -60,66 +53,8 @@ int	open_heredocfile(void)
 		else
 			break ;
 	}
-	return (fd);
-}
-
-t_h	*new_heredoc(char *e)
-{
-	t_h	*h;
-
-	h = calloc(sizeof(t_h), 1);
-	if (!h)
-		_err("malloc");
-	h->e = strdup(e);
-	if (!h->e)
-		_err("malloc");
-	h->next = NULL;
-	return (h);
-}
-
-t_h	*heredoc_last(t_h *head)
-{
-	while (1)
-	{
-		if (head->next == NULL)
-			break ;
-		head = head->next;
-	}
-	return (head);
-}
-
-void	heredoc_addback(t_h **head, t_h *new)
-{
-	t_h	*last;
-
-	if (head)
-	{
-		if (*head)
-		{
-			last = heredoc_last(*head);
-			last->next = new;
-		}
-		else
-			*head = new;
-	}
-}
-
-void	heredoc_eof(t_line *line, t_h **head)
-{
-	t_h	*new;
-
-	while (1)
-	{
-		if (line->type == T_EOF_R)
-			break ;
-		if (is_heredoc(line))
-		{
-			line = line->next;
-			new = new_heredoc(line->token->word);
-			heredoc_addback(head, new);
-		}
-		line = line->next;
-	}
+	(*fds)->file = fd;
+	return (x);
 }
 
 void	_err_heredoc(char *m)
@@ -128,7 +63,7 @@ void	_err_heredoc(char *m)
 			m);
 }
 
-void	heredoc_start(int fd, char *eof)
+void	heredoc_start(int fd, char *eof,t_env *env)
 {
 	char	*line;
 
@@ -145,6 +80,8 @@ void	heredoc_start(int fd, char *eof)
 			free(line);
 			break ;
 		}
+		line = vari_expand(line, env);
+		line = expand_quote(line);
 		dprintf(fd, "%s\n", line);
 		free(line);
 	}
@@ -163,29 +100,16 @@ static t_fd	*new_fd(void)
 	return (new);
 }
 
-t_fd	*heredoc(char *eof)
+t_fd	*heredoc(char *eof ,t_env *env)
 {
 	t_fd	*new;
+	char *x;
 
 	new = new_fd();
-	new->file = open_heredocfile();
-	heredoc_start(new->file, eof);
+	x= open_heredocfile(&new);
+	heredoc_start(new->file, eof,env);
 	new->std_fd = 0;
+	close(new->file);
+	new->file = open(x, O_RDONLY, 0644);
 	return (new);
 }
-
-// int	heredoc(t_node *node)
-// {
-// 	int	fd;
-// 	t_h	*head;
-
-// 	head = NULL;
-// 	heredoc_eof(node->line, &head);
-// 	if (head == NULL)
-// 		return (0);
-// 	fd = open_heredocfile();
-// 	heredoc_start(fd, head);
-// 	dup2(fd, 0);
-// 	// close(fd);
-// 	return (0);
-// }
