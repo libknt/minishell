@@ -22,7 +22,8 @@ $(OBJDIR)/%.o: %.c
 all: $(NAME)
 
 $(NAME):$(OBJS)
-		$(CC) $^ $(CFLAGS) -o $@ -lreadline
+	@mkdir -p .heredoc
+	$(CC) $^ $(CFLAGS) -o $@ -lreadline
 
 leak :
 	sh leak.sh

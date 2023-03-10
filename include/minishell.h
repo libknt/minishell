@@ -21,6 +21,8 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+#include <sys/types.h>
+#include <dirent.h>
 
 int		exit_status;
 
