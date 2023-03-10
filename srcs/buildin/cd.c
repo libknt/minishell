@@ -9,7 +9,7 @@
 /*   Updated: 2023/03/10 00:28:37 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+//strdup, strlen, strncmp, strcmp, memset
 #include "minishell.h"
 #define PATH_MAXLEN 4096
 

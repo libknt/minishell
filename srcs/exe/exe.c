@@ -136,8 +136,10 @@ int	exec_tree(t_node *node, t_env *env)
 	int	fd0;
 	int	fd1;
 
-	fd0 = fcntl(0, F_DUPFD, 10);
-	fd1 = fcntl(1, F_DUPFD, 10);
+	//fd0 = fcntl(0, F_DUPFD, 10);
+	//fd1 = fcntl(1, F_DUPFD, 10);
+	fd0 = dup(0);
+	fd1 = dup(1);
 	add_node(node);
 	while (node && node->line->type == PIPE)
 		node = node->left;
