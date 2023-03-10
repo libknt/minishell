@@ -23,6 +23,8 @@
 #include <errno.h>
 
 
+void	ft_echo(char **argv);
+void	ft_exit(char **argv);
 /*lexer */
 t_token	*lexer(char **line, t_env *env);
 /*lexer utils auote*/

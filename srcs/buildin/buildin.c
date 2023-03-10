@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buildin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <masadevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:34:18 by marai             #+#    #+#             */
-/*   Updated: 2023/03/10 00:34:21 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/10 16:32:10 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ bool	is_buildin(char *str)
 	else if (!strcmp(str, "env"))
 		return (true);
 	else if (!strcmp(str, "unset"))
+		return (true);
+	else if (!strcmp(str, "echo"))
+		return (true);
+	else if (!strcmp(str, "exit"))
 		return (true);
 	return (false);
 }
@@ -50,6 +54,16 @@ int	buildin(char *argv[], t_env **env)
 	else if (!strcmp(argv[0], "unset"))
 	{
 		unset(argv, env);
+		return (1);
+	}
+	else if (!strcmp(argv[0], "echo"))
+	{
+		ft_echo(argv);
+		return (1);
+	}
+	else if (!strcmp(argv[0], "exit"))
+	{
+		ft_exit(argv);
 		return (1);
 	}
 	return (0);
