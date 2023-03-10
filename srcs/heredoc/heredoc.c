@@ -6,17 +6,18 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 19:01:20 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/10 13:01:57 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/10 14:22:24 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-typedef strcut s_h t_h;
 
-strcut s_h{
-	char *e;
-	t_h *next;
-}
+typedef struct s_h	t_h;
+struct				s_h
+{
+	char			*e;
+	t_h				*next;
+};
 
 bool	is_heredoc(t_line *line)
 {
@@ -28,7 +29,7 @@ bool	is_heredoc(t_line *line)
 	return (false);
 }
 
-char	*rename(char *x)
+char	*ft_rename(char *x)
 {
 	char	*file;
 
@@ -50,10 +51,10 @@ int	open_heredocfile(void)
 		_err("malloc");
 	while (1)
 	{
-		fd = open(x, O_EXCL | O_CREAT | O_WRONLY, 0644);
+		fd = open(x, O_EXCL | O_CREAT | O_RDWR, 0644);
 		if (fd < 0)
 		{
-			x = rename(x);
+			x = ft_rename(x);
 			continue ;
 		}
 		else
@@ -62,38 +63,38 @@ int	open_heredocfile(void)
 	return (fd);
 }
 
-t_h  *new_heredoc(char *e)
+t_h	*new_heredoc(char *e)
 {
-	t_h *h;
+	t_h	*h;
 
-	h = calloc(sizeof(t_h),1);
-	if(!h)
+	h = calloc(sizeof(t_h), 1);
+	if (!h)
 		_err("malloc");
-	h->e = strdup("e");
-	if(!h->e)
+	h->e = strdup(e);
+	if (!h->e)
 		_err("malloc");
 	h->next = NULL;
-	return h;
+	return (h);
 }
 
-t_h *heredoc_last(t_h *head)
+t_h	*heredoc_last(t_h *head)
 {
-	while(1)
+	while (1)
 	{
-		if(head->next == NULL)
-			break;
+		if (head->next == NULL)
+			break ;
 		head = head->next;
 	}
-	return head;
+	return (head);
 }
 
-void heredoc_addback(t_h **head,t_h *new)
+void	heredoc_addback(t_h **head, t_h *new)
 {
-	t_h *last;
+	t_h	*last;
 
-	if(head)
+	if (head)
 	{
-		if(*head)
+		if (*head)
 		{
 			last = heredoc_last(*head);
 			last->next = new;
@@ -103,9 +104,9 @@ void heredoc_addback(t_h **head,t_h *new)
 	}
 }
 
-void	heredoc_eof(t_line *line,t_h *head)
+void	heredoc_eof(t_line *line, t_h **head)
 {
-	t_h *new;
+	t_h	*new;
 
 	while (1)
 	{
@@ -115,48 +116,76 @@ void	heredoc_eof(t_line *line,t_h *head)
 		{
 			line = line->next;
 			new = new_heredoc(line->token->word);
-			heredoc_addback(&head,new);
+			heredoc_addback(head, new);
 		}
 		line = line->next;
 	}
 }
 
-void _err_heredoc(char *m)
+void	_err_heredoc(char *m)
 {
-	printf("%s: warning: here-document at line 3 delimited by end-of-file (wanted `EOF')\n",m);
+	printf("%s: warning: here-document at line 3 delimited by end-of-file (wanted `EOF')\n",
+			m);
 }
 
-void	heredoc_start(int fd,t_h *head)
+void	heredoc_start(int fd, char *eof)
 {
-	char *line;
-	while(1)
+	char	*line;
+
+	while (1)
 	{
 		line = readline(">");
-		if(line == NULL)
-			_err_heredoc("minishell");
-		if(strncmp(head->e,line) == 0)
+		if (line == NULL)
 		{
-			if(head->next == NULL)
-				break;
-			else
-				head = head->next;
+			_err_heredoc("minishell");
+			return ;
+		}
+		else if (strcmp(eof, line) == 0)
+		{
+			free(line);
+			break ;
 		}
 		dprintf(fd, "%s\n", line);
+		free(line);
 	}
-
 }
-
-int	heredoc(t_node *node)
+static t_fd	*new_fd(void)
 {
-	int	fd;
-	t_h *head;
+	t_fd	*new;
 
-	head = NULL;
-	heredoc_eof(node->line,head);
-	if(head ==NULL)
-		return 0;
-	fd = open_heredocfile();
-	heredoc_start(fd,head);
-	dup2(fd,0);
-	close(fd);
+	new = calloc(1, sizeof(t_fd));
+	if (new == NULL)
+		_err("malloc");
+	new->std_fd = -1;
+	new->file = -1;
+	new->file_new = -1;
+	new->std_fd_new = -1;
+	return (new);
 }
+
+t_fd	*heredoc(char *eof)
+{
+	t_fd	*new;
+
+	new = new_fd();
+	new->file = open_heredocfile();
+	heredoc_start(new->file, eof);
+	new->std_fd = 0;
+	return (new);
+}
+
+// int	heredoc(t_node *node)
+// {
+// 	int	fd;
+// 	t_h	*head;
+
+// 	head = NULL;
+// 	heredoc_eof(node->line, &head);
+// 	if (head == NULL)
+// 		return (0);
+// 	fd = open_heredocfile();
+// 	heredoc_start(fd, head);
+// 	dup2(fd, 0);
+// 	// close(fd);
+// 	return (0);
+// }

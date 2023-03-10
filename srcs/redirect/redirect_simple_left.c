@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_simple_left.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/09 18:07:49 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/10 14:21:26 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,15 @@ t_fd	*redirect_left(t_line *line)
 	{
 		if (line->type == T_EOF_R)
 			break ;
-		if (line->type == REDIRECT && (strncmp(line->token->word, "<<", 2) != 0)
-			&& !strncmp(line->token->word, "<", 1))
+		if (line->type == REDIRECT && (!strncmp(line->token->word, "<<", 2)))
+		{
+			// fd = close_file(fd);
+			// fd = open_file(line->next->token->word);
+			fd = close_file(fd);
+			line = line->next;
+			fd = heredoc(line->token->word);
+		}
+		else if (line->type == REDIRECT && !strncmp(line->token->word, "<", 1))
 		{
 			fd = close_file(fd);
 			fd = open_file(line->next->token->word);
