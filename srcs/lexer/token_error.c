@@ -6,14 +6,11 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:06:46 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/06 11:56:21 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 14:49:44 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// bool	g_syntax_err = false;
-extern int exit_status;
 
 bool	_err_syntax(char *mes)
 {
