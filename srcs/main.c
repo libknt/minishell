@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/03/06 14:49:08 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 18:43:01 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exit_status;
+int	exit_status = 5;
 void	print_env1(t_env *env)
 {
 	while (1)
@@ -56,12 +56,6 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		if (*line)
 			add_history(line);
-		if (strcmp(line, "echo $?") == 0)
-		{
-			printf("%d\n", exit_status);
-			free(line);
-			continue ;
-		}
 		token = lexer(&line, env);
 		if (token == NULL)
 			continue ;

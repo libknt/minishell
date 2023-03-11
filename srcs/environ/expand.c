@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <masadevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/03/10 00:36:13 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/11 18:48:23 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <string.h>
 
+extern int exit_status;
 //brace expansion
 
 //tilde expansion
@@ -49,6 +50,8 @@ ssize_t	vari_end(char *line)
 
 	if (!line)
 		return (-1);
+	if (*line == '?')
+		return (1);
 	i = 0;
 	if (isdigit(line[i]))
 		return (1);
@@ -123,6 +126,8 @@ char	*find_env(char *str, t_env *env)
 {
 	char	*env_value;
 
+	if(*str == '?')
+		return (ft_itoa(exit_status));
 	while (env)
 	{
 		if (!strcmp(env->key, str))
