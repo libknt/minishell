@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 02:12:45 by marai             #+#    #+#             */
-/*   Updated: 2023/03/11 18:47:31 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/11 19:22:20 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_itoa(int n)
 	}
 	dst = malloc(sizeof(char) * (digit + 1));
 	if (dst == NULL)
-		return (NULL);
+		_err_malloc();
 	dst[digit] = '\0';
 	if (n == 0)
 		dst[0] = '0';

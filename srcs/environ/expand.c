@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/03/11 18:48:23 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/11 19:22:58 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <string.h>
 
-extern int exit_status;
+extern int	exit_status;
 //brace expansion
 
 //tilde expansion
@@ -88,7 +88,7 @@ ssize_t	calc_expand_len(char *line, t_env *env, ssize_t len)
 	end = vari_end(line);
 	str = calloc(end + 1, sizeof(char));
 	if (str == NULL)
-		return (-1);
+		_err_malloc();
 	ft_strlcpy(str, line, end + 1);
 	len = len - end + find_env_len(str, env) - 1;
 	free(str);
@@ -126,13 +126,15 @@ char	*find_env(char *str, t_env *env)
 {
 	char	*env_value;
 
-	if(*str == '?')
+	if (*str == '?')
 		return (ft_itoa(exit_status));
 	while (env)
 	{
 		if (!strcmp(env->key, str))
 		{
 			env_value = strdup(env->value);
+			if (!env_value)
+				_err_malloc();
 			return (env_value);
 		}
 		env = env->next;
@@ -149,7 +151,7 @@ ssize_t	make_expand(char *expanded, char *line, t_env *env)
 	end = vari_end(line);
 	str = calloc(end + 1, sizeof(char));
 	if (str == NULL)
-		_err("calloc error\n");
+		_err_malloc();
 	ft_strlcpy(str, line, end + 1);
 	env_value = find_env(str, env);
 	if (env_value != NULL)
@@ -168,7 +170,7 @@ char	*vari_expand(char *line, t_env *env)
 	expanded_len = vari_expand_len(line, env);
 	expanded = calloc(expanded_len + 1, sizeof(char));
 	if (!expanded)
-		_err("calloc");
+		_err_malloc();
 	i = 0;
 	quote_counter = 0;
 	while (i < strlen(line))
@@ -205,7 +207,7 @@ char	*expand_quote(char *line)
 	len = strlen(line);
 	line2 = calloc(len + 1, sizeof(char));
 	if (!line2)
-		_err("calloc\n");
+		_err_malloc();
 	i = 0;
 	j = 0;
 	while (line[i])

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:57:09 by keys              #+#    #+#             */
-/*   Updated: 2023/03/10 16:29:04 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/11 19:13:32 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_putstr_fd(char *s, int fd)
+static void	ft_putstr_fd(char *s, int fd)
 {
 	size_t	len;
 
@@ -27,12 +27,6 @@ void	ft_putstr_fd(char *s, int fd)
 		write(fd, s, INT_MAX);
 		ft_putstr_fd(&s[INT_MAX], fd);
 	}
-}
-
-void	ft_putendl_fd(char *s, int fd)
-{
-	ft_putstr_fd(s, fd);
-	write(fd, "\n", 1);
 }
 
 bool	is_operation_n(char *argv)

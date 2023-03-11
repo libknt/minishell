@@ -105,7 +105,6 @@ void	expand(t_token *token);
 bool	token_error(t_token *token);
 void	tree_free(t_node *tree);
 bool	parse_err(t_node *node);
-bool	_err_syntax(char *mes);
 void	print_t(t_token *token);
 void	print_tree(t_node *node);
 void	print_n(t_node *node);
@@ -141,4 +140,6 @@ int	buildin(char *argv[], t_env **env);
 void	unset(char *argv[], t_env **env);
 int	cd(char *argv[], t_env *env);
 char	*ft_itoa(int n);
+bool	_err_syntax(char *m);
+int	_err_malloc(void);
 #endif

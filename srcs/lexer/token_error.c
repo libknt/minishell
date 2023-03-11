@@ -6,17 +6,11 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:06:46 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/11 15:01:34 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 19:02:08 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-bool	_err_syntax(char *mes)
-{
-	dprintf(STDERR_FILENO, "minishell: syntax error near %s\n", mes);
-	return (true);
-}
 
 bool	err_syntax(char *op)
 {

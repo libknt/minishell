@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/03/11 14:41:45 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 19:01:26 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ bool	make_token(char **line, t_data_t *d)
 			d->prompt = *line;
 			d->word = strndup(&d->prompt[d->i], d->len);
 			if (!d->word)
-				_err("malloc");
+				_err_malloc();
 			d->i += d->len;
 			d->token = new_token(d->word, find_type(d->word));
 			token_addback(&d->head, d->token);
