@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:36:46 by marai             #+#    #+#             */
-/*   Updated: 2023/03/10 00:30:21 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/12 02:20:12 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	unset(char *argv[], t_env **env)
+void	unset(char *argv[], t_env **env, t_status *s)
 {
 	ssize_t	i;
 	t_env	*env_node;
 
 	if (!argv)
 		return ;
+	s->f = true;
 	i = 1;
 	while (argv[i])
 	{
@@ -28,7 +29,7 @@ void	unset(char *argv[], t_env **env)
 			if (!strcmp(argv[i], env_node->key))
 			{
 				env_node->prev->next = env_node->next;
-				if(env_node->next)
+				if (env_node->next)
 					env_node->next->prev = env_node->prev;
 				free(env_node);
 			}
@@ -36,4 +37,5 @@ void	unset(char *argv[], t_env **env)
 		}
 		i++;
 	}
+	s->status = 0;
 }

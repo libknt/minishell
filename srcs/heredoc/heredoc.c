@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 19:01:20 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/11 20:57:54 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/12 02:46:54 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*open_heredocfile(t_fd **fds)
 	return (x);
 }
 
-void	heredoc_start(int fd, char *eof, t_env *env)
+void	heredoc_start(int fd, char *eof, t_env *env, t_node *node)
 {
 	char	*line;
 
@@ -67,19 +67,18 @@ void	heredoc_start(int fd, char *eof, t_env *env)
 		line = readline(">");
 		if (line == NULL)
 		{
-			// _err_heredoc("minishell");
+			node->status = 1;
+			write(1,"\n",1);
 			return ;
 		}
 		else if (strcmp(eof, line) == 0)
-		{
-			free(line);
 			break ;
-		}
 		line = vari_expand(line, env);
 		line = expand_quote(line);
 		dprintf(fd, "%s\n", line);
 		free(line);
 	}
+	free(line);
 }
 
 static t_fd	*new_fd(void)
@@ -88,7 +87,7 @@ static t_fd	*new_fd(void)
 
 	new = calloc(1, sizeof(t_fd));
 	if (new == NULL)
-		_err("malloc");
+		_err_malloc();
 	new->std_fd = -1;
 	new->file = -1;
 	new->file_new = -1;
@@ -96,7 +95,7 @@ static t_fd	*new_fd(void)
 	return (new);
 }
 
-t_fd	*heredoc(char *eof, t_env *env)
+t_fd	*heredoc(char *eof, t_env *env, t_node *node)
 {
 	t_fd	*new;
 	char	*x;
@@ -106,7 +105,9 @@ t_fd	*heredoc(char *eof, t_env *env)
 		x = open_heredocdir(&new);
 	else
 		x = open_heredocfile(&new);
-	heredoc_start(new->file, eof, env);
+	heredoc_start(new->file, eof, env, node);
+	if (node->status == 1)
+		return (new);
 	new->std_fd = 0;
 	close(new->file);
 	new->file = open(x, O_RDONLY, 0644);

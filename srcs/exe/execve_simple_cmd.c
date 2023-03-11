@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_simple_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/03/11 21:31:12 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/12 02:26:35 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	execve_simple_cmd(t_node *node, t_env *env)
 	envp = make_env_args(env);
 	redirect_adoption(node->fds);
 	argv = access_cmd_path(node, envp);
-	if (buildin(argv, &env))
+	if (buildin_simple(argv, &env))
 	{
 		ft_split_free(envp);
 		ft_split_free(argv);

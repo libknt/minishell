@@ -3,16 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/03/11 20:09:19 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/12 02:17:59 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
+typedef struct s_status		t_status;
+struct						s_status
+{
+	bool					f;
+	int						status;
+	char					*err_ms;
+};
 typedef struct s_fd			t_fd;
 struct						s_fd
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_filename.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:17:23 by keys              #+#    #+#             */
-/*   Updated: 2023/03/11 21:40:26 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/12 00:41:58 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,12 @@ char	*exec_filename(char *prompt, char **envp)
 	char	*pa;
 	char	*s;
 	char	**argv;
-	int		k;
 
 	if (*prompt == '\0')
 		return (NULL);
 	s = ft_strjoin("/", prompt);
 	if (!s)
 		_err_malloc();
-	k = 0;
 	pa = seach_path(envp);
 	if (!pa)
 		_err_malloc();

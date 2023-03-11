@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <masadevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:30:45 by marai             #+#    #+#             */
-/*   Updated: 2023/03/10 00:30:50 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/12 02:20:18 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ static char	**make_export_args(t_env *env)
 
 	num = env_num(env);
 	envp = calloc(num + 1, sizeof(char *));
+	if (!envp)
+		_err_malloc();
 	i = 0;
 	while (i < num)
 	{
@@ -84,7 +86,7 @@ static char	**make_export_args(t_env *env)
 		len = strlen(env->key) + value_len + 4;
 		envp[i] = calloc(len, sizeof(char));
 		if (!envp[i])
-			return (free_envp(envp, i));
+			_err_malloc();
 		ft_strlcat(envp[i], env->key, len);
 		if (env->value)
 		{
@@ -112,12 +114,13 @@ int	check_env_vari(char *argv)
 	return (1);
 }
 
-void	ft_export(char *argv[], t_env **env)
+void	ft_export(char *argv[], t_env **env, t_status *s)
 {
 	ssize_t	i;
 	char	**envp;
 	t_env	*env_node;
 
+	s->f = true;
 	if (!argv[1])
 	{
 		envp = make_export_args(*env);

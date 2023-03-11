@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:57:09 by keys              #+#    #+#             */
-/*   Updated: 2023/03/11 19:13:32 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/12 02:20:48 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	**operation_n(char **argv, bool *flag)
 	return (&argv[i]);
 }
 
-void	ft_echo(char **argv)
+void	ft_echo(char **argv,t_status *s)
 {
 	size_t	i;
 	bool	flag;
@@ -78,6 +78,7 @@ void	ft_echo(char **argv)
 	flag = 0;
 	i = 0;
 	argv++;
+	s->f = true;
 	argv = operation_n(argv, &flag);
 	while (1)
 	{
@@ -91,17 +92,3 @@ void	ft_echo(char **argv)
 	if (flag == false)
 		write(1, "\n", 1);
 }
-
-// int	main(int argc,char **argv)
-// {
-// 	(void)argc;
-// 	ft_echo(++argv, 1);
-// }
-// /*
-// -n test
-// -nnnnnnnn  test
-// -n -n test
-// -n-n test
-// ----n test
-// tewtt\ntest
-// */

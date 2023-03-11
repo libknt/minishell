@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buildin.c                                          :+:      :+:    :+:   */
+/*   buildin_simple.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:34:18 by marai             #+#    #+#             */
-/*   Updated: 2023/03/12 02:27:32 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/12 02:25:55 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //use strcmp
 #include "minishell.h"
-
 extern int	exit_status;
+
 static void	ft_putstr_fd(char *s, int fd)
 {
 	size_t	len;
@@ -37,53 +37,18 @@ static void	ft_putendl_fd(char *s, int fd)
 	write(fd, "\n", 1);
 }
 
-t_status	*new_status(void)
-{
-	t_status	*new;
-
-	new = calloc(1, sizeof(t_status));
-	if (!new)
-		_err_malloc();
-	return (new);
-}
-
-bool	is_buildin(char *str)
-{
-	if (!str)
-		return (false);
-	else if (!strcmp(str, "cd"))
-		return (true);
-	else if (!strcmp(str, "export"))
-		return (true);
-	else if (!strcmp(str, "env"))
-		return (true);
-	else if (!strcmp(str, "unset"))
-		return (true);
-	else if (!strcmp(str, "echo"))
-		return (true);
-	else if (!strcmp(str, "pwd"))
-		return (true);
-	else if (!strcmp(str, "exit"))
-		return (true);
-	return (false);
-}
-
-int	buildin_exit(t_status *s)
+int	buildin_return(t_status *s)
 {
 	if (s->f == false)
 		return (0);
-	else
-	{
-		exit_status = s->status;
-		if (s->status == 0)
-			exit(0);
-		ft_putendl_fd(s->err_ms, 2);
-		exit(s->status);
-	}
+	exit_status = s->status;
+	if (s->status == 0)
+		return (1);
+	ft_putendl_fd(s->err_ms, 2);
 	return (1);
 }
 
-int	buildin(char *argv[], t_env **env)
+int	buildin_simple(char *argv[], t_env **env)
 {
 	t_status	*s;
 
@@ -104,5 +69,5 @@ int	buildin(char *argv[], t_env **env)
 		ft_pwd(s);
 	else if (!strcmp(argv[0], "exit"))
 		ft_exit(argv, s);
-	return (buildin_exit(s));
+	return (buildin_return(s));
 }

@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:56 by keys              #+#    #+#             */
-/*   Updated: 2023/03/10 00:28:37 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/12 02:18:38 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-//strdup, strlen, strncmp, strcmp, memset
+
 #include "minishell.h"
 #define PATH_MAXLEN 4096
 
@@ -22,6 +22,8 @@ char	*get_home_dir(t_env *env)
 		if (!strcmp(env->key, "HOME"))
 		{
 			homepath = strdup(env->value);
+			if (!homepath)
+				_err_malloc();
 			return (homepath);
 		}
 		env = env->next;
@@ -57,12 +59,13 @@ char	*make_abs_path(char *path, char *argv, char *home)
 	return (path);
 }
 
-int	cd(char *argv[], t_env *env)
+int	cd(char *argv[], t_env *env, t_status *s)
 {
 	char	path[PATH_MAXLEN];
 	char	*home;
 	int		status;
 
+	s->f = true;
 	home = get_home_dir(env);
 	if (home == NULL)
 		_err("HOME not set\n");

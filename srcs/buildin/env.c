@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <masadevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:31:08 by marai             #+#    #+#             */
-/*   Updated: 2023/03/10 00:31:10 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/12 02:20:33 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-//strlen, 
+
 #include "minishell.h"
 
 bool	check_eql(char *str)
@@ -38,6 +38,8 @@ char	**make_env_args(t_env *env)
 
 	num = env_num(env);
 	envp = calloc(num + 1, sizeof(char *));
+	if (!envp)
+		_err_malloc();
 	i = 0;
 	while (i < num)
 	{
@@ -48,7 +50,7 @@ char	**make_env_args(t_env *env)
 		len = strlen(env->key) + value_len + 2;
 		envp[i] = calloc(len, sizeof(char));
 		if (!envp[i])
-			return (free_envp(envp, i));
+			_err_malloc();
 		ft_strlcat(envp[i], env->key, len);
 		if (env->value)
 		{
@@ -62,7 +64,7 @@ char	**make_env_args(t_env *env)
 	return (envp);
 }
 
-void	env_buildin(char *argv[], t_env *env)
+void	env_buildin(char *argv[], t_env *env, t_status *s)
 {
 	char	**envp;
 	int		pid;
@@ -71,6 +73,7 @@ void	env_buildin(char *argv[], t_env *env)
 	ssize_t	i;
 
 	i = 0;
+	s->f = true;
 	if (!argv || !argv[0])
 		return ;
 	else if (!argv[1])
@@ -103,4 +106,5 @@ void	env_buildin(char *argv[], t_env *env)
 	}
 	else
 		wait(&status);
+	s->status = status;
 }

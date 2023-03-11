@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_left.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/11 20:42:05 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/12 02:41:23 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_fd	*open_file(t_node *node, char *name)
 	new = new_fd();
 	new->file = open(name, O_RDONLY, 0644);
 	if (new->file < 0)
-		return _err_nofile(node, name);
+		return (_err_nofile(node, name));
 	new->std_fd = 0;
 	return (new);
 }
@@ -61,7 +61,12 @@ t_fd	*redirect_left(t_node *node, t_line *line, t_env *env)
 		{
 			fd = close_file(fd);
 			line = line->next;
-			fd = heredoc(line->token->word, env);
+			fd = heredoc(line->token->word, env, node);
+			if (node->status == 1)
+			{
+				fd = close_file(fd);
+				return (NULL);
+			}
 		}
 		else if (line->type == REDIRECT && !strncmp(line->token->word, "<", 1))
 		{
