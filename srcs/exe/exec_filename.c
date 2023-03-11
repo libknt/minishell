@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:17:23 by keys              #+#    #+#             */
-/*   Updated: 2023/03/11 16:04:55 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 21:40:26 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,14 @@ static char	*access_check(char **argv, char *s)
 	{
 		pa = argv[k];
 		argv[k] = ft_strjoin(pa, s);
+		if (!argv[k])
+			_err_malloc();
 		free(pa);
 		if (access(argv[k], X_OK) == 0)
 		{
 			pa = strdup(argv[k]);
+			if (!pa)
+				_err_malloc();
 			ft_split_free(argv);
 			free(s);
 			return (pa);
@@ -61,10 +65,12 @@ char	*exec_filename(char *prompt, char **envp)
 	if (*prompt == '\0')
 		return (NULL);
 	s = ft_strjoin("/", prompt);
+	if (!s)
+		_err_malloc();
 	k = 0;
 	pa = seach_path(envp);
 	if (!pa)
-		return (NULL);
+		_err_malloc();
 	argv = ft_split(pa, ':');
 	free(pa);
 	return (access_check(argv, s));

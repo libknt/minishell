@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 15:30:10 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/11 15:38:33 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 21:48:38 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *s1)
 	len = strlen(s1);
 	p = (char *)malloc(sizeof(char) * (len + 1));
 	if (p == NULL)
-		return (NULL);
+		_err_malloc();
 	else
 		memmove(p, s1, len);
 	memset(p + len, '\0', 1);
@@ -58,7 +58,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = strlen(s + start);
 	ans = (char *)malloc(sizeof(char) * (len + 1));
 	if (!ans)
-		return (NULL);
+		_err_malloc();
 	ft_strlcpy(ans, s + start, len + 1);
 	return (ans);
 }
@@ -98,7 +98,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	len_s2 = strlen(s2);
 	p = malloc(len_s1 + len_s2 + 1);
 	if (!p)
-		return (NULL);
+		_err_malloc();
 	ft_strlcpy(p, s1, len_s1 + 1);
 	ft_strlcat(p, s2, len_s1 + len_s2 + 1);
 	return (p);

@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 19:01:20 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/11 14:55:55 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 20:57:54 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	heredoc_start(int fd, char *eof, t_env *env)
 		line = readline(">");
 		if (line == NULL)
 		{
-			_err_heredoc("minishell");
+			// _err_heredoc("minishell");
 			return ;
 		}
 		else if (strcmp(eof, line) == 0)

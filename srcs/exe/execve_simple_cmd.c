@@ -6,11 +6,13 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/03/11 17:26:16 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 21:31:12 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	exit_status;
 
 static int	execve_cmd(char **argv, char **envp, t_node *node)
 {
@@ -20,15 +22,16 @@ static int	execve_cmd(char **argv, char **envp, t_node *node)
 	if (access(argv[0], X_OK))
 	{
 		node->fds = revert_redirect(node->fds);
-		_err_cmd_node_found("command not found");
+		_err_cmd_not_found(argv[0]);
 		return (-2);
 	}
 	pid = fork();
 	if (pid < 0)
-		_err("fork");
+		_err_fork();
 	else if (pid == 0)
 		execve(argv[0], argv, envp);
 	wait(&waitstatus);
+	exit_status = waitstatus;
 	return (waitstatus);
 }
 
@@ -45,7 +48,7 @@ int	execve_simple_cmd(t_node *node, t_env *env)
 		ft_split_free(envp);
 		ft_split_free(argv);
 		node->fds = revert_redirect(node->fds);
-		return (1);
+		return (0);
 	}
 	if (execve_cmd(argv, envp, node) < 0)
 		return (1);

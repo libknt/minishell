@@ -6,13 +6,13 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/03/11 18:52:01 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 21:13:55 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exit_status;
+int		exit_status;
 void	print_env1(t_env *env)
 {
 	while (1)
@@ -57,6 +57,7 @@ int	main(int argc, char **argv, char **envp)
 		if (*line)
 			add_history(line);
 		token = lexer(&line, env);
+		exit_status = 0;
 		if (token == NULL)
 			continue ;
 		tree = parser(token, line);

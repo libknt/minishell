@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:55:38 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/11 17:24:41 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 21:36:16 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	command_found(char **argv, char **envp)
 {
 	if (access(argv[0], X_OK) && !is_buildin(argv[0]))
 	{
-		_err_cmd_node_found("command not found");
+		_err_cmd_not_found(argv[0]);
 		ft_split_free(envp);
 		return (1);
 	}
@@ -68,7 +68,7 @@ int	exec(t_node *node, t_env *env, int fd1)
 	pipe(rw);
 	pid = fork();
 	if (pid < 0)
-		_err("fork");
+		_err_fork();
 	else if (pid == 0)
 	{
 		close_pipe(node, rw, fd1);

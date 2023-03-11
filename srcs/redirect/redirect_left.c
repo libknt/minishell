@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/11 15:06:11 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 20:42:05 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_fd	*new_fd(void)
 
 	new = calloc(1, sizeof(t_fd));
 	if (new == NULL)
-		_err("malloc");
+		_err_malloc();
 	new->std_fd = -1;
 	new->file = -1;
 	new->file_new = -1;
@@ -36,19 +36,19 @@ static void	*close_file(t_fd *fd)
 	return (NULL);
 }
 
-static t_fd	*open_file(char *name)
+static t_fd	*open_file(t_node *node, char *name)
 {
 	t_fd	*new;
 
 	new = new_fd();
 	new->file = open(name, O_RDONLY, 0644);
 	if (new->file < 0)
-		printf("%s: No such file or directory\n", name);
+		return _err_nofile(node, name);
 	new->std_fd = 0;
 	return (new);
 }
 
-t_fd	*redirect_left(t_line *line, t_env *env)
+t_fd	*redirect_left(t_node *node, t_line *line, t_env *env)
 {
 	t_fd	*fd;
 
@@ -66,7 +66,9 @@ t_fd	*redirect_left(t_line *line, t_env *env)
 		else if (line->type == REDIRECT && !strncmp(line->token->word, "<", 1))
 		{
 			fd = close_file(fd);
-			fd = open_file(line->next->token->word);
+			fd = open_file(node, line->next->token->word);
+			if (fd == NULL)
+				return (NULL);
 			line = line->next;
 		}
 		else if (line->type == REDIRECT)

@@ -6,16 +6,13 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 01:01:00 by marai             #+#    #+#             */
-/*   Updated: 2023/03/11 17:24:47 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 21:51:19 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	_err_cmd_node_found(char *mes)
-{
-	dprintf(STDERR_FILENO, "%s\n", mes);
-}
+extern int	exit_status;
 
 char	**access_cmd_path(t_node *node, char **envp)
 {
@@ -52,9 +49,10 @@ void	wait_process(void)
 				break ;
 			else if (EINTR == errno)
 				continue ;
-			_err("wait error");
+			_err_wait(status);
 		}
 	}
+	exit_status = status;
 }
 
 int	exec_tree(t_node *node, t_env *env)
@@ -70,7 +68,8 @@ int	exec_tree(t_node *node, t_env *env)
 	add_redirect(node, env);
 	while (node != NULL)
 	{
-		exec(node, env, fd1);
+		if (node->status != 1)
+			exec(node, env, fd1);
 		node = node->next;
 	}
 	wait_process();
@@ -84,6 +83,8 @@ int	exe_(t_node *node, t_env *env)
 	if (node->line->type != PIPE)
 	{
 		node->fds = redirect_check(node, env);
+		if (node->status == 1)
+			return (0);
 		execve_simple_cmd(node, env);
 	}
 	else

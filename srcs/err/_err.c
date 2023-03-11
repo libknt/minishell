@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 23:24:55 by keys              #+#    #+#             */
-/*   Updated: 2023/03/11 19:16:00 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 21:50:19 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,65 @@ int	_err_malloc(void)
 	exit(1);
 }
 
+int			_err_fork(void) __attribute__((noreturn));
+int	_err_fork(void)
+{
+	ft_putendl_fd("Fatal Error: fork.\n", STDERR_FILENO);
+	exit_status = 1;
+	exit(1);
+}
+
+int			_err_wait(int status) __attribute__((noreturn));
+int	_err_wait(int status)
+{
+	ft_putendl_fd("wait error\n", STDERR_FILENO);
+	exit_status = status;
+	exit(status);
+}
 /*lexer*/
 bool	_err_syntax(char *m)
 {
-	ft_putstr_fd("minishell: syntax error near ", STDERR_FILENO);
+	ft_putstr_fd("minishell: syntax error near unexpected token ",
+					STDERR_FILENO);
 	ft_putendl_fd(m, STDERR_FILENO);
 	exit_status = 258;
 	return (true);
+}
+/*parser*/
+void	_err_syntax_p(char *m, bool *r)
+{
+	*r = true;
+	exit_status = 258;
+	ft_putstr_fd("minishell: syntax error near unexpected token ",
+					STDERR_FILENO);
+	ft_putendl_fd(m, STDERR_FILENO);
+}
+
+void	_err_parse_p(char *m, bool *r)
+{
+	*r = true;
+	exit_status = 258;
+	ft_putstr_fd("minishell: parse error near unexpected token ",
+					STDERR_FILENO);
+	ft_putendl_fd(m, STDERR_FILENO);
+}
+
+void	*_err_nofile(t_node *node, char *m)
+{
+	exit_status = 1;
+	ft_putstr_fd("minishell:", STDERR_FILENO);
+	ft_putstr_fd(m, STDERR_FILENO);
+	ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+	node->status = 1;
+	return (NULL);
+}
+
+void	_err_cmd_not_found(char *m)
+{
+	ft_putstr_fd("minishell:", STDERR_FILENO);
+	ft_putstr_fd(m, STDERR_FILENO);
+	ft_putendl_fd(": command not found", STDERR_FILENO);
+	exit_status = 127;
 }
 
 /*

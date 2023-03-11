@@ -4,6 +4,7 @@
 # include "get_next_line.h"
 # include "struct.h"
 # include <ctype.h>
+# include <dirent.h>
 # include <err.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -21,12 +22,13 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
-#include <sys/types.h>
-#include <dirent.h>
 
-#define WRITE 1
-#define READ 0
-int	is_quote(char c);
+# define WRITE 1
+# define READ 0
+void	*_err_nofile(t_node *node, char *m);
+int		_err_fork(void);
+void	_err_cmd_not_found(char *m);
+int		is_quote(char c);
 bool	is_alpha_under(char c);
 bool	is_alpha_num_under(char c);
 bool	is_identifier(const char *s);
@@ -40,9 +42,8 @@ void	add_env(t_env **env, char *envp, size_t len);
 void	add_value(t_env **env, char *envp, size_t len);
 bool	is_heredocfile(void);
 void	_err_heredoc(char *m);
-int	exec(t_node *node, t_env *env, int fd1);
+int		exec(t_node *node, t_env *env, int fd1);
 char	**access_cmd_path(t_node *node, char **envp);
-void	_err_cmd_node_found(char *mes);
 char	*ft_rename(char *x);
 char	*ft_rename_dir(char *x);
 char	*ft_strdup(const char *s1);
@@ -51,14 +52,15 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	add_redirect(t_node *node, t_env *env);
+int		_err_wait(int status);
 
 /*redirect*/
 char	*expand_quote(char *line);
 char	*vari_expand(char *line, t_env *env);
 t_fds	*redirect_check(t_node *node, t_env *env);
 void	*revert_redirect(t_fds *fd);
-t_fd	*redirect_right(t_line *line);
-t_fd	*redirect_left(t_line *line, t_env *env);
+t_fd	*redirect_right(t_node *node, t_line *line);
+t_fd	*redirect_left(t_node *node, t_line *line, t_env *env);
 t_fd	*heredoc(char *eof, t_env *env);
 void	redirect_adoption(t_fds *fds);
 void	revert_redirect_pipe(t_fds *fd, int rw[2]);
@@ -84,8 +86,8 @@ t_node	*parser(t_token *token, char *line);
 t_line	*make_line(t_token *token);
 bool	find_redirect(t_token *token);
 t_node	**add_node(t_node *node);
-void	_err_parse_p(char *mes, bool *r);
-void	_err_syntax_p(char *mes, bool *r);
+void	_err_parse_p(char *m, bool *r);
+void	_err_syntax_p(char *m, bool *r);
 void	addline_utils(t_line **line, t_token *token, t_redirect type);
 void	line_addback(t_line **head, t_line *new);
 t_line	*newline(t_token *token, t_redirect type);
@@ -136,10 +138,10 @@ bool	is_identifier(const char *s);
 /*buildin*/
 bool	is_buildin(char *str);
 void	env_buildin(char *argv[], t_env *env);
-int	buildin(char *argv[], t_env **env);
+int		buildin(char *argv[], t_env **env);
 void	unset(char *argv[], t_env **env);
-int	cd(char *argv[], t_env *env);
+int		cd(char *argv[], t_env *env);
 char	*ft_itoa(int n);
 bool	_err_syntax(char *m);
-int	_err_malloc(void);
+int		_err_malloc(void);
 #endif

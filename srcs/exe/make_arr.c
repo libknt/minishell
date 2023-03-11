@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 14:21:21 by keys              #+#    #+#             */
-/*   Updated: 2023/03/10 01:02:10 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/11 21:38:33 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	push_arr(char **arr, t_line *line)
 		if (line->type == CMDLINE)
 		{
 			arr[i] = strdup(line->token->word);
+			if (!arr[i])
+				_err_malloc();
 			i++;
 		}
 		line = line->next;
@@ -57,7 +59,7 @@ char	**make_arr(t_node *node)
 	len = line_size(line);
 	arr = calloc(sizeof(char **), len + 1);
 	if (!arr)
-		_err("malloc");
+		_err_malloc();
 	push_arr(arr, line);
 	return (arr);
 }

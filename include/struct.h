@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/03/10 18:28:24 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/11 20:09:19 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ struct						s_line
 typedef struct s_node		t_node;
 struct						s_node
 {
+	int						status;
 	t_line					*line;
 	t_fds					*fds;
 	t_node					*left;

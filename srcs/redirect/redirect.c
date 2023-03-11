@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 17:58:29 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/11 15:48:52 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 20:43:09 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_fds	*new_fds(void)
 
 	new = calloc(1, sizeof(t_fds));
 	if (new == NULL)
-		_err("malloc");
+		_err_malloc();
 	new->fd_r = NULL;
 	new->fd_l = NULL;
 	return (new);
@@ -38,8 +38,13 @@ t_fds	*redirect_check(t_node *node, t_env *env)
 	t_fds	*fd;
 
 	fd = new_fds();
-	fd->fd_r = redirect_right(node->line);
-	fd->fd_l = redirect_left(node->line, env);
+	fd->fd_l = redirect_left(node, node->line, env);
+	if (node->status == 1)
+	{
+		free(fd);
+		return (NULL);
+	}
+	fd->fd_r = redirect_right(node, node->line);
 	if (fd->fd_r == NULL && fd->fd_l == NULL)
 	{
 		free(fd);

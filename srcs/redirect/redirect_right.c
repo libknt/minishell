@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/11 15:07:31 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 20:13:29 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_fd	*new_fd(void)
 
 	new = calloc(1, sizeof(t_fd));
 	if (new == NULL)
-		_err("malloc");
+		_err_malloc();
 	new->std_fd = -1;
 	new->file = -1;
 	new->file_new = -1;
@@ -56,11 +56,14 @@ static t_fd	*open_file_r(char *name)
 	return (new);
 }
 
-t_fd	*redirect_right(t_line *line)
+t_fd	*redirect_right(t_node *node, t_line *line)
 {
 	t_fd	*fd;
 
 	fd = NULL;
+	/////////
+	(void)node;
+	/////////
 	while (1)
 	{
 		if (line->type == T_EOF_R)
