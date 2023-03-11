@@ -3,22 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   _err.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 23:24:55 by keys              #+#    #+#             */
-/*   Updated: 2023/03/05 22:07:32 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/11 18:47:03 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int exit_status;
 void	_err(const char *e) __attribute__((noreturn));
 void	_err(const char *e)
 {
 	dprintf(STDERR_FILENO, "Fatal Error: %s\n", e);
 	exit_status = 1;
 	exit(127);
+}
+
+void	_err_malloc(const char *e) __attribute__((noreturn));
+void _err_malloc(const char *e)
+{
+
 }
 /*
 
