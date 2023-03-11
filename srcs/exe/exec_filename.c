@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:17:23 by keys              #+#    #+#             */
-/*   Updated: 2023/03/10 01:02:22 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/11 13:39:22 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,7 @@ char	*exec_filename(char *prompt, char **envp)
 	if (!pa)
 		return (NULL);
 	tmp = ft_split(pa, ':');
+	free(pa);
 	while (tmp[k])
 	{
 		pa = tmp[k];
