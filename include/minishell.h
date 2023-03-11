@@ -4,6 +4,8 @@
 # include "get_next_line.h"
 # include "struct.h"
 # include <ctype.h>
+# include <err.h>
+# include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
@@ -19,9 +21,20 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
-#include <err.h>
-#include <errno.h>
+#include <sys/types.h>
+#include <dirent.h>
 
+
+/*redirect*/
+char	*expand_quote(char *line);
+char	*vari_expand(char *line, t_env *env);
+t_fds	*redirect_check(t_node *node, t_env *env);
+void	*revert_redirect(t_fds *fd);
+t_fd	*redirect_right(t_line *line);
+t_fd	*redirect_left(t_line *line, t_env *env);
+t_fd	*heredoc(char *eof, t_env *env);
+void	redirect_adoption(t_fds *fds);
+void	revert_redirect_pipe(t_fds *fd, int rw[2]);
 
 void	ft_echo(char **argv);
 void	ft_exit(char **argv);
@@ -40,7 +53,7 @@ void	token_addback(t_token **head, t_token *new);
 t_token	*new_token(char *str, t_token_type type);
 
 /*parser*/
-t_node	*parser(t_token *token,char *line);
+t_node	*parser(t_token *token, char *line);
 t_line	*make_line(t_token *token);
 bool	find_redirect(t_token *token);
 t_node	**add_node(t_node *node);
@@ -50,10 +63,8 @@ void	addline_utils(t_line **line, t_token *token, t_redirect type);
 void	line_addback(t_line **head, t_line *new);
 t_line	*newline(t_token *token, t_redirect type);
 
-
 /*execve*/
-int	execve_simple_cmd(t_node *node, t_env *env);
-
+int		execve_simple_cmd(t_node *node, t_env *env);
 
 char	**ft_split(char const *s, char c);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
@@ -73,30 +84,24 @@ void	print_tree(t_node *node);
 void	print_n(t_node *node);
 
 char	**make_arr(t_node *node);
-void	_redirect_si(t_node *node);
-int		_redirect(t_node *node);
-void	restore_fd(t_node *node);
-int		here_documents(t_node *node);
 void	expand_token(t_token **token, t_env *env);
 // char	*get_next_line(int fd);
 
-int			exec_tree(t_node *node, t_env *env);
-int			exe_(t_node *node, t_env *env);
-void		set_signal(void);
-void		make_lstenv(t_env **s_env, char **envp);
-
+int		exec_tree(t_node *node, t_env *env);
+int		exe_(t_node *node, t_env *env);
+void	set_signal(void);
+void	make_lstenv(t_env **s_env, char **envp);
 
 void	print_line(t_line *line);
 void	print_split(char **t);
 void	print_t(t_token *token);
 
-
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-int	cd(char *argv[], t_env *env);
+int		cd(char *argv[], t_env *env);
 void	ft_env_addback(t_env **env, t_env *new);
 t_env	*new_lstenv(char *envp);
 void	ft_export(char *argv[], t_env **env);
-void		test(t_node *node);
+void	test(t_node *node);
 char	**make_env_args(t_env *env);
 ssize_t	env_num(t_env *env);
 char	**free_envp(char **envp, ssize_t len);

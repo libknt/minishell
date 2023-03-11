@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_simple_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/03/10 01:02:48 by marai            ###   ########.fr       */
+/*   Updated: 2023/03/10 18:50:06 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,22 @@ int	execve_simple_cmd(t_node *node, t_env *env)
 	char	**envp;
 	pid_t	pid;
 	int		waitstatus;
+	// t_fds	*fd;
 
-	;
 	envp = make_env_args(env);
+	redirect_adoption(node->fds);
 	argv = access_cmd_path(node, envp);
 	//make build in masahito
 	if (buildin(argv, &env))
 	{
 		ft_split_free(envp);
 		ft_split_free(argv);
+		node->fds =revert_redirect(node->fds);
 		return (1);
 	}
 	if (access(argv[0], X_OK))
 	{
+		node->fds = revert_redirect(node->fds);
 		_err_cmd_node_found("command not found");
 		return (1);
 	}
@@ -68,6 +71,7 @@ int	execve_simple_cmd(t_node *node, t_env *env)
 	else if (pid == 0)
 		execve(argv[0], argv, envp);
 	wait(&waitstatus);
+	node->fds = revert_redirect(node->fds);
 	ft_split_free(argv);
 	ft_split_free(envp);
 	return (WEXITSTATUS(waitstatus));

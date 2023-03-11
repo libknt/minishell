@@ -6,12 +6,28 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/03/04 22:33:19 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/10 18:28:24 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+typedef struct s_fd			t_fd;
+struct						s_fd
+{
+	int						std_fd;
+	int						file;
+	int						file_new;
+	int						std_fd_new;
+};
+typedef struct s_fds		t_fds;
+struct						s_fds
+{
+	t_fd					*fd_r;
+	t_fd					*fd_l;
+};
+
 typedef enum e_token_type	t_token_type;
 enum						e_token_type
 {
@@ -69,19 +85,11 @@ struct						s_line
 	t_line					*next;
 };
 
-typedef struct s_fd			t_fd;
-struct						s_fd
-{
-	int						fd;
-	int						oldfd;
-	int						newfd;
-};
-
 typedef struct s_node		t_node;
 struct						s_node
 {
-	t_fd					*fd;
 	t_line					*line;
+	t_fds					*fds;
 	t_node					*left;
 	t_node					*right;
 	t_node					*next;
