@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+extern int exit_status;
 void	_err(const char *e) __attribute__((noreturn));
 void	_err(const char *e)
 {

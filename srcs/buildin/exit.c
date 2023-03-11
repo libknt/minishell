@@ -6,17 +6,11 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 22:45:28 by keys              #+#    #+#             */
-/*   Updated: 2023/03/06 09:49:46 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/10 16:35:21 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "minishell.h"
-#include <limits.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
+#include "minishell.h"
 
 void	ft_exit(char **argv)
 {
@@ -40,22 +34,7 @@ void	ft_exit(char **argv)
 	else
 	{
 		i = atol(argv[1]);
-		while (1)
-		{
-			if (i > 255)
-				i -= 256;
-			else
-				break ;
-		}
+		i = i % 256;
 		exit(i);
 	}
 }
-
-// int	main(int argc, char **argv)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	argv++;
-// 	ft_exit(argv);
-// }

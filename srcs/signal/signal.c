@@ -13,6 +13,7 @@
 #include "minishell.h"
 #include <signal.h>
 
+extern int exit_status;
 void	ctr_c(int sig)
 {
 	(void)sig;

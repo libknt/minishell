@@ -24,7 +24,6 @@
 #include <sys/types.h>
 #include <dirent.h>
 
-int		exit_status;
 
 /*redirect*/
 char	*expand_quote(char *line);
@@ -37,6 +36,8 @@ t_fd	*heredoc(char *eof, t_env *env);
 void	redirect_adoption(t_fds *fds);
 void	revert_redirect_pipe(t_fds *fd, int rw[2]);
 
+void	ft_echo(char **argv);
+void	ft_exit(char **argv);
 /*lexer */
 t_token	*lexer(char **line, t_env *env);
 /*lexer utils auote*/
@@ -67,7 +68,7 @@ int		execve_simple_cmd(t_node *node, t_env *env);
 
 char	**ft_split(char const *s, char c);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-char	*exec_filename(char *prompt);
+char	*exec_filename(char *prompt, char **envp);
 void	_err(const char *e);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_split_free(char **dst);
@@ -104,9 +105,12 @@ void	test(t_node *node);
 char	**make_env_args(t_env *env);
 ssize_t	env_num(t_env *env);
 char	**free_envp(char **envp, ssize_t len);
+/*expand*/
+bool	is_identifier(const char *s);
 /*buildin*/
 bool	is_buildin(char *str);
 void	env_buildin(char *argv[], t_env *env);
-int		buildin(char *argv[], t_env **env);
-int		cd(char *argv[], t_env *env);
+int	buildin(char *argv[], t_env **env);
+void	unset(char *argv[], t_env **env);
+int	cd(char *argv[], t_env *env);
 #endif

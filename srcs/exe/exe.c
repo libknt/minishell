@@ -1,12 +1,12 @@
-/* ************************************************************************* */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: marai <masadevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 14:58:36 by keys              #+#    #+#             */
-/*   Updated: 2023/03/09 10:07:26 by marai            ###   ########.fr       */
+/*   Created: 2023/03/10 01:01:00 by marai             #+#    #+#             */
+/*   Updated: 2023/03/10 01:01:17 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 #define WRITE 1
 #define READ 0
 
+extern int	exit_status;
+
 static void	_err_cmd_node_found(char *mes)
 {
 	exit_status = 127;
 	dprintf(STDERR_FILENO, "%s\n", mes);
 }
 
-static char	**access_cmd_path(t_node *node)
+static char	**access_cmd_path(t_node *node, char **envp)
 {
 	char	*cmd_path;
 	char	**argv;
@@ -31,7 +33,7 @@ static char	**access_cmd_path(t_node *node)
 	{
 		cmd_path = NULL;
 		if (!is_buildin(argv[0]))
-			cmd_path = exec_filename(argv[0]);
+			cmd_path = exec_filename(argv[0], envp);
 		if (cmd_path != NULL)
 		{
 			free(argv[0]);
@@ -51,7 +53,8 @@ int	exec(t_node *node, t_env *env, int fd1)
 	if (!node)
 		return (0);
 	envp = make_env_args(env);
-	argv = access_cmd_path(node);
+	argv = access_cmd_path(node, envp);
+ 
 	redirect_adoption(node->fds);
 	pipe(rw);
 	//make buold in masahito
@@ -141,8 +144,10 @@ int	exec_tree(t_node *node, t_env *env)
 	int	fd0;
 	int	fd1;
 
-	fd0 = fcntl(0, F_DUPFD, 10);
-	fd1 = fcntl(1, F_DUPFD, 10);
+	//fd0 = fcntl(0, F_DUPFD, 10);
+	//fd1 = fcntl(1, F_DUPFD, 10);
+	fd0 = dup(0);
+	fd1 = dup(1);
 	add_node(node);
 	while (node && node->line->type == PIPE)
 		node = node->left;

@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marai <masadevs@gmail.com>                 +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/10 00:31:08 by marai             #+#    #+#             */
+/*   Updated: 2023/03/10 00:31:10 by marai            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+//strlen, 
 #include "minishell.h"
 
-bool check_eql(char *str)
+bool	check_eql(char *str)
 {
 	ssize_t	i;
 
 	if (!str)
 		return (false);
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == '=')
 			return (true);
@@ -21,7 +33,7 @@ char	**make_env_args(t_env *env)
 	ssize_t	i;
 	ssize_t	num;
 	ssize_t	len;
-	ssize_t value_len;
+	ssize_t	value_len;
 	char	**envp;
 
 	num = env_num(env);
@@ -59,14 +71,14 @@ void	env_buildin(char *argv[], t_env *env)
 	ssize_t	i;
 
 	i = 0;
-	if(!argv || !argv[0])
+	if (!argv || !argv[0])
 		return ;
-	else if(!argv[1])
+	else if (!argv[1])
 	{
 		envp = make_env_args(env);
-		while(envp && envp[i] && env)
+		while (envp && envp[i] && env)
 		{
-			if(env->value)
+			if (env->value)
 				printf("%s\n", envp[i]);
 			i++;
 			env = env->next;
@@ -74,10 +86,10 @@ void	env_buildin(char *argv[], t_env *env)
 		return ;
 	}
 	pid = fork();
-	if(pid == 0)
+	if (pid == 0)
 	{
 		i = 1;
-		while(argv[i])
+		while (argv[i])
 		{
 			if (check_eql(argv[i]))
 				_err("invalid error\n");
@@ -92,4 +104,3 @@ void	env_buildin(char *argv[], t_env *env)
 	else
 		wait(&status);
 }
-

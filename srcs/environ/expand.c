@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marai <masadevs@gmail.com>                 +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
+/*   Updated: 2023/03/10 00:36:13 by marai            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include <string.h>
 
@@ -24,7 +36,7 @@ bool	is_identifier(const char *s)
 	s++;
 	while (*s)
 	{
-		if (!is_alpha_num_under(*s))
+		if (!is_alpha_num_under(*s) && *s != '=')
 			return (false);
 		s++;
 	}
@@ -38,6 +50,8 @@ ssize_t	vari_end(char *line)
 	if (!line)
 		return (-1);
 	i = 0;
+	if (isdigit(line[i]))
+		return (1);
 	if (!is_alpha_under(line[i]))
 		return (0);
 	i++;
