@@ -1,0 +1,22 @@
+fkjs
+fjdsgfskg
+fsjfekfj
+total 176
+drwxr-xr-x  16 kyoda  2020    544  3 11 14:35 .
+drwxr-xr-x   9 kyoda  2020    306  3 11 14:34 ..
+drwxr-xr-x  12 kyoda  2020    408  3 11 14:34 .git
+drwxr-xr-x  12 kyoda  2020    408  3 11 14:38 .heredoc
+drwxr-xr-x   3 kyoda  2020    102  3 11 14:34 .vscode
+-rw-r--r--   1 kyoda  2020    869  3 11 14:36 1.txt
+-rw-r--r--   1 kyoda  2020   1550  3 11 14:34 Makefile
+drwxr-xr-x   5 kyoda  2020    170  3 11 14:34 include
+-rwxr-xr-x   1 kyoda  2020     47  3 11 14:34 leak.sh
+-rwxr-xr-x   1 kyoda  2020  41804  3 11 14:34 minishell
+drwxr-xr-x   3 kyoda  2020    102  3 11 14:34 obj
+drwxr-xr-x  14 kyoda  2020    476  3 11 14:34 srcs
+-rw-r--r--   1 kyoda  2020  21652  3 11 14:34 tags
+-rw-r--r--   1 kyoda  2020   1484  3 11 14:34 test
+-rw-r--r--   1 kyoda  2020    575  3 11 14:34 test.sh
+drwxr-xr-x   8 kyoda  2020    272  3 11 14:34 tmp
+
+

@@ -28,3 +28,25 @@ drwxr-xr-x  14 kyoda  2020    476  3 11 13:15 srcs
 -rw-r--r--   1 kyoda  2020    742  3 11 13:16 test
 -rw-r--r--   1 kyoda  2020    575  3 11 13:15 test.sh
 drwxr-xr-x   8 kyoda  2020    272  3 11 13:15 tmp
+1.txt
+Makefile
+include
+leak.sh
+minishell
+obj
+srcs
+tags
+test
+test.sh
+tmp
+1.txt
+Makefile
+include
+leak.sh
+minishell
+obj
+srcs
+tags
+test
+test.sh
+tmp

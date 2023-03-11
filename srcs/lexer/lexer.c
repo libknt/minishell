@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/03/06 14:48:57 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 14:41:45 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,10 @@ t_token	*lexer(char **line, t_env *env)
 	t_token		*token;
 
 	if (!*line[0])
+	{
+		free(*line);
 		return (NULL);
+	}
 	token = NULL;
 	memset(&data, 0, sizeof(t_data_t));
 	data.prompt = *line;
