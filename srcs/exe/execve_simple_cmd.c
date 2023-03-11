@@ -6,36 +6,11 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/03/11 17:02:47 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 17:26:16 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// static void	_err_cmd_node_found(char *mes)
-// {
-// 	dprintf(STDERR_FILENO, "%s\n", mes);
-// }
-
-// static char	**access_cmd_path(t_node *node, char **envp)
-// {
-// 	char	*cmd_path;
-// 	char	**argv;
-
-// 	argv = make_arr(node);
-// 	if (access(argv[0], X_OK) != 0)
-// 	{
-// 		cmd_path = NULL;
-// 		if (!is_buildin(argv[0]))
-// 			cmd_path = exec_filename(argv[0], envp);
-// 		if (cmd_path != NULL)
-// 		{
-// 			free(argv[0]);
-// 			argv[0] = cmd_path;
-// 		}
-// 	}
-// 	return (argv);
-// }
 
 static int	execve_cmd(char **argv, char **envp, t_node *node)
 {

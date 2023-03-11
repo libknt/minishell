@@ -26,6 +26,18 @@
 
 #define WRITE 1
 #define READ 0
+int	is_quote(char c);
+bool	is_alpha_under(char c);
+bool	is_alpha_num_under(char c);
+bool	is_identifier(const char *s);
+ssize_t	vari_end(char *line);
+char	*find_env(char *str, t_env *env);
+ssize_t	find_env_len(char *str, t_env *env);
+ssize_t	calc_expand_len(char *line, t_env *env, ssize_t len);
+ssize_t	vari_expand_len(char *line, t_env *env);
+size_t	env_len(char *envp);
+void	add_env(t_env **env, char *envp, size_t len);
+void	add_value(t_env **env, char *envp, size_t len);
 bool	is_heredocfile(void);
 void	_err_heredoc(char *m);
 int	exec(t_node *node, t_env *env, int fd1);
