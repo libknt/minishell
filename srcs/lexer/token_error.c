@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:06:46 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/11 14:49:44 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 15:01:34 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 bool	_err_syntax(char *mes)
 {
-	exit_status = 2;
 	dprintf(STDERR_FILENO, "minishell: syntax error near %s\n", mes);
 	return (true);
 }

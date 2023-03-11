@@ -24,6 +24,10 @@
 #include <sys/types.h>
 #include <dirent.h>
 
+bool	is_heredocfile(void);
+void	_err_heredoc(char *m);
+char	*ft_rename(char *x);
+char	*ft_rename_dir(char *x);
 
 /*redirect*/
 char	*expand_quote(char *line);

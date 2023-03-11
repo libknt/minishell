@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_right.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/10 18:30:54 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/11 15:07:31 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static t_fd	*open_file_rr(char *name)
 	new->std_fd = 1;
 	return (new);
 }
+
 static t_fd	*open_file_r(char *name)
 {
 	t_fd	*new;
@@ -78,7 +79,5 @@ t_fd	*redirect_right(t_line *line)
 			line = line->next;
 		line = line->next;
 	}
-	// dup_redirect(fd);
 	return (fd);
 }
-

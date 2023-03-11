@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_adoption.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 18:29:09 by keys              #+#    #+#             */
-/*   Updated: 2023/03/10 18:49:40 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/11 15:05:07 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ static void	dup_redirect(t_fd *fd)
 	close(fd->file_new);
 }
 
-void redirect_adoption(t_fds *fds)
+void	redirect_adoption(t_fds *fds)
 {
-	if(fds == NULL)
-		return;
+	if (fds == NULL)
+		return ;
 	dup_redirect(fds->fd_l);
 	dup_redirect(fds->fd_r);
 }

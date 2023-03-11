@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 14:53:32 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/11 14:55:29 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 15:04:42 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	_err_heredoc(char *m)
 {
-	printf("%s: warning: here-document at line 3 delimited by end-of-file (wanted `EOF')\n",
-			m);
+	printf("%s: warning: wanted `EOF'\n", m);
 }
 
 bool	is_heredoc(t_line *line)
@@ -67,7 +66,7 @@ char	*ft_rename_dir(char *x)
 
 bool	is_heredocfile(void)
 {
-	DIR *d;
+	DIR	*d;
 
 	d = opendir(".heredoc");
 	if (d == NULL)

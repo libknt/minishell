@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_left.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/10 18:30:09 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/11 15:06:11 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ static t_fd	*open_file(char *name)
 	return (new);
 }
 
-
-t_fd	*redirect_left(t_line *line,t_env *env)
+t_fd	*redirect_left(t_line *line, t_env *env)
 {
 	t_fd	*fd;
 
@@ -60,11 +59,9 @@ t_fd	*redirect_left(t_line *line,t_env *env)
 			break ;
 		if (line->type == REDIRECT && (!strncmp(line->token->word, "<<", 2)))
 		{
-			// fd = close_file(fd);
-			// fd = open_file(line->next->token->word);
 			fd = close_file(fd);
 			line = line->next;
-			fd = heredoc(line->token->word,env);
+			fd = heredoc(line->token->word, env);
 		}
 		else if (line->type == REDIRECT && !strncmp(line->token->word, "<", 1))
 		{
@@ -76,26 +73,5 @@ t_fd	*redirect_left(t_line *line,t_env *env)
 			line = line->next;
 		line = line->next;
 	}
-	// dup_redirect(fd);
 	return (fd);
 }
-
-// t_fd	*redirect_check(t_node *node)
-// {
-// 	t_fd	*fd;
-
-// 	fd = redirect(node->line);
-// 	return (fd);
-// }
-
-// void	revert_redirect(t_fd *fd)
-// {
-// 	if (fd == NULL)
-// 		return ;
-// 	dup2(fd->std_fd, fd->file_new);
-// 	close(fd->file_new);
-// 	dup2(fd->std_fd_new, fd->std_fd);
-// 	close(fd->std_fd_new);
-// 	close(fd->file);
-// 	free(fd);
-// }
