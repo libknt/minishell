@@ -1,0 +1,30 @@
+total 112
+drwxr-xr-x  14 kyoda  2020    476  3 11 13:16 .
+drwxr-xr-x   9 kyoda  2020    306  3 11 13:15 ..
+drwxr-xr-x  12 kyoda  2020    408  3 11 13:15 .git
+drwxr-xr-x   2 kyoda  2020     68  3 11 13:15 .heredoc
+drwxr-xr-x   3 kyoda  2020    102  3 11 13:15 .vscode
+-rw-r--r--   1 kyoda  2020   1550  3 11 13:15 Makefile
+drwxr-xr-x   5 kyoda  2020    170  3 11 13:15 include
+-rw-r--r--   1 kyoda  2020     47  3 11 13:15 leak.sh
+-rwxr-xr-x   1 kyoda  2020  41388  3 11 13:15 minishell
+drwxr-xr-x   3 kyoda  2020    102  3 11 13:15 obj
+drwxr-xr-x  14 kyoda  2020    476  3 11 13:15 srcs
+-rw-r--r--   1 kyoda  2020      0  3 11 13:16 test
+-rw-r--r--   1 kyoda  2020    575  3 11 13:15 test.sh
+drwxr-xr-x   8 kyoda  2020    272  3 11 13:15 tmp
+total 120
+drwxr-xr-x  14 kyoda  2020    476  3 11 13:16 .
+drwxr-xr-x   9 kyoda  2020    306  3 11 13:15 ..
+drwxr-xr-x  12 kyoda  2020    408  3 11 13:15 .git
+drwxr-xr-x   2 kyoda  2020     68  3 11 13:15 .heredoc
+drwxr-xr-x   3 kyoda  2020    102  3 11 13:15 .vscode
+-rw-r--r--   1 kyoda  2020   1550  3 11 13:15 Makefile
+drwxr-xr-x   5 kyoda  2020    170  3 11 13:15 include
+-rw-r--r--   1 kyoda  2020     47  3 11 13:15 leak.sh
+-rwxr-xr-x   1 kyoda  2020  41388  3 11 13:15 minishell
+drwxr-xr-x   3 kyoda  2020    102  3 11 13:15 obj
+drwxr-xr-x  14 kyoda  2020    476  3 11 13:15 srcs
+-rw-r--r--   1 kyoda  2020    742  3 11 13:16 test
+-rw-r--r--   1 kyoda  2020    575  3 11 13:15 test.sh
+drwxr-xr-x   8 kyoda  2020    272  3 11 13:15 tmp

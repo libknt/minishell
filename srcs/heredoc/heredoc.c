@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 19:01:20 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/10 20:18:23 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/11 13:19:37 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ char	*ft_rename_dir(char *x)
 	if (!file)
 		_err("malloc");
 	free(tmp);
+	free(x);
 	return (file);
 }
 bool	is_heredocfile(void)
@@ -168,5 +169,6 @@ t_fd	*heredoc(char *eof, t_env *env)
 	new->std_fd = 0;
 	close(new->file);
 	new->file = open(x, O_RDONLY, 0644);
+	free(x);
 	return (new);
 }
