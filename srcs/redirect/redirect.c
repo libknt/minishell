@@ -6,11 +6,20 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 17:58:29 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/11 15:07:17 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/11 15:48:52 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	add_redirect(t_node *node, t_env *env)
+{
+	while (node != NULL)
+	{
+		node->fds = redirect_check(node, env);
+		node = node->next;
+	}
+}
 
 t_fds	*new_fds(void)
 {

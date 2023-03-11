@@ -24,10 +24,21 @@
 #include <sys/types.h>
 #include <dirent.h>
 
+#define WRITE 1
+#define READ 0
 bool	is_heredocfile(void);
 void	_err_heredoc(char *m);
+int	exec(t_node *node, t_env *env, int fd1);
+char	**access_cmd_path(t_node *node, char **envp);
+void	_err_cmd_node_found(char *mes);
 char	*ft_rename(char *x);
 char	*ft_rename_dir(char *x);
+char	*ft_strdup(const char *s1);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+char	*ft_strjoin(char const *s1, char const *s2);
+void	add_redirect(t_node *node, t_env *env);
 
 /*redirect*/
 char	*expand_quote(char *line);
