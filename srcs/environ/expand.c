@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/03/11 19:22:58 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/12 21:18:41 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,10 @@ char	*find_env(char *str, t_env *env)
 	char	*env_value;
 
 	if (*str == '?')
+	{
+		exit_status = exit_status % 255;
 		return (ft_itoa(exit_status));
+	}
 	while (env)
 	{
 		if (!strcmp(env->key, str))

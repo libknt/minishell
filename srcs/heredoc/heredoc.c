@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 19:01:20 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/12 02:46:54 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/12 23:10:52 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	heredoc_start(int fd, char *eof, t_env *env, t_node *node)
 		line = readline(">");
 		if (line == NULL)
 		{
-			node->status = 1;
-			write(1,"\n",1);
+			node->status = 2;
+			write(1, "\n", 1);
 			return ;
 		}
 		else if (strcmp(eof, line) == 0)

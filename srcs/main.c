@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/03/11 21:13:55 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/12 22:31:53 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,8 @@ void	print_env1(t_env *env)
 	}
 }
 
-void	_err_arg(int argc, char **argv)
+void	_err_arg(void)
 {
-	(void)argc;
-	(void)argv;
-	// if (strncmp(&argv[1][strlen(argv[1]) - 3], ".sh", 3) == 0)
-	// 	write(1, ".sh files are not executable\n", 29);
-	// else
-	// 	write(1, "cannot execute binary file\n", 27);
 	write(2, "Please run it with ./{ executable file name }.\n", 47);
 	exit(127);
 }
@@ -43,8 +37,9 @@ int	main(int argc, char **argv, char **envp)
 	t_node	*tree;
 	t_env	*env;
 
+	(void)argv;
 	if (argc != 1)
-		_err_arg(argc, argv);
+		_err_arg();
 	env = NULL;
 	make_lstenv(&env, envp);
 	set_signal();
@@ -57,7 +52,6 @@ int	main(int argc, char **argv, char **envp)
 		if (*line)
 			add_history(line);
 		token = lexer(&line, env);
-		exit_status = 0;
 		if (token == NULL)
 			continue ;
 		tree = parser(token, line);

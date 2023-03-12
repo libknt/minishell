@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 01:01:00 by marai             #+#    #+#             */
-/*   Updated: 2023/03/11 21:51:19 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/12 22:09:26 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	wait_process(void)
 			_err_wait(status);
 		}
 	}
-	exit_status = status;
 }
 
 int	exec_tree(t_node *node, t_env *env)
@@ -66,13 +65,17 @@ int	exec_tree(t_node *node, t_env *env)
 	while (node && node->line->type == PIPE)
 		node = node->left;
 	add_redirect(node, env);
-	while (node != NULL)
+	while (1)
 	{
-		if (node->status != 1)
+		if (node->status < 1)
 			exec(node, env, fd1);
+		if (node->next == NULL)
+			break ;
 		node = node->next;
 	}
 	wait_process();
+	if (node->status == 2)
+		exit_status = 0;
 	dup2(fd0, 0);
 	close(fd0);
 	return (0);

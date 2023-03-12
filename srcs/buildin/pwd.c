@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:36 by keys              #+#    #+#             */
-/*   Updated: 2023/03/12 02:19:57 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/12 16:36:11 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ void	ft_pwd(t_status *s)
 	s->f = true;
 	pwd = get_pwd(buf, sizeof(buf), s);
 	if (pwd)
+	{
 		write(1, pwd, strlen(pwd));
+		write(1, "\n", 1);
+	}
+
 }
 //https://learn.microsoft.com/ja-jp/windows/win32/fileio/maximum-file-path-limitation?tabs=registry

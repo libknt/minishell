@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:55:38 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/11 21:36:16 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/12 21:51:02 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+extern int	exit_status;
 static int	command_found(char **argv, char **envp)
 {
 	if (access(argv[0], X_OK) && !is_buildin(argv[0]))
@@ -57,6 +58,7 @@ int	exec(t_node *node, t_env *env, int fd1)
 	char	**envp;
 	int		rw[2];
 	pid_t	pid;
+	int		status;
 
 	if (!node)
 		return (0);
@@ -76,6 +78,11 @@ int	exec(t_node *node, t_env *env, int fd1)
 			buildin(argv, &env);
 		else
 			execve(argv[0], argv, envp);
+	}
+	if (node->next == NULL)
+	{
+		wait(&status);
+		exit_status = status;
 	}
 	return (revert_free(node, argv, envp, rw));
 }
