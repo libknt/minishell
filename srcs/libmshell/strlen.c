@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strndup.c                                          :+:      :+:    :+:   */
+/*   strlen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/12 19:33:34 by keys              #+#    #+#             */
-/*   Updated: 2023/03/12 19:55:46 by keys             ###   ########.fr       */
+/*   Created: 2023/03/12 19:10:57 by keys              #+#    #+#             */
+/*   Updated: 2023/03/12 19:55:41 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmshell.h"
 
-char	*strndup(const char *str, size_t n)
+size_t	ft_strlen(const char *str)
 {
 	size_t	len;
-	char	*p;
 
-	len = ft_strlen(str);
-	if (len <= n)
-		return (ft_strndup(str));
-	p = ft_calloc(n + 1, sizeof(char));
-	if (!p)
-		return (NULL);
-	ft_memcpy(p, str, n);
-	return (p);
+	len = 0;
+	while (*str++)
+		len++;
+	return (len);
 }

@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strndup.c                                          :+:      :+:    :+:   */
+/*   substr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/12 19:33:34 by keys              #+#    #+#             */
-/*   Updated: 2023/03/12 19:55:46 by keys             ###   ########.fr       */
+/*   Created: 2023/03/12 19:26:49 by keys              #+#    #+#             */
+/*   Updated: 2023/03/12 19:55:49 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmshell.h"
 
-char	*strndup(const char *str, size_t n)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	len;
-	char	*p;
+	char	*ans;
 
-	len = ft_strlen(str);
-	if (len <= n)
-		return (ft_strndup(str));
-	p = ft_calloc(n + 1, sizeof(char));
-	if (!p)
+	if (!s)
 		return (NULL);
-	ft_memcpy(p, str, n);
-	return (p);
+	if (ft_strlen(s) <= start || !len)
+		return (ft_strdup(""));
+	if (ft_strlen(s + start) < len)
+		len = ft_strlen(s + start);
+	ans = malloc(sizeof(char) * (len + 1));
+	if (!ans)
+		return (NULL);
+	ft_strlcpy(ans, s + start, len + 1);
+	return (ans);
 }
