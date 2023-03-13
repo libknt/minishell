@@ -2,5 +2,7 @@
 
 #### recoding our own little bash. A program capable of parsing a prompt and launching executables with arguments, along with a few built-in functions.
 
+#### I collaborated with him on the development.
+####  https://github.com/MasaDevs 
 #### make
 #### ./minishell
