@@ -6,7 +6,7 @@
 /*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:44:10 by keys              #+#    #+#             */
-/*   Updated: 2023/03/14 12:09:08 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/14 23:08:29 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	exec_action(void)
 	}
 	else if(global.sig == SIGQUIT)
 	{
-		printf("\nQuit(core dumped)\n");
+		printf("Quit(core dumped)\n");
 		global.exit_status = 131;
 	}
 	global.sig = 0;
@@ -45,6 +45,10 @@ int	check_state(void)
 		rl_done = 1;
 		global.interrupt = true;
 		global.exit_status = 130;
+	}
+	else if(global.sig == SIGQUIT)
+	{
+		rl_done = 1;
 	}
 	global.sig = 0;
 	return (0);

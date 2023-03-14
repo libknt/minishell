@@ -6,7 +6,7 @@
 /*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 01:01:00 by marai             #+#    #+#             */
-/*   Updated: 2023/03/13 21:24:38 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/14 23:19:14 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	exec_tree(t_node *node, t_env *env)
 		node = node->next;
 	}
 	wait_process();
+	exec_action();
 	if (node->status == 2)
 		global.exit_status = 0;
 	dup2(fd0, 0);

@@ -6,7 +6,7 @@
 /*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:55:38 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/13 21:22:36 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/14 23:18:59 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,13 @@ int	exec(t_node *node, t_env *env, int fd1)
 	if (command_found(argv, envp))
 		return (1);
 	pipe(rw);
+	rl_event_hook = 0;
 	pid = fork();
 	if (pid < 0)
 		_err_fork();
 	else if (pid == 0)
 	{
+		reset_signal();
 		close_pipe(node, rw, fd1);
 		if (is_buildin(argv[0]))
 			buildin(argv, &env);
