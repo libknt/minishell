@@ -145,4 +145,8 @@ char		*ft_itoa(int n);
 bool		_err_syntax(char *m);
 int			_err_malloc(void);
 t_status	*new_status(void);
+void	reset_signal(void);
+void	wait_process(void);
+int	check_state(void);
+int	exec_action(void);
 #endif

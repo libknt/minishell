@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   buildin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:34:18 by marai             #+#    #+#             */
-/*   Updated: 2023/03/12 02:27:32 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/13 21:23:46 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //use strcmp
 #include "minishell.h"
-
-extern int	exit_status;
+extern t_global global;
 static void	ft_putstr_fd(char *s, int fd)
 {
 	size_t	len;
@@ -74,7 +73,7 @@ int	buildin_exit(t_status *s)
 		return (0);
 	else
 	{
-		exit_status = s->status;
+		global.exit_status = s->status;
 		if (s->status == 0)
 			exit(0);
 		ft_putendl_fd(s->err_ms, 2);

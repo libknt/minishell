@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   execve_simple_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/03/12 02:26:35 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/14 12:01:55 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int	exit_status;
+extern t_global global;
 
 static int	execve_cmd(char **argv, char **envp, t_node *node)
 {
 	pid_t	pid;
-	int		waitstatus;
+	//int		waitstatus;
 
 	if (access(argv[0], X_OK))
 	{
@@ -25,14 +25,20 @@ static int	execve_cmd(char **argv, char **envp, t_node *node)
 		_err_cmd_not_found(argv[0]);
 		return (-2);
 	}
+	rl_event_hook = 0;
 	pid = fork();
 	if (pid < 0)
 		_err_fork();
 	else if (pid == 0)
+	{
+		reset_signal();
 		execve(argv[0], argv, envp);
-	wait(&waitstatus);
-	exit_status = waitstatus;
-	return (waitstatus);
+	}
+	wait_process();
+	exec_action(global.sig);
+	//global.exit_status = waitstatus;
+	//return (waitstatus);
+	return (0);
 }
 
 int	execve_simple_cmd(t_node *node, t_env *env)

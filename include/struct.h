@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/03/12 02:17:59 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/13 21:02:02 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,12 @@ struct						s_node
 	t_node					*left;
 	t_node					*right;
 	t_node					*next;
+};
+typedef struct s_global	t_global;
+struct	s_global
+{
+	int	exit_status;
+	bool interrupt;
+	int	sig;
 };
 #endif

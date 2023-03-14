@@ -3,44 +3,80 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:44:10 by keys              #+#    #+#             */
-/*   Updated: 2023/03/12 00:46:54 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/14 12:09:08 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <signal.h>
+extern t_global	global;
 
-extern int exit_status;
-void	ctr_c(int sig)
+void	sig_handler(int sig)
 {
-	(void)sig;
-	exit_status =130;
-	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	global.sig = sig;
 }
+
+int	exec_action(void)
+{
+	if (global.sig == SIGINT)
+	{
+		printf("\n");
+		global.exit_status = 130;
+	}
+	else if(global.sig == SIGQUIT)
+	{
+		printf("\nQuit(core dumped)\n");
+		global.exit_status = 131;
+	}
+	global.sig = 0;
+	return (0);
+}
+
+int	check_state(void)
+{
+	if (global.sig == 0)
+		return (0);
+	else if (global.sig == SIGINT)
+	{
+		rl_replace_line("", 0);
+		rl_done = 1;
+		global.interrupt = true;
+		global.exit_status = 130;
+	}
+	global.sig = 0;
+	return (0);
+}
+
 
 void	set_signal(void)
 {
-	//if (signal(SIGINT, ctr_c) == SIG_ERR || signal(SIGQUIT, SIG_IGN) == SIG_ERR)
-	//{
-	//	rl_clear_history();
-	//	printf("SIGERR\n");
-	//	exit(1);
-	//}
 	struct sigaction	sig_int;
 	struct sigaction	sig_quit;
+	
 	sigemptyset(&sig_int.sa_mask);
-	sig_int.sa_handler = ctr_c;
+	sig_int.sa_handler = sig_handler;
 	sig_int.sa_flags = 0;
 	sigaction(SIGINT,&sig_int,NULL);
 	sigemptyset(&sig_quit.sa_mask);
-	sig_quit.sa_handler = SIG_IGN;
+	sig_quit.sa_handler = sig_handler;
 	sig_int.sa_flags = 0;
 	sigaction(SIGQUIT,&sig_quit,NULL);
+}
 
+void	reset_signal(void)
+{
+	struct sigaction	sig_int;
+	struct sigaction	sig_quit;
+	
+	sigemptyset(&sig_int.sa_mask);
+	sig_int.sa_handler = SIG_DFL;
+	sig_int.sa_flags = 0;
+	sigaction(SIGINT,&sig_int,NULL);
+	sigemptyset(&sig_quit.sa_mask);
+	sig_quit.sa_handler = SIG_DFL;
+	sig_int.sa_flags = 0;
+	sigaction(SIGQUIT,&sig_quit,NULL);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:55:38 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/12 21:51:02 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/13 21:22:36 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int	exit_status;
+extern t_global	global;
 static int	command_found(char **argv, char **envp)
 {
 	if (access(argv[0], X_OK) && !is_buildin(argv[0]))
@@ -82,7 +82,7 @@ int	exec(t_node *node, t_env *env, int fd1)
 	if (node->next == NULL)
 	{
 		wait(&status);
-		exit_status = status;
+		global.exit_status = status;
 	}
 	return (revert_free(node, argv, envp, rw));
 }

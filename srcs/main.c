@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/03/12 22:31:53 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/14 11:53:38 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		exit_status;
+t_global global;
 void	print_env1(t_env *env)
 {
 	while (1)
@@ -42,10 +42,11 @@ int	main(int argc, char **argv, char **envp)
 		_err_arg();
 	env = NULL;
 	make_lstenv(&env, envp);
-	set_signal();
 	rl_outstream = stderr;
 	while (1)
 	{
+		rl_event_hook = check_state;
+		set_signal();
 		line = readline("minishell>");
 		if (line == NULL)
 			break ;
