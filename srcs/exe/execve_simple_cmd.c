@@ -6,7 +6,7 @@
 /*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/03/14 12:01:55 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/14 12:16:25 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	execve_cmd(char **argv, char **envp, t_node *node)
 		execve(argv[0], argv, envp);
 	}
 	wait_process();
-	exec_action(global.sig);
+	exec_action();
 	//global.exit_status = waitstatus;
 	//return (waitstatus);
 	return (0);
