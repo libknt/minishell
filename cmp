@@ -1,0 +1,10 @@
+Makefile
+a.out
+cmp
+exit_status.sh
+include
+leak.sh
+minishell
+obj
+srcs
+test.sh

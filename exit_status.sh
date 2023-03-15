@@ -8,5 +8,5 @@ echo $?
 cat a
 echo $?
 
-cd a | ./minishell
-echo $?
+# cd a | ./minishell
+# echo $?

@@ -32,3 +32,11 @@ assert 'pwd'
 assert 'ls'
 assert './a.out'
 assert 'echo "test"\n1'
+assert 'ls -la > test1'
+assert 'cat < Makefile >test2 >test3 >test4 '
+assert 'cat test4 >>test5 | cat test4 >>test5
+assert 'cat test0'
+assert 'ls -la | grep test'
+assert 'ls -la test0'
+assert 'ls | ls |ls |ls |ls |ls |ls | cat < Makefile'
+assert 'find . -name "*c" | xargs cat

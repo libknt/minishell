@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:55:38 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/15 10:09:48 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/15 11:37:12 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,20 @@ static int	revert_free(t_node *node, char **argv, char **envp, int rw[2])
 	return (1);
 }
 
+static bool	check_argv(char **argv, t_node *node)
+{
+	if (node->prev != NULL)
+	{
+		if (strcmp("./minishell", argv[0]) == 0)
+		{
+			ft_split_free(argv);
+			_err_minishell("Cannot run minishell after pipe");
+			return (true);
+		}
+	}
+	return (false);
+}
+
 int	exec(t_node *node, t_env *env, int fd1)
 {
 	char	**argv;
@@ -67,6 +81,8 @@ int	exec(t_node *node, t_env *env, int fd1)
 	redirect_adoption(node->fds);
 	if (command_found(argv, envp))
 		return (1);
+	if (check_argv(argv, node))
+		return (0);
 	pipe(rw);
 	rl_event_hook = 0;
 	pid = fork();
