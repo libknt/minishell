@@ -6,7 +6,7 @@
 /*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:34:18 by marai             #+#    #+#             */
-/*   Updated: 2023/03/13 21:23:46 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/15 23:28:29 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	buildin_exit(t_status *s)
 	return (1);
 }
 
-int	buildin(char *argv[], t_env **env)
+int	buildin(char *argv[], t_env **env, t_node *node)
 {
 	t_status	*s;
 
@@ -94,7 +94,7 @@ int	buildin(char *argv[], t_env **env)
 	else if (!strcmp(argv[0], "export"))
 		ft_export(argv, env, s);
 	else if (!strcmp(argv[0], "env"))
-		env_buildin(argv, *env, s);
+		env_buildin(argv, *env, node, s);
 	else if (!strcmp(argv[0], "unset"))
 		unset(argv, env, s);
 	else if (!strcmp(argv[0], "echo"))

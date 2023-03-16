@@ -6,7 +6,7 @@
 /*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/03/14 12:16:25 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/15 23:30:40 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_global global;
 
-static int	execve_cmd(char **argv, char **envp, t_node *node)
+int	execve_cmd(char **argv, char **envp, t_node *node)
 {
 	pid_t	pid;
 	//int		waitstatus;
@@ -49,7 +49,7 @@ int	execve_simple_cmd(t_node *node, t_env *env)
 	envp = make_env_args(env);
 	redirect_adoption(node->fds);
 	argv = access_cmd_path(node, envp);
-	if (buildin_simple(argv, &env))
+	if (buildin_simple(argv, &env, node))
 	{
 		ft_split_free(envp);
 		ft_split_free(argv);

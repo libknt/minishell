@@ -6,7 +6,7 @@
 /*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:55:38 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/14 23:18:59 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/15 23:30:02 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	exec(t_node *node, t_env *env, int fd1)
 		reset_signal();
 		close_pipe(node, rw, fd1);
 		if (is_buildin(argv[0]))
-			buildin(argv, &env);
+			buildin(argv, &env, node);
 		else
 			execve(argv[0], argv, envp);
 	}
