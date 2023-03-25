@@ -161,8 +161,15 @@ ssize_t		env_num(t_env *env);
 
 char		**make_env_args(t_env *env);
 
-int	command_found(char **argv, char **envp);
-void	close_pipe(t_node *node, int rw[2], int fd1);
-int	revert_free(t_node *node, char **argv, char **envp, int rw[2]);
-bool	check_argv(char **argv, t_node *node);
+int			command_found(char **argv, char **envp);
+void		close_pipe(t_node *node, int rw[2], int fd1);
+int			revert_free(t_node *node, char **argv, char **envp, int rw[2]);
+bool		check_argv(char **argv, t_node *node);
+int			is_quote(char c);
+
+ssize_t		vari_end(char *line);
+ssize_t		find_env_len(char *str, t_env *env);
+ssize_t		calc_expand_len(char *line, t_env *env, ssize_t len);
+ssize_t		vari_expand_len(char *line, t_env *env);
+char		*find_env(char *str, t_env *env);
 #endif
