@@ -136,18 +136,18 @@ char		**free_envp(char **envp, ssize_t len);
 bool		is_identifier(const char *s);
 /*buildin*/
 bool		is_buildin(char *str);
-void		env_buildin(char *argv[], t_env *env, t_status *s);
-int			buildin(char *argv[], t_env **env);
-int			buildin_simple(char *argv[], t_env **env);
+void		env_buildin(char *argv[], t_env *env, t_node *node, t_status *s);
+int			execve_cmd(char **argv, char **envp, t_node *node);
+int			buildin(char *argv[], t_env **env, t_node *node);
+int			buildin_simple(char *argv[], t_env **env, t_node *node);
 void		unset(char *argv[], t_env **env, t_status *s);
 int			cd(char *argv[], t_env *env, t_status *s);
 char		*ft_itoa(int n);
 bool		_err_syntax(char *m);
 int			_err_malloc(void);
 t_status	*new_status(void);
-void		reset_signal(void);
-void		wait_process(void);
-int			check_state(void);
-int			exec_action(void);
-void		_err_minishell(char *m);
+void	reset_signal(void);
+void	wait_process(void);
+int	check_state(void);
+int	exec_action(void);
 #endif

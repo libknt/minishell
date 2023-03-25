@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   _err.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 23:24:55 by keys              #+#    #+#             */
-/*   Updated: 2023/03/15 11:36:33 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/13 21:27:40 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_global	global;
+extern t_global global;
 
 static void	ft_putstr_fd(char *s, int fd)
 {
@@ -37,7 +37,7 @@ static void	ft_putendl_fd(char *s, int fd)
 	write(fd, "\n", 1);
 }
 
-void			_err(const char *e) __attribute__((noreturn));
+void		_err(const char *e) __attribute__((noreturn));
 void	_err(const char *e)
 {
 	dprintf(STDERR_FILENO, "Fatal Error: %s\n", e);
@@ -45,7 +45,7 @@ void	_err(const char *e)
 	exit(127);
 }
 
-int				_err_malloc(void) __attribute__((noreturn));
+int			_err_malloc(void) __attribute__((noreturn));
 int	_err_malloc(void)
 {
 	ft_putendl_fd("Fatal Error: memory not allocated.\n", STDERR_FILENO);
@@ -53,7 +53,7 @@ int	_err_malloc(void)
 	exit(1);
 }
 
-int				_err_fork(void) __attribute__((noreturn));
+int			_err_fork(void) __attribute__((noreturn));
 int	_err_fork(void)
 {
 	ft_putendl_fd("Fatal Error: fork.\n", STDERR_FILENO);
@@ -61,7 +61,7 @@ int	_err_fork(void)
 	exit(1);
 }
 
-int				_err_wait(int status) __attribute__((noreturn));
+int			_err_wait(int status) __attribute__((noreturn));
 int	_err_wait(int status)
 {
 	ft_putendl_fd("wait error\n", STDERR_FILENO);
@@ -112,13 +112,6 @@ void	_err_cmd_not_found(char *m)
 	ft_putstr_fd(m, STDERR_FILENO);
 	ft_putendl_fd(": command not found", STDERR_FILENO);
 	global.exit_status = 127;
-}
-
-void	_err_minishell(char *m)
-{
-	global.exit_status = 1;
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putendl_fd(m, STDERR_FILENO);
 }
 
 /*
