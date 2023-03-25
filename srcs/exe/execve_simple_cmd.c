@@ -35,8 +35,8 @@ int	execve_cmd(char **argv, char **envp, t_node *node)
 		execve(argv[0], argv, envp);
 	}
 	//wait_process();
-	exec_action();
 	wait(&waitstatus);
+	exec_action();
 	global.exit_status = waitstatus;
 	//return (waitstatus);
 	return (0);
