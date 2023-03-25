@@ -81,6 +81,8 @@ int	exec(t_node *node, t_env *env, int fd1)
 	redirect_adoption(node->fds);
 	if (command_found(argv, envp))
 		return (1);
+	if (check_argv(argv, node))
+		return (0);
 	pipe(rw);
 	rl_event_hook = 0;
 	pid = fork();
