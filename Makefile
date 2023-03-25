@@ -25,10 +25,6 @@ $(NAME):$(OBJS)
 	@mkdir -p .heredoc
 	$(CC) $^ $(CFLAGS) -o $@ -lreadline
 
-#$(NAME):$(OBJS)
-#	@mkdir -p .heredoc
-#	make -C libmshell
-#	$(CC) $^ $(CFLAGS) libmshell/libmshell.a -o $@ -lreadline
 leak :
 	sh leak.sh
 
@@ -42,7 +38,7 @@ fclean: clean
 re : fclean all
 	./minishell
 
-t : all
+t :re
 	sh test.sh
 
 var:
