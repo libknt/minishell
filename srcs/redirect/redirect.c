@@ -33,6 +33,22 @@ t_fds	*new_fds(void)
 	return (new);
 }
 
+bool	nocmd(t_node *node)
+{
+	t_line	*line;
+
+	line = node->line;
+	while (1)
+	{
+		if (line->type == CMDLINE)
+			return (false);
+		else if (line->type == T_EOF_R)
+			return true;
+		else
+			line = line->next;
+	}
+}
+
 t_fds	*redirect_check(t_node *node, t_env *env)
 {
 	t_fds	*fd;
