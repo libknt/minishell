@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 14:53:32 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/13 21:14:50 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/25 17:21:42 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	_err_heredoc(char *m)
 {
@@ -49,7 +48,7 @@ char	*ft_rename_dir(char *x)
 	len = strlen(x);
 	file = calloc(sizeof(char), len - 6);
 	if (!file)
-		_err("malloc");
+		_err_malloc();
 	memset(file, 'x', len - 7);
 	memcpy(file, x, 10);
 	free(x);

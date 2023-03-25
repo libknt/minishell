@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/03/13 21:25:36 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/25 17:35:10 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <string.h>
 
-extern t_global	global;
+extern t_global	g_global;
 //brace expansion
 
 //tilde expansion
@@ -128,8 +128,8 @@ char	*find_env(char *str, t_env *env)
 
 	if (*str == '?')
 	{
-		global.exit_status = global.exit_status % 255;
-		return (ft_itoa(global.exit_status));
+		g_global.exit_status = g_global.exit_status % 255;
+		return (ft_itoa(g_global.exit_status));
 	}
 	while (env)
 	{

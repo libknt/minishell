@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 19:01:20 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/13 21:15:47 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/25 17:26:11 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-extern t_global global;
+
+extern t_global	g_global;
 
 char	*open_heredocdir(t_fd **fds)
 {
@@ -63,12 +64,12 @@ void	heredoc_start(int fd, char *eof, t_env *env, t_node *node)
 {
 	char	*line;
 
-	global.interrupt = 0;
+	g_global.interrupt = 0;
 	while (1)
 	{
 		line = readline(">");
-		if(global.interrupt)
-			break;
+		if (g_global.interrupt)
+			break ;
 		if (line == NULL)
 		{
 			node->status = 2;

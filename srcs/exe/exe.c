@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 01:01:00 by marai             #+#    #+#             */
-/*   Updated: 2023/03/14 23:19:14 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/25 17:25:25 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_global	global;
+extern t_global	g_global;
 
 char	**access_cmd_path(t_node *node, char **envp)
 {
@@ -76,7 +76,7 @@ int	exec_tree(t_node *node, t_env *env)
 	wait_process();
 	exec_action();
 	if (node->status == 2)
-		global.exit_status = 0;
+		g_global.exit_status = 0;
 	dup2(fd0, 0);
 	close(fd0);
 	return (0);

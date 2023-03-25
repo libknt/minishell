@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:06:46 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/11 19:02:08 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/25 17:51:36 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ bool	token_error(t_token *token)
 {
 	if (token == NULL)
 		return (true);
-	if(token->type == T_EOF)
-		return true;
+	if (token->type == T_EOF)
+		return (true);
 	if (syntax_check(token))
 		return (true);
 	return (false);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   _err.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 23:24:55 by keys              #+#    #+#             */
-/*   Updated: 2023/03/13 21:27:40 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/25 17:25:14 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_global global;
+extern t_global g_global;
 
 static void	ft_putstr_fd(char *s, int fd)
 {
@@ -41,7 +41,7 @@ void		_err(const char *e) __attribute__((noreturn));
 void	_err(const char *e)
 {
 	dprintf(STDERR_FILENO, "Fatal Error: %s\n", e);
-	global.exit_status = 1;
+	g_global.exit_status = 1;
 	exit(127);
 }
 
@@ -49,7 +49,7 @@ int			_err_malloc(void) __attribute__((noreturn));
 int	_err_malloc(void)
 {
 	ft_putendl_fd("Fatal Error: memory not allocated.\n", STDERR_FILENO);
-	global.exit_status = 1;
+	g_global.exit_status = 1;
 	exit(1);
 }
 
@@ -57,7 +57,7 @@ int			_err_fork(void) __attribute__((noreturn));
 int	_err_fork(void)
 {
 	ft_putendl_fd("Fatal Error: fork.\n", STDERR_FILENO);
-	global.exit_status = 1;
+	g_global.exit_status = 1;
 	exit(1);
 }
 
@@ -65,7 +65,7 @@ int			_err_wait(int status) __attribute__((noreturn));
 int	_err_wait(int status)
 {
 	ft_putendl_fd("wait error\n", STDERR_FILENO);
-	global.exit_status = status;
+	g_global.exit_status = status;
 	exit(status);
 }
 /*lexer*/
@@ -74,14 +74,14 @@ bool	_err_syntax(char *m)
 	ft_putstr_fd("minishell: syntax error near unexpected token ",
 					STDERR_FILENO);
 	ft_putendl_fd(m, STDERR_FILENO);
-	global.exit_status = 258;
+	g_global.exit_status = 258;
 	return (true);
 }
 /*parser*/
 void	_err_syntax_p(char *m, bool *r)
 {
 	*r = true;
-	global.exit_status = 258;
+	g_global.exit_status = 258;
 	ft_putstr_fd("minishell: syntax error near unexpected token ",
 					STDERR_FILENO);
 	ft_putendl_fd(m, STDERR_FILENO);
@@ -90,7 +90,7 @@ void	_err_syntax_p(char *m, bool *r)
 void	_err_parse_p(char *m, bool *r)
 {
 	*r = true;
-	global.exit_status = 258;
+	g_global.exit_status = 258;
 	ft_putstr_fd("minishell: parse error near unexpected token ",
 					STDERR_FILENO);
 	ft_putendl_fd(m, STDERR_FILENO);
@@ -98,7 +98,7 @@ void	_err_parse_p(char *m, bool *r)
 
 void	*_err_nofile(t_node *node, char *m)
 {
-	global.exit_status = 1;
+	g_global.exit_status = 1;
 	ft_putstr_fd("minishell:", STDERR_FILENO);
 	ft_putstr_fd(m, STDERR_FILENO);
 	ft_putendl_fd(": No such file or directory", STDERR_FILENO);
@@ -111,12 +111,12 @@ void	_err_cmd_not_found(char *m)
 	ft_putstr_fd("minishell:", STDERR_FILENO);
 	ft_putstr_fd(m, STDERR_FILENO);
 	ft_putendl_fd(": command not found", STDERR_FILENO);
-	global.exit_status = 127;
+	g_global.exit_status = 127;
 }
 
 void	_err_minishell(char *m)
 {
-	global.exit_status = 1;
+	g_global.exit_status = 1;
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putendl_fd(m, STDERR_FILENO);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_right.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/11 20:13:29 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/25 17:34:15 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,7 @@ t_fd	*redirect_right(t_node *node, t_line *line)
 	t_fd	*fd;
 
 	fd = NULL;
-	/////////
 	(void)node;
-	/////////
 	while (1)
 	{
 		if (line->type == T_EOF_R)

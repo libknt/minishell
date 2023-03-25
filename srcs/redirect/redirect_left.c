@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/12 02:41:23 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/25 18:30:50 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,31 @@ static t_fd	*open_file(t_node *node, char *name)
 	return (new);
 }
 
-t_fd	*redirect_left(t_node *node, t_line *line, t_env *env)
+static t_fd	*redirect_left_utils(t_node *node, t_line **line, t_fd *fd,
+		t_env *env)
 {
-	t_fd	*fd;
+	fd = close_file(fd);
+	*line = (*line)->next;
+	fd = heredoc((*line)->token->word, env, node);
+	if (node->status == 1)
+	{
+		fd = close_file(fd);
+		return (NULL);
+	}
+	return (fd);
+}
 
-	fd = NULL;
+t_fd	*redirect_left(t_node *node, t_line *line, t_env *env, t_fd *fd)
+{
 	while (1)
 	{
 		if (line->type == T_EOF_R)
 			break ;
 		if (line->type == REDIRECT && (!strncmp(line->token->word, "<<", 2)))
 		{
-			fd = close_file(fd);
-			line = line->next;
-			fd = heredoc(line->token->word, env, node);
-			if (node->status == 1)
-			{
-				fd = close_file(fd);
+			fd = redirect_left_utils(node, &line, fd, env);
+			if (fd == NULL)
 				return (NULL);
-			}
 		}
 		else if (line->type == REDIRECT && !strncmp(line->token->word, "<", 1))
 		{

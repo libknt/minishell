@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execve_simple_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/03/15 23:30:40 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/25 17:25:49 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_global global;
+extern t_global g_global;
 
 int	execve_cmd(char **argv, char **envp, t_node *node)
 {
@@ -37,7 +37,7 @@ int	execve_cmd(char **argv, char **envp, t_node *node)
 	//wait_process();
 	wait(&waitstatus);
 	exec_action();
-	global.exit_status = waitstatus;
+	g_global.exit_status = waitstatus;
 	//return (waitstatus);
 	return (0);
 }

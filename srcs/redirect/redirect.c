@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 17:58:29 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/11 20:43:09 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/25 18:06:51 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	nocmd(t_node *node)
 		if (line->type == CMDLINE)
 			return (false);
 		else if (line->type == T_EOF_R)
-			return true;
+			return (true);
 		else
 			line = line->next;
 	}
@@ -54,7 +54,7 @@ t_fds	*redirect_check(t_node *node, t_env *env)
 	t_fds	*fd;
 
 	fd = new_fds();
-	fd->fd_l = redirect_left(node, node->line, env);
+	fd->fd_l = redirect_left(node, node->line, env, NULL);
 	if (node->status == 1)
 	{
 		free(fd);
@@ -66,64 +66,11 @@ t_fds	*redirect_check(t_node *node, t_env *env)
 		free(fd);
 		return (NULL);
 	}
-		if (nocmd(node))
+	if (nocmd(node))
 	{
 		revert_redirect(fd);
 		node->status = 1;
 		return (NULL);
 	}
 	return (fd);
-}
-
-void	*revert_redirect(t_fds *fd)
-{
-	if (fd == NULL)
-		return (NULL);
-	if (fd->fd_l)
-	{
-		dup2(fd->fd_l->std_fd, fd->fd_l->file_new);
-		close(fd->fd_l->file_new);
-		dup2(fd->fd_l->std_fd_new, fd->fd_l->std_fd);
-		close(fd->fd_l->std_fd_new);
-		close(fd->fd_l->file);
-		free(fd->fd_l);
-	}
-	if (fd->fd_r)
-	{
-		dup2(fd->fd_r->std_fd, fd->fd_r->file_new);
-		close(fd->fd_r->file_new);
-		dup2(fd->fd_r->std_fd_new, fd->fd_r->std_fd);
-		close(fd->fd_r->std_fd_new);
-		close(fd->fd_r->file);
-		free(fd->fd_r);
-	}
-	free(fd);
-	return (NULL);
-}
-
-void	revert_redirect_pipe(t_fds *fd, int rw[2])
-{
-	dup2(rw[0], 0);
-	close(rw[0]);
-	close(rw[1]);
-	if (fd == NULL)
-		return ;
-	if (fd->fd_l)
-	{
-		dup2(fd->fd_l->std_fd, fd->fd_l->file_new);
-		close(fd->fd_l->file_new);
-		close(fd->fd_l->std_fd_new);
-		close(fd->fd_l->file);
-		free(fd->fd_l);
-	}
-	if (fd->fd_r)
-	{
-		dup2(fd->fd_r->std_fd, fd->fd_r->file_new);
-		close(fd->fd_r->file_new);
-		dup2(fd->fd_r->std_fd_new, fd->fd_r->std_fd);
-		close(fd->fd_r->std_fd_new);
-		close(fd->fd_r->file);
-		free(fd->fd_r);
-	}
-	free(fd);
 }

@@ -3,54 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:44:10 by keys              #+#    #+#             */
-/*   Updated: 2023/03/14 23:08:29 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/25 17:28:34 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <signal.h>
-extern t_global	global;
+extern t_global	g_global;
 
 void	sig_handler(int sig)
 {
-	global.sig = sig;
+	g_global.sig = sig;
 }
 
 int	exec_action(void)
 {
-	if (global.sig == SIGINT)
+	if (g_global.sig == SIGINT)
 	{
 		printf("\n");
-		global.exit_status = 130;
+		g_global.exit_status = 130;
 	}
-	else if(global.sig == SIGQUIT)
+	else if(g_global.sig == SIGQUIT)
 	{
 		printf("Quit(core dumped)\n");
-		global.exit_status = 131;
+		g_global.exit_status = 131;
 	}
-	global.sig = 0;
+	g_global.sig = 0;
 	return (0);
 }
 
 int	check_state(void)
 {
-	if (global.sig == 0)
+	if (g_global.sig == 0)
 		return (0);
-	else if (global.sig == SIGINT)
+	else if (g_global.sig == SIGINT)
 	{
 		rl_replace_line("", 0);
 		rl_done = 1;
-		global.interrupt = true;
-		global.exit_status = 130;
+		g_global.interrupt = true;
+		g_global.exit_status = 130;
 	}
-	else if(global.sig == SIGQUIT)
+	else if(g_global.sig == SIGQUIT)
 	{
 		rl_done = 1;
 	}
-	global.sig = 0;
+	g_global.sig = 0;
 	return (0);
 }
 
@@ -59,7 +59,7 @@ void	set_signal(void)
 {
 	struct sigaction	sig_int;
 	struct sigaction	sig_quit;
-	
+
 	sigemptyset(&sig_int.sa_mask);
 	sig_int.sa_handler = sig_handler;
 	sig_int.sa_flags = 0;
@@ -74,7 +74,7 @@ void	reset_signal(void)
 {
 	struct sigaction	sig_int;
 	struct sigaction	sig_quit;
-	
+
 	sigemptyset(&sig_int.sa_mask);
 	sig_int.sa_handler = SIG_DFL;
 	sig_int.sa_flags = 0;
