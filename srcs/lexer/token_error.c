@@ -53,6 +53,8 @@ bool	token_error(t_token *token)
 {
 	if (token == NULL)
 		return (true);
+	if(token->type == T_EOF)
+		return true;
 	if (syntax_check(token))
 		return (true);
 	return (false);
