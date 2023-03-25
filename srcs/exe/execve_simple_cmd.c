@@ -17,7 +17,7 @@ extern t_global global;
 int	execve_cmd(char **argv, char **envp, t_node *node)
 {
 	pid_t	pid;
-	//int		waitstatus;
+	int		waitstatus;
 
 	if (access(argv[0], X_OK))
 	{
@@ -34,9 +34,9 @@ int	execve_cmd(char **argv, char **envp, t_node *node)
 		reset_signal();
 		execve(argv[0], argv, envp);
 	}
-	wait_process();
+	//wait_process();
 	exec_action();
-	//global.exit_status = waitstatus;
+	global.exit_status = waitstatus;
 	//return (waitstatus);
 	return (0);
 }
