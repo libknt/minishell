@@ -15,12 +15,18 @@
 t_node	**add_node(t_node *node)
 {
 	t_node	**tmp;
+	t_node	**p;
 
+	p = &node;
 	if (node->left)
 	{
 		tmp = add_node(node->left);
-		*tmp = node->right;
-		return (&node->right->next);
+		(*tmp)->next = node->right;
+		node->right->prev = *tmp;
+		return (&node->right);
+		//*tmp = node->right;
+		//return (&node->right->next);
 	}
-	return (&node->next);
+	return (p);
+	//return (&node->next);
 }
