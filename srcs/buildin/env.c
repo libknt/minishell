@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:31:08 by marai             #+#    #+#             */
-/*   Updated: 2023/03/12 02:20:33 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/15 23:40:39 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**make_env_args(t_env *env)
 	return (envp);
 }
 
-void	env_buildin(char *argv[], t_env *env, t_status *s)
+void	env_buildin(char *argv[], t_env *env, t_node *node, t_status *s)
 {
 	char	**envp;
 	int		pid;
@@ -88,14 +88,20 @@ void	env_buildin(char *argv[], t_env *env, t_status *s)
 		}
 		return ;
 	}
+	rl_event_hook = 0;
 	pid = fork();
 	if (pid == 0)
 	{
 		i = 1;
+		reset_signal();
 		while (argv[i])
 		{
-			if (check_eql(argv[i]))
-				_err("invalid error\n");
+			if (!check_eql(argv[i]))
+			{
+				envp = make_env_args(env);
+				s->status = execve_cmd(&argv[i], envp, node);
+				exit(s->status);
+			}
 			env_node = new_lstenv(argv[i]);
 			if (!env_node)
 				_err("env_node_error\n");
@@ -104,7 +110,8 @@ void	env_buildin(char *argv[], t_env *env, t_status *s)
 		}
 		exit(1);
 	}
-	else
-		wait(&status);
+	wait(&status);
+	exec_action();
+
 	s->status = status;
 }
