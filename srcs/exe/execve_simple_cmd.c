@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   execve_simple_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/03/15 23:30:40 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/15 10:55:29 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_global global;
+extern t_global	global;
 
 int	execve_cmd(char **argv, char **envp, t_node *node)
 {
 	pid_t	pid;
-	//int		waitstatus;
+	int		waitstatus;
 
 	if (access(argv[0], X_OK))
 	{
@@ -34,10 +34,9 @@ int	execve_cmd(char **argv, char **envp, t_node *node)
 		reset_signal();
 		execve(argv[0], argv, envp);
 	}
-	wait_process();
 	exec_action();
-	//global.exit_status = waitstatus;
-	//return (waitstatus);
+	wait(&waitstatus);
+	global.exit_status = waitstatus;
 	return (0);
 }
 
