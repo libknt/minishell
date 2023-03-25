@@ -160,4 +160,9 @@ char		**free_envp(char **envp, ssize_t len);
 ssize_t		env_num(t_env *env);
 
 char		**make_env_args(t_env *env);
+
+int	command_found(char **argv, char **envp);
+void	close_pipe(t_node *node, int rw[2], int fd1);
+int	revert_free(t_node *node, char **argv, char **envp, int rw[2]);
+bool	check_argv(char **argv, t_node *node);
 #endif

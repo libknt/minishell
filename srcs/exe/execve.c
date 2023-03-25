@@ -6,101 +6,53 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:55:38 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/25 17:25:57 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/25 20:36:40 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_global	g_global;
-static int	command_found(char **argv, char **envp)
-{
-	if (access(argv[0], X_OK) && !is_buildin(argv[0]))
-	{
-		_err_cmd_not_found(argv[0]);
-		ft_split_free(envp);
-		return (1);
-	}
-	else
-		return (0);
-}
 
-void	close_pipe(t_node *node, int rw[2], int fd1)
+static void	exec_fork(t_node *node, t_env *env, int fd1, t_data_e *d)
 {
-	if (node->next == NULL)
-	{
-		close(rw[0]);
-		close(rw[1]);
-		if (!node->fds || (node->fds && node->fds->fd_r == NULL))
-			dup2(fd1, 1);
-		close(fd1);
-	}
-	else
-	{
-		close(rw[0]);
-		if (!node->fds || (node->fds && node->fds->fd_r == NULL))
-			dup2(rw[1], 1);
-		close(rw[1]);
-	}
-}
+	int	pid;
 
-static int	revert_free(t_node *node, char **argv, char **envp, int rw[2])
-{
-	revert_redirect_pipe(node->fds, rw);
-	ft_split_free(argv);
-	ft_split_free(envp);
-	return (1);
-}
-
-static bool	check_argv(char **argv, t_node *node)
-{
-	if (node->prev != NULL)
-	{
-		if (strcmp("./minishell", argv[0]) == 0)
-		{
-			ft_split_free(argv);
-			_err_minishell("Cannot run minishell after pipe");
-			return (true);
-		}
-	}
-	return (false);
-}
-
-int	exec(t_node *node, t_env *env, int fd1)
-{
-	char	**argv;
-	char	**envp;
-	int		rw[2];
-	pid_t	pid;
-	int		status;
-
-	if (!node)
-		return (0);
-	envp = make_env_args(env);
-	argv = access_cmd_path(node, envp);
-	redirect_adoption(node->fds);
-	if (command_found(argv, envp))
-		return (1);
-	if (check_argv(argv, node))
-		return (0);
-	pipe(rw);
-	rl_event_hook = 0;
 	pid = fork();
 	if (pid < 0)
 		_err_fork();
 	else if (pid == 0)
 	{
 		reset_signal();
-		close_pipe(node, rw, fd1);
-		if (is_buildin(argv[0]))
-			buildin(argv, &env, node);
+		close_pipe(node, d->rw, fd1);
+		if (is_buildin(d->argv[0]))
+			buildin(d->argv, &env, node);
 		else
-			execve(argv[0], argv, envp);
+			execve(d->argv[0], d->argv, d->envp);
 	}
+}
+
+int	exec(t_node *node, t_env *env, int fd1)
+{
+	t_data_e	d;
+
+	memset(&d, 0, sizeof(t_data_e));
+	if (!node)
+		return (0);
+	d.envp = make_env_args(env);
+	d.argv = access_cmd_path(node, d.envp);
+	redirect_adoption(node->fds);
+	if (command_found(d.argv, d.envp))
+		return (1);
+	if (check_argv(d.argv, node))
+		return (0);
+	pipe(d.rw);
+	rl_event_hook = 0;
+	exec_fork(node, env, fd1, &d);
 	if (node->next == NULL)
 	{
-		wait(&status);
-		g_global.exit_status = status;
+		wait(&(d.status));
+		g_global.exit_status = d.status;
 	}
-	return (revert_free(node, argv, envp, rw));
+	return (revert_free(node, d.argv, d.envp, d.rw));
 }

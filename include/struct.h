@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/03/13 21:02:02 by Marai            ###   ########.fr       */
+/*   Updated: 2023/03/25 20:33:53 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,4 +110,12 @@ struct	s_global
 	bool interrupt;
 	int	sig;
 };
+typedef struct s_data_e
+{
+	char		**argv;
+	char		**envp;
+	int			rw[2];
+	pid_t		pid;
+	int			status;
+}				t_data_e;
 #endif

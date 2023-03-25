@@ -6,18 +6,17 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/03/25 17:25:49 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/25 20:38:49 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_global g_global;
+extern t_global	g_global;
 
 int	execve_cmd(char **argv, char **envp, t_node *node)
 {
 	pid_t	pid;
-	int		waitstatus;
 
 	if (access(argv[0], X_OK))
 	{
@@ -34,11 +33,9 @@ int	execve_cmd(char **argv, char **envp, t_node *node)
 		reset_signal();
 		execve(argv[0], argv, envp);
 	}
-	//wait_process();
-	wait(&waitstatus);
+	wait_process();
 	exec_action();
-	g_global.exit_status = waitstatus;
-	//return (waitstatus);
+	// g_global.exit_status = waitstatus;
 	return (0);
 }
 
