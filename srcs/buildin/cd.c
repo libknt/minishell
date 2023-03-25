@@ -6,11 +6,12 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:56 by keys              #+#    #+#             */
-/*   Updated: 2023/03/12 02:18:38 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/25 18:47:52 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 #define PATH_MAXLEN 4096
 
 char	*get_home_dir(t_env *env)

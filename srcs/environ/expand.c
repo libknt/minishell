@@ -6,19 +6,13 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/03/25 17:35:10 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/25 18:46:36 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <string.h>
 
 extern t_global	g_global;
-//brace expansion
-
-//tilde expansion
-
-//variable expansion
 
 bool	is_alpha_under(char c)
 {

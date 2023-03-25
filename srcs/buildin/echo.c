@@ -6,28 +6,11 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:57:09 by keys              #+#    #+#             */
-/*   Updated: 2023/03/12 02:20:48 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/25 18:54:02 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	ft_putstr_fd(char *s, int fd)
-{
-	size_t	len;
-
-	len = 0;
-	if (!s)
-		return ;
-	len = strlen(s);
-	if (len <= INT_MAX)
-		write(fd, s, len);
-	else
-	{
-		write(fd, s, INT_MAX);
-		ft_putstr_fd(&s[INT_MAX], fd);
-	}
-}
 
 bool	is_operation_n(char *argv)
 {
@@ -62,7 +45,7 @@ char	**operation_n(char **argv, bool *flag)
 	i = 0;
 	while (1)
 	{
-		if (!argv[i] ||is_operation_n(argv[i]))
+		if (!argv[i] || is_operation_n(argv[i]))
 			break ;
 		*flag = true;
 		i++;
@@ -70,7 +53,7 @@ char	**operation_n(char **argv, bool *flag)
 	return (&argv[i]);
 }
 
-void	ft_echo(char **argv,t_status *s)
+void	ft_echo(char **argv, t_status *s)
 {
 	size_t	i;
 	bool	flag;
@@ -86,8 +69,8 @@ void	ft_echo(char **argv,t_status *s)
 			break ;
 		ft_putstr_fd(argv[i], 1);
 		i++;
-		if(argv[i])
-			write(1," ",1);
+		if (argv[i])
+			write(1, " ", 1);
 	}
 	if (flag == false)
 		write(1, "\n", 1);
