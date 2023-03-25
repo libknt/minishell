@@ -93,7 +93,7 @@ int	exec(t_node *node, t_env *env, int fd1)
 		reset_signal();
 		close_pipe(node, rw, fd1);
 		if (is_buildin(argv[0]))
-			buildin(argv, &env);
+			buildin(argv, &env, node);
 		else
 			execve(argv[0], argv, envp);
 	}
