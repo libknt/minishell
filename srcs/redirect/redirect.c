@@ -66,6 +66,12 @@ t_fds	*redirect_check(t_node *node, t_env *env)
 		free(fd);
 		return (NULL);
 	}
+		if (nocmd(node))
+	{
+		revert_redirect(fd);
+		node->status = 1;
+		return (NULL);
+	}
 	return (fd);
 }
 
