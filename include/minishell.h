@@ -150,4 +150,5 @@ void	reset_signal(void);
 void	wait_process(void);
 int	check_state(void);
 int	exec_action(void);
+void		_err_minishell(char *m);
 #endif
