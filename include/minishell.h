@@ -151,4 +151,7 @@ void	wait_process(void);
 int	check_state(void);
 int	exec_action(void);
 void		_err_minishell(char *m);
+
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putendl_fd(char *s, int fd);
 #endif
