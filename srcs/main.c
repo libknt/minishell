@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/03/25 14:24:36 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/25 14:44:23 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,29 +50,14 @@ int	main(int argc, char **argv, char **envp)
 		line = readline("minishell>");
 		if (line == NULL)
 			break ;
-		printf("-------------------------\n");
-		printf("%d\n",__LINE__);
-		printf("-------------------------\n");
-		fflush(stdout);
 		if (*line)
 			add_history(line);
-		printf("-------------------------\n");
-		printf("%d\n",__LINE__);
-		printf("-------------------------\n");
 		token = lexer(&line, env);
 		if (token == NULL)
 			continue ;
-		printf("-------------------------\n");
-		printf("%d\n",__LINE__);
-		printf("-------------------------\n");
 		tree = parser(token, line);
 		if (tree == NULL)
 			continue ;
-		printf("-------------------------\n");
-		printf("%d\n",__LINE__);
-		printf("%p ; %p : %p\n",tree ,tree->left,tree->line);
-		printf("%s : %s\n",tree->line->token->word,tree->line->next->token->word);
-		printf("-------------------------\n");
 		exe_(tree, env);
 		tree_free(tree);
 		token_free(&token);
