@@ -101,6 +101,7 @@ struct						s_node
 	t_node					*left;
 	t_node					*right;
 	t_node					*next;
+	t_node					*prev;
 };
 typedef struct s_global	t_global;
 struct	s_global
