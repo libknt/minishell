@@ -52,6 +52,20 @@ static int	revert_free(t_node *node, char **argv, char **envp, int rw[2])
 	return (1);
 }
 
+static bool	check_argv(char **argv, t_node *node)
+{
+	if (node->prev != NULL)
+	{
+		if (strcmp("./minishell", argv[0]) == 0)
+		{
+			ft_split_free(argv);
+			_err_minishell("Cannot run minishell after pipe");
+			return (true);
+		}
+	}
+	return (false);
+}
+
 int	exec(t_node *node, t_env *env, int fd1)
 {
 	char	**argv;
