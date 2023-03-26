@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/03/26 14:34:18 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/26 16:11:45 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_status			t_status;
 struct							s_status
 {
 	bool						f;
+	int							buildin_type;
 	int							status;
 	char						*err_ms;
 };
