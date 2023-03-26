@@ -63,7 +63,7 @@ t_fds		*redirect_check(t_node *node, t_env *env);
 void		*revert_redirect(t_fds *fd);
 t_fd		*redirect_right(t_node *node, t_line *line);
 t_fd		*redirect_left(t_node *node, t_line *line, t_env *env, t_fd *fd);
-t_fd		*heredoc(char *eof, t_env *env, t_node *node);
+t_fd		*heredoc(t_heredoc_var *v, t_env *env, t_node *node);
 void		redirect_adoption(t_fds *fds);
 void		revert_redirect_pipe(t_fds *fd, int rw[2]);
 

@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/25 18:30:50 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/26 14:37:58 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,14 @@ static t_fd	*open_file(t_node *node, char *name)
 static t_fd	*redirect_left_utils(t_node *node, t_line **line, t_fd *fd,
 		t_env *env)
 {
+	t_heredoc_var	v;
+
 	fd = close_file(fd);
+	v.flag = false;
 	*line = (*line)->next;
-	fd = heredoc((*line)->token->word, env, node);
+	v.eof = (*line)->token->word;
+	v.flag = (*(*line)->token->ex_heredoc_flag);
+	fd = heredoc(&v, env, node);
 	if (node->status == 1)
 	{
 		fd = close_file(fd);

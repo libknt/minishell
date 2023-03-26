@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 21:24:17 by keys              #+#    #+#             */
-/*   Updated: 2023/03/04 21:31:33 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/26 14:39:55 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ t_token	*new_token(char *str, t_token_type type)
 	new = calloc(sizeof(t_token), 1);
 	if (!new)
 		_err("calloc");
+	new->ex_heredoc_flag = calloc(sizeof(bool), 1);
+	if (!new->ex_heredoc_flag)
+		_err_malloc();
 	new->type = type;
 	new->word = str;
 	return (new);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:24:57 by keys              #+#    #+#             */
-/*   Updated: 2023/03/11 19:36:39 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/26 14:39:02 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 bool	find_redirect(t_token *token)
 {
+	if (token->type == EX_WORD)
+	{
+		token->type = WORD;
+		return (false);
+	}
 	return ((strncmp(token->word, "<<", 2) == 0) || (strncmp(token->word, ">>",
 				2) == 0) || (strncmp(token->word, "<", 1) == 0)
 		|| (strncmp(token->word, ">", 1) == 0));

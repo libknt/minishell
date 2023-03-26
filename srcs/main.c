@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/03/25 21:07:27 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/26 14:39:30 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	func_readline(t_env *env, char *line, t_token *token, t_node *tree)
 		token = lexer(&line, env);
 		if (token == NULL)
 			continue ;
+		expand_token(&token, env);
 		tree = parser(token, line);
 		if (tree == NULL)
 			continue ;

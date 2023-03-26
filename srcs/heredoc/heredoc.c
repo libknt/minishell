@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 19:01:20 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/25 17:26:11 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/26 14:40:05 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*open_heredocfile(t_fd **fds)
 	return (x);
 }
 
-void	heredoc_start(int fd, char *eof, t_env *env, t_node *node)
+void	heredoc_start(t_heredoc_var *v, t_env *env, t_node *node)
 {
 	char	*line;
 
@@ -76,11 +76,11 @@ void	heredoc_start(int fd, char *eof, t_env *env, t_node *node)
 			write(1, "\n", 1);
 			return ;
 		}
-		else if (strcmp(eof, line) == 0)
+		else if (strcmp(v->eof, line) == 0)
 			break ;
-		line = vari_expand(line, env);
-		line = expand_quote(line);
-		dprintf(fd, "%s\n", line);
+		if (v->flag == false)
+			line = vari_expand(line, env);
+		dprintf(v->fd, "%s\n", line);
 		free(line);
 	}
 	free(line);
@@ -100,7 +100,7 @@ static t_fd	*new_fd(void)
 	return (new);
 }
 
-t_fd	*heredoc(char *eof, t_env *env, t_node *node)
+t_fd	*heredoc(t_heredoc_var *v, t_env *env, t_node *node)
 {
 	t_fd	*new;
 	char	*x;
@@ -110,7 +110,8 @@ t_fd	*heredoc(char *eof, t_env *env, t_node *node)
 		x = open_heredocdir(&new);
 	else
 		x = open_heredocfile(&new);
-	heredoc_start(new->file, eof, env, node);
+	v->fd = new->file;
+	heredoc_start(v, env, node);
 	if (node->status == 1)
 		return (new);
 	new->std_fd = 0;

@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/03/25 20:59:39 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/26 14:39:09 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*vari_expand(char *line, t_env *env)
 	{
 		if (line[i] == '\'')
 			quote_counter++;
-		if (line[i] == '$' && quote_counter % 2 == 0 && \
+		if (line[i] == '$' && quote_counter % 2 == 0 &&
 			(i == 0 || line[i - 1] != '\\'))
 			i += make_expand(expanded, &line[i + 1], env);
 		else
@@ -102,15 +102,36 @@ char	*expand_quote(char *line)
 	return (line2);
 }
 
+static bool	is_heredoc_flag(char *word)
+{
+	if (strncmp(word, "<<", 2) == 0)
+		return (true);
+	return (false);
+}
 void	expand_token(t_token **token, t_env *env)
 {
 	t_token	*tmp;
+	bool	f;
 
 	tmp = *token;
+	f = false;
 	while (1)
 	{
 		if (tmp->type == T_EOF)
 			break ;
+		if (f)
+		{
+			f = false;
+			if (strchr(tmp->word, '"') || strchr(tmp->word, '\''))
+			{
+				(*tmp->ex_heredoc_flag) = true;
+			}
+			tmp->word = expand_quote(tmp->word);
+			tmp = tmp->next;
+			continue ;
+		}
+		else if (is_heredoc_flag(tmp->word))
+			f = true;
 		tmp->word = vari_expand(tmp->word, env);
 		tmp->word = expand_quote(tmp->word);
 		tmp = tmp->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_free.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 22:40:13 by keys              #+#    #+#             */
-/*   Updated: 2023/03/06 14:47:52 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/26 14:39:52 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	token_free(t_token **token)
 			tmp = (*token)->next;
 			free((*token)->word);
 			(*token)->word = NULL;
+			free((*token)->ex_heredoc_flag);
 			free(*token);
 			(*token) = tmp;
 		}

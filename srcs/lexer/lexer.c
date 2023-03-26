@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/03/11 19:01:26 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/03/26 14:39:48 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,26 @@ static void	*lexer_err_free(char **line, t_token **token)
 	return (NULL);
 }
 
+static void	check_redirect(t_token *token)
+{
+	while (1)
+	{
+		if (token->type == T_EOF)
+			break ;
+		if (strchr(token->word, '"') || strchr(token->word, '\''))
+		{
+			token->type = EX_WORD;
+		}
+		token = token->next;
+	}
+}
+
 t_token	*lexer(char **line, t_env *env)
 {
 	t_data_t	data;
 	t_token		*token;
 
+	(void)env;
 	if (!*line[0])
 	{
 		free(*line);
@@ -105,6 +120,7 @@ t_token	*lexer(char **line, t_env *env)
 	token = data.head;
 	if (token_error(token))
 		return (lexer_err_free(line, &token));
-	expand_token(&token, env);
+	check_redirect(token);
+	// expand_token(&token, env);
 	return (token);
 }
