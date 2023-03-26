@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/03/26 14:39:09 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/26 15:16:45 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,56 @@ static bool	is_heredoc_flag(char *word)
 		return (true);
 	return (false);
 }
+
+// static char	*remake_token(char *line, t_token **token)
+// {
+// 	size_t	len;
+// 	t_token	*new;
+// 	char	*str;
+
+// 	len = 0;
+// 	while (1)
+// 	{
+// 		if (!*line || *line == ' ')
+// 			break ;
+// 		len++;
+// 	}
+// 	str = strndup(line, len);
+// 	if (!str)
+// 		_err_malloc();
+// 	new = new_token(str, WORD);
+// 	token_addback(token, new);
+// 	return (&line[len]);
+// }
+// static t_token	*expand_lexer(char *line)
+// {
+// 	t_token	*token;
+// 	size_t i;
+
+// 	 i =0;
+
+// 	token = NULL;
+// 	while (line[i])
+// 	{
+// 		while (is_blank(line[i]))
+// 			i++;
+// 		if (line[i] == '\0')
+// 			break ;
+// 		line = remake_token(&line[i], &token);
+// 	}
+// 	return (token);
+// }
+
+	// t_token	*new;
+	// t_token	*back;
+	// t_token	*last;
+
+			// new = expand_lexer(tmp->word);
+			// back = tmp->next;
+			// last = token_last(new);
+			// last->next = back;
+			// tmp->next = new;
+
 void	expand_token(t_token **token, t_env *env)
 {
 	t_token	*tmp;
