@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/03/26 16:11:45 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/26 16:49:22 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,6 @@ typedef struct s_data_e
 	int							rw[2];
 	pid_t						pid;
 	int							status;
+	int atty;
 }								t_data_e;
 #endif

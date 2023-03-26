@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 01:01:00 by marai             #+#    #+#             */
-/*   Updated: 2023/03/25 17:25:25 by keys             ###   ########.fr       */
+/*   Updated: 2023/03/26 16:48:00 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	wait_process(void)
 	}
 }
 
-int	exec_tree(t_node *node, t_env *env)
+int	exec_tree(t_node *node, t_env *env,int atty)
 {
 	int	fd0;
 	int	fd1;
@@ -68,7 +68,7 @@ int	exec_tree(t_node *node, t_env *env)
 	while (1)
 	{
 		if (node->status < 1)
-			exec(node, env, fd1);
+			exec(node, env, fd1,atty);
 		if (node->next == NULL)
 			break ;
 		node = node->next;
@@ -84,6 +84,9 @@ int	exec_tree(t_node *node, t_env *env)
 
 int	exe_(t_node *node, t_env *env)
 {
+	int	atty;
+
+	atty = isatty(1);
 	if (node->line->type != PIPE)
 	{
 		node->fds = redirect_check(node, env);
@@ -92,6 +95,6 @@ int	exe_(t_node *node, t_env *env)
 		execve_simple_cmd(node, env);
 	}
 	else
-		exec_tree(node, env);
+		exec_tree(node, env,atty);
 	return (0);
 }
