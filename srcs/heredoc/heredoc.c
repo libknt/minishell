@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 19:01:20 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/26 14:40:05 by keys             ###   ########.fr       */
+/*   Updated: 2023/04/01 14:16:45 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,12 @@ t_fd	*heredoc(t_heredoc_var *v, t_env *env, t_node *node)
 	new->std_fd = 0;
 	close(new->file);
 	new->file = open(x, O_RDONLY, 0644);
+	if (new->file < 0)
+	{
+		write(1, "Do not delete heredoc files!\n", 29);
+		node->status = 1;
+		return (NULL);
+	}
 	free(x);
 	return (new);
 }
