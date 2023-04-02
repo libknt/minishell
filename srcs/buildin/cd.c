@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:56 by keys              #+#    #+#             */
-/*   Updated: 2023/03/25 18:47:52 by keys             ###   ########.fr       */
+/*   Updated: 2023/04/02 16:23:55 by Marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	cd(char *argv[], t_env *env, t_status *s)
 	home = get_home_dir(env);
 	if (home == NULL)
 		_err("HOME not set\n");
-	if (!argv[1] || !strcmp(argv[1], "."))
+	if (!argv[1])
 		status = chdir(home);
 	else if (argv[1][0] == '/')
 		status = chdir(argv[1]);
