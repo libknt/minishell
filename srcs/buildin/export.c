@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:30:45 by marai             #+#    #+#             */
-/*   Updated: 2023/03/25 19:14:22 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/07 17:27:13 by masahitoara      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	check_env_vari(char *argv)
 		return (0);
 	if (argv[0] == '=' || !is_identifier(argv))
 	{
-		printf("`%s': not a valid identifier\n", argv);
+		printf("'%s': not a valid identifier\n", argv);
 		return (0);
 	}
 	return (1);

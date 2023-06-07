@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand2.c                                          :+:      :+:    :+:   */
+/*   expand3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/03/25 20:43:30 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/07 17:26:32 by masahitoara      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ bool	is_identifier(const char *s)
 	{
 		if (!is_alpha_num_under(*s) && *s != '=')
 			return (false);
+		if(*s == '=')
+			return (true);
 		s++;
 	}
 	return (true);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buildin_simple.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:34:18 by marai             #+#    #+#             */
-/*   Updated: 2023/03/26 16:12:25 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/07 19:03:22 by masahitoara      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	buildin_return(t_status *s)
 
 void	exec_buildin(char **argv, t_env **env, t_node *node, t_status *s)
 {
+	/*
 	if (!isatty(1))
 	{
 		write(STDERR_FILENO,argv[0],strlen(argv[0]));
@@ -34,6 +35,7 @@ void	exec_buildin(char **argv, t_env **env, t_node *node, t_status *s)
 		s->f = true;
 		return ;
 	}
+	*/
 	if (s->buildin_type == 1)
 		cd(argv, *env, s);
 	if (s->buildin_type == 2)

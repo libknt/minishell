@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_filename.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:17:23 by keys              #+#    #+#             */
-/*   Updated: 2023/03/12 00:41:58 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/07 17:07:23 by masahitoara      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ char	*exec_filename(char *prompt, char **envp)
 
 	if (*prompt == '\0')
 		return (NULL);
-	s = ft_strjoin("/", prompt);
-	if (!s)
-		_err_malloc();
 	pa = seach_path(envp);
 	if (!pa)
+		return (NULL);
+	s = ft_strjoin("/", prompt);
+	if (!s)
 		_err_malloc();
 	argv = ft_split(pa, ':');
 	free(pa);
