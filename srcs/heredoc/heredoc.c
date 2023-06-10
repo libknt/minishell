@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 19:01:20 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/10 20:26:57 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/10 20:34:09 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char	*open_heredocdir(t_fd **fds)
 		}
 		else
 			break ;
+	}
 	(*fds)->file = fd;
 	close(dummy_fd);
 	return (x);
