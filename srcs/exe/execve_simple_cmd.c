@@ -49,7 +49,6 @@ int	execve_simple_cmd(t_node *node, t_env *env)
 	envp = make_env_args(env);
 	redirect_adoption(node->fds);
 	argv = access_cmd_path(node, envp);
-	fflush(stdout);
 	if (buildin_simple(argv, &env, node))
 	{
 		ft_split_free(envp);
