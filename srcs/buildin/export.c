@@ -6,7 +6,7 @@
 /*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:30:45 by marai             #+#    #+#             */
-/*   Updated: 2023/06/07 17:27:13 by masahitoara      ###   ########.fr       */
+/*   Updated: 2023/06/11 02:00:43 by masahitoara      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	check_env_vari(char *argv)
 		return (0);
 	if (argv[0] == '=' || !is_identifier(argv))
 	{
-		printf("'%s': not a valid identifier\n", argv);
+		//printf("'%s': not a valid identifier\n", argv);
 		return (0);
 	}
 	return (1);
@@ -74,7 +74,10 @@ static void	export_utils(char *argv[], t_env *env_node, t_env **env)
 	while (argv[i])
 	{
 		if (!check_env_vari(argv[i]))
-			return ;
+		{
+			i++;
+			continue;
+		}
 		env_node = new_lstenv(argv[i]);
 		if (!env_node)
 			_err("env node error\n");
@@ -104,4 +107,5 @@ void	ft_export(char *argv[], t_env **env, t_status *s)
 		return ;
 	}
 	export_utils(argv, NULL, env);
+	
 }
