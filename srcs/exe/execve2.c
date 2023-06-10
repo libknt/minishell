@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:55:38 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/25 20:01:35 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/10 19:23:05 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern t_global	g_global;
 
 int	command_found(char **argv, char **envp)
 {
-	if (access(argv[0], X_OK) && !is_buildin(argv[0]))
+	if ((access(argv[0], X_OK) && !is_buildin(argv[0])) || is_file_access(argv[0]) )
 	{
 		_err_cmd_not_found(argv[0]);
 		ft_split_free(envp);
