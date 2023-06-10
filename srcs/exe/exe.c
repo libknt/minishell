@@ -85,9 +85,10 @@ int	exec_tree(t_node *node, t_env *env,int atty)
 int	exe_(t_node *node, t_env *env)
 {
 	int	atty;
+	int dummy_fd;
 
+	dummy_fd = open("/dev/null", O_RDONLY);
 	atty = isatty(1);
-
 	if (node->line->type != PIPE)
 	{
 		node->fds = redirect_check(node, env);
@@ -97,5 +98,6 @@ int	exe_(t_node *node, t_env *env)
 	}
 	else
 		exec_tree(node, env,atty);
+	close(dummy_fd);
 	return (0);
 }

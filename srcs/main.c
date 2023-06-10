@@ -68,5 +68,5 @@ int	main(int argc, char **argv, char **envp)
 	make_lstenv(&env, envp);
 	rl_outstream = stderr;
 	func_readline(env, NULL, NULL, NULL);
-	return (0);
+	return (g_global.exit_status);
 }
