@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:56 by keys              #+#    #+#             */
-/*   Updated: 2023/06/10 20:44:24 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/11 02:34:06 by masahitoara      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ int	cd(char *argv[], t_env *env, t_status *s)
 	}
 	free(home);
 	if (status < 0)
-		write(2, "bash: cd: too many arguments\n", 29);
+		dprintf(STDERR_FILENO, "bash: cd: too many arguments\n");
 	return (0);
 }
