@@ -14,13 +14,6 @@
 
 extern t_global	g_global;
 
-// static void	write_isatty(char *str)
-// {
-// 	write(STDERR_FILENO, str, strlen(str));
-// 	write(STDERR_FILENO, ": write error: Bad file descriptor\n", 35);
-// 	exit(0);
-// }
-
 static void	exec_fork(t_node *node, t_env *env, int fd1, t_data_e *d)
 {
 	int	pid;
