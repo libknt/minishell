@@ -19,8 +19,6 @@ char	*open_heredocdir(t_fd **fds)
 	int		fd;
 	char	*x;
 
-	int dummy_fd;
-	dummy_fd = open("/dev/null", O_RDONLY);
 	x = strdup(".heredoc/.x.heredoc");
 	if (x == NULL)
 		_err("malloc");
@@ -36,7 +34,6 @@ char	*open_heredocdir(t_fd **fds)
 			break ;
 	}
 	(*fds)->file = fd;
-	close(dummy_fd);
 	return (x);
 
 }
