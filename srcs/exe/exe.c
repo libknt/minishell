@@ -54,7 +54,7 @@ void	wait_process(void)
 	}
 }
 
-int	exec_tree(t_node *node, t_env *env,int atty)
+int	exec_tree(t_node *node, t_env *env, int atty)
 {
 	int	fd0;
 	int	fd1;
@@ -68,7 +68,7 @@ int	exec_tree(t_node *node, t_env *env,int atty)
 	while (1)
 	{
 		if (node->status < 1)
-			exec(node, env, fd1,atty);
+			exec(node, env, fd1, atty);
 		if (node->next == NULL)
 			break ;
 		node = node->next;
@@ -85,7 +85,7 @@ int	exec_tree(t_node *node, t_env *env,int atty)
 int	exe_(t_node *node, t_env *env)
 {
 	int	atty;
-	int dummy_fd;
+	int	dummy_fd;
 
 	dummy_fd = open("/dev/null", O_RDONLY);
 	atty = isatty(1);
@@ -97,7 +97,7 @@ int	exe_(t_node *node, t_env *env)
 		execve_simple_cmd(node, env);
 	}
 	else
-		exec_tree(node, env,atty);
+		exec_tree(node, env, atty);
 	close(dummy_fd);
 	return (0);
 }

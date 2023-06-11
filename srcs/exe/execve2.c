@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:55:38 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/10 19:23:05 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/11 15:05:07 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,34 @@
 
 extern t_global	g_global;
 
-int	command_found(char **argv, char **envp)
+static int	command_found_utils(char **argv, char **envp)
 {
-	if(is_directory(argv[0]))
+	if (is_directory(argv[0]))
 	{
-		if(strcmp(argv[0],"..") == 0 )
+		if (strcmp(argv[0], "..") == 0)
 		{
 			_err_cmd_not_found(argv[0]);
 			ft_split_free(envp);
 		}
-		else{
+		else
+		{
 			_err_is_directory(argv[0]);
 			ft_split_free(envp);
 		}
 		return (1);
 	}
-	else if(is_file_accessible(argv[0]))
+	else if (is_file_accessible(argv[0]))
 	{
 		ft_split_free(envp);
 		return (1);
 	}
+	return (0);
+}
+
+int	command_found(char **argv, char **envp)
+{
+	if (command_found_utils(argv, envp))
+		return (1);
 	else if (access(argv[0], X_OK) && !is_buildin(argv[0]))
 	{
 		_err_cmd_not_found(argv[0]);

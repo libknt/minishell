@@ -60,7 +60,7 @@ int	check_env_vari(char *argv)
 		return (0);
 	if (argv[0] == '=' || !is_identifier(argv))
 	{
-		//printf("'%s': not a valid identifier\n", argv);
+		// printf("'%s': not a valid identifier\n", argv);
 		return (0);
 	}
 	return (1);
@@ -76,7 +76,7 @@ static void	export_utils(char *argv[], t_env *env_node, t_env **env)
 		if (!check_env_vari(argv[i]))
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		env_node = new_lstenv(argv[i]);
 		if (!env_node)
@@ -107,5 +107,4 @@ void	ft_export(char *argv[], t_env **env, t_status *s)
 		return ;
 	}
 	export_utils(argv, NULL, env);
-	
 }

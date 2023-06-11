@@ -27,15 +27,6 @@ int	buildin_return(t_status *s)
 
 void	exec_buildin(char **argv, t_env **env, t_node *node, t_status *s)
 {
-	/*
-	if (!isatty(1))
-	{
-		write(STDERR_FILENO,argv[0],strlen(argv[0]));
-		write(STDERR_FILENO, ": write error: Bad file descriptor\n", 35);
-		s->f = true;
-		return ;
-	}
-	*/
 	if (s->buildin_type == 1)
 		cd(argv, *env, s);
 	if (s->buildin_type == 2)

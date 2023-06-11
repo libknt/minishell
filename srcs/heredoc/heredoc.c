@@ -35,7 +35,6 @@ char	*open_heredocdir(t_fd **fds)
 	}
 	(*fds)->file = fd;
 	return (x);
-
 }
 
 char	*open_heredocfile(t_fd **fds)
