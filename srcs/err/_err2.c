@@ -58,3 +58,19 @@ void	_err_cmd_not_found(char *m)
 	ft_putendl_fd(": command not found", STDERR_FILENO);
 	g_global.exit_status = 127;
 }
+
+void	_err_is_directory(char *m)
+{
+	ft_putstr_fd("minishell:", STDERR_FILENO);
+	ft_putstr_fd(m, STDERR_FILENO);
+	ft_putendl_fd(": Is a directory", STDERR_FILENO);
+	g_global.exit_status = 126;
+}
+
+void	_err_permission(char *m)
+{
+	ft_putstr_fd("minishell:", STDERR_FILENO);
+	ft_putstr_fd(m, STDERR_FILENO);
+	ft_putendl_fd(": Permission denied", STDERR_FILENO);
+	g_global.exit_status = 126;
+}

@@ -19,7 +19,21 @@ int	execve_cmd(char **argv, char **envp, t_node *node)
 	pid_t	pid;
 	int waitstatus;
 	
-	if (access(argv[0], X_OK) || is_file_access(argv[0]))
+	if(is_directory(argv[0]))
+	{
+		node->fds = revert_redirect(node->fds);
+		if(strcmp(argv[0],"..") == 0 )
+			_err_cmd_not_found(argv[0]);
+		else 
+			_err_is_directory(argv[0]);
+		return (-2);
+	}
+	if(is_file_accessible(argv[0]))
+	{
+		node->fds = revert_redirect(node->fds);
+		return (-2);
+	}
+	if (access(argv[0], X_OK))
 	{
 		node->fds = revert_redirect(node->fds);
 		_err_cmd_not_found(argv[0]);

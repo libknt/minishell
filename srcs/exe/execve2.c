@@ -16,7 +16,25 @@ extern t_global	g_global;
 
 int	command_found(char **argv, char **envp)
 {
-	if ((access(argv[0], X_OK) && !is_buildin(argv[0])) || is_file_access(argv[0]) )
+	if(is_directory(argv[0]))
+	{
+		if(strcmp(argv[0],"..") == 0 )
+		{
+			_err_cmd_not_found(argv[0]);
+			ft_split_free(envp);
+		}
+		else{
+			_err_is_directory(argv[0]);
+			ft_split_free(envp);
+		}
+		return (1);
+	}
+	else if(is_file_accessible(argv[0]))
+	{
+		ft_split_free(envp);
+		return (1);
+	}
+	else if (access(argv[0], X_OK) && !is_buildin(argv[0]))
 	{
 		_err_cmd_not_found(argv[0]);
 		ft_split_free(envp);
