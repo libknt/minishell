@@ -74,7 +74,6 @@ void	heredoc_start(t_heredoc_var *v, t_env *env, t_node *node)
 		if (line == NULL)
 		{
 			node->status = 2;
-			write(1, "\n", 1);
 			return ;
 		}
 		else if (strcmp(v->eof, line) == 0)
