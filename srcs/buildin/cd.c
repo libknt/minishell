@@ -6,13 +6,14 @@
 /*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:56 by keys              #+#    #+#             */
-/*   Updated: 2023/06/11 02:34:06 by masahitoara      ###   ########.fr       */
+/*   Updated: 2023/06/11 03:32:51masahitoara      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 #define PATH_MAXLEN 4096
+void imple_pwd(t_env *head, char *prev, t_status *s);
 
 char	*get_home_dir(t_env *env)
 {
@@ -64,12 +65,17 @@ int	cd(char *argv[], t_env *env, t_status *s)
 {
 	char	path[PATH_MAXLEN];
 	char	*home;
+	char	*prev;
 	int		status;
 
 	s->f = true;
 	home = get_home_dir(env);
 	if (home == NULL)
-		_err("HOME not set\n");
+	{
+		dprintf(STDERR_FILENO, "HOME not set\n");
+		return -1;
+	}
+	prev = get_pwd(s);
 	if (!argv[1])
 		status = chdir(home);
 	else if (argv[1][0] == '/')
@@ -83,6 +89,40 @@ int	cd(char *argv[], t_env *env, t_status *s)
 	}
 	free(home);
 	if (status < 0)
+	{
 		dprintf(STDERR_FILENO, "bash: cd: too many arguments\n");
+		free(prev);
+	}
+	else
+		imple_pwd(env, prev, s);
 	return (0);
+}
+
+void imple_pwd(t_env *head, char *prev, t_status *s)
+{
+	t_env	*env1;
+	char	*path;
+
+
+	env1 = head;
+	while(env1)
+	{
+		if(!strcmp(env1->key, "PWD"))
+		{
+			free(env1->value);
+			path = get_pwd(s);
+			env1->value = path;
+		}
+		env1 = env1->next;
+	}
+	env1 = head;
+	while(env1)
+	{
+		if(!strcmp(env1->key, "OLDPWD"))
+		{
+			free(env1->value);
+			env1->value = prev;
+		}
+		env1 = env1->next;
+	}
 }
