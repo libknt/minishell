@@ -20,3 +20,19 @@ void	_err_minishell(char *m)
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putendl_fd(m, STDERR_FILENO);
 }
+
+void	_err_is_directory(char *m)
+{
+	ft_putstr_fd("minishell:", STDERR_FILENO);
+	ft_putstr_fd(m, STDERR_FILENO);
+	ft_putendl_fd(": Is a directory", STDERR_FILENO);
+	g_global.exit_status = 126;
+}
+
+void	_err_permission(char *m)
+{
+	ft_putstr_fd("minishell:", STDERR_FILENO);
+	ft_putstr_fd(m, STDERR_FILENO);
+	ft_putendl_fd(": Permission denied", STDERR_FILENO);
+	g_global.exit_status = 126;
+}

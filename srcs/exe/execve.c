@@ -25,7 +25,8 @@ static void	exec_fork(t_node *node, t_env *env, int fd1, t_data_e *d)
 	{
 		reset_signal();
 		close_pipe(node, d->rw, fd1);
-		if (is_buildin(d->argv[0])){
+		if (is_buildin(d->argv[0]))
+		{
 			buildin(d->argv, &env, node);
 		}
 		else

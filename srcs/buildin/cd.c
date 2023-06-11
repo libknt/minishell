@@ -13,7 +13,8 @@
 #include "minishell.h"
 
 #define PATH_MAXLEN 4096
-void imple_pwd(t_env *head, char *prev, t_status *s);
+
+void	imple_pwd(t_env *head, char *prev, t_status *s);
 
 char	*get_home_dir(t_env *env)
 {
@@ -73,7 +74,7 @@ int	cd(char *argv[], t_env *env, t_status *s)
 	if (home == NULL)
 	{
 		dprintf(STDERR_FILENO, "HOME not set\n");
-		return -1;
+		return (-1);
 	}
 	prev = get_pwd(s);
 	if (!argv[1])
@@ -98,16 +99,15 @@ int	cd(char *argv[], t_env *env, t_status *s)
 	return (0);
 }
 
-void imple_pwd(t_env *head, char *prev, t_status *s)
+void	imple_pwd(t_env *head, char *prev, t_status *s)
 {
-	t_env	*env1;
-	char	*path;
-
+	t_env *env1;
+	char *path;
 
 	env1 = head;
-	while(env1)
+	while (env1)
 	{
-		if(!strcmp(env1->key, "PWD"))
+		if (!strcmp(env1->key, "PWD"))
 		{
 			free(env1->value);
 			path = get_pwd(s);
@@ -116,9 +116,9 @@ void imple_pwd(t_env *head, char *prev, t_status *s)
 		env1 = env1->next;
 	}
 	env1 = head;
-	while(env1)
+	while (env1)
 	{
-		if(!strcmp(env1->key, "OLDPWD"))
+		if (!strcmp(env1->key, "OLDPWD"))
 		{
 			free(env1->value);
 			env1->value = prev;
