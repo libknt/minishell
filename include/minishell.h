@@ -180,4 +180,6 @@ void	_err_is_directory(char *m);
 int is_directory(const char *str);
 void	_err_permission(char *m);
 int is_file_accessible(char *str);
+void	block_signal(void);
+t_env *make_env(char *key, char *value);
 #endif

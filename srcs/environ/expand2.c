@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/03/25 20:49:08 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/18 16:11:04 by masahitoara      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ ssize_t	find_env_len(char *str, t_env *env)
 	{
 		if (!strcmp(env->key, str))
 		{
-			return (strlen(env->value));
+			if(env->value)
+				return (strlen(env->value));
+			else
+				return (0);
 		}
 		env = env->next;
 	}
@@ -106,9 +109,14 @@ char	*find_env(char *str, t_env *env)
 	{
 		if (!strcmp(env->key, str))
 		{
-			env_value = strdup(env->value);
-			if (!env_value)
-				_err_malloc();
+			if(env->value)
+			{
+				env_value = strdup(env->value);
+				if (!env_value)
+					_err_malloc();
+			}
+			else
+				env_value = NULL;
 			return (env_value);
 		}
 		env = env->next;

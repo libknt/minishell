@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_simple_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/06/11 15:08:33 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/18 14:24:57 by masahitoara      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	execve_cmd(char **argv, char **envp, t_node *node)
 		return (-2);
 	rl_event_hook = 0;
 	pid = fork();
+	block_signal();
 	if (pid < 0)
 		_err_fork();
 	else if (pid == 0)
