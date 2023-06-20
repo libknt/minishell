@@ -6,11 +6,12 @@
 /*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/06/18 14:24:57 by masahitoara      ###   ########.fr       */
+/*   Updated: 2023/06/20 16:08:31 by masahitoara      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <sys/wait.h>
 
 extern t_global	g_global;
 
@@ -58,6 +59,8 @@ int	execve_cmd(char **argv, char **envp, t_node *node)
 	}
 	waitpid(pid, &waitstatus, 0);
 	g_global.exit_status = waitstatus;
+	if (WIFSIGNALED(waitstatus))
+		g_global.exit_status += 128;
 	exec_action();
 	return (0);
 }
