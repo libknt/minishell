@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_lstenvp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 09:09:09 by keys              #+#    #+#             */
-/*   Updated: 2023/06/18 15:45:43 by masahitoara      ###   ########.fr       */
+/*   Updated: 2023/06/20 15:54:45 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_env_addback(t_env **env, t_env *new)
 	{
 		while (env_node)
 		{
-			if (!strcmp(env_node->key, new->key))
+			if (!ft_strcmp(env_node->key, new->key))
 			{
 				env_node->prev->next = new;
 				new->prev = env_node->prev;

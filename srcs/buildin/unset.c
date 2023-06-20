@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:36:46 by marai             #+#    #+#             */
-/*   Updated: 2023/03/25 18:48:23 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/20 15:54:45 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	unset(char *argv[], t_env **env, t_status *s)
 		env_node = *env;
 		while (env_node)
 		{
-			if (!strcmp(argv[i], env_node->key))
+			if (!ft_strcmp(argv[i], env_node->key))
 			{
 				env_node->prev->next = env_node->next;
 				if (env_node->next)

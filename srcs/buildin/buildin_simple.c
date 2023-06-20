@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buildin_simple.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:34:18 by marai             #+#    #+#             */
-/*   Updated: 2023/06/11 03:57:22 by masahitoara      ###   ########.fr       */
+/*   Updated: 2023/06/20 15:54:45 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,19 @@ int	buildin_simple(char *argv[], t_env **env, t_node *node)
 	s = new_status();
 	if (!argv)
 		return (0);
-	if (!strcmp(argv[0], "cd"))
+	if (!ft_strcmp(argv[0], "cd"))
 		s->buildin_type = 1;
-	else if (!strcmp(argv[0], "export"))
+	else if (!ft_strcmp(argv[0], "export"))
 		s->buildin_type = 2;
-	else if (!strcmp(argv[0], "env"))
+	else if (!ft_strcmp(argv[0], "env"))
 		s->buildin_type = 3;
-	else if (!strcmp(argv[0], "unset"))
+	else if (!ft_strcmp(argv[0], "unset"))
 		s->buildin_type = 4;
-	else if (!strcmp(argv[0], "echo"))
+	else if (!ft_strcmp(argv[0], "echo"))
 		s->buildin_type = 5;
-	else if (!strcmp(argv[0], "pwd"))
+	else if (!ft_strcmp(argv[0], "pwd"))
 		s->buildin_type = 6;
-	else if (!strcmp(argv[0], "exit"))
+	else if (!ft_strcmp(argv[0], "exit"))
 		s->buildin_type = 7;
 	if (s->buildin_type)
 		exec_buildin(argv, env, node, s);

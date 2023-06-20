@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:55:38 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/11 15:05:07 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/20 15:54:45 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	command_found_utils(char **argv, char **envp)
 {
 	if (is_directory(argv[0]))
 	{
-		if (strcmp(argv[0], "..") == 0)
+		if (ft_strcmp(argv[0], "..") == 0)
 		{
 			_err_cmd_not_found(argv[0]);
 			ft_split_free(envp);
@@ -83,7 +83,7 @@ bool	check_argv(char **argv, t_node *node)
 {
 	if (node->prev != NULL)
 	{
-		if (strcmp("./minishell", argv[0]) == 0)
+		if (ft_strcmp("./minishell", argv[0]) == 0)
 		{
 			ft_split_free(argv);
 			_err_minishell("Cannot run minishell after pipe");

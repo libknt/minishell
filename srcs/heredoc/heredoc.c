@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 19:01:20 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/20 15:31:54 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/20 15:54:45 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	heredoc_start(t_heredoc_var *v, t_env *env, t_node *node)
 			node->status = 2;
 			return ;
 		}
-		else if (strcmp(v->eof, line) == 0)
+		else if (ft_strcmp(v->eof, line) == 0)
 			break ;
 		if (v->flag == false)
 			line = vari_expand(line, env);

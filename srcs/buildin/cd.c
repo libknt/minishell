@@ -22,7 +22,7 @@ char	*get_home_dir(t_env *env)
 
 	while (env)
 	{
-		if (!strcmp(env->key, "HOME"))
+		if (!ft_strcmp(env->key, "HOME"))
 		{
 			homepath = ft_strdup(env->value);
 			if (!homepath)
@@ -39,15 +39,15 @@ char	*make_abs_path(char *path, char *argv, char *home)
 	ssize_t	i;
 
 	i = 0;
-	if (!strcmp(argv, "~"))
+	if (!ft_strcmp(argv, "~"))
 	{
-		memset(path, '\0', PATH_MAXLEN);
+		ft_memset(path, '\0', PATH_MAXLEN);
 		ft_strlcpy(path, home, PATH_MAXLEN);
 		return (path);
 	}
 	if (!ft_strncmp(argv, "~/", 2))
 	{
-		memset(path, '\0', PATH_MAXLEN);
+		ft_memset(path, '\0', PATH_MAXLEN);
 		ft_strlcpy(path, home, PATH_MAXLEN);
 		i = 2;
 	}
@@ -81,7 +81,7 @@ int	cd(char *argv[], t_env *env, t_status *s)
 		status = chdir(argv[1]);
 	else
 	{
-		memset(path, '\0', PATH_MAXLEN);
+		ft_memset(path, '\0', PATH_MAXLEN);
 		getcwd(path, PATH_MAXLEN);
 		make_abs_path(path, argv[1], home);
 		status = chdir(path);
@@ -104,7 +104,7 @@ void	imple_pwd(t_env *head, t_status *s)
 	isPWD = false;	
 	while(env)
 	{
-		if(!strcmp("PWD", env->key))
+		if(!ft_strcmp("PWD", env->key))
 		{
 			if(env->value)
 			{
