@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 22:45:28 by keys              #+#    #+#             */
-/*   Updated: 2023/06/07 22:56:50 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/20 15:53:27 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	exe_exit(size_t i, char **argv, t_status *s)
 		else
 		{
 			check_str(argv[1]);
-			i = atol(argv[1]);
+			i = ft_atol(argv[1]);
 			i = i % 256;
 			exit(i);
 		}

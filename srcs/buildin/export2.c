@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:30:45 by marai             #+#    #+#             */
-/*   Updated: 2023/03/25 18:59:48 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/20 15:54:45 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**env_sort(char **envp)
 		j = i;
 		while (envp[j])
 		{
-			if (0 < strcmp(envp[i], envp[j]))
+			if (0 < ft_strcmp(envp[i], envp[j]))
 			{
 				temp = envp[i];
 				envp[i] = envp[j];

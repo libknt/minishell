@@ -22,9 +22,9 @@ char	*get_home_dir(t_env *env)
 
 	while (env)
 	{
-		if (!strcmp(env->key, "HOME"))
+		if (!ft_strcmp(env->key, "HOME"))
 		{
-			homepath = strdup(env->value);
+			homepath = ft_strdup(env->value);
 			if (!homepath)
 				_err_malloc();
 			return (homepath);
@@ -39,24 +39,24 @@ char	*make_abs_path(char *path, char *argv, char *home)
 	ssize_t	i;
 
 	i = 0;
-	if (!strcmp(argv, "~"))
+	if (!ft_strcmp(argv, "~"))
 	{
-		memset(path, '\0', PATH_MAXLEN);
+		ft_memset(path, '\0', PATH_MAXLEN);
 		ft_strlcpy(path, home, PATH_MAXLEN);
 		return (path);
 	}
-	if (!strncmp(argv, "~/", 2))
+	if (!ft_strncmp(argv, "~/", 2))
 	{
-		memset(path, '\0', PATH_MAXLEN);
+		ft_memset(path, '\0', PATH_MAXLEN);
 		ft_strlcpy(path, home, PATH_MAXLEN);
 		i = 2;
 	}
-	if (!strncmp(argv, "./", 2))
+	if (!ft_strncmp(argv, "./", 2))
 		i = 2;
-	ft_strlcat(path, "/", strlen(path) + 2);
+	ft_strlcat(path, "/", ft_strlen(path) + 2);
 	while (argv[i])
 	{
-		ft_strlcat(path, &argv[i], strlen(path) + 2);
+		ft_strlcat(path, &argv[i], ft_strlen(path) + 2);
 		i++;
 	}
 	return (path);
@@ -72,7 +72,8 @@ int	cd(char *argv[], t_env *env, t_status *s)
 	home = get_home_dir(env);
 	if (home == NULL)
 	{
-		dprintf(STDERR_FILENO, "HOME not set\n");
+		// dprintf(STDERR_FILENO, "HOME not set\n");
+		ft_putendl_fd("HOME not set", STDERR_FILENO);
 		return (-1);
 	}
 	if (!argv[1])
@@ -81,14 +82,17 @@ int	cd(char *argv[], t_env *env, t_status *s)
 		status = chdir(argv[1]);
 	else
 	{
-		memset(path, '\0', PATH_MAXLEN);
+		ft_memset(path, '\0', PATH_MAXLEN);
 		getcwd(path, PATH_MAXLEN);
 		make_abs_path(path, argv[1], home);
 		status = chdir(path);
 	}
 	free(home);
 	if (status < 0)
-		dprintf(STDERR_FILENO, "bash: cd: too many arguments\n");
+	{
+		// dprintf(STDERR_FILENO, "bash: cd: too many arguments\n");
+		ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);
+	}
 	else
 		imple_pwd(env, s);
 	return (0);
@@ -104,7 +108,7 @@ void	imple_pwd(t_env *head, t_status *s)
 	isPWD = false;	
 	while(env)
 	{
-		if(!strcmp("PWD", env->key))
+		if(!ft_strcmp("PWD", env->key))
 		{
 			if(env->value)
 			{

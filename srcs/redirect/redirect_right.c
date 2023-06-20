@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/20 15:29:06 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ t_fd	*redirect_right(t_node *node, t_line *line)
 	{
 		if (line->type == T_EOF_R)
 			break ;
-		if (line->type == REDIRECT && (!strncmp(line->token->word, ">>", 2)
-				|| !strncmp(line->token->word, ">", 1)))
+		if (line->type == REDIRECT && (!ft_strncmp(line->token->word, ">>", 2)
+				|| !ft_strncmp(line->token->word, ">", 1)))
 		{
 			fd = close_file(fd);
-			if (!strncmp(line->token->word, ">>", 2))
+			if (!ft_strncmp(line->token->word, ">>", 2))
 				fd = open_file_rr(line->next->token->word);
 			else
 				fd = open_file_r(line->next->token->word);

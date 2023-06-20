@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/20 15:54:45 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ ssize_t	find_env_len(char *str, t_env *env)
 {
 	while (env)
 	{
-		if (!strcmp(env->key, str))
+		if (!ft_strcmp(env->key, str))
 		{
 			if(env->value)
-				return (strlen(env->value));
+				return (ft_strlen(env->value));
 			else
 				return (0);
 		}
@@ -76,7 +76,7 @@ ssize_t	vari_expand_len(char *line, t_env *env)
 
 	i = 0;
 	quote_counter = 0;
-	len = strlen(line);
+	len = ft_strlen(line);
 	if (!line)
 		return (0);
 	while (line[i])
@@ -107,11 +107,11 @@ char	*find_env(char *str, t_env *env)
 	}
 	while (env)
 	{
-		if (!strcmp(env->key, str))
+		if (!ft_strcmp(env->key, str))
 		{
 			if(env->value)
 			{
-				env_value = strdup(env->value);
+				env_value = ft_strdup(env->value);
 				if (!env_value)
 					_err_malloc();
 			}

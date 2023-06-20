@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/20 15:32:12 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ ssize_t	make_expand(char *expanded, char *line, t_env *env)
 	env_value = find_env(str, env);
 	if (env_value != NULL)
 	{
-		strncat(expanded, env_value, strlen(env_value));
+		ft_strncat(expanded, env_value, ft_strlen(env_value));
 		free(env_value);
 	}
 	free(str);
@@ -46,7 +46,7 @@ char	*vari_expand(char *line, t_env *env)
 		_err_malloc();
 	i = 0;
 	quote_counter = 0;
-	while (i < strlen(line))
+	while (i < ft_strlen(line))
 	{
 		if (line[i] == '\'')
 			quote_counter++;
@@ -54,7 +54,7 @@ char	*vari_expand(char *line, t_env *env)
 			(i == 0 || line[i - 1] != '\\'))
 			i += make_expand(expanded, &line[i + 1], env);
 		else
-			strncat(expanded, &line[i], 1);
+			ft_strncat(expanded, &line[i], 1);
 		i++;
 	}
 	free(line);
@@ -75,7 +75,7 @@ static void	expand_quote_utils(char *line, char *line2, char *last)
 			i++;
 		if (is_quote(line[i]))
 		{
-			last = strchr(&line[i + 1], line[i]);
+			last = ft_strchr(&line[i + 1], line[i]);
 			diff = last - &line[i];
 			ft_strlcpy(&line2[j], &line[i + 1], last - &line[i]);
 			i += diff;
@@ -95,7 +95,7 @@ char	*expand_quote(char *line)
 
 	if (!line)
 		return (NULL);
-	len = strlen(line);
+	len = ft_strlen(line);
 	line2 = ft_calloc(len + 1, sizeof(char));
 	if (!line2)
 		_err_malloc();
@@ -106,7 +106,7 @@ char	*expand_quote(char *line)
 
 static bool	is_heredoc_flag(char *word)
 {
-	if (strncmp(word, "<<", 2) == 0)
+	if (ft_strncmp(word, "<<", 2) == 0)
 		return (true);
 	return (false);
 }
@@ -174,7 +174,7 @@ void	expand_token(t_token **token, t_env *env)
 		if (f)
 		{
 			f = false;
-			if (strchr(tmp->word, '"') || strchr(tmp->word, '\''))
+			if (ft_strchr(tmp->word, '"') || ft_strchr(tmp->word, '\''))
 			{
 				(*tmp->ex_heredoc_flag) = true;
 			}

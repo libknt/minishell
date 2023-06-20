@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_filename.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:17:23 by keys              #+#    #+#             */
-/*   Updated: 2023/06/07 17:07:23 by masahitoara      ###   ########.fr       */
+/*   Updated: 2023/06/20 15:31:54 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ char	*seach_path(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		if (!strncmp(envp[i], "PATH=", 5))
-			return (strdup(&envp[i][5]));
+		if (!ft_strncmp(envp[i], "PATH=", 5))
+			return (ft_strdup(&envp[i][5]));
 		i++;
 	}
 	return (NULL);
@@ -41,7 +41,7 @@ static char	*access_check(char **argv, char *s)
 		free(pa);
 		if (access(argv[k], X_OK) == 0)
 		{
-			pa = strdup(argv[k]);
+			pa = ft_strdup(argv[k]);
 			if (!pa)
 				_err_malloc();
 			ft_split_free(argv);

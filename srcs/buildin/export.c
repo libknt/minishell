@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:30:45 by marai             #+#    #+#             */
-/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/20 15:30:06 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ static void	envp_args(char **envp, ssize_t i, t_env *env, ssize_t value_len)
 	ssize_t	len;
 
 	len = 0;
-	len = strlen(env->key) + value_len + 4;
+	len = ft_strlen(env->key) + value_len + 4;
 	envp[i] = ft_calloc(len, sizeof(char));
 	if (!envp[i])
 		_err_malloc();
 	ft_strlcat(envp[i], env->key, len);
 	if (env->value)
 	{
-		ft_strlcat(envp[i], "=", strlen(env->key) + 2);
-		ft_strlcat(envp[i], "\"", strlen(env->key) + 3);
+		ft_strlcat(envp[i], "=", ft_strlen(env->key) + 2);
+		ft_strlcat(envp[i], "\"", ft_strlen(env->key) + 3);
 		ft_strlcat(envp[i], env->value, len);
 		ft_strlcat(envp[i], "\"", len);
 	}
@@ -45,7 +45,7 @@ static char	**make_export_args(t_env *env, ssize_t i, ssize_t num,
 		if (!env->value)
 			value_len = 0;
 		else
-			value_len = strlen(env->value);
+			value_len = ft_strlen(env->value);
 		envp_args(envp, i, env, value_len);
 		i++;
 		env = env->next;

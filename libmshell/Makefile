@@ -18,7 +18,11 @@ SRC			= calloc.c  \
 			  strlcat.c \
 			  strlen.c  \
 			  strncmp.c \
-			  substr.c
+			  substr.c \
+			  strcmp.c \
+			  atol.c  \
+			  isdigit.c
+
 OBJS		= $(SRC:.c=.o)
 CC 			= gcc
 INCLUDE		= -I ./

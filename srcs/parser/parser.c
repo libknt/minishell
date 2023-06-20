@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:24:57 by keys              #+#    #+#             */
-/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/20 15:29:06 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ bool	find_redirect(t_token *token)
 		token->type = WORD;
 		return (false);
 	}
-	return ((strncmp(token->word, "<<", 2) == 0) || (strncmp(token->word, ">>",
-				2) == 0) || (strncmp(token->word, "<", 1) == 0)
-		|| (strncmp(token->word, ">", 1) == 0));
+	return ((ft_strncmp(token->word, "<<", 2) == 0) || (ft_strncmp(token->word, ">>",
+				2) == 0) || (ft_strncmp(token->word, "<", 1) == 0)
+		|| (ft_strncmp(token->word, ">", 1) == 0));
 }
 
 t_node	*newnode(t_token *token)

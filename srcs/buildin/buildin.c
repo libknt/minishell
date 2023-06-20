@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:34:18 by marai             #+#    #+#             */
-/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/20 15:54:45 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,19 @@ bool	is_buildin(char *str)
 {
 	if (!str)
 		return (false);
-	else if (!strcmp(str, "cd"))
+	else if (!ft_strcmp(str, "cd"))
 		return (true);
-	else if (!strcmp(str, "export"))
+	else if (!ft_strcmp(str, "export"))
 		return (true);
-	else if (!strcmp(str, "env"))
+	else if (!ft_strcmp(str, "env"))
 		return (true);
-	else if (!strcmp(str, "unset"))
+	else if (!ft_strcmp(str, "unset"))
 		return (true);
-	else if (!strcmp(str, "echo"))
+	else if (!ft_strcmp(str, "echo"))
 		return (true);
-	else if (!strcmp(str, "pwd"))
+	else if (!ft_strcmp(str, "pwd"))
 		return (true);
-	else if (!strcmp(str, "exit"))
+	else if (!ft_strcmp(str, "exit"))
 		return (true);
 	return (false);
 }
@@ -67,19 +67,19 @@ int	buildin(char *argv[], t_env **env, t_node *node)
 	s = new_status();
 	if (!argv)
 		return (0);
-	if (!strcmp(argv[0], "cd"))
+	if (!ft_strcmp(argv[0], "cd"))
 		cd(argv, *env, s);
-	else if (!strcmp(argv[0], "export"))
+	else if (!ft_strcmp(argv[0], "export"))
 		ft_export(argv, env, s);
-	else if (!strcmp(argv[0], "env"))
+	else if (!ft_strcmp(argv[0], "env"))
 		env_buildin(argv, *env, node, s);
-	else if (!strcmp(argv[0], "unset"))
+	else if (!ft_strcmp(argv[0], "unset"))
 		unset(argv, env, s);
-	else if (!strcmp(argv[0], "echo"))
+	else if (!ft_strcmp(argv[0], "echo"))
 		ft_echo(argv, s);
-	else if (!strcmp(argv[0], "pwd"))
+	else if (!ft_strcmp(argv[0], "pwd"))
 		ft_pwd(s);
-	else if (!strcmp(argv[0], "exit"))
+	else if (!ft_strcmp(argv[0], "exit"))
 		ft_exit(argv, s);
 	return (buildin_exit(s));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_simple_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/06/18 14:24:57 by masahitoara      ###   ########.fr       */
+/*   Updated: 2023/06/20 15:54:45 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	command_access_utils(char **argv, t_node *node)
 	if (is_directory(argv[0]))
 	{
 		node->fds = revert_redirect(node->fds);
-		if (strcmp(argv[0], "..") == 0)
+		if (ft_strcmp(argv[0], "..") == 0)
 			_err_cmd_not_found(argv[0]);
 		else
 			_err_is_directory(argv[0]);
