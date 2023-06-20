@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_adoption.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 18:29:09 by keys              #+#    #+#             */
-/*   Updated: 2023/03/25 17:33:10 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/20 16:15:53 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 static int	escape(int fd)
 {
 	int	newfd;
+	int dummy_fd;
+	
 
-	newfd = fcntl(fd, F_DUPFD, 10);
+	dummy_fd = open("/dev/null", O_RDONLY);
+	newfd = dup(fd);
 	if (newfd < 0)
-		_err("fcntl");
+		_err("dup");
 	if (close(fd) < 0)
 		_err("close");
+	close(dummy_fd);
 	return (newfd);
 }
 

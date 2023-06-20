@@ -72,7 +72,8 @@ int	cd(char *argv[], t_env *env, t_status *s)
 	home = get_home_dir(env);
 	if (home == NULL)
 	{
-		dprintf(STDERR_FILENO, "HOME not set\n");
+		// dprintf(STDERR_FILENO, "HOME not set\n");
+		ft_putendl_fd("HOME not set", STDERR_FILENO);
 		return (-1);
 	}
 	if (!argv[1])
@@ -88,7 +89,10 @@ int	cd(char *argv[], t_env *env, t_status *s)
 	}
 	free(home);
 	if (status < 0)
-		dprintf(STDERR_FILENO, "bash: cd: too many arguments\n");
+	{
+		// dprintf(STDERR_FILENO, "bash: cd: too many arguments\n");
+		ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);
+	}
 	else
 		imple_pwd(env, s);
 	return (0);

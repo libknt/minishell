@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:56:19 by keys              #+#    #+#             */
-/*   Updated: 2023/06/20 15:54:28 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/20 16:02:23 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	*ft_calloc(size_t count, size_t size);
-int	ft_isdigit(int c);
-int ft_strcmp(const char *s1, const char *s2);
+int	    ft_isdigit(int c);
+int     ft_strcmp(const char *s1, const char *s2);
 long	ft_atol(const char *nptr);
 
 #endif
