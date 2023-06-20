@@ -45,7 +45,11 @@ int	execve_cmd(char **argv, char **envp, t_node *node)
 	int		waitstatus;
 
 	if (command_access_utils(argv, node) < 0)
+	{
+		ft_split_free(argv);
+		ft_split_free(envp);
 		return (-2);
+	}
 	rl_event_hook = 0;
 	pid = fork();
 	block_signal();

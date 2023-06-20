@@ -33,7 +33,7 @@ void	check_str(char *str)
 		else
 		{
 			if (ft_isal(str[i]) == 1)
-				exit(2);
+				exit(255);
 		}
 		i++;
 	}
@@ -54,7 +54,7 @@ static void	exe_exit(size_t i, char **argv, t_status *s)
 		if (argv[1][0] == '\0')
 		{
 			write(2, "minishell: exit: : numeric argument required\n", 44);
-			exit(2);
+			exit(255);
 		}
 		else
 		{

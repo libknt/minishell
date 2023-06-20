@@ -41,11 +41,15 @@ static int	command_found_utils(char **argv, char **envp)
 int	command_found(char **argv, char **envp)
 {
 	if (command_found_utils(argv, envp))
+	{
+		ft_split_free(argv);
 		return (1);
+	}
 	else if (access(argv[0], X_OK) && !is_buildin(argv[0]))
 	{
 		_err_cmd_not_found(argv[0]);
 		ft_split_free(envp);
+		ft_split_free(argv);
 		return (1);
 	}
 	else
