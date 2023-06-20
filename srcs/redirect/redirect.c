@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 17:58:29 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/10 19:38:46 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_fds	*new_fds(void)
 {
 	t_fds	*new;
 
-	new = calloc(1, sizeof(t_fds));
+	new = ft_calloc(1, sizeof(t_fds));
 	if (new == NULL)
 		_err_malloc();
 	new->fd_r = NULL;

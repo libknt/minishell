@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_arr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 14:21:21 by keys              #+#    #+#             */
-/*   Updated: 2023/03/11 21:38:33 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	**make_arr(t_node *node)
 
 	line = node->line;
 	len = line_size(line);
-	arr = calloc(sizeof(char **), len + 1);
+	arr = ft_calloc(sizeof(char **), len + 1);
 	if (!arr)
 		_err_malloc();
 	push_arr(arr, line);

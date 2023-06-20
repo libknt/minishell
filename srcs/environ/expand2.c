@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/18 16:11:04 by masahitoara      ###   ########.fr       */
+/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ ssize_t	calc_expand_len(char *line, t_env *env, ssize_t len)
 	char	*str;
 
 	end = vari_end(line);
-	str = calloc(end + 1, sizeof(char));
+	str = ft_calloc(end + 1, sizeof(char));
 	if (str == NULL)
 		_err_malloc();
 	ft_strlcpy(str, line, end + 1);

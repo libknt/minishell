@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:31:08 by marai             #+#    #+#             */
-/*   Updated: 2023/03/25 19:56:49 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	make_env_args_utils(t_env *env, char **envp, ssize_t i,
 	ssize_t	len;
 
 	len = strlen(env->key) + value_len + 2;
-	envp[i] = calloc(len, sizeof(char));
+	envp[i] = ft_calloc(len, sizeof(char));
 	if (!envp[i])
 		_err_malloc();
 	ft_strlcat(envp[i], env->key, len);
@@ -37,7 +37,7 @@ char	**make_env_args(t_env *env)
 	char	**envp;
 
 	num = env_num(env);
-	envp = calloc(num + 1, sizeof(char *));
+	envp = ft_calloc(num + 1, sizeof(char *));
 	if (!envp)
 		_err_malloc();
 	i = 0;
