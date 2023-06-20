@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/03/26 15:16:45 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/18 16:01:31 by masahitoara      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ ssize_t	make_expand(char *expanded, char *line, t_env *env)
 	ft_strlcpy(str, line, end + 1);
 	env_value = find_env(str, env);
 	if (env_value != NULL)
+	{
 		strncat(expanded, env_value, strlen(env_value));
-	free(env_value);
+		free(env_value);
+	}
 	free(str);
 	return (end);
 }

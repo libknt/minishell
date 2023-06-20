@@ -14,7 +14,7 @@
 
 #define PATH_MAXLEN 4096
 
-void	imple_pwd(t_env *head, char *prev, t_status *s);
+void	imple_pwd(t_env *head, t_status *s);
 
 char	*get_home_dir(t_env *env)
 {
@@ -66,7 +66,6 @@ int	cd(char *argv[], t_env *env, t_status *s)
 {
 	char	path[PATH_MAXLEN];
 	char	*home;
-	char	*prev;
 	int		status;
 
 	s->f = true;
@@ -76,7 +75,6 @@ int	cd(char *argv[], t_env *env, t_status *s)
 		dprintf(STDERR_FILENO, "HOME not set\n");
 		return (-1);
 	}
-	prev = get_pwd(s);
 	if (!argv[1])
 		status = chdir(home);
 	else if (argv[1][0] == '/')
@@ -90,39 +88,35 @@ int	cd(char *argv[], t_env *env, t_status *s)
 	}
 	free(home);
 	if (status < 0)
-	{
 		dprintf(STDERR_FILENO, "bash: cd: too many arguments\n");
-		free(prev);
-	}
 	else
-		imple_pwd(env, prev, s);
+		imple_pwd(env, s);
 	return (0);
 }
 
-void	imple_pwd(t_env *head, char *prev, t_status *s)
+void	imple_pwd(t_env *head, t_status *s)
 {
-	t_env *env1;
-	char *path;
+	char	*path;
+	bool	isPWD;
+	t_env	*env;
 
-	env1 = head;
-	while (env1)
+	env = head;
+	isPWD = false;	
+	while(env)
 	{
-		if (!strcmp(env1->key, "PWD"))
+		if(!strcmp("PWD", env->key))
 		{
-			free(env1->value);
-			path = get_pwd(s);
-			env1->value = path;
+			if(env->value)
+			{
+				ft_env_addback(&head, make_env("OLDPWD", env->value));
+				isPWD = true;
+			}
 		}
-		env1 = env1->next;
+		env = env->next;
 	}
-	env1 = head;
-	while (env1)
-	{
-		if (!strcmp(env1->key, "OLDPWD"))
-		{
-			free(env1->value);
-			env1->value = prev;
-		}
-		env1 = env1->next;
-	}
+	if(!isPWD)
+		ft_env_addback(&head, make_env("OLDPWD", NULL));
+	path = get_pwd(s);
+	ft_env_addback(&head, make_env("PWD", path));
+	free(path);
 }

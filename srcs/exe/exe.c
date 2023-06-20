@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 01:01:00 by marai             #+#    #+#             */
-/*   Updated: 2023/06/10 19:38:28 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/18 15:11:59 by masahitoara      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	exec_tree(t_node *node, t_env *env, int atty)
 	while (node && node->line->type == PIPE)
 		node = node->left;
 	add_redirect(node, env);
+	block_signal();
 	while (1)
 	{
 		if (node->status < 1)
