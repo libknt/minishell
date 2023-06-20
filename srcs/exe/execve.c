@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:55:38 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/20 15:34:40 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/20 16:55:17 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_global	g_global;
 
-static void	exec_fork(t_node *node, t_env *env, int fd1, t_data_e *d)
+static int	exec_fork(t_node *node, t_env *env, int fd1, t_data_e *d)
 {
 	int	pid;
 
@@ -34,11 +34,13 @@ static void	exec_fork(t_node *node, t_env *env, int fd1, t_data_e *d)
 			execve(d->argv[0], d->argv, d->envp);
 		}
 	}
+	return (pid);
 }
 
 int	exec(t_node *node, t_env *env, int fd1, int atty)
 {
 	t_data_e	d;
+	int pid;
 
 	ft_memset(&d, 0, sizeof(t_data_e));
 	if (!node)
@@ -53,10 +55,10 @@ int	exec(t_node *node, t_env *env, int fd1, int atty)
 		return (0);
 	pipe(d.rw);
 	rl_event_hook = 0;
-	exec_fork(node, env, fd1, &d);
+	pid = exec_fork(node, env, fd1, &d);
 	if (node->next == NULL)
 	{
-		wait(&(d.status));
+		waitpid(pid, &(d.status), 0);
 		g_global.exit_status = d.status;
 	}
 	return (revert_free(node, d.argv, d.envp, d.rw));
