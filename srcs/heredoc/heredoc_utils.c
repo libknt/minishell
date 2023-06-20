@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 14:53:32 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/10 19:40:50 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/20 15:12:35 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_rename_dir(char *x)
 	if (!file)
 		_err_malloc();
 	memset(file, 'x', len - 7);
-	memcpy(file, x, 10);
+	ft_memcpy(file, x, 10);
 	free(x);
 	x = strdup(".heredoc");
 	if (!file)
