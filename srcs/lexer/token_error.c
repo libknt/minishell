@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:06:46 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/25 17:51:36 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/20 15:29:06 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 bool	err_syntax(char *op)
 {
-	if (strncmp(op, "||", 2) == 0)
+	if (ft_strncmp(op, "||", 2) == 0)
 		return (_err_syntax("||"));
-	if (strncmp(op, "&&", 2) == 0)
+	if (ft_strncmp(op, "&&", 2) == 0)
 		return (_err_syntax("&&"));
-	if (strncmp(op, ";;", 2) == 0)
+	if (ft_strncmp(op, ";;", 2) == 0)
 		return (_err_syntax(";;"));
-	if (strncmp(op, "|&", 2) == 0)
+	if (ft_strncmp(op, "|&", 2) == 0)
 		return (_err_syntax("|&"));
-	if (strncmp(op, "&", 1) == 0)
+	if (ft_strncmp(op, "&", 1) == 0)
 		return (_err_syntax("&"));
-	if (strncmp(op, "(", 1) == 0)
+	if (ft_strncmp(op, "(", 1) == 0)
 		return (_err_syntax("()"));
-	if (strncmp(op, ")", 1) == 0)
+	if (ft_strncmp(op, ")", 1) == 0)
 		return (_err_syntax(")"));
-	if (strncmp(op, ";", 1) == 0)
+	if (ft_strncmp(op, ";", 1) == 0)
 		return (_err_syntax(";"));
 	return (false);
 }

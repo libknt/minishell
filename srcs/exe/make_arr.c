@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 14:21:21 by keys              #+#    #+#             */
-/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/20 15:31:54 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	push_arr(char **arr, t_line *line)
 			break ;
 		if (line->type == CMDLINE)
 		{
-			arr[i] = strdup(line->token->word);
+			arr[i] = ft_strdup(line->token->word);
 			if (!arr[i])
 				_err_malloc();
 			i++;

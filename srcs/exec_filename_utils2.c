@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_filename_utils2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 15:30:10 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/12 20:59:12 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/20 15:30:06 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strdup(const char *s1)
 	int		len;
 	char	*p;
 
-	len = strlen(s1);
+	len = ft_strlen(s1);
 	p = (char *)malloc(sizeof(char) * (len + 1));
 	if (p == NULL)
 		_err_malloc();
@@ -33,7 +33,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 
 	if (!src)
 		return (0);
-	len = strlen(src);
+	len = ft_strlen(src);
 	if (dstsize == 0)
 		return (len);
 	if (len <= dstsize - 1)
@@ -52,10 +52,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	if (strlen(s) <= start || !len)
+	if (ft_strlen(s) <= start || !len)
 		return (ft_strdup(""));
-	if (strlen(s + start) < len)
-		len = strlen(s + start);
+	if (ft_strlen(s + start) < len)
+		len = ft_strlen(s + start);
 	ans = (char *)malloc(sizeof(char) * (len + 1));
 	if (!ans)
 		_err_malloc();
@@ -69,11 +69,11 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	size_t	src_len;
 
 	if (!(dst) && src && dstsize == 0)
-		return (strlen(src));
-	dst_len = strlen(dst);
+		return (ft_strlen(src));
+	dst_len = ft_strlen(dst);
 	if (!src)
 		return (dst_len);
-	src_len = strlen(src);
+	src_len = ft_strlen(src);
 	if (dst_len >= dstsize)
 		return (dstsize + src_len);
 	if (src_len < dstsize - dst_len)
@@ -94,8 +94,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	len_s1 = strlen(s1);
-	len_s2 = strlen(s2);
+	len_s1 = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
 	p = malloc(len_s1 + len_s2 + 1);
 	if (!p)
 		_err_malloc();

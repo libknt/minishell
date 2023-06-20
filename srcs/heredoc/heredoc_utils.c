@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 14:53:32 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/20 15:31:54 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	is_heredoc(t_line *line)
 {
 	if (line->type == REDIRECT)
 	{
-		if (strncmp(line->token->word, "<<", 2) == 0)
+		if (ft_strncmp(line->token->word, "<<", 2) == 0)
 			return (true);
 	}
 	return (false);
@@ -45,14 +45,14 @@ char	*ft_rename_dir(char *x)
 	char	*tmp;
 	size_t	len;
 
-	len = strlen(x);
+	len = ft_strlen(x);
 	file = ft_calloc(sizeof(char), len - 6);
 	if (!file)
 		_err_malloc();
 	memset(file, 'x', len - 7);
 	memcpy(file, x, 10);
 	free(x);
-	x = strdup(".heredoc");
+	x = ft_strdup(".heredoc");
 	if (!file)
 		_err("malloc");
 	tmp = file;

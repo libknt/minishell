@@ -24,7 +24,7 @@ char	*get_home_dir(t_env *env)
 	{
 		if (!strcmp(env->key, "HOME"))
 		{
-			homepath = strdup(env->value);
+			homepath = ft_strdup(env->value);
 			if (!homepath)
 				_err_malloc();
 			return (homepath);
@@ -45,18 +45,18 @@ char	*make_abs_path(char *path, char *argv, char *home)
 		ft_strlcpy(path, home, PATH_MAXLEN);
 		return (path);
 	}
-	if (!strncmp(argv, "~/", 2))
+	if (!ft_strncmp(argv, "~/", 2))
 	{
 		memset(path, '\0', PATH_MAXLEN);
 		ft_strlcpy(path, home, PATH_MAXLEN);
 		i = 2;
 	}
-	if (!strncmp(argv, "./", 2))
+	if (!ft_strncmp(argv, "./", 2))
 		i = 2;
-	ft_strlcat(path, "/", strlen(path) + 2);
+	ft_strlcat(path, "/", ft_strlen(path) + 2);
 	while (argv[i])
 	{
-		ft_strlcat(path, &argv[i], strlen(path) + 2);
+		ft_strlcat(path, &argv[i], ft_strlen(path) + 2);
 		i++;
 	}
 	return (path);

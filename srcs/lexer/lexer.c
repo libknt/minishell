@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/03/26 14:39:48 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/20 15:30:34 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ ssize_t	wordlen(char *prompt, t_data_t *d)
 
 t_token_type	find_type(char *tmp)
 {
-	if (strncmp(tmp, "||", 2) == 0 || strncmp(tmp, "&&", 2) == 0 || strncmp(tmp,
-			";;", 2) == 0 || strncmp(tmp, "|&", 2) == 0 || strncmp(tmp, "&",
-			1) == 0 || strncmp(tmp, ";", 1) == 0 || strncmp(tmp, "(", 1) == 0
-		|| strncmp(tmp, ")", 1) == 0 || strncmp(tmp, "|", 1) == 0
-		|| strncmp(tmp, "\n", 1) == 0)
+	if (ft_strncmp(tmp, "||", 2) == 0 || ft_strncmp(tmp, "&&", 2) == 0 || ft_strncmp(tmp,
+			";;", 2) == 0 || ft_strncmp(tmp, "|&", 2) == 0 || ft_strncmp(tmp, "&",
+			1) == 0 || ft_strncmp(tmp, ";", 1) == 0 || ft_strncmp(tmp, "(", 1) == 0
+		|| ft_strncmp(tmp, ")", 1) == 0 || ft_strncmp(tmp, "|", 1) == 0
+		|| ft_strncmp(tmp, "\n", 1) == 0)
 		return (OP);
 	return (WORD);
 }
@@ -91,7 +91,7 @@ static void	check_redirect(t_token *token)
 	{
 		if (token->type == T_EOF)
 			break ;
-		if (strchr(token->word, '"') || strchr(token->word, '\''))
+		if (ft_strchr(token->word, '"') || ft_strchr(token->word, '\''))
 		{
 			token->type = EX_WORD;
 		}
