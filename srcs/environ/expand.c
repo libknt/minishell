@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/18 16:01:31 by masahitoara      ###   ########.fr       */
+/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ ssize_t	make_expand(char *expanded, char *line, t_env *env)
 	char	*env_value;
 
 	end = vari_end(line);
-	str = calloc(end + 1, sizeof(char));
+	str = ft_calloc(end + 1, sizeof(char));
 	if (str == NULL)
 		_err_malloc();
 	ft_strlcpy(str, line, end + 1);
@@ -41,7 +41,7 @@ char	*vari_expand(char *line, t_env *env)
 	char	*expanded;
 
 	expanded_len = vari_expand_len(line, env);
-	expanded = calloc(expanded_len + 1, sizeof(char));
+	expanded = ft_calloc(expanded_len + 1, sizeof(char));
 	if (!expanded)
 		_err_malloc();
 	i = 0;
@@ -96,7 +96,7 @@ char	*expand_quote(char *line)
 	if (!line)
 		return (NULL);
 	len = strlen(line);
-	line2 = calloc(len + 1, sizeof(char));
+	line2 = ft_calloc(len + 1, sizeof(char));
 	if (!line2)
 		_err_malloc();
 	expand_quote_utils(line, line2, NULL);

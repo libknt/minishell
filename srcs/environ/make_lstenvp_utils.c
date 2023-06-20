@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_lstenvp_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 00:48:30 by Marai             #+#    #+#             */
-/*   Updated: 2023/03/12 00:52:42 by Marai            ###   ########.fr       */
+/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_env	*new_lstenv(char *envp)
 	t_env	*env;
 	size_t	len;
 
-	env = calloc(sizeof(t_env), 1);
+	env = ft_calloc(sizeof(t_env), 1);
 	if (!env)
 		_err("calloc");
 	len = env_len(envp);

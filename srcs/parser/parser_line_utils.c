@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_line_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 21:32:13 by keys              #+#    #+#             */
-/*   Updated: 2023/03/11 19:48:00 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_line	*newline(t_token *token, t_redirect type)
 {
 	t_line	*new;
 
-	new = calloc(sizeof(t_line), 1);
+	new = ft_calloc(sizeof(t_line), 1);
 	if (!new)
 		_err_malloc();
 	new->token = token;

@@ -9,6 +9,10 @@ INCLUDE		=	-I ./include/
 # 			  srcs/exe/exe.c
 SRCS		= $(shell find srcs/ -name "*.c" )
 
+LIBMSHELLDIR	=	libmshell
+LIBMSHELL		=	$(LIBMSHELLDIR)/libmshell.a
+LIB			=	$(LIBMSHELL)
+
 
 OBJDIR   = obj
 OBJS  = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
@@ -22,8 +26,9 @@ $(OBJDIR)/%.o: %.c
 all: $(NAME)
 
 $(NAME):$(OBJS)
+	make -C libmshell
 	@mkdir -p .heredoc
-	$(CC) $^ $(CFLAGS) -o $@ -lreadline
+	$(CC) $^ $(CFLAGS) $(LIB) -o $@ -lreadline
 
 #$(NAME):$(OBJS)
 #	@mkdir -p .heredoc
@@ -39,6 +44,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
+	make fclean -C libmshell
 
 re : fclean all
 	./minishell

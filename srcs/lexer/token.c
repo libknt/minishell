@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 21:24:17 by keys              #+#    #+#             */
-/*   Updated: 2023/03/26 14:39:55 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ t_token	*new_token(char *str, t_token_type type)
 {
 	t_token	*new;
 
-	new = calloc(sizeof(t_token), 1);
+	new = ft_calloc(sizeof(t_token), 1);
 	if (!new)
 		_err("calloc");
-	new->ex_heredoc_flag = calloc(sizeof(bool), 1);
+	new->ex_heredoc_flag = ft_calloc(sizeof(bool), 1);
 	if (!new->ex_heredoc_flag)
 		_err_malloc();
 	new->type = type;
