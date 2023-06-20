@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_lstenvp_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Marai <MasaDevs@gmail.com>                 +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 00:48:30 by Marai             #+#    #+#             */
-/*   Updated: 2023/03/12 00:52:42 by Marai            ###   ########.fr       */
+/*   Updated: 2023/06/20 15:18:31 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	add_env(t_env **env, char *envp, size_t len)
 
 void	add_value(t_env **env, char *envp, size_t len)
 {
-	if (strlen(envp) != len)
-		(*env)->value = ft_substr(envp, len + 1, strlen(&envp[len + 1]));
+	if (ft_strlen(envp) != len)
+		(*env)->value = ft_substr(envp, len + 1, ft_strlen(&envp[len + 1]));
 	else
 		(*env)->value = NULL;
 }

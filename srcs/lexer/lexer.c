@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/03/26 14:39:48 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/20 15:19:14 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ bool	make_token(char **line, t_data_t *d)
 		else
 		{
 			d->prompt = *line;
-			d->word = strndup(&d->prompt[d->i], d->len);
+			d->word = ft_strndup(&d->prompt[d->i], d->len);
 			if (!d->word)
 				_err_malloc();
 			d->i += d->len;
@@ -91,7 +91,7 @@ static void	check_redirect(t_token *token)
 	{
 		if (token->type == T_EOF)
 			break ;
-		if (strchr(token->word, '"') || strchr(token->word, '\''))
+		if (ft_strchr(token->word, '"') || ft_strchr(token->word, '\''))
 		{
 			token->type = EX_WORD;
 		}

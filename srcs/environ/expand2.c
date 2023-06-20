@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/18 16:11:04 by masahitoara      ###   ########.fr       */
+/*   Updated: 2023/06/20 15:18:31 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ ssize_t	find_env_len(char *str, t_env *env)
 		if (!strcmp(env->key, str))
 		{
 			if(env->value)
-				return (strlen(env->value));
+				return (ft_strlen(env->value));
 			else
 				return (0);
 		}
@@ -76,7 +76,7 @@ ssize_t	vari_expand_len(char *line, t_env *env)
 
 	i = 0;
 	quote_counter = 0;
-	len = strlen(line);
+	len = ft_strlen(line);
 	if (!line)
 		return (0);
 	while (line[i])

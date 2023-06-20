@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils_is.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 21:12:35 by keys              #+#    #+#             */
-/*   Updated: 2023/03/04 21:29:44 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/20 15:17:36 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	is_metacharacter(char c)
 {
 	char	*is;
 
-	is = strchr("|&;()<> \t", c);
+	is = ft_strchr("|&;()<> \t", c);
 	if (is == NULL)
 		return (false);
 	return (true);

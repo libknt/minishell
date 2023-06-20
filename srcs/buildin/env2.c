@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:31:08 by marai             #+#    #+#             */
-/*   Updated: 2023/03/25 19:56:49 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/20 15:18:31 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ static void	make_env_args_utils(t_env *env, char **envp, ssize_t i,
 {
 	ssize_t	len;
 
-	len = strlen(env->key) + value_len + 2;
+	len = ft_strlen(env->key) + value_len + 2;
 	envp[i] = calloc(len, sizeof(char));
 	if (!envp[i])
 		_err_malloc();
 	ft_strlcat(envp[i], env->key, len);
 	if (env->value)
 	{
-		ft_strlcat(envp[i], "=", strlen(env->key) + 2);
+		ft_strlcat(envp[i], "=", ft_strlen(env->key) + 2);
 		ft_strlcat(envp[i], env->value, len);
 	}
 }
@@ -46,7 +46,7 @@ char	**make_env_args(t_env *env)
 		if (!env->value)
 			value_len = 0;
 		else
-			value_len = strlen(env->value);
+			value_len = ft_strlen(env->value);
 		make_env_args_utils(env, envp, i, value_len);
 		i++;
 		env = env->next;

@@ -53,10 +53,10 @@ char	*make_abs_path(char *path, char *argv, char *home)
 	}
 	if (!strncmp(argv, "./", 2))
 		i = 2;
-	ft_strlcat(path, "/", strlen(path) + 2);
+	ft_strlcat(path, "/", ft_strlen(path) + 2);
 	while (argv[i])
 	{
-		ft_strlcat(path, &argv[i], strlen(path) + 2);
+		ft_strlcat(path, &argv[i], ft_strlen(path) + 2);
 		i++;
 	}
 	return (path);

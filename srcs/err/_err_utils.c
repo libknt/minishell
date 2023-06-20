@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _err_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 23:24:55 by keys              #+#    #+#             */
-/*   Updated: 2023/03/25 18:36:22 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/20 15:18:31 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_putstr_fd(char *s, int fd)
 	len = 0;
 	if (!s)
 		return ;
-	len = strlen(s);
+	len = ft_strlen(s);
 	if (len <= INT_MAX)
 		write(fd, s, len);
 	else
