@@ -2,6 +2,7 @@
 # define MINISHELL_H
 
 # include "get_next_line.h"
+# include "../libmshell/libmshell.h"
 # include "struct.h"
 # include <ctype.h>
 # include <dirent.h>

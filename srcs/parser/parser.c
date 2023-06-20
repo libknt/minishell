@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:24:57 by keys              #+#    #+#             */
-/*   Updated: 2023/03/26 14:39:02 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_node	*newnode(t_token *token)
 {
 	t_node	*new;
 
-	new = calloc(sizeof(t_node), 1);
+	new = ft_calloc(sizeof(t_node), 1);
 	if (!new)
 		_err_malloc();
 	new->line = make_line(token);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_right.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/25 17:34:15 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_fd	*new_fd(void)
 {
 	t_fd	*new;
 
-	new = calloc(1, sizeof(t_fd));
+	new = ft_calloc(1, sizeof(t_fd));
 	if (new == NULL)
 		_err_malloc();
 	new->std_fd = -1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:30:45 by marai             #+#    #+#             */
-/*   Updated: 2023/06/11 02:00:43 by masahitoara      ###   ########.fr       */
+/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	envp_args(char **envp, ssize_t i, t_env *env, ssize_t value_len)
 
 	len = 0;
 	len = strlen(env->key) + value_len + 4;
-	envp[i] = calloc(len, sizeof(char));
+	envp[i] = ft_calloc(len, sizeof(char));
 	if (!envp[i])
 		_err_malloc();
 	ft_strlcat(envp[i], env->key, len);
@@ -37,7 +37,7 @@ static char	**make_export_args(t_env *env, ssize_t i, ssize_t num,
 	char	**envp;
 
 	num = env_num(env);
-	envp = calloc(num + 1, sizeof(char *));
+	envp = ft_calloc(num + 1, sizeof(char *));
 	if (!envp)
 		_err_malloc();
 	while (i < num)
