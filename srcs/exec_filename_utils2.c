@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_filename_utils2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 15:30:10 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/12 20:59:12 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/20 15:15:35 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ char	*ft_strdup(const char *s1)
 	if (p == NULL)
 		_err_malloc();
 	else
-		memmove(p, s1, len);
-	memset(p + len, '\0', 1);
+		ft_memmove(p, s1, len);
+	ft_memset(p + len, '\0', 1);
 	return (p);
 }
 
@@ -37,10 +37,10 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	if (dstsize == 0)
 		return (len);
 	if (len <= dstsize - 1)
-		memmove(dst, src, len + 1);
+		ft_memmove(dst, src, len + 1);
 	else
 	{
-		memmove(dst, src, dstsize - 1);
+		ft_memmove(dst, src, dstsize - 1);
 		bzero(&dst[dstsize - 1], 1);
 	}
 	return (len);
@@ -77,11 +77,11 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	if (dst_len >= dstsize)
 		return (dstsize + src_len);
 	if (src_len < dstsize - dst_len)
-		memmove(dst + dst_len, src, src_len + 1);
+		ft_memmove(dst + dst_len, src, src_len + 1);
 	else
 	{
-		memmove(dst + dst_len, src, dstsize - dst_len - 1);
-		memset(dst + dstsize, '\0', 1);
+		ft_memmove(dst + dst_len, src, dstsize - dst_len - 1);
+		ft_memset(dst + dstsize, '\0', 1);
 	}
 	return (dst_len + src_len);
 }

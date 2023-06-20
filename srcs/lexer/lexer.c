@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/03/26 14:39:48 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/20 15:15:35 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ t_token	*lexer(char **line, t_env *env)
 		return (NULL);
 	}
 	token = NULL;
-	memset(&data, 0, sizeof(t_data_t));
+	ft_memset(&data, 0, sizeof(t_data_t));
 	data.prompt = *line;
 	if (make_token(line, &data))
 		return (lexer_err_free(line, &data.head));

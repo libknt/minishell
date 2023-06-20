@@ -41,13 +41,13 @@ char	*make_abs_path(char *path, char *argv, char *home)
 	i = 0;
 	if (!strcmp(argv, "~"))
 	{
-		memset(path, '\0', PATH_MAXLEN);
+		ft_memset(path, '\0', PATH_MAXLEN);
 		ft_strlcpy(path, home, PATH_MAXLEN);
 		return (path);
 	}
 	if (!strncmp(argv, "~/", 2))
 	{
-		memset(path, '\0', PATH_MAXLEN);
+		ft_memset(path, '\0', PATH_MAXLEN);
 		ft_strlcpy(path, home, PATH_MAXLEN);
 		i = 2;
 	}
@@ -81,7 +81,7 @@ int	cd(char *argv[], t_env *env, t_status *s)
 		status = chdir(argv[1]);
 	else
 	{
-		memset(path, '\0', PATH_MAXLEN);
+		ft_memset(path, '\0', PATH_MAXLEN);
 		getcwd(path, PATH_MAXLEN);
 		make_abs_path(path, argv[1], home);
 		status = chdir(path);

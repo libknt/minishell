@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:55:38 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/26 16:50:12 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/20 15:15:35 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	exec(t_node *node, t_env *env, int fd1, int atty)
 {
 	t_data_e	d;
 
-	memset(&d, 0, sizeof(t_data_e));
+	ft_memset(&d, 0, sizeof(t_data_e));
 	if (!node)
 		return (0);
 	d.envp = make_env_args(env);
