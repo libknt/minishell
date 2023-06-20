@@ -5,6 +5,7 @@ CC			=	cc
 # CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=leak
 CFLAGS		=	-Wall -Wextra -Werror
 INCLUDE		=	-I ./include/ -I ~/.brew/opt/readline/include
+# INCLUDE		=	-I ./include/ -I /goinfre/kyoda/.brew/opt/readline/include
 # SRCS		= srcs/main.c\
 # 			  srcs/exe/exe.c
 SRCS		= $(shell find srcs/ -name "*.c" )
@@ -12,6 +13,7 @@ SRCS		= $(shell find srcs/ -name "*.c" )
 LIBMSHELLDIR	=	libmshell
 LIBMSHELL		=	$(LIBMSHELLDIR)/libmshell.a
 LIB			=	$(LIBMSHELL) -L ~/.brew/opt/readline/lib
+# LIB			=	$(LIBMSHELL) -L /goinfre/kyoda/.brew/opt/readline/lib
 
 
 OBJDIR   = obj

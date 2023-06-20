@@ -17,11 +17,18 @@ extern t_global	g_global;
 int	buildin_return(t_status *s)
 {
 	if (s->f == false)
+	{
+		free(s);
 		return (0);
+	}
 	g_global.exit_status = s->status;
 	if (s->status == 0)
+	{
+		free(s);
 		return (1);
+	}
 	ft_putendl_fd(s->err_ms, 2);
+	free(s);
 	return (1);
 }
 
