@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:36:46 by marai             #+#    #+#             */
-/*   Updated: 2023/06/21 21:58:09 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/22 03:35:26 by masahitoara      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	unset(char *argv[], t_env **env, t_status *s)
 				env_node->prev->next = env_node->next;
 				if (env_node->next)
 					env_node->next->prev = env_node->prev;
+				free(env_node->key);
+				free(env_node->value);
 				free(env_node);
 				break ;
 			}
