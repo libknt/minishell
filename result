@@ -1,0 +1,607 @@
+COMMAND
+
+RESULT
+COMMAND
+/bin/pwd
+RESULT
+COMMAND
+/bin/echo
+RESULT
+COMMAND
+/bin/ls
+RESULT
+COMMAND
+pwd
+RESULT
+COMMAND
+echo
+RESULT
+COMMAND
+ls
+RESULT
+COMMAND
+./a.out
+RESULT
+COMMAND
+a.out
+RESULT
+COMMAND
+nosuchfile
+RESULT
+COMMAND
+""
+RESULT
+COMMAND
+..
+RESULT
+COMMAND
+./
+RESULT
+COMMAND
+/
+RESULT
+COMMAND
+/etc
+RESULT
+COMMAND
+/etc/
+RESULT
+COMMAND
+////
+RESULT
+COMMAND
+no_exec_perm
+RESULT
+COMMAND
+./no_exec_perm
+RESULT
+COMMAND
+no_read_perm
+RESULT
+COMMAND
+./no_read_perm
+RESULT
+COMMAND
+unset PATH
+export PATH="/tmp/a:/tmp/b"
+simple_test
+RESULT
+COMMAND
+unset PATH
+export PATH="/tmp/b:/tmp/a"
+simple_test
+RESULT
+COMMAND
+unset PATH
+export PATH="/tmp/a:/tmp/b"
+simple_test
+RESULT
+COMMAND
+unset PATH
+export PATH="/tmp/b:/tmp/a"
+simple_test
+RESULT
+COMMAND
+unset PATH
+export PATH="/tmp/a:/tmp/b"
+simple_test
+RESULT
+COMMAND
+unset PATH
+export PATH="/tmp/b:/tmp/a"
+simple_test
+RESULT
+COMMAND
+unset PATH
+export PATH="/tmp/a:/tmp/b"
+simple_test
+RESULT
+COMMAND
+unset PATH
+export PATH="/tmp/b:/tmp/a"
+simple_test
+RESULT
+COMMAND
+ls /
+RESULT
+COMMAND
+echo hello    world     
+RESULT
+COMMAND
+nosuchfile
+
+
+RESULT
+COMMAND
+./print_args 'hello   world' '42Tokyo'
+RESULT
+COMMAND
+echo 'hello   world' '42Tokyo'
+RESULT
+COMMAND
+echo '"hello   world"' '42Tokyo'
+RESULT
+COMMAND
+./print_args "hello   world" "42Tokyo"
+RESULT
+COMMAND
+echo "hello   world" "42Tokyo"
+RESULT
+COMMAND
+echo "'hello   world'" "42Tokyo"
+RESULT
+COMMAND
+echo hello'      world'
+RESULT
+COMMAND
+echo hello'  world  '"  42Tokyo  "
+RESULT
+COMMAND
+echo hello >hello.txt
+RESULT
+COMMAND
+echo hello >f1>f2>f3
+RESULT
+COMMAND
+cat <Makefile
+RESULT
+COMMAND
+cat <f1<f2<f3
+RESULT
+COMMAND
+cat <hoge
+RESULT
+COMMAND
+pwd >>pwd.txt
+RESULT
+COMMAND
+pwd >>pwd.txt 
+ pwd >>pwd.txt
+RESULT
+COMMAND
+cat <<EOF
+hello
+world
+EOF
+NOPRINT
+RESULT
+COMMAND
+cat <<EOF<<eof
+hello
+world
+EOF
+eof
+NOPRINT
+RESULT
+COMMAND
+cat <<EOF
+hello
+world
+RESULT
+COMMAND
+cat <<E"O"F
+hello
+world
+EOF
+NOPRINT
+RESULT
+COMMAND
+cat <<EOF   
+$USER
+$NO_SUCH_VAR
+$FOO$BAR
+EOF
+RESULT
+COMMAND
+cat <<"EOF" 
+$USER
+$NO_SUCH_VAR
+$FOO$BAR
+EOF
+RESULT
+COMMAND
+cat <<EO"F" 
+$USER
+$NO_SUCH_VAR
+$FOO$BAR
+EOF
+RESULT
+COMMAND
+cat <<$EOF         
+eof
+$EOF
+EOF
+RESULT
+COMMAND
+cat <<"$EOF"       
+eof
+$EOF
+EOF
+RESULT
+COMMAND
+cat Makefile | grep minishell
+RESULT
+COMMAND
+cat | cat | ls
+
+
+RESULT
+COMMAND
+echo $USER
+RESULT
+COMMAND
+echo $USER$PATH$TERM
+RESULT
+COMMAND
+echo "$USER  $PATH   $TERM"
+RESULT
+COMMAND
+echo $?
+RESULT
+COMMAND
+invalid
+echo $?
+echo $?
+RESULT
+COMMAND
+exit42
+echo $?
+echo $?
+RESULT
+COMMAND
+exit42
+
+echo $?
+echo $?
+RESULT
+COMMAND
+exit
+RESULT
+COMMAND
+exit 42
+RESULT
+COMMAND
+exit ""
+RESULT
+COMMAND
+exit hello
+RESULT
+COMMAND
+exit 42Tokyo
+RESULT
+COMMAND
+exit 1 2
+RESULT
+COMMAND
+export
+RESULT
+26c26
+< declare -x SHLVL="3"
+---
+> declare -x SHLVL="2"
+37c37
+< declare -x _="/bin/bash"
+---
+> declare -x _="./minishell"
+COMMAND
+export | grep nosuch | sort
+RESULT
+COMMAND
+export nosuch
+ export | grep nosuch | sort
+RESULT
+COMMAND
+export nosuch=fuga
+ export | grep nosuch | sort
+RESULT
+COMMAND
+export nosuch=fuga hoge=nosuch
+ export | grep nosuch | sort
+RESULT
+COMMAND
+export [invalid]
+RESULT
+COMMAND
+export [invalid_nosuch]
+ export | grep nosuch | sort
+RESULT
+COMMAND
+export [invalid]=nosuch
+ export | grep nosuch | sort
+RESULT
+COMMAND
+export [invalid] nosuch hoge=nosuch
+ export | grep nosuch | sort
+RESULT
+COMMAND
+export nosuch [invalid] hoge=nosuch
+ export | grep nosuch | sort
+RESULT
+COMMAND
+export nosuch hoge=nosuch [invalid]
+ export | grep nosuch | sort
+RESULT
+COMMAND
+export nosuch="nosuch2=hoge"
+export $nosuch
+ export | grep nosuch | sort
+RESULT
+COMMAND
+unset
+RESULT
+COMMAND
+unset hoge
+RESULT
+COMMAND
+unset fuga
+RESULT
+COMMAND
+unset nosuch
+RESULT
+COMMAND
+unset [invalid]
+RESULT
+COMMAND
+unset hoge fuga
+RESULT
+COMMAND
+unset hoge nosuch fuga
+RESULT
+COMMAND
+unset fuga 
+ export | echo $fuga
+RESULT
+1d0
+< 
+COMMAND
+unset [invalid] fuga 
+ echo $fuga
+RESULT
+1d0
+< 
+COMMAND
+env
+RESULT
+2,3d1
+< SHELL=/bin/zsh
+< HOMEBREW_TEMP=/tmp/marai/Homebrew/Temp
+5c3,4
+< MAKEFLAGS=
+---
+> HOMEBREW_TEMP=/tmp/marai/Homebrew/Temp
+> SHELL=/bin/zsh
+6a6
+> MAKEFLAGS=
+11d10
+< USER=marai
+12a12
+> USER=marai
+17d16
+< HOMEBREW_CACHE=/tmp/marai/Homebrew/Caches
+18a18
+> HOMEBREW_CACHE=/tmp/marai/Homebrew/Caches
+20d19
+< _=/usr/bin/env
+26,27d24
+< HOME=/Users/marai
+< SHLVL=3
+28a26,27
+> SHLVL=2
+> HOME=/Users/marai
+34d32
+< DISPLAY=/private/tmp/com.apple.launchd.QHp3xaBUEh/org.xquartz:0
+36c34
+< SQLITE_EXEMPT_PATH_FROM_VNODE_GUARDS=/Users/marai/Library/WebKit/Databases
+---
+> DISPLAY=/private/tmp/com.apple.launchd.QHp3xaBUEh/org.xquartz:0
+37a36
+> SQLITE_EXEMPT_PATH_FROM_VNODE_GUARDS=/Users/marai/Library/WebKit/Databases
+38a38
+> _=./minishell
+COMMAND
+env | grep hoge | sort
+RESULT
+COMMAND
+cd
+RESULT
+COMMAND
+cd .
+RESULT
+COMMAND
+cd ..
+RESULT
+COMMAND
+cd ///
+RESULT
+COMMAND
+cd /tmp
+RESULT
+COMMAND
+cd /tmp/
+RESULT
+COMMAND
+cd /tmp///
+RESULT
+COMMAND
+cd /../../../././.././
+RESULT
+COMMAND
+cd src
+RESULT
+COMMAND
+unset HOME
+cd
+RESULT
+COMMAND
+cd 
+ echo $PWD
+RESULT
+COMMAND
+cd 
+ echo $PWD
+RESULT
+COMMAND
+cd .
+ echo $PWD
+RESULT
+COMMAND
+cd ..
+ echo $PWD
+RESULT
+COMMAND
+cd ///
+ echo $PWD
+RESULT
+COMMAND
+cd /tmp
+ echo $PWD
+RESULT
+1c1
+< /tmp
+---
+> /private/tmp
+COMMAND
+cd /tmp/
+ echo $PWD
+RESULT
+1c1
+< /tmp
+---
+> /private/tmp
+COMMAND
+cd /tmp///
+ echo $PWD
+RESULT
+1c1
+< /tmp
+---
+> /private/tmp
+COMMAND
+cd /../../../././.././
+ echo $PWD
+RESULT
+COMMAND
+cd src
+ echo $PWD
+RESULT
+COMMAND
+unset HOME
+cd 
+ echo $PWD
+RESULT
+1d0
+< /Users/marai/Documents/minishell
+COMMAND
+echo
+RESULT
+COMMAND
+echo hello
+RESULT
+COMMAND
+echo hello "    " world
+RESULT
+COMMAND
+echo -n
+RESULT
+COMMAND
+echo -n hello
+RESULT
+COMMAND
+echo -n hello world
+RESULT
+COMMAND
+echo hello -n
+RESULT
+COMMAND
+pwd
+RESULT
+COMMAND
+cd
+pwd
+RESULT
+COMMAND
+cd src
+pwd
+RESULT
+COMMAND
+cd /etc
+pwd
+RESULT
+1c1
+< /etc
+---
+> /private/etc
+COMMAND
+cd . 
+ pwd 
+ echo $PWD $OLDPWD
+RESULT
+COMMAND
+cd .. 
+ pwd 
+ echo $PWD $OLDPWD
+RESULT
+COMMAND
+cd /// 
+ pwd 
+ echo $PWD $OLDPWD
+RESULT
+COMMAND
+cd /tmp/// 
+ pwd 
+ echo $PWD $OLDPWD
+RESULT
+1,2c1,2
+< /tmp
+< /tmp /Users/marai/Documents/minishell
+---
+> /private/tmp
+> /private/tmp /Users/marai/Documents/minishell
+COMMAND
+unset PWD
+pwd
+cd /etc
+pwd
+RESULT
+1,2d0
+< /Users/marai/Documents/minishell
+< /etc
+COMMAND
+unset PWD 
+ cd 
+ echo $PWD 
+cd /tmp
+echo $PWD
+RESULT
+1,2d0
+< /Users/marai
+< /tmp
+COMMAND
+unset PWD
+cd
+echo $OLDPWD
+cd /tmp
+echo $OLDPWD
+RESULT
+1,2d0
+< 
+< /Users/marai
+COMMAND
+unset PWD
+cd
+export|grep PWD
+cd /tmp
+export|grep PWD
+RESULT
+1,2d0
+< declare -x OLDPWD=""
+< declare -x OLDPWD="/Users/marai"
+COMMAND
+unset PWD
+cd
+env|grep PWD
+cd /tmp
+env|grep PWD
+RESULT
+1d0
+< OLDPWD=/Users/marai
