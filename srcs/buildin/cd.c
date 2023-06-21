@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:56 by keys              #+#    #+#             */
-/*   Updated: 2023/06/21 16:20:00 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/21 17:40:34 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,22 @@ char	*make_abs_path(char *path, char *argv, char *home)
 	i = 0;
 	if (!ft_strcmp(argv, "~"))
 	{
+		if (!home)
+		{
+			ft_putendl_fd("HOME not set", STDERR_FILENO);
+			return (NULL);
+		}
 		ft_memset(path, '\0', PATH_MAXLEN);
 		ft_strlcpy(path, home, PATH_MAXLEN);
 		return (path);
 	}
 	if (!ft_strncmp(argv, "~/", 2))
 	{
+		if (!home)
+		{
+			ft_putendl_fd("HOME not set", STDERR_FILENO);
+			return (NULL);
+		}
 		ft_memset(path, '\0', PATH_MAXLEN);
 		ft_strlcpy(path, home, PATH_MAXLEN);
 		i = 2;
@@ -74,22 +84,25 @@ int	move_to_home_or_rel_path(char *path[], t_env *env, t_status *s)
 	int		status;
 
 	home = get_home_dir(env);
-	if (home == NULL)
-	{
-		ft_putendl_fd("HOME not set", STDERR_FILENO);
-		s->status = 1;
-		return (-1);
-	}
 	if (!path[1])
+	{
+		if (!home)
+		{
+			ft_putendl_fd("HOME not set", STDERR_FILENO);
+			s->status = 1;
+			return (-1);
+		}
 		status = chdir(home);
+	}
 	else
 	{
 		ft_memset(home_path, '\0', PATH_MAXLEN);
 		getcwd(home_path, PATH_MAXLEN);
 		make_abs_path(home_path, path[1], home);
 		status = chdir(home_path);
-		free(home);
 	}
+	if (home)
+		free(home);
 	return status;
 }
 
@@ -98,6 +111,7 @@ void	handle_cd_status(int status, t_env *env, t_status *s)
 	if (status < 0)
 	{
 		ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);
+		s->status = 1;
 	}
 	else
 		imple_pwd(env, s);
@@ -108,7 +122,7 @@ int	cd(char *argv[], t_env *env, t_status *s)
 	int		status;
 
 	s->f = true;
-	if (argv[1][0] == '/')
+	if (argv[1] && argv[1][0] == '/')
 		status = move_to_abs_path(argv[1]);
 	else
 		status = move_to_home_or_rel_path(argv, env, s);
