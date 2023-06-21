@@ -6,7 +6,7 @@
 /*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:56 by keys              #+#    #+#             */
-/*   Updated: 2023/06/22 03:32:32 by masahitoara      ###   ########.fr       */
+/*   Updated: 2023/06/22 04:07:00 by masahitoara      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,13 @@ char	*make_abs_path(char *path, char *argv, char *home)
 
 int	move_to_abs_path(char *path)
 {
-	return chdir(path);
+	int		status;
+
+	status =  chdir(path);
+	if (status < 0)
+		ft_putendl_fd(" No such file or directory", STDERR_FILENO);
+	
+	return (status);
 }
 
 int	move_to_home_or_rel_path(char *path[], t_env *env, t_status *s)
@@ -103,16 +109,16 @@ int	move_to_home_or_rel_path(char *path[], t_env *env, t_status *s)
 	}
 	if (home)
 		free(home);
+	if (status < 0)
+		ft_putendl_fd(" No such file or directory", STDERR_FILENO);
+	
 	return status;
 }
 
 void	handle_cd_status(int status, t_env **env, t_status *s)
 {
 	if (status < 0)
-	{
-		ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);
 		s->status = 1;
-	}
 	else
 		imple_pwd(env, s);
 }
@@ -122,7 +128,12 @@ int	cd(char *argv[], t_env **env, t_status *s)
 	int		status;
 
 	s->f = true;
-	if (argv[1] && argv[1][0] == '/')
+	if (argv[1] && argv[2])
+	{
+		ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);
+		status = -1;
+	}
+	else if (argv[1] && argv[1][0] == '/')
 		status = move_to_abs_path(argv[1]);
 	else
 		status = move_to_home_or_rel_path(argv, *env, s);
