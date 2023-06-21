@@ -31,7 +31,7 @@ bool	is_identifier(const char *s)
 	{
 		if (!is_alpha_num_under(*s) && *s != '=')
 			return (false);
-		if(*s == '=')
+		if (*s == '=')
 			return (true);
 		s++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:56 by keys              #+#    #+#             */
-/*   Updated: 2023/06/11 03:32:51masahitoara      ###   ########.fr       */
+/*   Updated: 2023/06/21 16:03:11 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,17 @@ int	cd(char *argv[], t_env *env, t_status *s)
 
 void	imple_pwd(t_env *head, t_status *s)
 {
-	char	*path;
-	bool	isPWD;
-	t_env	*env;
+	char *path;
+	bool isPWD;
+	t_env *env;
 
 	env = head;
-	isPWD = false;	
-	while(env)
+	isPWD = false;
+	while (env)
 	{
-		if(!ft_strcmp("PWD", env->key))
+		if (!ft_strcmp("PWD", env->key))
 		{
-			if(env->value)
+			if (env->value)
 			{
 				ft_env_addback(&head, make_env("OLDPWD", env->value));
 				isPWD = true;
@@ -121,7 +121,7 @@ void	imple_pwd(t_env *head, t_status *s)
 		}
 		env = env->next;
 	}
-	if(!isPWD)
+	if (!isPWD)
 		ft_env_addback(&head, make_env("OLDPWD", NULL));
 	path = get_pwd(s);
 	ft_env_addback(&head, make_env("PWD", path));

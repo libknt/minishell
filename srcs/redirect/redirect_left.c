@@ -79,7 +79,8 @@ t_fd	*redirect_left(t_node *node, t_line *line, t_env *env, t_fd *fd)
 			if (fd == NULL)
 				return (NULL);
 		}
-		else if (line->type == REDIRECT && !ft_strncmp(line->token->word, "<", 1))
+		else if (line->type == REDIRECT && !ft_strncmp(line->token->word, "<",
+				1))
 		{
 			fd = close_file(fd);
 			fd = open_file(node, line->next->token->word);

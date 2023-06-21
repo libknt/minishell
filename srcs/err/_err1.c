@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 23:24:55 by keys              #+#    #+#             */
-/*   Updated: 2023/06/20 16:02:56 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/21 15:46:00 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ extern t_global	g_global;
 
 void	_err(const char *e)
 {
-	// dprintf(STDERR_FILENO, "Fatal Error: %s\n", e);
 	ft_putstr_fd("Fatal Error: ", STDERR_FILENO);
 	ft_putendl_fd((char *)e, STDERR_FILENO);
 	g_global.exit_status = 1;

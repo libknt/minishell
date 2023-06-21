@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/21 15:17:48 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/21 16:04:48 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@ ssize_t	vari_end(char *line)
 
 	if (!line)
 		return (-1);
-	if (*line == '?')
+	if (*line == '?' || isdigit(*line))
 		return (1);
 	i = 0;
-	if (isdigit(line[i]))
-		return (1);
 	if (!is_alpha_under(line[i]))
 		return (0);
 	i++;
@@ -43,7 +41,7 @@ ssize_t	find_env_len(char *str, t_env *env)
 	{
 		if (!ft_strcmp(env->key, str))
 		{
-			if(env->value)
+			if (env->value)
 				return (ft_strlen(env->value));
 			else
 				return (0);
@@ -58,7 +56,7 @@ ssize_t	calc_expand_len(char *line, t_env *env, ssize_t len)
 	ssize_t	end;
 	char	*str;
 
-	if(*line == '?')
+	if (*line == '?')
 		return (3);
 	end = vari_end(line);
 	str = ft_calloc(end + 1, sizeof(char));
@@ -111,7 +109,7 @@ char	*find_env(char *str, t_env *env)
 	{
 		if (!ft_strcmp(env->key, str))
 		{
-			if(env->value)
+			if (env->value)
 			{
 				env_value = ft_strdup(env->value);
 				if (!env_value)

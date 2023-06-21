@@ -15,8 +15,7 @@
 static int	escape(int fd)
 {
 	int	newfd;
-	int dummy_fd;
-	
+	int	dummy_fd;
 
 	dummy_fd = open("/dev/null", O_RDONLY);
 	newfd = dup(fd);
