@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/06/21 16:06:06 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/21 19:36:51 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	_err_arg(void)
 	exit(127);
 }
 
-static void	func_readline(t_env *env, char *line, t_token *token, t_node *tree)
+static void	func_readline(t_env **env, char *line, t_token *token, t_node *tree)
 {
 	while (1)
 	{
@@ -43,10 +43,10 @@ static void	func_readline(t_env *env, char *line, t_token *token, t_node *tree)
 			break ;
 		if (*line)
 			add_history(line);
-		token = lexer(&line, env);
+		token = lexer(&line, *env);
 		if (token == NULL)
 			continue ;
-		expand_token(&token, env, false);
+		expand_token(&token, *env, false);
 		tree = parser(token, line);
 		if (tree == NULL)
 			continue ;
@@ -67,6 +67,6 @@ int	main(int argc, char **argv, char **envp)
 	env = NULL;
 	make_lstenv(&env, envp);
 	rl_outstream = stderr;
-	func_readline(env, NULL, NULL, NULL);
+	func_readline(&env, NULL, NULL, NULL);
 	return (g_global.exit_status);
 }

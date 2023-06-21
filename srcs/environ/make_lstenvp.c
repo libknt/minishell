@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_lstenvp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 09:09:09 by keys              #+#    #+#             */
-/*   Updated: 2023/06/21 16:09:50 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/21 19:48:33 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,22 @@ t_env *search_key_in_list(t_env **env, t_env *new)
 	return env_node;
 }
 
-void replace_node_in_list(t_env **env_node, t_env *new)
+void replace_node_in_list(t_env **head, t_env **env_node, t_env *new)
 {
-	(*env_node)->prev->next = new;
-	new->prev = (*env_node)->prev;
-	new->next = (*env_node)->next;
-	if ((*env_node)->next)
-		(*env_node)->next->prev = new;
-	free((*env_node)->key);
-	free((*env_node)->value);
-	free(*env_node);
+	t_env *tmp;
+
+	tmp = *env_node;
+	if (tmp->prev)
+		tmp->prev->next = new;
+	else
+		(*head) = new;
+	new->prev = tmp->prev;
+	new->next = tmp->next;
+	if (tmp->next)
+		tmp->next->prev = new;
+	free(tmp->key);
+	free(tmp->value);
+	free(tmp);
 }
 
 void add_node_to_end(t_env **env_node, t_env *new)
@@ -54,7 +60,7 @@ void ft_env_addback(t_env **env, t_env *new)
 	env_node = search_key_in_list(env, new);
 	if (env_node && !ft_strcmp(env_node->key, new->key))
 	{
-		replace_node_in_list(&env_node, new);
+		replace_node_in_list(env, &env_node, new);
 	}
 	else if (env_node)
 	{
