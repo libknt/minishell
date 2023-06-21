@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 01:01:00 by marai             #+#    #+#             */
-/*   Updated: 2023/06/18 15:11:59 by masahitoara      ###   ########.fr       */
+/*   Updated: 2023/06/21 19:36:24 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	wait_process(void)
 	}
 }
 
-int	exec_tree(t_node *node, t_env *env, int atty)
+int	exec_tree(t_node *node, t_env **env, int atty)
 {
 	int	fd0;
 	int	fd1;
@@ -64,7 +64,7 @@ int	exec_tree(t_node *node, t_env *env, int atty)
 	add_node(node);
 	while (node && node->line->type == PIPE)
 		node = node->left;
-	add_redirect(node, env);
+	add_redirect(node, *env);
 	block_signal();
 	while (1)
 	{
@@ -83,7 +83,7 @@ int	exec_tree(t_node *node, t_env *env, int atty)
 	return (0);
 }
 
-int	exe_(t_node *node, t_env *env)
+int	exe_(t_node *node, t_env **env)
 {
 	int	atty;
 	int	dummy_fd;
@@ -92,7 +92,7 @@ int	exe_(t_node *node, t_env *env)
 	atty = isatty(1);
 	if (node->line->type != PIPE)
 	{
-		node->fds = redirect_check(node, env);
+		node->fds = redirect_check(node, *env);
 		if (node->status == 1)
 			return (0);
 		execve_simple_cmd(node, env);

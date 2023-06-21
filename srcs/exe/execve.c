@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:55:38 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/21 15:47:13 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/21 19:34:04 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	exec_fork(t_node *node, t_env *env, int fd1, t_data_e *d)
 	return (pid);
 }
 
-int	exec(t_node *node, t_env *env, int fd1, int atty)
+int	exec(t_node *node, t_env **env, int fd1, int atty)
 {
 	t_data_e	d;
 	int			pid;
@@ -41,7 +41,7 @@ int	exec(t_node *node, t_env *env, int fd1, int atty)
 	ft_memset(&d, 0, sizeof(t_data_e));
 	if (!node)
 		return (0);
-	d.envp = make_env_args(env);
+	d.envp = make_env_args(*env);
 	d.argv = access_cmd_path(node, d.envp);
 	d.atty = atty;
 	redirect_adoption(node->fds);
@@ -51,7 +51,7 @@ int	exec(t_node *node, t_env *env, int fd1, int atty)
 		return (0);
 	pipe(d.rw);
 	rl_event_hook = 0;
-	pid = exec_fork(node, env, fd1, &d);
+	pid = exec_fork(node, *env, fd1, &d);
 	if (node->next == NULL)
 	{
 		waitpid(pid, &(d.status), 0);

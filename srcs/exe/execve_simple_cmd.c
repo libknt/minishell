@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_simple_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/06/20 16:44:07 by masahitoara      ###   ########.fr       */
+/*   Updated: 2023/06/21 19:31:33 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,15 @@ int	execve_cmd(char **argv, char **envp, t_node *node)
 	return (0);
 }
 
-int	execve_simple_cmd(t_node *node, t_env *env)
+int	execve_simple_cmd(t_node *node, t_env **env)
 {
 	char	**argv;
 	char	**envp;
 
-	envp = make_env_args(env);
+	envp = make_env_args(*env);
 	redirect_adoption(node->fds);
 	argv = access_cmd_path(node, envp);
-	if (buildin_simple(argv, &env, node))
+	if (buildin_simple(argv, env, node))
 	{
 		ft_split_free(envp);
 		ft_split_free(argv);

@@ -45,7 +45,7 @@ ssize_t		calc_expand_len(char *line, t_env *env, ssize_t len);
 ssize_t		vari_expand_len(char *line, t_env *env);
 bool		is_heredocfile(void);
 void		_err_heredoc(char *m);
-int			exec(t_node *node, t_env *env, int fd1, int atty);
+int			exec(t_node *node, t_env **env, int fd1, int atty);
 char		**access_cmd_path(t_node *node, char **envp);
 char		*ft_rename(char *x);
 char		*ft_rename_dir(char *x);
@@ -97,7 +97,7 @@ void		line_addback(t_line **head, t_line *new);
 t_line		*newline(t_token *token, t_redirect type);
 
 /*execve*/
-int			execve_simple_cmd(t_node *node, t_env *env);
+int			execve_simple_cmd(t_node *node, t_env **env);
 
 char		**ft_split(char const *s, char c);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
@@ -118,8 +118,8 @@ char		**make_arr(t_node *node);
 void	    expand_token(t_token **token, t_env *env, bool f);
 // char	*get_next_line(int fd);
 
-int			exec_tree(t_node *node, t_env *env,int atty);
-int			exe_(t_node *node, t_env *env);
+int			exec_tree(t_node *node, t_env **env,int atty);
+int			exe_(t_node *node, t_env **env);
 void		set_signal(void);
 void		make_lstenv(t_env **s_env, char **envp);
 
