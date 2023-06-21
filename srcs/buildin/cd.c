@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:56 by keys              #+#    #+#             */
-/*   Updated: 2023/06/21 21:02:08 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/21 17:40:34 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define PATH_MAXLEN 4096
 
-void	imple_pwd(t_env **head, t_status *s);
+void	imple_pwd(t_env *head, t_status *s);
 
 char	*get_home_dir(t_env *env)
 {
@@ -106,7 +106,7 @@ int	move_to_home_or_rel_path(char *path[], t_env *env, t_status *s)
 	return status;
 }
 
-void	handle_cd_status(int status, t_env **env, t_status *s)
+void	handle_cd_status(int status, t_env *env, t_status *s)
 {
 	if (status < 0)
 	{
@@ -117,7 +117,7 @@ void	handle_cd_status(int status, t_env **env, t_status *s)
 		imple_pwd(env, s);
 }
 
-int	cd(char *argv[], t_env **env, t_status *s)
+int	cd(char *argv[], t_env *env, t_status *s)
 {
 	int		status;
 
@@ -125,7 +125,7 @@ int	cd(char *argv[], t_env **env, t_status *s)
 	if (argv[1] && argv[1][0] == '/')
 		status = move_to_abs_path(argv[1]);
 	else
-		status = move_to_home_or_rel_path(argv, *env, s);
+		status = move_to_home_or_rel_path(argv, env, s);
 	handle_cd_status(status, env, s);
 	return (0);
 }
@@ -169,13 +169,13 @@ int	cd(char *argv[], t_env **env, t_status *s)
 // 	return (0);
 // }
 
-void	imple_pwd(t_env **head, t_status *s)
+void	imple_pwd(t_env *head, t_status *s)
 {
 	char	*path;
 	bool	is_pwd;
 	t_env	*env;
 
-	env = *head;
+	env = head;
 	is_pwd = false;
 	while (env)
 	{
@@ -183,15 +183,15 @@ void	imple_pwd(t_env **head, t_status *s)
 		{
 			if (env->value)
 			{
-				ft_env_addback(head, make_env("OLDPWD", env->value));
+				ft_env_addback(&head, make_env("OLDPWD", env->value));
 				is_pwd = true;
 			}
 		}
 		env = env->next;
 	}
 	if (!is_pwd)
-		ft_env_addback(head, make_env("OLDPWD", NULL));
+		ft_env_addback(&head, make_env("OLDPWD", NULL));
 	path = get_pwd(s);
-	ft_env_addback(head, make_env("PWD", path));
+	ft_env_addback(&head, make_env("PWD", path));
 	free(path);
 }
