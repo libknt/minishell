@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 09:09:09 by keys              #+#    #+#             */
-/*   Updated: 2023/06/21 19:48:33 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/22 02:01:21 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void replace_node_in_list(t_env **head, t_env **env_node, t_env *new)
 {
 	t_env *tmp;
 
+	if(!new->value)
+		return ;
 	tmp = *env_node;
 	if (tmp->prev)
 		tmp->prev->next = new;

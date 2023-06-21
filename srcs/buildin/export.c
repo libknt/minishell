@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:30:45 by marai             #+#    #+#             */
-/*   Updated: 2023/06/20 15:30:06 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/22 02:00:03 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,14 @@ int	check_env_vari(char *argv)
 		return (0);
 	if (argv[0] == '=' || !is_identifier(argv))
 	{
-		// printf("'%s': not a valid identifier\n", argv);
+		ft_putendl_fd("not a valid identifier:", 2);
+		ft_putendl_fd(argv, 2);
 		return (0);
 	}
 	return (1);
 }
 
-static void	export_utils(char *argv[], t_env *env_node, t_env **env)
+static void	export_utils(char *argv[], t_env *env_node, t_env **env, t_status *s)
 {
 	ssize_t	i;
 
@@ -76,6 +77,7 @@ static void	export_utils(char *argv[], t_env *env_node, t_env **env)
 		if (!check_env_vari(argv[i]))
 		{
 			i++;
+			s->status = 1;
 			continue ;
 		}
 		env_node = new_lstenv(argv[i]);
@@ -92,6 +94,7 @@ void	ft_export(char *argv[], t_env **env, t_status *s)
 	char	**envp;
 
 	s->f = true;
+	s->status = 0;
 	if (!argv[1])
 	{
 		envp = make_export_args(*env, 0, 0, 0);
@@ -106,5 +109,5 @@ void	ft_export(char *argv[], t_env **env, t_status *s)
 		free_envp(envp, i);
 		return ;
 	}
-	export_utils(argv, NULL, env);
+	export_utils(argv, NULL, env, s);
 }
