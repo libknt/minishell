@@ -69,25 +69,28 @@ int	cd(char *argv[], t_env *env, t_status *s)
 	int		status;
 
 	s->f = true;
-	home = get_home_dir(env);
-	if (home == NULL)
-	{
-		// dprintf(STDERR_FILENO, "HOME not set\n");
-		ft_putendl_fd("HOME not set", STDERR_FILENO);
-		return (-1);
-	}
-	if (!argv[1])
-		status = chdir(home);
-	else if (argv[1][0] == '/')
+	if (argv[1][0] == '/')
 		status = chdir(argv[1]);
 	else
 	{
-		ft_memset(path, '\0', PATH_MAXLEN);
-		getcwd(path, PATH_MAXLEN);
-		make_abs_path(path, argv[1], home);
-		status = chdir(path);
+		home = get_home_dir(env);
+		if (home == NULL)
+		{
+			ft_putendl_fd("HOME not set", STDERR_FILENO);
+			s->status = 1;
+			return (-1);
+		}
+		if (!argv[1])
+			status = chdir(home);
+		else
+		{
+			ft_memset(path, '\0', PATH_MAXLEN);
+			getcwd(path, PATH_MAXLEN);
+			make_abs_path(path, argv[1], home);
+			status = chdir(path);
+			free(home);
+		}
 	}
-	free(home);
 	if (status < 0)
 	{
 		// dprintf(STDERR_FILENO, "bash: cd: too many arguments\n");

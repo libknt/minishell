@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/20 15:54:45 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/21 15:17:48 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ ssize_t	calc_expand_len(char *line, t_env *env, ssize_t len)
 	ssize_t	end;
 	char	*str;
 
+	if(*line == '?')
+		return (3);
 	end = vari_end(line);
 	str = ft_calloc(end + 1, sizeof(char));
 	if (str == NULL)
