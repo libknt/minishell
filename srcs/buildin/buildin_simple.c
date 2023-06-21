@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buildin_simple.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:34:18 by marai             #+#    #+#             */
-/*   Updated: 2023/06/20 15:54:45 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/21 21:46:53 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	buildin_return(t_status *s)
 void	exec_buildin(char **argv, t_env **env, t_node *node, t_status *s)
 {
 	if (s->buildin_type == 1)
-		cd(argv, *env, s);
+		cd(argv, env, s);
 	if (s->buildin_type == 2)
 		ft_export(argv, env, s);
 	if (s->buildin_type == 3)
