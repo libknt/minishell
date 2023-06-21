@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/06/10 19:38:05 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/21 16:06:06 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	func_readline(t_env *env, char *line, t_token *token, t_node *tree)
 		token = lexer(&line, env);
 		if (token == NULL)
 			continue ;
-		expand_token(&token, env);
+		expand_token(&token, env, false);
 		tree = parser(token, line);
 		if (tree == NULL)
 			continue ;

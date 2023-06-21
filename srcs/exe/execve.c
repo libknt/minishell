@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:55:38 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/20 16:55:17 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/21 15:47:13 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,9 @@ static int	exec_fork(t_node *node, t_env *env, int fd1, t_data_e *d)
 		reset_signal();
 		close_pipe(node, d->rw, fd1);
 		if (is_buildin(d->argv[0]))
-		{
 			buildin(d->argv, &env, node);
-		}
 		else
-		{
 			execve(d->argv[0], d->argv, d->envp);
-		}
 	}
 	return (pid);
 }
@@ -40,7 +36,7 @@ static int	exec_fork(t_node *node, t_env *env, int fd1, t_data_e *d)
 int	exec(t_node *node, t_env *env, int fd1, int atty)
 {
 	t_data_e	d;
-	int pid;
+	int			pid;
 
 	ft_memset(&d, 0, sizeof(t_data_e));
 	if (!node)

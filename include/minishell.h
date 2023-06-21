@@ -115,7 +115,7 @@ void		print_tree(t_node *node);
 void		print_n(t_node *node);
 
 char		**make_arr(t_node *node);
-void		expand_token(t_token **token, t_env *env);
+void	    expand_token(t_token **token, t_env *env, bool f);
 // char	*get_next_line(int fd);
 
 int			exec_tree(t_node *node, t_env *env,int atty);
@@ -183,4 +183,13 @@ void	_err_permission(char *m);
 int is_file_accessible(char *str);
 void	block_signal(void);
 t_env *make_env(char *key, char *value);
+
+
+void	check_redirect(t_token *token);
+void	*lexer_err_free(char **line, t_token **token);
+t_token_type	find_type(char *tmp);
+ssize_t	wordlen(char *prompt, t_data_t *d);
+
+
+void	sig_handler(int sig);
 #endif

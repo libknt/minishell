@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/20 15:32:12 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/21 16:06:17 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*vari_expand(char *line, t_env *env)
 	{
 		if (line[i] == '\'')
 			quote_counter++;
-		if (line[i] == '$' && quote_counter % 2 == 0 &&
+		if (line[i] == '$' && quote_counter % 2 == 0 && \
 			(i == 0 || line[i - 1] != '\\'))
 			i += make_expand(expanded, &line[i + 1], env);
 		else
@@ -136,7 +136,7 @@ static bool	is_heredoc_flag(char *word)
 // 	t_token	*token;
 // 	size_t i;
 
-// 	 i =0;
+// 		i =0;
 
 // 	token = NULL;
 // 	while (line[i])
@@ -150,23 +150,21 @@ static bool	is_heredoc_flag(char *word)
 // 	return (token);
 // }
 
-	// t_token	*new;
-	// t_token	*back;
-	// t_token	*last;
+// t_token	*new;
+// t_token	*back;
+// t_token	*last;
 
-			// new = expand_lexer(tmp->word);
-			// back = tmp->next;
-			// last = token_last(new);
-			// last->next = back;
-			// tmp->next = new;
+// new = expand_lexer(tmp->word);
+// back = tmp->next;
+// last = token_last(new);
+// last->next = back;
+// tmp->next = new;
 
-void	expand_token(t_token **token, t_env *env)
+void	expand_token(t_token **token, t_env *env, bool f)
 {
 	t_token	*tmp;
-	bool	f;
 
 	tmp = *token;
-	f = false;
 	while (1)
 	{
 		if (tmp->type == T_EOF)

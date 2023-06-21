@@ -19,8 +19,8 @@ bool	find_redirect(t_token *token)
 		token->type = WORD;
 		return (false);
 	}
-	return ((ft_strncmp(token->word, "<<", 2) == 0) || (ft_strncmp(token->word, ">>",
-				2) == 0) || (ft_strncmp(token->word, "<", 1) == 0)
+	return ((ft_strncmp(token->word, "<<", 2) == 0) || (ft_strncmp(token->word,
+				">>", 2) == 0) || (ft_strncmp(token->word, "<", 1) == 0)
 		|| (ft_strncmp(token->word, ">", 1) == 0));
 }
 

@@ -47,6 +47,7 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 	make fclean -C libmshell
+	rm -f result
 
 re : fclean all
 	./minishell
