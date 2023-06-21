@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_lstenvp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 09:09:09 by keys              #+#    #+#             */
-/*   Updated: 2023/06/22 02:01:21 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/22 03:19:10 by masahitoara      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,12 @@ void replace_node_in_list(t_env **head, t_env **env_node, t_env *new)
 	t_env *tmp;
 
 	if(!new->value)
+	{
+		free(new->key);
+		free(new->value);
+		free(new);
 		return ;
+	}
 	tmp = *env_node;
 	if (tmp->prev)
 		tmp->prev->next = new;
