@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:36:46 by marai             #+#    #+#             */
-/*   Updated: 2023/06/20 15:54:45 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/21 20:28:39 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@ void	unset(char *argv[], t_env **env, t_status *s)
 	ssize_t	i;
 	t_env	*env_node;
 
-	if (!argv)
+	if (!argv[1])
+	{
+		ft_putendl_fd("unset: not enough arguments\n", 2);
+		s->status = 1;
 		return ;
+	}
 	s->f = true;
 	i = 1;
 	while (argv[i])
@@ -28,10 +32,14 @@ void	unset(char *argv[], t_env **env, t_status *s)
 		{
 			if (!ft_strcmp(argv[i], env_node->key))
 			{
-				env_node->prev->next = env_node->next;
+				if(env_node->prev)
+					(env_node->prev)->next = env_node->next;
+				else
+					*env = NULL;
 				if (env_node->next)
-					env_node->next->prev = env_node->prev;
+					(env_node->next)->prev = env_node->prev;
 				free(env_node);
+				break ;
 			}
 			env_node = env_node->next;
 		}
