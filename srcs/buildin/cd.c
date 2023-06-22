@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:56 by keys              #+#    #+#             */
-/*   Updated: 2023/06/22 11:01:45 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/22 11:37:57 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*make_abs_path(char *path, char *argv, char *home)
 	{
 		if (!home)
 		{
-			ft_putstr_fd("HOME not set", STDERR_FILENO);
+			ft_putendl_fd("HOME not set", STDERR_FILENO);
 			return (NULL);
 		}
 		ft_memset(path, '\0', PATH_MAXLEN);
@@ -54,7 +54,7 @@ char	*make_abs_path(char *path, char *argv, char *home)
 	{
 		if (!home)
 		{
-			ft_putstr_fd("HOME not set", STDERR_FILENO);
+			ft_putendl_fd("HOME not set", STDERR_FILENO);
 			return (NULL);
 		}
 		ft_memset(path, '\0', PATH_MAXLEN);
