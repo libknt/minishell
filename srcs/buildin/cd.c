@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:56 by keys              #+#    #+#             */
-/*   Updated: 2023/06/22 04:07:00 by masahitoara      ###   ########.fr       */
+/*   Updated: 2023/06/22 11:01:45 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*make_abs_path(char *path, char *argv, char *home)
 	{
 		if (!home)
 		{
-			ft_putendl_fd("HOME not set", STDERR_FILENO);
+			ft_putstr_fd("HOME not set", STDERR_FILENO);
 			return (NULL);
 		}
 		ft_memset(path, '\0', PATH_MAXLEN);
@@ -54,7 +54,7 @@ char	*make_abs_path(char *path, char *argv, char *home)
 	{
 		if (!home)
 		{
-			ft_putendl_fd("HOME not set", STDERR_FILENO);
+			ft_putstr_fd("HOME not set", STDERR_FILENO);
 			return (NULL);
 		}
 		ft_memset(path, '\0', PATH_MAXLEN);
@@ -130,7 +130,7 @@ int	cd(char *argv[], t_env **env, t_status *s)
 	s->f = true;
 	if (argv[1] && argv[2])
 	{
-		ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);
+		ft_putstr_fd("minishell: cd: too many arguments", STDERR_FILENO);
 		status = -1;
 	}
 	else if (argv[1] && argv[1][0] == '/')

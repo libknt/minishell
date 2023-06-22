@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:30:45 by marai             #+#    #+#             */
-/*   Updated: 2023/06/22 02:00:03 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/22 11:02:23 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	check_env_vari(char *argv)
 		return (0);
 	if (argv[0] == '=' || !is_identifier(argv))
 	{
-		ft_putendl_fd("not a valid identifier:", 2);
-		ft_putendl_fd(argv, 2);
+		ft_putstr_fd("not a valid identifier:", 2);
+		ft_putstr_fd(argv, 2);
 		return (0);
 	}
 	return (1);
