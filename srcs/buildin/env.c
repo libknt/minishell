@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:31:08 by marai             #+#    #+#             */
-/*   Updated: 2023/03/25 19:51:15 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/22 03:26:07 by masahitoara      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static bool	env_utils(char **argv, t_env *env, t_status *s)
 			i++;
 			env = env->next;
 		}
+		ft_split_free(envp);
 		return (true);
 	}
 	return (false);
