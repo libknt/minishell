@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/20 15:29:06 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/22 10:39:53 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ static t_fd	*open_file(t_node *node, char *name)
 	new = new_fd();
 	new->file = open(name, O_RDONLY, 0644);
 	if (new->file < 0)
+	{
+		free(new);
 		return (_err_nofile(node, name));
+	}
 	new->std_fd = 0;
 	return (new);
 }
