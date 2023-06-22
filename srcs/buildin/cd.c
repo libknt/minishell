@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:56 by keys              #+#    #+#             */
-/*   Updated: 2023/06/22 11:37:57 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/22 13:38:47 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int	cd(char *argv[], t_env **env, t_status *s)
 	s->f = true;
 	if (argv[1] && argv[2])
 	{
-		ft_putstr_fd("minishell: cd: too many arguments", STDERR_FILENO);
+		ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);
 		status = -1;
 	}
 	else if (argv[1] && argv[1][0] == '/')
