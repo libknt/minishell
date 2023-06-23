@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   strndup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:33:34 by keys              #+#    #+#             */
-/*   Updated: 2023/03/15 12:24:53 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/23 12:09:08 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmshell.h"
 
-char	*strndup(const char *str, size_t n)
+char	*ft_strndup(const char *str, size_t n)
 {
 	size_t	len;
 	char	*p;

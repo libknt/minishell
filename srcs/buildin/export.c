@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:30:45 by marai             #+#    #+#             */
-/*   Updated: 2023/06/22 13:39:09 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/23 12:13:35 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ void	ft_export(char *argv[], t_env **env, t_status *s)
 		i = 0;
 		while (envp[i])
 		{
-			printf("declare -x ");
-			printf("%s\n", envp[i]);
+			ft_putstr_fd("declare -x ", STDOUT_FILENO);
+			ft_putendl_fd(envp[i], STDOUT_FILENO);
 			i++;
 		}
 		free_envp(envp, i);

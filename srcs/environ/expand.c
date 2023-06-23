@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/21 19:29:55 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/23 12:09:38 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	expand_quote_utils(char *line, char *line2, char *last)
 	j = 0;
 	while (line[i])
 	{
-		while (isspace(line[i]) && isspace(line[i + 1]))
+		while (ft_isspace(line[i]) && ft_isspace(line[i + 1]))
 			i++;
 		if (is_quote(line[i]))
 		{
@@ -124,7 +124,7 @@ static bool	is_heredoc_flag(char *word)
 // 			break ;
 // 		len++;
 // 	}
-// 	str = strndup(line, len);
+// 	str = ft_strndup(line, len);
 // 	if (!str)
 // 		_err_malloc();
 // 	new = new_token(str, WORD);
