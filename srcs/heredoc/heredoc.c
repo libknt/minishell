@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 19:01:20 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/20 16:18:32 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/23 13:11:33 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	heredoc_start(t_heredoc_var *v, t_env *env, t_node *node)
 	free(line);
 }
 
-static t_fd	*new_fd(void)
+t_fd	*new_fd(void)
 {
 	t_fd	*new;
 
@@ -96,6 +96,7 @@ static t_fd	*new_fd(void)
 	new->file = -1;
 	new->file_new = -1;
 	new->std_fd_new = -1;
+	new->filelinks = NULL;
 	return (new);
 }
 
@@ -122,6 +123,6 @@ t_fd	*heredoc(t_heredoc_var *v, t_env *env, t_node *node)
 		node->status = 1;
 		return (NULL);
 	}
-	free(x);
+	new->filelinks = x;
 	return (new);
 }

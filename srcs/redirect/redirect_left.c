@@ -6,31 +6,25 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/22 10:39:53 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/23 13:18:51 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_fd	*new_fd(void)
-{
-	t_fd	*new;
 
-	new = ft_calloc(1, sizeof(t_fd));
-	if (new == NULL)
-		_err_malloc();
-	new->std_fd = -1;
-	new->file = -1;
-	new->file_new = -1;
-	new->std_fd_new = -1;
-	return (new);
-}
 
-static void	*close_file(t_fd *fd)
+void	*close_file(t_fd *fd)
 {
 	if (fd == NULL)
 		return (NULL);
 	close(fd->file);
+	if(fd->filelinks)
+	{
+		unlink(fd->filelinks);
+		free(fd->filelinks);
+		fd->filelinks = NULL;
+	}
 	free(fd);
 	fd = NULL;
 	return (NULL);

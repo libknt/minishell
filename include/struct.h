@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/03/26 16:49:22 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/23 13:18:15 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ struct							s_status
 	int							status;
 	char						*err_ms;
 };
+
 typedef struct s_fd				t_fd;
 struct							s_fd
 {
@@ -37,6 +38,7 @@ struct							s_fd
 	int							file;
 	int							file_new;
 	int							std_fd_new;
+	char					*filelinks;
 };
 typedef struct s_fds			t_fds;
 struct							s_fds
