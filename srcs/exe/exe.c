@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 01:01:00 by marai             #+#    #+#             */
-/*   Updated: 2023/06/21 19:36:24 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/23 11:52:19 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,10 @@ int	exe_(t_node *node, t_env **env)
 	{
 		node->fds = redirect_check(node, *env);
 		if (node->status == 1)
+		{
+			close(dummy_fd);
 			return (0);
+		}
 		execve_simple_cmd(node, env);
 	}
 	else

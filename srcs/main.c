@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/06/21 19:36:51 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/23 11:51:14 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,20 @@ static void	func_readline(t_env **env, char *line, t_token *token, t_node *tree)
 	}
 }
 
+void free_env(t_env *env)
+{
+	t_env *tmp;
+
+	while (env)
+	{
+		tmp = env->next;
+		free(env->key);
+		free(env->value);
+		free(env);
+		env = tmp;
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_env	*env;
@@ -68,5 +82,6 @@ int	main(int argc, char **argv, char **envp)
 	make_lstenv(&env, envp);
 	rl_outstream = stderr;
 	func_readline(&env, NULL, NULL, NULL);
+	free_env(env);
 	return (g_global.exit_status);
 }
