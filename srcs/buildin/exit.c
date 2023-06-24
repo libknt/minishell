@@ -41,7 +41,18 @@ void	check_str(char *str)
 
 static void	exe_exit(size_t i, char **argv, t_status *s)
 {
-	if (i > 2)
+	if(argv[1] && ((ft_atol(argv[1]) == LONG_MAX) || (ft_atol(argv[1]) == LONG_MIN)))
+	{
+		ft_putendl_fd("exit",STDOUT_FILENO);
+		if((ft_strcmp(argv[1], "9223372036854775807") != 0) && (ft_strcmp(argv[1], "-9223372036854775808") != 0) )
+		{
+			ft_putstr_fd("minishell: exit: ",STDOUT_FILENO);
+			ft_putstr_fd(argv[1],STDOUT_FILENO);
+			ft_putstr_fd(": numeric argument required",STDOUT_FILENO);
+		}
+		exit(255);
+	}
+	else if (i > 2)
 	{
 		write(2, "minishell: exit: too many arguments\n", 35);
 		s->status = 1;

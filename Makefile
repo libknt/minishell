@@ -3,7 +3,9 @@ CC			=	cc
 
 # CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
 # CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=leak
-CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address
+
+CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
+
 INCLUDE		=	-I ./include/ -I ~/.brew/opt/readline/include
 # INCLUDE		=	-I ./include/ -I /goinfre/kyoda/.brew/opt/readline/include
 # SRCS		= srcs/main.c\
