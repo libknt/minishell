@@ -3,29 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_right.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/23 13:19:04 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/24 20:20:04 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_fd	*open_file_rr(char *name)
+extern t_global g_global;
+
+static t_fd	*open_file_rr(t_node *node,char *name)
 {
 	t_fd	*new;
 
+	if((access(name,F_OK) == 0) &&(access(name,W_OK) == -1))
+	{
+		ft_putstr_fd("minishell: ",STDERR_FILENO);
+		ft_putstr_fd(name,STDERR_FILENO);
+		ft_putendl_fd(": Permission denied",STDERR_FILENO);
+		node->status = 1;
+		g_global.exit_status = 1;
+		return NULL;
+	}
 	new = new_fd();
 	new->file = open(name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	new->std_fd = 1;
 	return (new);
 }
 
-static t_fd	*open_file_r(char *name)
+static t_fd	*open_file_r(t_node *node,char *name)
 {
 	t_fd	*new;
 
+	if((access(name,F_OK) == 0) &&(access(name,W_OK) == -1))
+	{
+		ft_putstr_fd("minishell: ",STDERR_FILENO);
+		ft_putstr_fd(name,STDERR_FILENO);
+		ft_putendl_fd(": Permission denied",STDERR_FILENO);
+		node->status = 1;
+		g_global.exit_status = 1;
+		return NULL;
+	}
 	new = new_fd();
 	new->file = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	new->std_fd = 1;
@@ -47,9 +67,9 @@ t_fd	*redirect_right(t_node *node, t_line *line)
 		{
 			fd = close_file(fd);
 			if (!ft_strncmp(line->token->word, ">>", 2))
-				fd = open_file_rr(line->next->token->word);
+				fd = open_file_rr(node,line->next->token->word);
 			else
-				fd = open_file_r(line->next->token->word);
+				fd = open_file_r(node,line->next->token->word);
 			line = line->next;
 		}
 		else if (line->type == REDIRECT)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 22:45:28 by keys              #+#    #+#             */
-/*   Updated: 2023/06/24 18:42:39 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/24 20:15:43 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static void	handle_long_max_min(char **argv)
 
 static void	handle_exit_with_arg(char **argv)
 {
+	size_t i;
+
 	if (argv[1][0] == '\0')
 	{
 		write(2, "minishell: exit: : numeric argument required\n", 44);
@@ -66,6 +68,9 @@ static void	handle_exit_with_arg(char **argv)
 	else
 	{
 		check_str(argv[1]);
+		i = atol(argv[1]);
+		i %= 256;
+		exit(i);
 	}
 }
 
