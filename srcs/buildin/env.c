@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:31:08 by marai             #+#    #+#             */
-/*   Updated: 2023/06/24 19:15:45 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/24 19:28:13 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,11 @@ static bool	env_utils(char **argv, t_env *env, t_status *s)
 void	env_buildin(char *argv[], t_env *env, t_status *s)
 {
 
+	s->f = true;
+	s->status = 0;
 	if (argv[0] && argv[1])
 	{
+		s->status = 1;
 		ft_putendl_fd("too many argument", 2);
 		return ;
 	}
