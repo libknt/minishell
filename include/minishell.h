@@ -26,6 +26,7 @@
 
 # define WRITE 1
 # define READ 0
+# define PATH_MAXLEN 4096
 size_t			env_len(char *envp);
 void			add_env(t_env **env, char *envp, size_t len);
 void			add_value(t_env **env, char *envp, size_t len);
@@ -155,6 +156,11 @@ void			wait_process(void);
 int				check_state(void);
 int				exec_action(void);
 void			_err_minishell(char *m);
+//cd 
+char			*get_home_dir(t_env *env);
+bool			is_home_set(char *home);
+char			*make_home_path(char *path, char *home);
+void			imple_pwd(t_env **head, t_status *s);
 
 void			ft_putstr_fd(char *s, int fd);
 void			ft_putendl_fd(char *s, int fd);
