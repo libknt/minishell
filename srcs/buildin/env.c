@@ -57,7 +57,6 @@ static bool	env_utils(char **argv, t_env *env, t_status *s)
 
 void	env_buildin(char *argv[], t_env *env, t_status *s)
 {
-
 	s->f = true;
 	s->status = 0;
 	if (argv[0] && argv[1])
