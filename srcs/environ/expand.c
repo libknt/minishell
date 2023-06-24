@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/23 12:09:38 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/24 16:27:00 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,62 +103,6 @@ char	*expand_quote(char *line)
 	free(line);
 	return (line2);
 }
-
-static bool	is_heredoc_flag(char *word)
-{
-	if (ft_strncmp(word, "<<", 2) == 0)
-		return (true);
-	return (false);
-}
-
-// static char	*remake_token(char *line, t_token **token)
-// {
-// 	size_t	len;
-// 	t_token	*new;
-// 	char	*str;
-
-// 	len = 0;
-// 	while (1)
-// 	{
-// 		if (!*line || *line == ' ')
-// 			break ;
-// 		len++;
-// 	}
-// 	str = ft_strndup(line, len);
-// 	if (!str)
-// 		_err_malloc();
-// 	new = new_token(str, WORD);
-// 	token_addback(token, new);
-// 	return (&line[len]);
-// }
-// static t_token	*expand_lexer(char *line)
-// {
-// 	t_token	*token;
-// 	size_t i;
-
-// 		i =0;
-
-// 	token = NULL;
-// 	while (line[i])
-// 	{
-// 		while (is_blank(line[i]))
-// 			i++;
-// 		if (line[i] == '\0')
-// 			break ;
-// 		line = remake_token(&line[i], &token);
-// 	}
-// 	return (token);
-// }
-
-// t_token	*new;
-// t_token	*back;
-// t_token	*last;
-
-// new = expand_lexer(tmp->word);
-// back = tmp->next;
-// last = token_last(new);
-// last->next = back;
-// tmp->next = new;
 
 void	expand_token(t_token **token, t_env *env, bool f)
 {

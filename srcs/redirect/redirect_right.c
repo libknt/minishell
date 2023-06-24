@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-
-
 static t_fd	*open_file_rr(char *name)
 {
 	t_fd	*new;

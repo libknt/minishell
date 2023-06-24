@@ -197,4 +197,11 @@ void	sig_handler(int sig);
 
 t_fd	*new_fd(void);
 void	*close_file(t_fd *fd);
+
+bool	is_heredoc_flag(char *word);
+void	add_node_to_end(t_env **env_node, t_env *new);
+void	ft_env_addback(t_env **env, t_env *new);
+void	make_lstenv(t_env **s_env, char **envp);
+t_env	*search_key_in_list(t_env **env, t_env *new);
+void	replace_node_in_list(t_env **head, t_env **env_node, t_env *new);
 #endif

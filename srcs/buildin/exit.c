@@ -6,18 +6,11 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 22:45:28 by keys              #+#    #+#             */
-/*   Updated: 2023/06/20 15:53:27 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/24 16:19:44 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	ft_isal(int c)
-{
-	if (('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z'))
-		return (1);
-	return (0);
-}
 
 void	check_str(char *str)
 {
@@ -32,26 +25,47 @@ void	check_str(char *str)
 			return ;
 		else
 		{
-			if (ft_isal(str[i]) == 1)
+			if (ft_isalpha(str[i]) == 1)
 				exit(255);
 		}
 		i++;
 	}
 }
 
-static void	exe_exit(size_t i, char **argv, t_status *s)
+static void	handle_long_max_min(char **argv)
 {
-	if(argv[1] && ((ft_atol(argv[1]) == LONG_MAX) || (ft_atol(argv[1]) == LONG_MIN)))
+	ft_putendl_fd("exit", STDOUT_FILENO);
+	if ((ft_strcmp(argv[1], "9223372036854775807") != 0) && (ft_strcmp(argv[1],
+				"-9223372036854775808") != 0))
 	{
-		ft_putendl_fd("exit",STDOUT_FILENO);
-		if((ft_strcmp(argv[1], "9223372036854775807") != 0) && (ft_strcmp(argv[1], "-9223372036854775808") != 0) )
-		{
-			ft_putstr_fd("minishell: exit: ",STDOUT_FILENO);
-			ft_putstr_fd(argv[1],STDOUT_FILENO);
-			ft_putendl_fd(": numeric argument required",STDOUT_FILENO);
-		}
+		ft_putstr_fd("minishell: exit: ", STDOUT_FILENO);
+		ft_putstr_fd(argv[1], STDOUT_FILENO);
+		ft_putendl_fd(": numeric argument required", STDOUT_FILENO);
+	}
+	exit(255);
+}
+
+static void	handle_exit_with_arg(char **argv, size_t i)
+{
+	if (argv[1][0] == '\0')
+	{
+		write(2, "minishell: exit: : numeric argument required\n", 44);
 		exit(255);
 	}
+	else
+	{
+		check_str(argv[1]);
+		i = ft_atol(argv[1]);
+		i = i % 256;
+		exit(i);
+	}
+}
+
+static void	exe_exit(size_t i, char **argv, t_status *s)
+{
+	if (argv[1] && ((ft_atol(argv[1]) == LONG_MAX)
+			|| (ft_atol(argv[1]) == LONG_MIN)))
+		handle_long_max_min(argv);
 	else if (i > 2)
 	{
 		write(2, "minishell: exit: too many arguments\n", 35);
@@ -61,20 +75,7 @@ static void	exe_exit(size_t i, char **argv, t_status *s)
 	else if (i == 1)
 		exit(0);
 	else
-	{
-		if (argv[1][0] == '\0')
-		{
-			write(2, "minishell: exit: : numeric argument required\n", 44);
-			exit(255);
-		}
-		else
-		{
-			check_str(argv[1]);
-			i = ft_atol(argv[1]);
-			i = i % 256;
-			exit(i);
-		}
-	}
+		handle_exit_with_arg(argv, i);
 }
 
 void	ft_exit(char **argv, t_status *s)
