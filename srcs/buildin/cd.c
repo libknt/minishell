@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:56 by keys              #+#    #+#             */
-/*   Updated: 2023/06/22 13:38:47 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/24 19:49:42 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,9 +200,11 @@ void	imple_pwd(t_env **head, t_status *s)
 		}
 		env = env->next;
 	}
-	if (!is_pwd)
+	if (!is_pwd && head)
 		ft_env_addback(head, make_env("OLDPWD", NULL));
 	path = get_pwd(s);
-	ft_env_addback(head, make_env("PWD", path));
-	free(path);
+	if (head && path)
+		ft_env_addback(head, make_env("PWD", path));
+	if (path)
+		free(path);
 }

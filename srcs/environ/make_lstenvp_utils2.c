@@ -3,20 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   make_lstenvp_utils2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 00:48:30 by Marai             #+#    #+#             */
-/*   Updated: 2023/06/24 16:28:52 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/24 20:01:59 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	add_node_to_end(t_env **env_node, t_env *new)
+void	add_node_to_end(t_env **env, t_env *new)
 {
-	new->next = (*env_node)->next;
-	(*env_node)->next = new;
-	new->prev = *env_node;
+	t_env	*env_node;
+
+	env_node = *env;
+	while(env_node && env_node->next)
+		env_node = env_node->next;
+	if (env_node)
+	{
+		env_node->next = new;
+		new->prev = env_node;
+	}
 }
 
 void	ft_env_addback(t_env **env, t_env *new)
@@ -30,7 +37,7 @@ void	ft_env_addback(t_env **env, t_env *new)
 	}
 	else if (env_node)
 	{
-		add_node_to_end(&env_node, new);
+		add_node_to_end(env, new);
 	}
 	else
 	{

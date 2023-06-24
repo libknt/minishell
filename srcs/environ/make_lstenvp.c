@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_lstenvp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 09:09:09 by keys              #+#    #+#             */
-/*   Updated: 2023/06/24 16:28:02 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/24 20:06:20 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_env	*search_key_in_list(t_env **env, t_env *new)
 	t_env	*env_node;
 
 	env_node = *env;
+
 	while (env_node)
 	{
 		if (!ft_strcmp(env_node->key, new->key))
@@ -65,5 +66,7 @@ t_env	*make_env(char *key, char *value)
 		new->value = ft_strdup(value);
 	else
 		new->value = NULL;
+	new->prev = NULL;
+	new->next = NULL;
 	return (new);
 }
