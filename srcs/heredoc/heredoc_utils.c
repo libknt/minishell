@@ -6,16 +6,18 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 14:53:32 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/23 12:13:50 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/24 19:08:07 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	_err_heredoc(char *m)
+extern t_global	g_global;
+
+void	set_status(int status, t_node *node)
 {
-	ft_putstr_fd(m, STDERR_FILENO);
-	ft_putendl_fd(": warning: wanted `EOF'", STDERR_FILENO);
+	node->status = status;
+	g_global.exit_status = status;
 }
 
 bool	is_heredoc(t_line *line)

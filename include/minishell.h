@@ -204,4 +204,6 @@ void	ft_env_addback(t_env **env, t_env *new);
 void	make_lstenv(t_env **s_env, char **envp);
 t_env	*search_key_in_list(t_env **env, t_env *new);
 void	replace_node_in_list(t_env **head, t_env **env_node, t_env *new);
+void	_err_heredoc(char *m);
+void set_status(int status, t_node *node);
 #endif

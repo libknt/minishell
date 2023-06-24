@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _err3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 23:24:55 by keys              #+#    #+#             */
-/*   Updated: 2023/03/25 18:36:25 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/24 19:13:56 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,10 @@ void	_err_permission(char *m)
 	ft_putstr_fd(m, STDERR_FILENO);
 	ft_putendl_fd(": Permission denied", STDERR_FILENO);
 	g_global.exit_status = 126;
+}
+
+void	_err_heredoc(char *m)
+{
+	ft_putstr_fd(m, STDERR_FILENO);
+	ft_putendl_fd(": warning: wanted `EOF'", STDERR_FILENO);
 }
