@@ -129,7 +129,9 @@ void		print_t(t_token *token);
 
 size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
 void		ft_env_addback(t_env **env, t_env *new);
+//export
 void		ft_export(char *argv[], t_env **env, t_status *s);
+int			check_env_vari(char *argv);
 char		**make_env_args(t_env *env);
 ssize_t		env_num(t_env *env);
 char		**free_envp(char **envp, ssize_t len);
