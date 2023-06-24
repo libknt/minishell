@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 18:02:18 by keys              #+#    #+#             */
-/*   Updated: 2023/06/21 20:47:47 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/23 13:16:18 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ void	*revert_redirect(t_fds *fd)
 	}	
 	if (fd->fd_l)
 	{
+		if(fd->fd_l->filelinks)
+		{
+			unlink(fd->fd_l->filelinks);
+			free(fd->fd_l->filelinks);
+			fd->fd_l->filelinks = NULL;
+		}
 		dup2(fd->fd_l->std_fd, fd->fd_l->file_new);
 		close(fd->fd_l->file_new);
 		dup2(fd->fd_l->std_fd_new, fd->fd_l->std_fd);
@@ -56,6 +62,12 @@ void	revert_redirect_pipe(t_fds *fd, int rw[2])
 	}
 	if (fd->fd_l)
 	{
+		if(fd->fd_l->filelinks)
+		{
+			unlink(fd->fd_l->filelinks);
+			free(fd->fd_l->filelinks);
+			fd->fd_l->filelinks = NULL;
+		}
 		dup2(fd->fd_l->std_fd, fd->fd_l->file_new);
 		close(fd->fd_l->file_new);
 		// dup2(fd->fd_l->std_fd_new, fd->fd_l->std_fd);

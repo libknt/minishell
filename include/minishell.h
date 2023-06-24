@@ -192,4 +192,7 @@ ssize_t	wordlen(char *prompt, t_data_t *d);
 
 
 void	sig_handler(int sig);
+
+t_fd	*new_fd(void);
+void	*close_file(t_fd *fd);
 #endif
