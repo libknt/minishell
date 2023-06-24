@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 22:45:28 by keys              #+#    #+#             */
-/*   Updated: 2023/06/24 21:07:58 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/06/24 21:11:10 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static void	exe_exit(size_t i, char **argv, t_status *s)
 		handle_exit_with_arg(argv);
 	else if (i > 2)
 	{
-		write(2, "minishell: exit: too many arguments\n", 35);
+		ft_putendl_fd("minishell: exit: too many arguments", STDERR_FILENO);
 		s->status = 1;
 		return ;
 	}
