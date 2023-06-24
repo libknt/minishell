@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/21 16:04:48 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/24 19:05:13 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ ssize_t	vari_expand_len(char *line, t_env *env)
 	ssize_t	len;
 	ssize_t	quote_counter;
 
-	i = 0;
-	quote_counter = 0;
-	len = ft_strlen(line);
 	if (!line)
 		return (0);
-	while (line[i])
+	i = 0;
+	quote_counter = 0;
+	len = (ssize_t)ft_strlen(line);
+	while (i < (ssize_t)ft_strlen(line))
 	{
 		if (line[i] == '\'')
 			quote_counter++;
