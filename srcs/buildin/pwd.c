@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:36 by keys              #+#    #+#             */
-/*   Updated: 2023/06/20 15:31:54 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/24 20:41:35 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@ char	*get_pwd(t_status *s)
 	char	*p;
 	char	buf[MAXLEN];
 
+	ft_memset(buf, 0, MAXLEN);	
 	p = getcwd(buf, sizeof(buf));
 	if (!p)
 	{
 		s->status = errno;
-		s->err_ms = ft_strdup("Fatal Error: getcwd");
-		if (!s->err_ms)
-			_err_malloc();
+		ft_putendl_fd("Fatal Error: getcwd", 2);
 		return (NULL);
 	}
 	return (ft_strdup(p));
@@ -41,6 +40,7 @@ void	ft_pwd(t_status *s)
 	{
 		write(1, pwd, ft_strlen(pwd));
 		write(1, "\n", 1);
-		free(pwd);
 	}
+	if (pwd)
+		free(pwd);
 }
