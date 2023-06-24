@@ -1,7 +1,7 @@
 #include "libmshell.h"
 
-static long long	ft_overlong(const char *str, unsigned long long result,
-		int base, long long flag)
+static long long	ft_overlong(const char *str, \
+		unsigned long long result, int base, long long flag)
 {
 	unsigned long long	cutoff;
 	unsigned long long	last;
