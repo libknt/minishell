@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 22:45:28 by keys              #+#    #+#             */
-/*   Updated: 2023/06/24 21:30:22 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/24 22:57:54 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	handle_exit_with_arg(char **argv)
 	else
 	{
 		check_str(argv[1]);
-		i = atol(argv[1]);
+		i = ft_atol(argv[1]);
 		i %= 256;
 		exit(i);
 	}

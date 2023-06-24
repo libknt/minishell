@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/24 16:27:14 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/24 22:58:38 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	is_alpha_under(char c)
 
 bool	is_alpha_num_under(char c)
 {
-	return (is_alpha_under(c) || isdigit(c));
+	return (is_alpha_under(c) || ft_isdigit(c));
 }
 
 bool	is_identifier(const char *s)

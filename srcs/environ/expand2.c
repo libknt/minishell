@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/24 19:05:13 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/24 22:58:21 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ ssize_t	vari_end(char *line)
 
 	if (!line)
 		return (-1);
-	if (*line == '?' || isdigit(*line))
+	if (*line == '?' || ft_isdigit(*line))
 		return (1);
 	i = 0;
 	if (!is_alpha_under(line[i]))
