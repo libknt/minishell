@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:34:18 by marai             #+#    #+#             */
-/*   Updated: 2023/06/24 19:23:50 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/24 20:43:06 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	buildin_exit(t_status *s)
 		g_global.exit_status = s->status;
 		if (s->status == 0)
 			exit(0);
-		ft_putendl_fd(s->err_ms, 2);
 		exit(s->status);
 	}
 	return (1);
