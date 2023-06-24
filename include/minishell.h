@@ -139,10 +139,10 @@ char		**free_envp(char **envp, ssize_t len);
 bool		is_identifier(const char *s);
 /*buildin*/
 bool		is_buildin(char *str);
-void		env_buildin(char *argv[], t_env *env, t_node *node, t_status *s);
+void		env_buildin(char *argv[], t_env *env, t_status *s);
 int			execve_cmd(char **argv, char **envp, t_node *node);
 int			buildin(char *argv[], t_env **env, t_node *node);
-int			buildin_simple(char *argv[], t_env **env, t_node *node);
+int			buildin_simple(char *argv[], t_env **env);
 void		unset(char *argv[], t_env **env, t_status *s);
 int			cd(char *argv[], t_env **env, t_status *s);
 char		*ft_itoa(int n);

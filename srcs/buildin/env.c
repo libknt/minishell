@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:31:08 by marai             #+#    #+#             */
-/*   Updated: 2023/06/23 12:13:44 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/24 19:15:45 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,45 +55,13 @@ static bool	env_utils(char **argv, t_env *env, t_status *s)
 	return (false);
 }
 
-static void	env_fork(char **argv, t_env *env, t_status *s, t_node *node)
+void	env_buildin(char *argv[], t_env *env, t_status *s)
 {
-	char	**envp;
-	ssize_t	i;
-	t_env	*env_node;
 
-	i = 1;
-	while (argv[i])
+	if (argv[0] && argv[1])
 	{
-		if (!check_eql(argv[i]))
-		{
-			envp = make_env_args(env);
-			s->status = execve_cmd(&argv[i], envp, node);
-			exit(s->status);
-		}
-		env_node = new_lstenv(argv[i]);
-		if (!env_node)
-			_err("env_node_error\n");
-		ft_env_addback(&env, env_node);
-		i++;
-	}
-}
-
-void	env_buildin(char *argv[], t_env *env, t_node *node, t_status *s)
-{
-	int	pid;
-	int	status;
-
-	if (env_utils(argv, env, s))
+		ft_putendl_fd("too many argument", 2);
 		return ;
-	rl_event_hook = 0;
-	pid = fork();
-	if (pid == 0)
-	{
-		reset_signal();
-		env_fork(argv, env, s, node);
-		exit(1);
 	}
-	wait(&status);
-	exec_action();
-	s->status = status;
+	env_utils(argv, env, s);
 }

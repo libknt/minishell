@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/06/21 19:31:33 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/24 19:18:54 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	execve_simple_cmd(t_node *node, t_env **env)
 	envp = make_env_args(*env);
 	redirect_adoption(node->fds);
 	argv = access_cmd_path(node, envp);
-	if (buildin_simple(argv, env, node))
+	if (buildin_simple(argv, env))
 	{
 		ft_split_free(envp);
 		ft_split_free(argv);
