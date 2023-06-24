@@ -141,7 +141,7 @@ bool		is_identifier(const char *s);
 bool		is_buildin(char *str);
 void		env_buildin(char *argv[], t_env *env, t_status *s);
 int			execve_cmd(char **argv, char **envp, t_node *node);
-int			buildin(char *argv[], t_env **env, t_node *node);
+int			buildin(char *argv[], t_env **env);
 int			buildin_simple(char *argv[], t_env **env);
 void		unset(char *argv[], t_env **env, t_status *s);
 int			cd(char *argv[], t_env **env, t_status *s);

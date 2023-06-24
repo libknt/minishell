@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:34:18 by marai             #+#    #+#             */
-/*   Updated: 2023/06/21 21:47:02 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/24 19:23:50 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	buildin_exit(t_status *s)
 	return (1);
 }
 
-int	buildin(char *argv[], t_env **env, t_node *node)
+int	buildin(char *argv[], t_env **env)
 {
 	t_status	*s;
 
@@ -72,7 +72,7 @@ int	buildin(char *argv[], t_env **env, t_node *node)
 	else if (!ft_strcmp(argv[0], "export"))
 		ft_export(argv, env, s);
 	else if (!ft_strcmp(argv[0], "env"))
-		env_buildin(argv, *env, node, s);
+		env_buildin(argv, *env, s);
 	else if (!ft_strcmp(argv[0], "unset"))
 		unset(argv, env, s);
 	else if (!ft_strcmp(argv[0], "echo"))
