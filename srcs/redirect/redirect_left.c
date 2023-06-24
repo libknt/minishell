@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_left.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/23 13:18:51 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/24 20:20:22 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_global	g_global;
 
 void	*close_file(t_fd *fd)
 {
@@ -32,6 +34,15 @@ static t_fd	*open_file(t_node *node, char *name)
 {
 	t_fd	*new;
 
+	if((access(name,F_OK) == 0) &&(access(name,R_OK) == -1))
+	{
+		ft_putstr_fd("minishell: ",STDERR_FILENO);
+		ft_putstr_fd(name,STDERR_FILENO);
+		ft_putendl_fd(": Permission denied",STDERR_FILENO);
+		node->status = 1;
+		g_global.exit_status = 1;
+		return NULL;
+	}
 	new = new_fd();
 	new->file = open(name, O_RDONLY, 0644);
 	if (new->file < 0)
