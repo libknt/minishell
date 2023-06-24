@@ -48,7 +48,7 @@ static void	exe_exit(size_t i, char **argv, t_status *s)
 		{
 			ft_putstr_fd("minishell: exit: ",STDOUT_FILENO);
 			ft_putstr_fd(argv[1],STDOUT_FILENO);
-			ft_putstr_fd(": numeric argument required",STDOUT_FILENO);
+			ft_putendl_fd(": numeric argument required",STDOUT_FILENO);
 		}
 		exit(255);
 	}
