@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahitoarai <masahitoarai@student.42.f    +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:31:08 by marai             #+#    #+#             */
-/*   Updated: 2023/06/22 03:26:07 by masahitoara      ###   ########.fr       */
+/*   Updated: 2023/06/23 12:13:44 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ static bool	env_utils(char **argv, t_env *env, t_status *s)
 		while (envp && envp[i] && env)
 		{
 			if (env->value)
-				printf("%s\n", envp[i]);
+			{
+				ft_putendl_fd(envp[i], STDOUT_FILENO);
+			}
 			i++;
 			env = env->next;
 		}

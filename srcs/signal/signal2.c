@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:44:10 by keys              #+#    #+#             */
-/*   Updated: 2023/06/21 15:58:04 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/23 12:13:53 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	exec_action(void)
 {
 	if (g_global.sig == SIGINT)
 	{
-		printf("\n");
+		write(STDERR_FILENO, "\n", 1);
 		ft_putstr_fd("\n", STDERR_FILENO);
 		g_global.exit_status = 130;
 	}

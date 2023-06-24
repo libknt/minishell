@@ -21,7 +21,9 @@ SRC			= calloc.c  \
 			  substr.c \
 			  strcmp.c \
 			  atol.c  \
-			  isdigit.c
+			  isdigit.c \
+			  isalpha.c \
+			  isspace.c 
 
 OBJS		= $(SRC:.c=.o)
 CC 			= gcc

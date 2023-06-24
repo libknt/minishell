@@ -6,24 +6,13 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/06/23 11:51:14 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/23 12:14:40 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 t_global	g_global;
-
-void	print_env1(t_env *env)
-{
-	while (1)
-	{
-		if (env == NULL)
-			break ;
-		printf("%s\t:\t%s\n\n\n", env->key, env->value);
-		env = env->next;
-	}
-}
 
 void	_err_arg(void)
 {

@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:56:19 by keys              #+#    #+#             */
-/*   Updated: 2023/06/20 16:02:23 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/23 12:09:02 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_split_free(char **dst);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strdup(const char *s1);
-// char	*strndup(const char *str, size_t n);
+char	*ft_strndup(const char *str, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
@@ -43,5 +43,7 @@ void	*ft_calloc(size_t count, size_t size);
 int	    ft_isdigit(int c);
 int     ft_strcmp(const char *s1, const char *s2);
 long	ft_atol(const char *nptr);
+int     ft_isalpha(int c);
+int     ft_isspace(int c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/06/21 15:55:16 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/23 12:09:38 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static bool	make_token(char **line, t_data_t *d)
 		else
 		{
 			d->prompt = *line;
-			d->word = strndup(&d->prompt[d->i], d->len);
+			d->word = ft_strndup(&d->prompt[d->i], d->len);
 			if (!d->word)
 				_err_malloc();
 			d->i += d->len;
