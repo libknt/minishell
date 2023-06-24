@@ -46,9 +46,9 @@ static void	func_readline(t_env **env, char *line, t_token *token, t_node *tree)
 	}
 }
 
-void free_env(t_env *env)
+void	free_env(t_env *env)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	while (env)
 	{

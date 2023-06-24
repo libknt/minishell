@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 00:48:30 by Marai             #+#    #+#             */
-/*   Updated: 2023/06/23 11:43:24 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/24 16:22:13 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	add_value(t_env **env, char *envp, size_t len)
 	if (ft_strlen(envp) != len)
 	{
 		(*env)->value = ft_substr(envp, len + 1, ft_strlen(&envp[len + 1]));
-		if(!(*env)->value)
+		if (!(*env)->value)
 			_err_malloc();
 	}
 	else

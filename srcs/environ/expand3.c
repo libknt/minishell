@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/23 12:05:16 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/24 16:27:14 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,11 @@ bool	is_identifier(const char *s)
 int	is_quote(char c)
 {
 	return (c == '\'' || c == '\"' || c == '`');
+}
+
+bool	is_heredoc_flag(char *word)
+{
+	if (ft_strncmp(word, "<<", 2) == 0)
+		return (true);
+	return (false);
 }

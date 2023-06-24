@@ -12,14 +12,12 @@
 
 #include "minishell.h"
 
-
-
 void	*close_file(t_fd *fd)
 {
 	if (fd == NULL)
 		return (NULL);
 	close(fd->file);
-	if(fd->filelinks)
+	if (fd->filelinks)
 	{
 		unlink(fd->filelinks);
 		free(fd->filelinks);
