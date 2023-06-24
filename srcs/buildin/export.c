@@ -67,7 +67,8 @@ int	check_env_vari(char *argv)
 	return (1);
 }
 
-static void	export_utils(char *argv[], t_env *env_node, t_env **env, t_status *s)
+static void	export_utils(char *argv[], t_env *env_node, t_env **env,
+		t_status *s)
 {
 	ssize_t	i;
 

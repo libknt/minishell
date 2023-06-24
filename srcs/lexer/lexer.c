@@ -6,7 +6,7 @@
 /*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:16:08 by keys              #+#    #+#             */
-/*   Updated: 2023/06/23 12:09:38 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/24 21:31:12 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,5 @@ t_token	*lexer(char **line, t_env *env)
 	if (token_error(token))
 		return (lexer_err_free(line, &token));
 	check_redirect(token);
-	// expand_token(&token, env);
 	return (token);
 }

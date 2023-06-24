@@ -17,7 +17,6 @@ t_env	*search_key_in_list(t_env **env, t_env *new)
 	t_env	*env_node;
 
 	env_node = *env;
-
 	while (env_node)
 	{
 		if (!ft_strcmp(env_node->key, new->key))

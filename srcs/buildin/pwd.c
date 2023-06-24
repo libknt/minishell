@@ -19,7 +19,7 @@ char	*get_pwd(t_status *s)
 	char	*p;
 	char	buf[MAXLEN];
 
-	ft_memset(buf, 0, MAXLEN);	
+	ft_memset(buf, 0, MAXLEN);
 	p = getcwd(buf, sizeof(buf));
 	if (!p)
 	{
