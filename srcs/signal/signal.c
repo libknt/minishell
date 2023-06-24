@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:44:10 by keys              #+#    #+#             */
-/*   Updated: 2023/06/21 15:58:13 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/24 21:15:23 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ void	set_signal(void)
 {
 	struct sigaction	sig_int;
 	struct sigaction	sig_quit;
+	extern int			_rl_echo_control_chars;
 
+	_rl_echo_control_chars = 0;
 	sigemptyset(&sig_int.sa_mask);
 	sig_int.sa_handler = sig_handler;
 	sig_int.sa_flags = 0;
