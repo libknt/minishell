@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/24 20:30:50 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/06/24 20:39:52 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@ static t_fd	*open_file_rr(t_node *node,char *name)
 {
 	t_fd	*new;
 
+	if(name[0] == '\0')
+	{
+		ft_putendl_fd("bash: : No such file or directory",STDOUT_FILENO);
+		node->status = 1;
+		g_global.exit_status = 1;
+		return NULL;
+	}
 	if((access(name,F_OK) == 0) &&(access(name,W_OK) == -1))
 	{
 		ft_putstr_fd("minishell: ",STDERR_FILENO);
@@ -37,6 +44,13 @@ static t_fd	*open_file_r(t_node *node,char *name)
 {
 	t_fd	*new;
 
+	if(name[0] == '\0')
+	{
+		ft_putendl_fd("bash: : No such file or directory",STDOUT_FILENO);
+		node->status = 1;
+		g_global.exit_status = 1;
+		return NULL;
+	}
 	if((access(name,F_OK) == 0) &&(access(name,W_OK) == -1))
 	{
 		ft_putstr_fd("minishell: ",STDERR_FILENO);
