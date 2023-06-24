@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   atol.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/24 16:47:59 by kyoda             #+#    #+#             */
+/*   Updated: 2023/06/24 16:48:27 by kyoda            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libmshell.h"
 
-static long long	ft_overlong(const char *str, unsigned long long result,
-		int base, long long flag)
+static long long	ft_overlong(const char *str, \
+		unsigned long long result, int base, long long flag)
 {
 	unsigned long long	cutoff;
 	unsigned long long	last;

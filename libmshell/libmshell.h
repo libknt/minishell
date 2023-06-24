@@ -40,10 +40,10 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	*ft_calloc(size_t count, size_t size);
-int	    ft_isdigit(int c);
-int     ft_strcmp(const char *s1, const char *s2);
+int		ft_isdigit(int c);
+int		ft_strcmp(const char *s1, const char *s2);
 long	ft_atol(const char *nptr);
-int     ft_isalpha(int c);
-int     ft_isspace(int c);
+int		ft_isalpha(int c);
+int		ft_isspace(int c);
 
 #endif
