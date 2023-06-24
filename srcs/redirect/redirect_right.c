@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:48:58 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/24 20:20:04 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/06/24 20:30:50 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ t_fd	*redirect_right(t_node *node, t_line *line)
 				fd = open_file_rr(node,line->next->token->word);
 			else
 				fd = open_file_r(node,line->next->token->word);
+			if(node->status == 1)
+				return NULL;
 			line = line->next;
 		}
 		else if (line->type == REDIRECT)
