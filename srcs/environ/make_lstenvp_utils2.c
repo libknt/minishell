@@ -17,7 +17,7 @@ void	add_node_to_end(t_env **env, t_env *new)
 	t_env	*env_node;
 
 	env_node = *env;
-	while(env_node && env_node->next)
+	while (env_node && env_node->next)
 		env_node = env_node->next;
 	if (env_node)
 	{

@@ -34,14 +34,14 @@ static t_fd	*open_file(t_node *node, char *name)
 {
 	t_fd	*new;
 
-	if((access(name,F_OK) == 0) &&(access(name,R_OK) == -1))
+	if ((access(name, F_OK) == 0) && (access(name, R_OK) == -1))
 	{
-		ft_putstr_fd("minishell: ",STDERR_FILENO);
-		ft_putstr_fd(name,STDERR_FILENO);
-		ft_putendl_fd(": Permission denied",STDERR_FILENO);
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(name, STDERR_FILENO);
+		ft_putendl_fd(": Permission denied", STDERR_FILENO);
 		node->status = 1;
 		g_global.exit_status = 1;
-		return NULL;
+		return (NULL);
 	}
 	new = new_fd();
 	new->file = open(name, O_RDONLY, 0644);

@@ -12,27 +12,27 @@
 
 #include "minishell.h"
 
-extern t_global g_global;
+extern t_global	g_global;
 
-static t_fd	*open_file_rr(t_node *node,char *name)
+static t_fd	*open_file_rr(t_node *node, char *name)
 {
 	t_fd	*new;
 
-	if(name[0] == '\0')
+	if (name[0] == '\0')
 	{
-		ft_putendl_fd("bash: : No such file or directory",STDOUT_FILENO);
+		ft_putendl_fd("bash: : No such file or directory", STDOUT_FILENO);
 		node->status = 1;
 		g_global.exit_status = 1;
-		return NULL;
+		return (NULL);
 	}
-	if((access(name,F_OK) == 0) &&(access(name,W_OK) == -1))
+	if ((access(name, F_OK) == 0) && (access(name, W_OK) == -1))
 	{
-		ft_putstr_fd("minishell: ",STDERR_FILENO);
-		ft_putstr_fd(name,STDERR_FILENO);
-		ft_putendl_fd(": Permission denied",STDERR_FILENO);
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(name, STDERR_FILENO);
+		ft_putendl_fd(": Permission denied", STDERR_FILENO);
 		node->status = 1;
 		g_global.exit_status = 1;
-		return NULL;
+		return (NULL);
 	}
 	new = new_fd();
 	new->file = open(name, O_CREAT | O_WRONLY | O_APPEND, 0644);
@@ -40,25 +40,25 @@ static t_fd	*open_file_rr(t_node *node,char *name)
 	return (new);
 }
 
-static t_fd	*open_file_r(t_node *node,char *name)
+static t_fd	*open_file_r(t_node *node, char *name)
 {
 	t_fd	*new;
 
-	if(name[0] == '\0')
+	if (name[0] == '\0')
 	{
-		ft_putendl_fd("bash: : No such file or directory",STDOUT_FILENO);
+		ft_putendl_fd("bash: : No such file or directory", STDOUT_FILENO);
 		node->status = 1;
 		g_global.exit_status = 1;
-		return NULL;
+		return (NULL);
 	}
-	if((access(name,F_OK) == 0) &&(access(name,W_OK) == -1))
+	if ((access(name, F_OK) == 0) && (access(name, W_OK) == -1))
 	{
-		ft_putstr_fd("minishell: ",STDERR_FILENO);
-		ft_putstr_fd(name,STDERR_FILENO);
-		ft_putendl_fd(": Permission denied",STDERR_FILENO);
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(name, STDERR_FILENO);
+		ft_putendl_fd(": Permission denied", STDERR_FILENO);
 		node->status = 1;
 		g_global.exit_status = 1;
-		return NULL;
+		return (NULL);
 	}
 	new = new_fd();
 	new->file = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
@@ -81,11 +81,11 @@ t_fd	*redirect_right(t_node *node, t_line *line)
 		{
 			fd = close_file(fd);
 			if (!ft_strncmp(line->token->word, ">>", 2))
-				fd = open_file_rr(node,line->next->token->word);
+				fd = open_file_rr(node, line->next->token->word);
 			else
-				fd = open_file_r(node,line->next->token->word);
-			if(node->status == 1)
-				return NULL;
+				fd = open_file_r(node, line->next->token->word);
+			if (node->status == 1)
+				return (NULL);
 			line = line->next;
 		}
 		else if (line->type == REDIRECT)
