@@ -2,10 +2,10 @@ NAME 				=	minishell
 CC					=	cc
 CFLAGS				=	-Wall -Wextra -Werror
 INCLUDE				=	-I ./include/ 
+
 INCLUDE_READLINE	=	-I ~/.brew/opt/readline/include
-# INCLUDE			=	-I ./include/ -I /goinfre/kyoda/.brew/opt/readline/include
 LIB					=	$(LIBMSHELL) -L ~/.brew/opt/readline/lib
-# LIB				=	$(LIBMSHELL) -L /goinfre/kyoda/.brew/opt/readline/lib
+
 LIBMSHELLDIR		=	libmshell
 LIBMSHELL			=	$(LIBMSHELLDIR)/libmshell.a
 
@@ -65,8 +65,8 @@ SRCS				=	srcs/buildin/buildin.c \
 						srcs/signal/signal.c \
 						srcs/signal/signal2.c
 
-OBJDIR   = obj
-OBJS  = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
+OBJDIR   			= 	obj
+OBJS  				= 	$(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $$(dirname $@)
@@ -106,4 +106,5 @@ debug:	re
 # 	curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh
 
 .PHONY:
+	all lib clean fclean re debug
 
