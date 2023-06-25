@@ -6,13 +6,14 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/06/25 12:51:22 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/25 12:53:18 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 # include <stdio.h>
+# include <stdbool.h>
 
 typedef struct s_heredoc_var	t_heredoc_var;
 struct							s_heredoc_var
