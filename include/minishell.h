@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/25 12:49:59 by marai             #+#    #+#             */
+/*   Updated: 2023/06/25 12:50:24 by marai            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include "../libmshell/libmshell.h"
-# include "get_next_line.h"
 # include "struct.h"
 # include <ctype.h>
 # include <dirent.h>
@@ -87,7 +98,8 @@ void			ft_env_addback(t_env **env, t_env *new);
 void			make_lstenv(t_env **s_env, char **envp);
 //make_lstenvp.c
 t_env			*search_key_in_list(t_env **env, t_env *new);
-void			replace_node_in_list(t_env **head, t_env **env_node, t_env *new);
+void			replace_node_in_list(t_env **head, t_env **env_node, \
+			t_env *new);
 t_env			*make_env(char *key, char *value);
 
 /*err*/
@@ -190,7 +202,8 @@ t_node			*parser(t_token *token, char *line);
 void			redirect_adoption(t_fds *fds);
 //redirect_left.c
 void			*close_file(t_fd *fd);
-t_fd			*redirect_left(t_node *node, t_line *line, t_env *env, t_fd *fd);
+t_fd			*redirect_left(t_node *node, t_line *line, \
+	t_env *env, t_fd *fd);
 //redirect_right
 t_fd			*redirect_right(t_node *node, t_line *line);
 //redirect_utils.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:25 by keys              #+#    #+#             */
-/*   Updated: 2023/06/23 13:18:15 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/25 12:51:22 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ struct							s_fd
 	int							file;
 	int							file_new;
 	int							std_fd_new;
-	char					*filelinks;
+	char						*filelinks;
 };
 typedef struct s_fds			t_fds;
 struct							s_fds
@@ -131,6 +131,6 @@ typedef struct s_data_e
 	int							rw[2];
 	pid_t						pid;
 	int							status;
-	int atty;
+	int							atty;
 }								t_data_e;
 #endif
