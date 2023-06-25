@@ -183,7 +183,6 @@ ssize_t			calc_expand_len(char *line, t_env *env, ssize_t len);
 ssize_t			vari_expand_len(char *line, t_env *env);
 char			*find_env(char *str, t_env *env);
 
-t_token			*token_last(t_token *token);
 char			*get_pwd(t_status *s);
 void			_err_is_directory(char *m);
 

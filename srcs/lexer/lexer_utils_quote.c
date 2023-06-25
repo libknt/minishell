@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils_quote.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 21:23:14 by keys              #+#    #+#             */
-/*   Updated: 2023/03/04 21:30:30 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/25 10:47:23 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	qq_flag(bool *sq, bool *dq, char c)
+static void	qq_flag(bool *sq, bool *dq, char c)
 {
 	if (c == '\"')
 	{

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 21:24:17 by keys              #+#    #+#             */
-/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/25 10:49:32 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*token_last(t_token *token)
+static t_token	*token_last(t_token *token)
 {
 	t_token	*tmp;
 

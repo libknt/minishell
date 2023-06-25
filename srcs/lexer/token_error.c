@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:06:46 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/20 15:29:06 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/25 10:49:04 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	err_syntax(char *op)
+static bool	err_syntax(char *op)
 {
 	if (ft_strncmp(op, "||", 2) == 0)
 		return (_err_syntax("||"));
@@ -33,7 +33,7 @@ bool	err_syntax(char *op)
 	return (false);
 }
 
-bool	syntax_check(t_token *token)
+static bool	syntax_check(t_token *token)
 {
 	while (1)
 	{
