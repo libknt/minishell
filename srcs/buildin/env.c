@@ -6,27 +6,27 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:31:08 by marai             #+#    #+#             */
-/*   Updated: 2023/06/24 19:28:13 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/25 11:57:42 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	check_eql(char *str)
-{
-	ssize_t	i;
+// static bool	check_eql(char *str)
+// {
+// 	ssize_t	i;
 
-	if (!str)
-		return (false);
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '=')
-			return (true);
-		i++;
-	}
-	return (false);
-}
+// 	if (!str)
+// 		return (false);
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		if (str[i] == '=')
+// 			return (true);
+// 		i++;
+// 	}
+// 	return (false);
+// }
 
 static bool	env_utils(char **argv, t_env *env, t_status *s)
 {
