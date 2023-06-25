@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 22:45:28 by keys              #+#    #+#             */
-/*   Updated: 2023/06/24 22:57:54 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/25 09:06:34 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_global	g_global;
 
-void	check_str(char *str)
+static void	check_str(char *str)
 {
 	size_t	i;
 

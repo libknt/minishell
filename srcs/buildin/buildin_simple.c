@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:34:18 by marai             #+#    #+#             */
-/*   Updated: 2023/06/24 20:43:09 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/25 08:58:52 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_global	g_global;
 
-int	buildin_return(t_status *s)
+static int	buildin_return(t_status *s)
 {
 	if (s->f == false)
 	{
@@ -31,7 +31,7 @@ int	buildin_return(t_status *s)
 	return (1);
 }
 
-void	exec_buildin(char **argv, t_env **env, t_status *s)
+static void	exec_buildin(char **argv, t_env **env, t_status *s)
 {
 	if (s->buildin_type == 1)
 		cd(argv, env, s);

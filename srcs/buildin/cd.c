@@ -6,15 +6,15 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:56 by keys              #+#    #+#             */
-/*   Updated: 2023/06/24 22:28:31 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/25 09:05:10 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*make_abs_path(char *path, char *argv, char *home)
+static char	*make_abs_path(char *path, char *argv, char *home)
 {
-	ssize_t	i;
+	size_t	i;
 
 	i = 0;
 	if (!ft_strcmp(argv, "~"))
@@ -30,7 +30,7 @@ char	*make_abs_path(char *path, char *argv, char *home)
 	if (!ft_strncmp(argv, "./", 2))
 		i = 2;
 	ft_strlcat(path, "/", ft_strlen(path) + 2);
-	while (argv[i])
+	while (i < ft_strlen(argv))
 	{
 		ft_strlcat(path, &argv[i], ft_strlen(path) + 2);
 		i++;
@@ -38,7 +38,7 @@ char	*make_abs_path(char *path, char *argv, char *home)
 	return (path);
 }
 
-int	move_to_abs_path(char *path)
+static int	move_to_abs_path(char *path)
 {
 	int		status;
 
@@ -75,7 +75,7 @@ int	move_to_home_or_rel_path(char *path[], t_env *env)
 	return (status);
 }
 
-void	handle_cd_status(int status, t_env **env, t_status *s)
+static void	handle_cd_status(int status, t_env **env, t_status *s)
 {
 	if (status < 0)
 		s->status = 1;
