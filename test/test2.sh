@@ -1,4 +1,5 @@
 #!/bin/bash
+cp ../minishell ./
 RED="\033[31m"
 GREEN="\033[32m"
 YELLOW="\033[33m"
@@ -28,7 +29,7 @@ print_desc() {
 }
 
 cleanup() {
-	rm -f cmp out a.out print_args exit42 infinite_loop no_exec_perm no_read_perm
+	rm -f cmp out a.out print_args exit42 infinite_loop no_exec_perm no_read_perm minishell
 }
 
 assert() {
