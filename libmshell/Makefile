@@ -1,32 +1,32 @@
-NAME		= libmshell.a
-SRC			= calloc.c  \
-			  memmove.c \
-			  putchar.c \
-			  putstr.c  \
-			  strchr.c  \
-			  strjoin.c \
-			  strlcpy.c \
-			  strncat.c \
-			  strndup.c \
-			  bzero.c   \
-			  itoa.c    \
-			  memcpy.c  \
-			  memset.c  \
-			  putendl.c \
-			  split.c   \
-			  strdup.c  \
-			  strlcat.c \
-			  strlen.c  \
-			  strncmp.c \
-			  substr.c \
-			  strcmp.c \
-			  atol.c  \
-			  isdigit.c \
-			  isalpha.c \
-			  isspace.c 
+NAME		= 	libmshell.a
+SRC			=	calloc.c\
+				isspace.c\
+				memcpy.c\
+				putchar.c\
+				split.c\
+				strdup.c\
+				strlcpy.c\
+				strncmp.c\
+				atol.c\
+				isalpha.c\
+				itoa.c\
+				memmove.c\
+				putendl.c\
+				strchr.c\
+				strjoin.c\
+				strlen.c\
+				strndup.c\
+				bzero.c\
+				isdigit.c\
+				memset.c\
+				putstr.c\
+				strcmp.c\
+				strlcat.c\
+				strncat.c\
+				substr.c \
 
 OBJS		= $(SRC:.c=.o)
-CC 			= gcc
+CC 			= cc
 INCLUDE		= -I ./
 CFLAGS		= -Wall -Wextra -Werror $(INCLUDE)
 
