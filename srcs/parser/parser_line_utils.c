@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_line_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 21:32:13 by keys              #+#    #+#             */
-/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/25 10:57:16 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_line	*newline(t_token *token, t_redirect type)
 	return (new);
 }
 
-t_line	*line_last(t_line *token)
+static t_line	*line_last(t_line *token)
 {
 	t_line	*tmp;
 
@@ -54,11 +54,11 @@ void	line_addback(t_line **head, t_line *new)
 	}
 }
 
-void	addline_utils(t_line **line, t_token *token, t_redirect type)
-{
-	t_line	*new;
+// void	addline_utils(t_line **line, t_token *token, t_redirect type)
+// {
+// 	t_line	*new;
 
-	new = NULL;
-	new = newline(token, type);
-	line_addback(line, new);
-}
+// 	new = NULL;
+// 	new = newline(token, type);
+// 	line_addback(line, new);
+// }

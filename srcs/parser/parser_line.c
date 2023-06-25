@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 20:45:33 by keys              #+#    #+#             */
-/*   Updated: 2023/03/05 21:43:19 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/25 10:58:34 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	addline(t_token *token, t_line **line, t_line *new, int type)
+static void	addline(t_token *token, t_line **line, t_line *new, int type)
 {
 	while (1)
 	{

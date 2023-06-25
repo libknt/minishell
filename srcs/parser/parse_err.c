@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_err.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:21:12 by keys              #+#    #+#             */
-/*   Updated: 2023/03/05 21:22:43 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/25 10:55:57 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_line(t_line *line, bool *r)
+static void	check_line(t_line *line, bool *r)
 {
 	while (1)
 	{
@@ -35,7 +35,7 @@ void	check_line(t_line *line, bool *r)
 	}
 }
 
-void	check_syntax(t_node *node, bool *r)
+static void	check_syntax(t_node *node, bool *r)
 {
 	t_line	*line;
 
@@ -52,7 +52,7 @@ void	check_syntax(t_node *node, bool *r)
 	}
 }
 
-void	syntax_parse(t_node *node, bool *r)
+static void	syntax_parse(t_node *node, bool *r)
 {
 	if (*r == true)
 		return ;
