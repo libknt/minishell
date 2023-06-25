@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/24 16:27:00 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/25 10:38:34 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-ssize_t	make_expand(char *expanded, char *line, t_env *env)
+static ssize_t	make_expand(char *expanded, char *line, t_env *env)
 {
 	ssize_t	end;
 	char	*str;
@@ -88,7 +88,7 @@ static void	expand_quote_utils(char *line, char *line2, char *last)
 	}
 }
 
-char	*expand_quote(char *line)
+static char	*expand_quote(char *line)
 {
 	ssize_t	len;
 	char	*line2;

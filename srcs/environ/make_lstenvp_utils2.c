@@ -6,13 +6,13 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 00:48:30 by Marai             #+#    #+#             */
-/*   Updated: 2023/06/25 10:10:19 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/25 10:47:46 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	add_node_to_end(t_env **env, t_env *new)
+static void	add_node_to_end(t_env **env, t_env *new)
 {
 	t_env	*env_node;
 
