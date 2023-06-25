@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 08:27:16 by kyoda             #+#    #+#             */
-/*   Updated: 2023/03/09 14:29:18 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/06/25 11:01:22 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	line_free(t_line *line)
+static void	line_free(t_line *line)
 {
 	t_line	*tmp;
 

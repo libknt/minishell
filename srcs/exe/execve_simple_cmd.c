@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/06/24 19:18:54 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/25 10:57:33 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	command_access_utils(char **argv, t_node *node)
 	return (0);
 }
 
-int	execve_cmd(char **argv, char **envp, t_node *node)
+static int	execve_cmd(char **argv, char **envp, t_node *node)
 {
 	pid_t	pid;
 	int		waitstatus;

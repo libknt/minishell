@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   make_arr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 14:21:21 by keys              #+#    #+#             */
-/*   Updated: 2023/06/20 15:31:54 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/25 11:00:25 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	line_size(t_line *line)
+static size_t	line_size(t_line *line)
 {
 	size_t	len;
 
@@ -28,7 +28,7 @@ size_t	line_size(t_line *line)
 	return (len);
 }
 
-void	push_arr(char **arr, t_line *line)
+static void	push_arr(char **arr, t_line *line)
 {
 	size_t	i;
 

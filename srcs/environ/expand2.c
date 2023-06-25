@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/24 22:58:21 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/25 10:40:33 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ ssize_t	find_env_len(char *str, t_env *env)
 	return (0);
 }
 
-ssize_t	calc_expand_len(char *line, t_env *env, ssize_t len)
+static ssize_t	calc_expand_len(char *line, t_env *env, ssize_t len)
 {
 	ssize_t	end;
 	char	*str;

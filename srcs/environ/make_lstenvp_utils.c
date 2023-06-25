@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   make_lstenvp_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 00:48:30 by Marai             #+#    #+#             */
-/*   Updated: 2023/06/24 16:22:13 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/25 11:02:02 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	env_len(char *envp)
+static size_t	env_len(char *envp)
 {
 	size_t	len;
 
@@ -24,14 +24,14 @@ size_t	env_len(char *envp)
 	return (len);
 }
 
-void	add_env(t_env **env, char *envp, size_t len)
+static void	add_env(t_env **env, char *envp, size_t len)
 {
 	(*env)->key = ft_substr(envp, 0, len);
 	if (!env)
 		_err("malloc");
 }
 
-void	add_value(t_env **env, char *envp, size_t len)
+static void	add_value(t_env **env, char *envp, size_t len)
 {
 	if (ft_strlen(envp) != len)
 	{
@@ -57,14 +57,4 @@ t_env	*new_lstenv(char *envp)
 	env->prev = NULL;
 	env->next = NULL;
 	return (env);
-}
-
-t_env	*env_last(t_env *env)
-{
-	t_env	*tmp;
-
-	tmp = env;
-	while (tmp->next)
-		tmp = tmp->next;
-	return (tmp);
 }

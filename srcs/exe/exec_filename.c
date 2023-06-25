@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_filename.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:17:23 by keys              #+#    #+#             */
-/*   Updated: 2023/06/20 15:31:54 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/25 10:56:24 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*seach_path(char **envp)
+static char	*search_path(char **envp)
 {
 	ssize_t	i;
 
@@ -63,7 +63,7 @@ char	*exec_filename(char *prompt, char **envp)
 
 	if (*prompt == '\0')
 		return (NULL);
-	pa = seach_path(envp);
+	pa = search_path(envp);
 	if (!pa)
 		return (NULL);
 	s = ft_strjoin("/", prompt);

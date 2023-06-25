@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 01:01:00 by marai             #+#    #+#             */
-/*   Updated: 2023/06/23 12:48:02 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/25 10:54:53 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**access_cmd_path(t_node *node, char **envp)
 	return (argv);
 }
 
-void	wait_process(void)
+static void	wait_process(void)
 {
 	int		status;
 	pid_t	pid;

@@ -27,11 +27,7 @@
 # define WRITE 1
 # define READ 0
 # define PATH_MAXLEN 4096
-size_t			env_len(char *envp);
-void			add_env(t_env **env, char *envp, size_t len);
-void			add_value(t_env **env, char *envp, size_t len);
 t_env			*new_lstenv(char *envp);
-t_env			*env_last(t_env *env);
 void			*_err_nofile(t_node *node, char *m);
 int				_err_fork(void);
 void			_err_cmd_not_found(char *m);
@@ -39,10 +35,7 @@ int				is_quote(char c);
 bool			is_alpha_under(char c);
 bool			is_alpha_num_under(char c);
 bool			is_identifier(const char *s);
-ssize_t			vari_end(char *line);
 char			*find_env(char *str, t_env *env);
-ssize_t			find_env_len(char *str, t_env *env);
-ssize_t			calc_expand_len(char *line, t_env *env, ssize_t len);
 ssize_t			vari_expand_len(char *line, t_env *env);
 bool			is_heredocfile(void);
 void			_err_heredoc(char *m);
@@ -59,7 +52,6 @@ void			add_redirect(t_node *node, t_env *env);
 int				_err_wait(int status);
 
 /*redirect*/
-char			*expand_quote(char *line);
 char			*vari_expand(char *line, t_env *env);
 t_fds			*redirect_check(t_node *node, t_env *env);
 void			*revert_redirect(t_fds *fd);
@@ -142,7 +134,6 @@ bool			is_identifier(const char *s);
 /*buildin*/
 bool			is_buildin(char *str);
 void			env_buildin(char *argv[], t_env *env, t_status *s);
-int				execve_cmd(char **argv, char **envp, t_node *node);
 int				buildin(char *argv[], t_env **env);
 int				buildin_simple(char *argv[], t_env **env);
 void			unset(char *argv[], t_env **env, t_status *s);
@@ -152,7 +143,6 @@ bool			_err_syntax(char *m);
 int				_err_malloc(void);
 t_status		*new_status(void);
 void			reset_signal(void);
-void			wait_process(void);
 int				check_state(void);
 int				exec_action(void);
 void			_err_minishell(char *m);
@@ -169,7 +159,6 @@ char			**env_sort(char **envp);
 char			**free_envp(char **envp, ssize_t len);
 ssize_t			env_num(t_env *env);
 
-char			**make_env_args(t_env *env);
 
 int				command_found(char **argv, char **envp);
 void			close_pipe(t_node *node, int rw[2], int fd1);
@@ -179,7 +168,6 @@ int				is_quote(char c);
 
 ssize_t			vari_end(char *line);
 ssize_t			find_env_len(char *str, t_env *env);
-ssize_t			calc_expand_len(char *line, t_env *env, ssize_t len);
 ssize_t			vari_expand_len(char *line, t_env *env);
 char			*find_env(char *str, t_env *env);
 
@@ -204,7 +192,6 @@ t_fd			*new_fd(void);
 void			*close_file(t_fd *fd);
 
 bool			is_heredoc_flag(char *word);
-void			add_node_to_end(t_env **env_node, t_env *new);
 void			ft_env_addback(t_env **env, t_env *new);
 void			make_lstenv(t_env **s_env, char **envp);
 t_env			*search_key_in_list(t_env **env, t_env *new);
