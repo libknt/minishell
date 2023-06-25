@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils_is.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 21:12:35 by keys              #+#    #+#             */
-/*   Updated: 2023/06/20 15:30:34 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/25 10:54:03 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ bool	is_blank(char c)
 	return (c == ' ' || c == '\t');
 }
 
-bool	is_metacharacter(char c)
-{
-	char	*is;
+// static bool	is_metacharacter(char c)
+// {
+// 	char	*is;
 
-	is = ft_strchr("|&;()<> \t", c);
-	if (is == NULL)
-		return (false);
-	return (true);
-}
+// 	is = ft_strchr("|&;()<> \t", c);
+// 	if (is == NULL)
+// 		return (false);
+// 	return (true);
+// }
 
 size_t	is_ope(char *line)
 {

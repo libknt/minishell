@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 17:58:29 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/20 14:35:56 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/25 11:03:07 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	add_redirect(t_node *node, t_env *env)
 	}
 }
 
-t_fds	*new_fds(void)
+static t_fds	*new_fds(void)
 {
 	t_fds	*new;
 
@@ -33,7 +33,7 @@ t_fds	*new_fds(void)
 	return (new);
 }
 
-bool	nocmd(t_node *node)
+static bool	nocmd(t_node *node)
 {
 	t_line	*line;
 

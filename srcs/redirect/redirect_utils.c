@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 18:02:18 by keys              #+#    #+#             */
-/*   Updated: 2023/06/24 16:13:42 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/25 11:02:23 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	revert_fd_r(t_fd *fd_r)
+static void	revert_fd_r(t_fd *fd_r)
 {
 	if (fd_r == NULL)
 		return ;
@@ -24,7 +24,7 @@ void	revert_fd_r(t_fd *fd_r)
 	free(fd_r);
 }
 
-void	revert_fd_l(t_fd *fd_l, bool flag)
+static void	revert_fd_l(t_fd *fd_l, bool flag)
 {
 	if (fd_l == NULL)
 		return ;

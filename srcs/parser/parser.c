@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:24:57 by keys              #+#    #+#             */
-/*   Updated: 2023/06/20 15:29:06 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/25 10:59:57 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	find_redirect(t_token *token)
 		|| (ft_strncmp(token->word, ">", 1) == 0));
 }
 
-t_node	*newnode(t_token *token)
+static t_node	*newnode(t_token *token)
 {
 	t_node	*new;
 
@@ -35,7 +35,7 @@ t_node	*newnode(t_token *token)
 	return (new);
 }
 
-void	node_addtree(t_node **node, t_node *new)
+static void	node_addtree(t_node **node, t_node *new)
 {
 	t_node	*tmp;
 
@@ -57,7 +57,7 @@ void	node_addtree(t_node **node, t_node *new)
 	}
 }
 
-void	make_tree(t_node **node, t_token *token)
+static void	make_tree(t_node **node, t_token *token)
 {
 	t_node	*new;
 

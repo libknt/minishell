@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/06/23 12:14:40 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/25 11:05:02 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_global	g_global;
 
-void	_err_arg(void)
+static void	_err_arg(void)
 {
 	write(2, "Please run it with ./{ executable file name }.\n", 47);
 	exit(127);
@@ -46,7 +46,7 @@ static void	func_readline(t_env **env, char *line, t_token *token, t_node *tree)
 	}
 }
 
-void	free_env(t_env *env)
+static void	free_env(t_env *env)
 {
 	t_env	*tmp;
 
