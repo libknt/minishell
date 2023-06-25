@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 19:01:20 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/24 19:13:38 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/06/25 10:43:09 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_global	g_global;
 
-char	*open_heredocdir(t_fd **fds)
+static char	*open_heredocdir(t_fd **fds)
 {
 	int		fd;
 	char	*x;
@@ -37,7 +37,7 @@ char	*open_heredocdir(t_fd **fds)
 	return (x);
 }
 
-char	*open_heredocfile(t_fd **fds)
+static char	*open_heredocfile(t_fd **fds)
 {
 	int		fd;
 	char	*x;
@@ -60,7 +60,7 @@ char	*open_heredocfile(t_fd **fds)
 	return (x);
 }
 
-void	heredoc_start(t_heredoc_var *v, t_env *env, t_node *node)
+static void	heredoc_start(t_heredoc_var *v, t_env *env, t_node *node)
 {
 	char	*line;
 
