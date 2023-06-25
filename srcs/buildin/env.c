@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:31:08 by marai             #+#    #+#             */
-/*   Updated: 2023/06/25 11:57:42 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/25 13:02:01 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// static bool	check_eql(char *str)
-// {
-// 	ssize_t	i;
-
-// 	if (!str)
-// 		return (false);
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		if (str[i] == '=')
-// 			return (true);
-// 		i++;
-// 	}
-// 	return (false);
-// }
 
 static bool	env_utils(char **argv, t_env *env, t_status *s)
 {

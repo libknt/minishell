@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 21:32:13 by keys              #+#    #+#             */
-/*   Updated: 2023/06/25 10:57:16 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/06/25 13:03:56 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,3 @@ void	line_addback(t_line **head, t_line *new)
 			*head = new;
 	}
 }
-
-// void	addline_utils(t_line **line, t_token *token, t_redirect type)
-// {
-// 	t_line	*new;
-
-// 	new = NULL;
-// 	new = newline(token, type);
-// 	line_addback(line, new);
-// }
