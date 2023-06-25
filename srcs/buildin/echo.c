@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:57:09 by keys              #+#    #+#             */
-/*   Updated: 2023/03/25 18:54:02 by keys             ###   ########.fr       */
+/*   Updated: 2023/06/25 09:05:39 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	is_operation_n(char *argv)
+static bool	is_operation_n(char *argv)
 {
 	size_t	i;
 	bool	flag;
@@ -38,7 +38,7 @@ bool	is_operation_n(char *argv)
 	return (true);
 }
 
-char	**operation_n(char **argv, bool *flag)
+static char	**operation_n(char **argv, bool *flag)
 {
 	size_t	i;
 

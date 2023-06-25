@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:34:18 by marai             #+#    #+#             */
-/*   Updated: 2023/06/24 20:43:06 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/25 08:59:40 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool	is_buildin(char *str)
 	return (false);
 }
 
-int	buildin_exit(t_status *s)
+static int	buildin_exit(t_status *s)
 {
 	if (s->f == false)
 		return (0);
