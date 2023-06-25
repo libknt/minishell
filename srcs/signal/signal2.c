@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:44:10 by keys              #+#    #+#             */
-/*   Updated: 2023/06/25 13:04:32 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/06/25 16:43:16 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	check_state(void)
 	}
 	else if (g_global.sig == SIGQUIT)
 	{
-		rl_replace_line("", 0);
 		rl_redisplay();
 		g_global.interrupt = true;
 	}
