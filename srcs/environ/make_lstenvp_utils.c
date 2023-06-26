@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   make_lstenvp_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
+/*   By: masahito <masahito@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 00:48:30 by Marai             #+#    #+#             */
-/*   Updated: 2023/06/25 13:02:31 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/06/27 00:36:51 by masahito         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static size_t	env_len(char *envp)
+static size_t	environ_len(char *envp)
 {
 	size_t	len;
 
@@ -51,7 +51,7 @@ t_env	*new_lstenv(char *envp)
 	env = ft_calloc(sizeof(t_env), 1);
 	if (!env)
 		_err("calloc");
-	len = env_len(envp);
+	len = environ_len(envp);
 	add_env(&env, envp, len);
 	add_value(&env, envp, len);
 	env->prev = NULL;

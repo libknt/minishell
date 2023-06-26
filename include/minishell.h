@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: masahito <masahito@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 12:49:59 by marai             #+#    #+#             */
-/*   Updated: 2023/06/25 12:52:57 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/27 00:40:40 by masahito         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@
 # define WRITE 1
 # define READ 0
 # define PATH_MAXLEN 4096
+# define NO_QUOTE 0
+# define SINGLE_QUOTE 1
+# define DOUBLE_QUOTE 2
 /*buildin*/
 // buildin_simple
 int				buildin_simple(char *argv[], t_env **env);
@@ -78,13 +81,15 @@ void			unset(char *argv[], t_env **env, t_status *s);
 
 /*environ*/
 //expand.c
-char			*vari_expand(char *line, t_env *env);
+char			*ft_strjoin_free(char *str1, char *str2);
+char			*expand(char *line, t_env *env);
+char			*expand_all_env(char *line, t_env *env);
 void			expand_token(t_token **token, t_env *env, bool f);
 //expand2.c
-ssize_t			vari_end(char *line);
-ssize_t			find_env_len(char *str, t_env *env);
-char			*find_env(char *str, t_env *env);
-ssize_t			vari_expand_len(char *line, t_env *env);
+bool	is_skip(char c, int *status);
+size_t	env_len(char *line);
+size_t	add_char(char **str, char *line);
+size_t	expand_env(char **str, char *line, t_env *env);
 //expand3.c
 bool			is_alpha_under(char c);
 bool			is_alpha_num_under(char c);
