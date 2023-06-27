@@ -35,7 +35,7 @@ size_t	env_len(char *line)
 
 	i = 0;
 	while (i < ft_strlen(line) && !is_quote(line[i])
-		&& is_alpha_num_under(line[i]))
+		&& (is_alpha_num_under(line[i]) || line[i] == '?'))
 		i++;
 	return (i);
 }
@@ -65,7 +65,7 @@ static char	*find_environ(char *str, t_env *env)
 {
 	if (!ft_strcmp(str, "?"))
 	{
-		g_global.exit_status = g_global.exit_status % 255;
+		g_global.exit_status = g_global.exit_status % 256;
 		free(str);
 		return (ft_itoa(g_global.exit_status));
 	}

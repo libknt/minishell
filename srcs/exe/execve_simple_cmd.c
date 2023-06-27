@@ -63,7 +63,7 @@ static int	execve_cmd(char **argv, char **envp, t_node *node)
 	waitpid(pid, &waitstatus, 0);
 	g_global.exit_status = waitstatus;
 	if (WIFSIGNALED(waitstatus))
-		g_global.exit_status = 128 + waitstatus % 128;
+		g_global.exit_status = 128 + waitstatus;
 	exec_action();
 	return (0);
 }
