@@ -28,6 +28,8 @@ char	*ft_strjoin_free(char *str1, char *str2)
 	ans = ft_strjoin(str1, str2);
 	free(str1);
 	free(str2);
+	if (!ans)
+		_err_malloc();
 	return (ans);
 }
 

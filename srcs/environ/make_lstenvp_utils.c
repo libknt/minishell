@@ -27,7 +27,7 @@ static size_t	environ_len(char *envp)
 static void	add_env(t_env **env, char *envp, size_t len)
 {
 	(*env)->key = ft_substr(envp, 0, len);
-	if (!env)
+	if (!env || !(*env)->key)
 		_err("malloc");
 }
 
@@ -50,7 +50,7 @@ t_env	*new_lstenv(char *envp)
 
 	env = ft_calloc(sizeof(t_env), 1);
 	if (!env)
-		_err("calloc");
+		_err_malloc();
 	len = environ_len(envp);
 	add_env(&env, envp, len);
 	add_value(&env, envp, len);
