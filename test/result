@@ -1,0 +1,319 @@
+COMMAND
+ export
+ RESULT
+23c23
+< declare -x SHLVL="3"
+---
+> declare -x SHLVL="2"
+34c34
+< declare -x _="/bin/bash"
+---
+> declare -x _="./minishell"
+COMMAND
+ env
+ RESULT
+2,3d1
+< SHELL=/bin/zsh
+< TERM=xterm-256color
+4a3,4
+> TERM=xterm-256color
+> SHELL=/bin/zsh
+10d9
+< USER=marai
+11a11
+> USER=marai
+14d13
+< __CF_USER_TEXT_ENCODING=0x1E7B:0x1:0xE
+15a15
+> __CF_USER_TEXT_ENCODING=0x1E7B:0x1:0xE
+18d17
+< _=/usr/bin/env
+24c23
+< COLORFGBG=7;0
+---
+> SHLVL=2
+26c25
+< SHLVL=3
+---
+> COLORFGBG=7;0
+32d30
+< DISPLAY=/private/tmp/com.apple.launchd.yesSZwyyyt/org.xquartz:0
+33a32
+> DISPLAY=/private/tmp/com.apple.launchd.yesSZwyyyt/org.xquartz:0
+35a35
+> _=./minishell
+COMMAND
+ cd .
+ RESULT
+0a1
+> path: /Users/marai/Documents/minishell/test/.
+COMMAND
+ cd ..
+ RESULT
+0a1
+> path: /Users/marai/Documents/minishell/test/..
+COMMAND
+ cd src
+ RESULT
+0a1
+> path: /Users/marai/Documents/minishell/test/src
+COMMAND
+ cd .
+ echo $PWD
+ RESULT
+1a2
+> path: /Users/marai/Documents/minishell/test/.
+COMMAND
+ cd ..
+ echo $PWD
+ RESULT
+1a2
+> path: /Users/marai/Documents/minishell/test/..
+COMMAND
+ cd /tmp
+ echo $PWD
+ RESULT
+1c1
+< /tmp
+---
+> /private/tmp
+COMMAND
+ cd /tmp/
+ echo $PWD
+ RESULT
+1c1
+< /tmp
+---
+> /private/tmp
+COMMAND
+ cd /tmp///
+ echo $PWD
+ RESULT
+1c1
+< /tmp
+---
+> /private/tmp
+COMMAND
+ cd src
+ echo $PWD
+ RESULT
+1a2
+> path: /Users/marai/Documents/minishell/test/src
+COMMAND
+ cd src
+pwd
+ RESULT
+1a2
+> path: /Users/marai/Documents/minishell/test/src
+COMMAND
+ cd /etc
+pwd
+ RESULT
+1c1
+< /etc
+---
+> /private/etc
+COMMAND
+ cd . 
+ pwd 
+ echo $PWD $OLDPWD
+ RESULT
+2a3
+> path: /Users/marai/Documents/minishell/test/.
+COMMAND
+ cd .. 
+ pwd 
+ echo $PWD $OLDPWD
+ RESULT
+2a3
+> path: /Users/marai/Documents/minishell/test/..
+COMMAND
+ cd /tmp/// 
+ pwd 
+ echo $PWD $OLDPWD
+ RESULT
+1,2c1,2
+< /tmp
+< /tmp /Users/marai/Documents/minishell/test
+---
+> /private/tmp
+> /private/tmp /Users/marai/Documents/minishell/test
+COMMAND
+ unset PWD
+pwd
+cd /etc
+pwd
+ RESULT
+2c2
+< /etc
+---
+> /private/etc
+COMMAND
+ unset PWD 
+ cd 
+ echo $PWD 
+cd /tmp
+echo $PWD
+ RESULT
+2c2
+< /tmp
+---
+> /private/tmp
+COMMAND
+ unset PWD
+cd
+export|grep PWD
+cd /tmp
+export|grep PWD
+ RESULT
+1c1,2
+< declare -x OLDPWD=""
+---
+> declare -x OLDPWD
+> declare -x PWD="/Users/marai"
+2a4
+> declare -x PWD="/private/tmp"
+COMMAND
+ unset PWD
+cd
+env|grep PWD
+cd /tmp
+env|grep PWD
+ RESULT
+0a1
+> PWD=/Users/marai
+1a3
+> PWD=/private/tmp
+COMMAND
+ export
+ RESULT
+23c23
+< declare -x SHLVL="3"
+---
+> declare -x SHLVL="2"
+34c34
+< declare -x _="/bin/bash"
+---
+> declare -x _="./minishell"
+COMMAND
+ env
+ RESULT
+2,3d1
+< SHELL=/bin/zsh
+< TERM=xterm-256color
+4a3,4
+> TERM=xterm-256color
+> SHELL=/bin/zsh
+10d9
+< USER=marai
+11a11
+> USER=marai
+14d13
+< __CF_USER_TEXT_ENCODING=0x1E7B:0x1:0xE
+15a15
+> __CF_USER_TEXT_ENCODING=0x1E7B:0x1:0xE
+18d17
+< _=/usr/bin/env
+24c23
+< COLORFGBG=7;0
+---
+> SHLVL=2
+26c25
+< SHLVL=3
+---
+> COLORFGBG=7;0
+32d30
+< DISPLAY=/private/tmp/com.apple.launchd.yesSZwyyyt/org.xquartz:0
+33a32
+> DISPLAY=/private/tmp/com.apple.launchd.yesSZwyyyt/org.xquartz:0
+35a35
+> _=./minishell
+COMMAND
+ cd /tmp
+ echo $PWD
+ RESULT
+1c1
+< /tmp
+---
+> /private/tmp
+COMMAND
+ cd /tmp/
+ echo $PWD
+ RESULT
+1c1
+< /tmp
+---
+> /private/tmp
+COMMAND
+ cd /tmp///
+ echo $PWD
+ RESULT
+1c1
+< /tmp
+---
+> /private/tmp
+COMMAND
+ cd /etc
+pwd
+ RESULT
+1c1
+< /etc
+---
+> /private/etc
+COMMAND
+ cd /tmp/// 
+ pwd 
+ echo $PWD $OLDPWD
+ RESULT
+1,2c1,2
+< /tmp
+< /tmp /Users/marai/Documents/minishell/test
+---
+> /private/tmp
+> /private/tmp /Users/marai/Documents/minishell/test
+COMMAND
+ unset PWD
+pwd
+cd /etc
+pwd
+ RESULT
+2c2
+< /etc
+---
+> /private/etc
+COMMAND
+ unset PWD 
+ cd 
+ echo $PWD 
+cd /tmp
+echo $PWD
+ RESULT
+2c2
+< /tmp
+---
+> /private/tmp
+COMMAND
+ unset PWD
+cd
+export|grep PWD
+cd /tmp
+export|grep PWD
+ RESULT
+1c1,2
+< declare -x OLDPWD=""
+---
+> declare -x OLDPWD
+> declare -x PWD="/Users/marai"
+2a4
+> declare -x PWD="/private/tmp"
+COMMAND
+ unset PWD
+cd
+env|grep PWD
+cd /tmp
+env|grep PWD
+ RESULT
+0a1
+> PWD=/Users/marai
+1a3
+> PWD=/private/tmp

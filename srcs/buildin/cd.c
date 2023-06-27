@@ -30,11 +30,7 @@ static char	*make_abs_path(char *path, char *argv, char *home)
 	if (!ft_strncmp(argv, "./", 2))
 		i = 2;
 	ft_strlcat(path, "/", ft_strlen(path) + 2);
-	while (i < ft_strlen(argv))
-	{
-		ft_strlcat(path, &argv[i], ft_strlen(path) + 2);
-		i++;
-	}
+	ft_strlcat(path, &argv[i], PATH_MAXLEN);
 	return (path);
 }
 
@@ -43,7 +39,6 @@ static int	move_to_abs_path(char *path)
 	int		status;
 
 	status = chdir(path);
-	
 	if (status < 0)
 	{
 		if (!access(path, F_OK) && (access(path, R_OK) == -1 || access(path, X_OK) == -1))
