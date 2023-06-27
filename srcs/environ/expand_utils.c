@@ -14,21 +14,6 @@
 
 extern t_global	g_global;
 
-bool	is_skip(char c, int *status)
-{
-	if (c == '\'' && *status == NO_QUOTE)
-		*status = SINGLE_QUOTE;
-	else if (c == '\'' && *status == SINGLE_QUOTE)
-		*status = NO_QUOTE;
-	else if (c == '"' && *status == NO_QUOTE)
-		*status = DOUBLE_QUOTE;
-	else if (c == '"' && *status == DOUBLE_QUOTE)
-		*status = NO_QUOTE;
-	else
-		return (false);
-	return (true);
-}
-
 size_t	env_len(char *line)
 {
 	size_t	i;

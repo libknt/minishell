@@ -39,13 +39,7 @@ static int	move_to_abs_path(char *path)
 	int		status;
 
 	status = chdir(path);
-	if (status < 0)
-	{
-		if (!access(path, F_OK) && (access(path, R_OK) == -1 || access(path, X_OK) == -1))
-			ft_putendl_fd("minishell: cd: permission denied", STDERR_FILENO);
-		else
-			ft_putendl_fd(" No such file or directory", STDERR_FILENO);
-	}
+	cd_err_check(path, status);
 	return (status);
 }
 
@@ -71,13 +65,7 @@ int	move_to_home_or_rel_path(char *path[], t_env *env)
 	}
 	if (home)
 		free(home);
-	if (status < 0)
-	{
-		if (!access(home_path, F_OK) && (access(home_path, R_OK) == -1 || access(home_path, X_OK) == -1))
-			ft_putendl_fd("minishell: cd: permission denied", STDERR_FILENO);
-		else
-			ft_putendl_fd(" No such file or directory", STDERR_FILENO);
-	}
+	cd_err_check(home_path, status);
 	return (status);
 }
 
@@ -101,7 +89,9 @@ int	cd(char *argv[], t_env **env, t_status *s)
 	}
 	else if (argv[1] && PATH_MAXLEN - 1 < ft_strlen(argv[1]))
 	{
-		ft_putendl_fd("minishell: cd: no such file or directory", STDERR_FILENO);
+		ft_putstr_fd("minishell: cd: no such file or directory:", \
+			STDERR_FILENO);
+		ft_putendl_fd(argv[1], STDERR_FILENO);
 		status = -1;
 	}
 	else if (argv[1] && argv[1][0] == '/')

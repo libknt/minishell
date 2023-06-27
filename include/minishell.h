@@ -52,6 +52,7 @@ t_status		*new_status(void);
 int				cd(char *argv[], t_env **env, t_status *s);
 int				move_to_home_or_rel_path(char *path[], t_env *env);
 //cd2.c
+void			cd_err_check(char *path, int status);
 char			*get_home_dir(t_env *env);
 bool			is_home_set(char *home);
 char			*make_home_path(char *path, char *home);
