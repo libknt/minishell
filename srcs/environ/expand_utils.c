@@ -35,7 +35,7 @@ size_t	env_len(char *line)
 
 	i = 0;
 	while (i < ft_strlen(line) && !is_quote(line[i])
-		&& !ft_isspace(line[i]) && line[i] != ';' && line[i] != '$')
+		&& is_alpha_num_under(line[i]))
 		i++;
 	return (i);
 }
