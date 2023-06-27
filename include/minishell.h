@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahito <masahito@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 12:49:59 by marai             #+#    #+#             */
-/*   Updated: 2023/06/27 00:40:40 by masahito         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:14:04 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ char			*expand(char *line, t_env *env);
 char			*expand_all_env(char *line, t_env *env);
 void			expand_token(t_token **token, t_env *env, bool f);
 //expand2.c
-bool	is_skip(char c, int *status);
-size_t	env_len(char *line);
-size_t	add_char(char **str, char *line);
-size_t	expand_env(char **str, char *line, t_env *env);
+bool			is_skip(char c, int *status);
+size_t			env_len(char *line);
+size_t			add_char(char **str, char *line);
+size_t			expand_env(char **str, char *line, t_env *env);
 //expand3.c
 bool			is_alpha_under(char c);
 bool			is_alpha_num_under(char c);

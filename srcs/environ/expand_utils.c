@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahito <masahito@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 00:28:29 by masahito          #+#    #+#             */
-/*   Updated: 2023/06/27 00:42:00 by masahito         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:53:05 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,38 @@ bool	is_skip(char c, int *status)
 
 size_t	env_len(char *line)
 {
-	size_t i = 0;
-	
-	while(i < ft_strlen(line) && !is_quote(line[i]) && !ft_isspace(line[i]) && line[i] != ';')
+	size_t	i;
 
+	i = 0;
+	while (i < ft_strlen(line) && !is_quote(line[i])
+		&& !ft_isspace(line[i]) && line[i] != ';')
 		i++;
 	return (i);
 }
 
 size_t	add_char(char **str, char *line)
 {
-	if (!str || !*str)
-		return 0;
+	if (!*str || !line)
+		return (0);
 	*str = ft_strjoin_free(*str, ft_strndup(line, 1));
 	return (1);
 }
 
-static char	*find_environ(char *str, t_env *env)
+static char	*make_env_key(t_env *env)
 {
 	char	*env_value;
 
+	if (env->value)
+		env_value = ft_strdup(env->value);
+	else
+		env_value = ft_strdup("");
+	if (!env_value)
+		_err_malloc();
+	return (env_value);
+}
+
+static char	*find_environ(char *str, t_env *env)
+{
 	if (!ft_strcmp(str, "?"))
 	{
 		g_global.exit_status = g_global.exit_status % 255;
@@ -61,16 +73,8 @@ static char	*find_environ(char *str, t_env *env)
 	{
 		if (!ft_strcmp(env->key, str))
 		{
-			if (env->value)
-			{
-				env_value = ft_strdup(env->value);
-				if (!env_value)
-					_err_malloc();
-			}
-			else
-				env_value = NULL;
 			free(str);
-			return (env_value);
+			return (make_env_key(env));
 		}
 		env = env->next;
 	}

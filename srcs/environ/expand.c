@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahito <masahito@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/27 00:34:16 by masahito         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:52:47 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 extern t_global	g_global;
 
 char	*ft_strjoin_free(char *str1, char *str2)
@@ -21,6 +22,7 @@ char	*ft_strjoin_free(char *str1, char *str2)
 	{
 		free(str1);
 		free(str2);
+		_err_malloc();
 		return (NULL);
 	}
 	ans = ft_strjoin(str1, str2);
@@ -28,6 +30,7 @@ char	*ft_strjoin_free(char *str1, char *str2)
 	free(str2);
 	return (ans);
 }
+
 char	*expand(char *line, t_env *env)
 {
 	size_t	i;
@@ -37,19 +40,22 @@ char	*expand(char *line, t_env *env)
 
 	i = 0;
 	first = ft_strdup("");
+	if (!first)
+		_err_malloc();
 	str = &first;
 	status = NO_QUOTE;
-	while(line && i < ft_strlen(line))
+	while (line && i < ft_strlen(line))
 	{
 		if (!str || !*str)
-			return (NULL);
-		if(is_skip(line[i], &status))
+			_err_malloc();
+		if (is_skip(line[i], &status))
 			i++;
 		else if (line[i] == '$' && status != SINGLE_QUOTE)
 			i += expand_env(str, &line[i], env);
 		else
 			i += add_char(str, &(line[i]));
 	}
+	free(line);
 	return (*str);
 }
 
@@ -62,17 +68,20 @@ char	*expand_quote(char *line)
 
 	i = 0;
 	first = ft_strdup("");
+	if (!first)
+		_err_malloc();
 	str = &first;
 	status = NO_QUOTE;
-	while(line && i < ft_strlen(line))
+	while (line && i < ft_strlen(line))
 	{
 		if (!str || !*str)
-			return (NULL);
-		if(is_skip(line[i], &status))
+			_err_malloc();
+		if (is_skip(line[i], &status))
 			i++;
 		else
 			i += add_char(str, &(line[i]));
 	}
+	free(line);
 	return (*str);
 }
 
@@ -84,16 +93,17 @@ char	*expand_all_env(char *line, t_env *env)
 
 	i = 0;
 	first = ft_strdup("");
+	if (!first)
+		_err_malloc();
 	str = &first;
-	if (!str || !*str)
-		return (NULL);
-	while(line && i < ft_strlen(line))
+	while (line && i < ft_strlen(line))
 	{
 		if (line[i] == '$' && (i == 0 || line[i - 1] != '\\'))
 			i += expand_env(str, &line[i], env);
 		else
 			i += add_char(str, &(line[i]));
 	}
+	free(line);
 	return (*str);
 }
 

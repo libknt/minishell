@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:36:46 by marai             #+#    #+#             */
-/*   Updated: 2023/06/25 13:02:19 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/06/27 13:58:55 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ void	unset(char *argv[], t_env **env, t_status *s)
 	s->status = 0;
 	i = 1;
 	if (!argv[1])
-	{
-		ft_putendl_fd("unset: not enough arguments", 2);
-		s->status = 1;
-	}
+		return ;
 	while (argv[i])
 	{
 		if (!check_env_vari(argv[i]))
