@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 00:28:29 by masahito          #+#    #+#             */
-/*   Updated: 2023/06/27 13:53:05 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/28 11:10:18 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	*find_environ(char *str, t_env *env)
 {
 	if (!ft_strcmp(str, "?"))
 	{
-		g_global.exit_status = g_global.exit_status % 256;
+		g_global.exit_status = g_global.exit_status % 255;
 		free(str);
 		return (ft_itoa(g_global.exit_status));
 	}
