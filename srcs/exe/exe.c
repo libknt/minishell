@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahito <masahito@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 01:01:00 by marai             #+#    #+#             */
-/*   Updated: 2023/06/30 11:36:32 by masahito         ###   ########.fr       */
+/*   Updated: 2023/06/30 21:30:25 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	**access_cmd_path(t_node *node, char **envp)
 	char	**argv;
 
 	argv = make_arr(node);
+	if(!ft_strcmp(argv[0], ".") || !ft_strcmp(argv[0], ".."))
+		return (argv);
 	if (!ft_strncmp(argv[0], "/",1))
 		return (argv);
 	if (access(argv[0], X_OK) != 0 || !ft_strchr(argv[0], '/'))

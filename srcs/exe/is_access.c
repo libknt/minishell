@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_access.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 22:45:28 by keys              #+#    #+#             */
-/*   Updated: 2023/06/25 17:14:01 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/06/30 21:36:54 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,17 @@ int	is_file_accessible(char *str)
 	struct stat	buf;
 
 	if (stat(str, &buf) < 0)
+	{
+		if(ft_strchr(str,'/') != 0)
+		{
+			_err_no_such_file(str);
+			return (true);
+		}
 		return (false);
+	}
 	if (S_ISREG(buf.st_mode))
 	{
+	// printf("is_file_accessible\n");
 		return (is_file_accessible_utils(str, buf));
 	}
 	return (false);
