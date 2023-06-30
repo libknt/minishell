@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
+/*   By: masahito <masahito@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 01:01:00 by marai             #+#    #+#             */
-/*   Updated: 2023/06/25 13:02:56 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/06/30 11:15:19 by masahito         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**access_cmd_path(t_node *node, char **envp)
 	char	**argv;
 
 	argv = make_arr(node);
-	if (access(argv[0], X_OK) != 0)
+	if (access(argv[0], X_OK) != 0 || !ft_strchr(argv[0], '/'))
 	{
 		cmd_path = NULL;
 		if (!is_buildin(argv[0]))
