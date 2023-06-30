@@ -6,7 +6,7 @@
 /*   By: masahito <masahito@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 00:48:30 by Marai             #+#    #+#             */
-/*   Updated: 2023/06/27 00:36:51 by masahito         ###   ########.fr       */
+/*   Updated: 2023/06/30 14:34:02 by masahito         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	add_env(t_env **env, char *envp, size_t len)
 {
 	(*env)->key = ft_substr(envp, 0, len);
 	if (!env || !(*env)->key)
-		_err("malloc");
+		_err_malloc();
 }
 
 static void	add_value(t_env **env, char *envp, size_t len)

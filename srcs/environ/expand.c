@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: masahito <masahito@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/27 13:52:47 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/30 14:33:36 by masahito         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ char	*ft_strjoin_free(char *str1, char *str2)
 
 	if (!str1 || !str2)
 	{
-		free(str1);
-		free(str2);
+		if (str1)
+			free(str1);
+		if (str2)
+			free(str2);
 		_err_malloc();
 		return (NULL);
 	}
