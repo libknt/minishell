@@ -6,7 +6,10 @@ YELLOW="\033[33m"
 RESET="\033[0m"
 OK=$GREEN"OK"$RESET
 NG=$RED"NG"$RESET
-
+cat <<EOF | gcc -xc -o perm.out -
+#include <stdio.h>
+int main() { printf("hello from chmod\n"); }
+EOF
 cat <<EOF | gcc -xc -o a.out -
 #include <stdio.h>
 int main() { printf("hello from a.out\n"); }
@@ -657,5 +660,73 @@ assert 'unset PWD\ncd\necho $OLDPWD\ncd /tmp\necho $OLDPWD'
 assert 'unset PWD\ncd\nexport|grep PWD\ncd /tmp\nexport|grep PWD'
 assert 'unset PWD\ncd\nenv|grep PWD\ncd /tmp\nenv|grep PWD'
 
+assert 'chmod 000 perm.out\nperm.out'
+assert 'chmod 000 perm.out\n./perm.out'
+assert 'chmod 111 perm.out\nperm.out'
+assert 'chmod 111 perm.out\n./perm.out'
+assert 'chmod 222 perm.out\nperm.out'
+assert 'chmod 222 perm.out\n./perm.out'
+assert 'chmod 333 perm.out\nperm.out'
+assert 'chmod 333 perm.out\n./perm.out'
+assert 'chmod 444 perm.out\nperm.out'
+assert 'chmod 444 perm.out\n./perm.out'
+assert 'chmod 555 perm.out\nperm.out'
+assert 'chmod 555 perm.out\n./perm.out'
+assert 'chmod 666 perm.out\nperm.out'
+assert 'chmod 666 perm.out\n./perm.out'
+assert 'chmod 777 perm.out\nperm.out'
+assert 'chmod 777 perm.out\n./perm.out'
+assert 'chmod 000 perm.out\ncd ..\ntest/perm.out'
+assert 'chmod 000 perm.out\ncd ..\n./test/perm.out'
+assert 'chmod 111 perm.out\ncd ..\ntest/perm.out'
+assert 'chmod 111 perm.out\ncd ..\n./test/perm.out'
+assert 'chmod 222 perm.out\ncd ..\ntest/perm.out'
+assert 'chmod 222 perm.out\ncd ..\n./test/perm.out'
+assert 'chmod 333 perm.out\ncd ..\ntest/perm.out'
+assert 'chmod 333 perm.out\ncd ..\n./test/perm.out'
+assert 'chmod 444 perm.out\ncd ..\ntest/perm.out'
+assert 'chmod 444 perm.out\ncd ..\n./test/perm.out'
+assert 'chmod 555 perm.out\ncd ..\ntest/perm.out'
+assert 'chmod 555 perm.out\ncd ..\n./test/perm.out'
+assert 'chmod 666 perm.out\ncd ..\ntest/perm.out'
+assert 'chmod 666 perm.out\ncd ..\n./test/perm.out'
+assert 'chmod 777 perm.out\ncd ..\ntest/perm.out'
+assert 'chmod 777 perm.out\ncd ..\n./test/perm.out'
+
+assert 'ls'
+assert 'cd /bin\nls'
+assert 'cd /bin\n/bin/ls'
+assert '/ls'
+assert '//ls'
+assert '///ls'
+assert '////ls'
+assert '/////ls'
+
+assert '.'
+assert './'
+assert './.'
+assert '././.'
+assert './././.'
+assert '..'
+assert '../'
+assert '../.'
+assert '.././.'
+assert '../././.'
+assert '...'
+assert '.../'
+assert '.../.'
+assert '..././.'
+assert '.../././.'
+assert '....'
+assert '..../'
+assert '....'
+assert '....'
+assert '/'
+assert '/.'
+assert '/./.'
+assert '/bin'
+assert '/bin/'
+assert '/bin/ls'
+assert '/bin/ls/'
 
 cleanup
