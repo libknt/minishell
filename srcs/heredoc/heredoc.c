@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
+/*   By: masahito <masahito@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 19:01:20 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/25 13:03:27 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/06/27 00:17:24 by masahito         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	heredoc_start(t_heredoc_var *v, t_env *env, t_node *node)
 		else if (ft_strcmp(v->eof, line) == 0)
 			break ;
 		if (v->flag == false)
-			line = vari_expand(line, env);
+			line = expand_all_env(line, env);
 		ft_putendl_fd(line, v->fd);
 		free(line);
 	}

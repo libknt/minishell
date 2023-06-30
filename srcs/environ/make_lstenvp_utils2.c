@@ -12,6 +12,21 @@
 
 #include "minishell.h"
 
+bool	is_skip(char c, int *status)
+{
+	if (c == '\'' && *status == NO_QUOTE)
+		*status = SINGLE_QUOTE;
+	else if (c == '\'' && *status == SINGLE_QUOTE)
+		*status = NO_QUOTE;
+	else if (c == '"' && *status == NO_QUOTE)
+		*status = DOUBLE_QUOTE;
+	else if (c == '"' && *status == DOUBLE_QUOTE)
+		*status = NO_QUOTE;
+	else
+		return (false);
+	return (true);
+}
+
 static void	add_node_to_end(t_env **env, t_env *new)
 {
 	t_env	*env_node;
