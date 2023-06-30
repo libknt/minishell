@@ -29,7 +29,7 @@ print_desc() {
 }
 
 cleanup() {
-	rm -f cmp out a.out print_args exit42 infinite_loop no_exec_perm no_read_perm minishell
+	rm -f cmp out a.out print_args exit42 infinite_loop no_exec_perm no_read_perm minishell perm.out
 }
 
 assert() {
@@ -656,6 +656,91 @@ assert 'unset PWD \n cd \n echo $PWD \ncd /tmp\necho $PWD'
 assert 'unset PWD\ncd\necho $OLDPWD\ncd /tmp\necho $OLDPWD'
 assert 'unset PWD\ncd\nexport|grep PWD\ncd /tmp\nexport|grep PWD'
 assert 'unset PWD\ncd\nenv|grep PWD\ncd /tmp\nenv|grep PWD'
+
+
+## expand
+assert 'echo $PATH'
+assert 'echo $PATH $PATH'
+assert 'echo $PATH $PATH $PATH'
+assert "echo '\$PATH'"
+assert 'echo "$PATH"'
+
+## chmod
+cat <<EOF | gcc -xc -o perm.out -
+#include <stdio.h>
+int main() { printf("hello from chmod\n"); }
+EOF
+
+assert 'chmod 000 perm.out\nperm.out'
+assert 'chmod 000 perm.out\n./perm.out'
+assert 'chmod 111 perm.out\nperm.out'
+assert 'chmod 111 perm.out\n./perm.out'
+assert 'chmod 222 perm.out\nperm.out'
+assert 'chmod 222 perm.out\n./perm.out'
+assert 'chmod 333 perm.out\nperm.out'
+assert 'chmod 333 perm.out\n./perm.out'
+assert 'chmod 444 perm.out\nperm.out'
+assert 'chmod 444 perm.out\n./perm.out'
+assert 'chmod 555 perm.out\nperm.out'
+assert 'chmod 555 perm.out\n./perm.out'
+assert 'chmod 666 perm.out\nperm.out'
+assert 'chmod 666 perm.out\n./perm.out'
+assert 'chmod 777 perm.out\nperm.out'
+assert 'chmod 777 perm.out\n./perm.out'
+assert 'chmod 000 perm.out\ncd ..\ntest/perm.out'
+assert 'chmod 000 perm.out\ncd ..\n./test/perm.out'
+assert 'chmod 111 perm.out\ncd ..\ntest/perm.out'
+assert 'chmod 111 perm.out\ncd ..\n./test/perm.out'
+assert 'chmod 222 perm.out\ncd ..\ntest/perm.out'
+assert 'chmod 222 perm.out\ncd ..\n./test/perm.out'
+assert 'chmod 333 perm.out\ncd ..\ntest/perm.out'
+assert 'chmod 333 perm.out\ncd ..\n./test/perm.out'
+assert 'chmod 444 perm.out\ncd ..\ntest/perm.out'
+assert 'chmod 444 perm.out\ncd ..\n./test/perm.out'
+assert 'chmod 555 perm.out\ncd ..\ntest/perm.out'
+assert 'chmod 555 perm.out\ncd ..\n./test/perm.out'
+assert 'chmod 666 perm.out\ncd ..\ntest/perm.out'
+assert 'chmod 666 perm.out\ncd ..\n./test/perm.out'
+assert 'chmod 777 perm.out\ncd ..\ntest/perm.out'
+assert 'chmod 777 perm.out\ncd ..\n./test/perm.out'
+
+assert 'ls'
+assert 'cd /bin\nls'
+assert 'cd /bin\n/bin/ls'
+assert '/ls'
+assert '//ls'
+assert '///ls'
+assert '////ls'
+assert '/////ls'
+
+assert '.'
+assert './'
+assert './.'
+assert '././.'
+assert './././.'
+assert '..'
+assert '../'
+assert '../.'
+assert '.././.'
+assert '../././.'
+assert '...'
+assert '.../'
+assert '.../.'
+assert '..././.'
+assert '.../././.'
+assert '....'
+assert '..../'
+assert '....'
+assert '....'
+assert '/'
+assert '/.'
+assert '/./.'
+assert '/bin'
+assert '/bin/'
+assert '/bin/ls'
+assert '/bin/ls/'
+## ○No such file or directory ✗command not found　に行きたい 
+assert './aaa'
 
 
 cleanup
