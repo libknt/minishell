@@ -3,105 +3,112 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
+/*   By: masahito <masahito@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/25 13:02:22 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/06/30 14:33:36 by masahito         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static ssize_t	make_expand(char *expanded, char *line, t_env *env)
-{
-	ssize_t	end;
-	char	*str;
-	char	*env_value;
+extern t_global	g_global;
 
-	end = vari_end(line);
-	str = ft_calloc(end + 1, sizeof(char));
-	if (str == NULL)
+char	*ft_strjoin_free(char *str1, char *str2)
+{
+	char	*ans;
+
+	if (!str1 || !str2)
+	{
+		if (str1)
+			free(str1);
+		if (str2)
+			free(str2);
 		_err_malloc();
-	ft_strlcpy(str, line, end + 1);
-	env_value = find_env(str, env);
-	if (env_value != NULL)
-	{
-		ft_strncat(expanded, env_value, ft_strlen(env_value));
-		free(env_value);
-	}
-	free(str);
-	return (end);
-}
-
-char	*vari_expand(char *line, t_env *env)
-{
-	ssize_t	expanded_len;
-	size_t	i;
-	ssize_t	quote_counter;
-	char	*expanded;
-
-	expanded_len = vari_expand_len(line, env);
-	expanded = ft_calloc(expanded_len + 1, sizeof(char));
-	if (!expanded)
-		_err_malloc();
-	i = 0;
-	quote_counter = 0;
-	while (i < ft_strlen(line))
-	{
-		if (line[i] == '\'')
-			quote_counter++;
-		if (line[i] == '$' && quote_counter % 2 == 0 && \
-			(i == 0 || line[i - 1] != '\\'))
-			i += make_expand(expanded, &line[i + 1], env);
-		else
-			ft_strncat(expanded, &line[i], 1);
-		i++;
-	}
-	free(line);
-	return (expanded);
-}
-
-static void	expand_quote_utils(char *line, char *line2, char *last)
-{
-	ssize_t	i;
-	ssize_t	j;
-	ssize_t	diff;
-
-	i = 0;
-	j = 0;
-	while (line[i])
-	{
-		while (ft_isspace(line[i]) && ft_isspace(line[i + 1]))
-			i++;
-		if (is_quote(line[i]))
-		{
-			last = ft_strchr(&line[i + 1], line[i]);
-			diff = last - &line[i];
-			ft_strlcpy(&line2[j], &line[i + 1], last - &line[i]);
-			i += diff;
-			j += diff - 2;
-		}
-		else
-			line2[j] = line[i];
-		i++;
-		j++;
-	}
-}
-
-static char	*expand_quote(char *line)
-{
-	ssize_t	len;
-	char	*line2;
-
-	if (!line)
 		return (NULL);
-	len = ft_strlen(line);
-	line2 = ft_calloc(len + 1, sizeof(char));
-	if (!line2)
+	}
+	ans = ft_strjoin(str1, str2);
+	free(str1);
+	free(str2);
+	if (!ans)
 		_err_malloc();
-	expand_quote_utils(line, line2, NULL);
+	return (ans);
+}
+
+char	*expand(char *line, t_env *env)
+{
+	size_t	i;
+	char	**str;
+	char	*first;
+	int		status;
+
+	i = 0;
+	first = ft_strdup("");
+	if (!first)
+		_err_malloc();
+	str = &first;
+	status = NO_QUOTE;
+	while (line && i < ft_strlen(line))
+	{
+		if (!str || !*str)
+			_err_malloc();
+		if (is_skip(line[i], &status))
+			i++;
+		else if (line[i] == '$' && status != SINGLE_QUOTE)
+			i += expand_env(str, &line[i], env);
+		else
+			i += add_char(str, &(line[i]));
+	}
 	free(line);
-	return (line2);
+	return (*str);
+}
+
+char	*expand_quote(char *line)
+{
+	size_t	i;
+	char	**str;
+	char	*first;
+	int		status;
+
+	i = 0;
+	first = ft_strdup("");
+	if (!first)
+		_err_malloc();
+	str = &first;
+	status = NO_QUOTE;
+	while (line && i < ft_strlen(line))
+	{
+		if (!str || !*str)
+			_err_malloc();
+		if (is_skip(line[i], &status))
+			i++;
+		else
+			i += add_char(str, &(line[i]));
+	}
+	free(line);
+	return (*str);
+}
+
+char	*expand_all_env(char *line, t_env *env)
+{
+	size_t	i;
+	char	**str;
+	char	*first;
+
+	i = 0;
+	first = ft_strdup("");
+	if (!first)
+		_err_malloc();
+	str = &first;
+	while (line && i < ft_strlen(line))
+	{
+		if (line[i] == '$' && (i == 0 || line[i - 1] != '\\'))
+			i += expand_env(str, &line[i], env);
+		else
+			i += add_char(str, &(line[i]));
+	}
+	free(line);
+	return (*str);
 }
 
 void	expand_token(t_token **token, t_env *env, bool f)
@@ -126,8 +133,7 @@ void	expand_token(t_token **token, t_env *env, bool f)
 		}
 		else if (is_heredoc_flag(tmp->word))
 			f = true;
-		tmp->word = vari_expand(tmp->word, env);
-		tmp->word = expand_quote(tmp->word);
+		tmp->word = expand(tmp->word, env);
 		tmp = tmp->next;
 	}
 }

@@ -25,7 +25,7 @@ SRCS				=	srcs/buildin/buildin.c \
 						srcs/buildin/pwd.c \
 						srcs/buildin/unset.c \
 						srcs/environ/expand.c \
-						srcs/environ/expand2.c \
+						srcs/environ/expand_utils.c \
 						srcs/environ/expand3.c \
 						srcs/environ/make_lstenvp.c \
 						srcs/environ/make_lstenvp_utils.c \

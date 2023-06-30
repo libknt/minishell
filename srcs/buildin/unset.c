@@ -6,8 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:36:46 by marai             #+#    #+#             */
-/*   Updated: 2023/06/28 14:18:03 by marai            ###   ########.fr       */
-/*                                                                            */
+/*   Updated: 2023/06/27 13:58:55 by marai            ###   ########.fr       */                                                       */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -61,6 +60,8 @@ void	unset(char *argv[], t_env **env, t_status *s)
 	s->f = true;
 	s->status = 0;
 	i = 1;
+	if (!argv[1])
+		return ;
 	while (argv[i])
 	{
 		if (!is_key_valid(argv[i]))
