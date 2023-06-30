@@ -3,11 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahito <masahito@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:36:46 by marai             #+#    #+#             */
-/*   Updated: 2023/06/30 22:20:51 by masahito         ###   ########.fr       */
-/*                                                                            */
+/*   Updated: 2023/06/27 13:58:55 by marai            ###   ########.fr       */                                                       */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -38,6 +37,9 @@ static void	unset_env(char *arg, t_env **env)
 
 static bool	is_key_valid(char *str)
 {
+	ssize_t	i;
+
+	i = 0;
 	if (!str)
 		return (false);
 	if (!is_identifier(str))
