@@ -30,7 +30,11 @@ static char	*make_abs_path(char *path, char *argv, char *home)
 	if (!ft_strncmp(argv, "./", 2))
 		i = 2;
 	ft_strlcat(path, "/", ft_strlen(path) + 2);
-	ft_strlcat(path, &argv[i], PATH_MAXLEN);
+	while (i < ft_strlen(argv))
+	{
+		ft_strlcat(path, &argv[i], ft_strlen(path) + 2);
+		i++;
+	}
 	return (path);
 }
 
@@ -39,7 +43,8 @@ static int	move_to_abs_path(char *path)
 	int		status;
 
 	status = chdir(path);
-	cd_err_check(path, status);
+	if (status < 0)
+		ft_putendl_fd(" No such file or directory", STDERR_FILENO);
 	return (status);
 }
 
@@ -65,7 +70,8 @@ int	move_to_home_or_rel_path(char *path[], t_env *env)
 	}
 	if (home)
 		free(home);
-	cd_err_check(home_path, status);
+	if (status < 0)
+		ft_putendl_fd(" No such file or directory", STDERR_FILENO);
 	return (status);
 }
 
@@ -89,9 +95,7 @@ int	cd(char *argv[], t_env **env, t_status *s)
 	}
 	else if (argv[1] && PATH_MAXLEN - 1 < ft_strlen(argv[1]))
 	{
-		ft_putstr_fd("minishell: cd: no such file or directory:", \
-			STDERR_FILENO);
-		ft_putendl_fd(argv[1], STDERR_FILENO);
+		ft_putendl_fd("minishell: cd: too long path", STDERR_FILENO);
 		status = -1;
 	}
 	else if (argv[1] && argv[1][0] == '/')

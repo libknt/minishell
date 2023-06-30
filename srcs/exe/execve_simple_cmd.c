@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_simple_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/06/28 11:17:23 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/25 13:03:03 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	execve_cmd(char **argv, char **envp, t_node *node)
 	waitpid(pid, &waitstatus, 0);
 	g_global.exit_status = waitstatus;
 	if (WIFSIGNALED(waitstatus))
-		g_global.exit_status = 128 + waitstatus;
+		g_global.exit_status += 128;
 	exec_action();
 	return (0);
 }

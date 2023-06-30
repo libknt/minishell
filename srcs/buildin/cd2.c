@@ -12,19 +12,6 @@
 
 #include "minishell.h"
 
-void	cd_err_check(char *path, int status)
-{
-	if (status < 0)
-	{
-		if (!access(path, F_OK) && (access(path, R_OK) == -1 || \
-			access(path, X_OK) == -1))
-			ft_putendl_fd("minishell: cd: permission denied", STDERR_FILENO);
-		else
-			ft_putendl_fd(" No such file or directory", STDERR_FILENO);
-	}
-	return ;
-}
-
 char	*get_home_dir(t_env *env)
 {
 	char	*homepath;

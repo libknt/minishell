@@ -40,6 +40,7 @@ void	ft_pwd(t_status *s)
 	{
 		write(1, pwd, ft_strlen(pwd));
 		write(1, "\n", 1);
-		free(pwd);
 	}
+	if (pwd)
+		free(pwd);
 }

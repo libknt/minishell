@@ -59,16 +59,10 @@ t_env	*make_env(char *key, char *value)
 
 	new = malloc(sizeof(t_env));
 	if (!new)
-		_err_malloc();
+		_err("malloc err\n");
 	new->key = ft_strdup(key);
-	if (!new->key)
-		_err_malloc();
 	if (value)
-	{
 		new->value = ft_strdup(value);
-		if (!new->value)
-			_err_malloc();
-	}
 	else
 		new->value = NULL;
 	new->prev = NULL;

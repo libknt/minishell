@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_access.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 22:45:28 by keys              #+#    #+#             */
-/*   Updated: 2023/06/27 13:09:03 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/25 17:14:01 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_directory(const char *str)
 
 static int	is_file_accessible_utils(char *str, struct stat buf)
 {
-	if (ft_strchr(str, '/') != 0)
+	if(ft_strchr(str,'/') != 0)
 	{
 		if (!(buf.st_mode & S_IXUSR))
 		{

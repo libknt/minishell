@@ -48,7 +48,7 @@ t_token	*new_token(char *str, t_token_type type)
 
 	new = ft_calloc(sizeof(t_token), 1);
 	if (!new)
-		_err_malloc();
+		_err("calloc");
 	new->ex_heredoc_flag = ft_calloc(sizeof(bool), 1);
 	if (!new->ex_heredoc_flag)
 		_err_malloc();
