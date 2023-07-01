@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:44:10 by keys              #+#    #+#             */
-/*   Updated: 2023/06/25 16:43:16 by marai            ###   ########.fr       */
+/*   Updated: 2023/07/01 16:57:49 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	exec_action(void)
 	{
 		write(STDERR_FILENO, "\n", 1);
 		ft_putstr_fd("\n", STDERR_FILENO);
-		g_global.exit_status = 130;
+		g_global.exit_status = 1;
 	}
 	else if (g_global.sig == SIGQUIT)
 	{
@@ -45,7 +45,7 @@ int	check_state(void)
 		rl_replace_line("", 0);
 		rl_done = 1;
 		g_global.interrupt = true;
-		g_global.exit_status = 130;
+		g_global.exit_status = 1;
 	}
 	else if (g_global.sig == SIGQUIT)
 	{
