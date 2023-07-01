@@ -75,19 +75,32 @@ $(OBJDIR)/%.o: %.c
 all: $(NAME)
 
 $(NAME):$(OBJS)
+	@make set
 	make -C libmshell
 	@mkdir -p .heredoc
 	$(CC) $^ $(CFLAGS) $(LIB) -o $@ -lreadline
 
 lib:
 	make  -C libmshell
-
+set:
+	@if [ -e ~/.inputrc ]; then \
+	mv ~/.inputrc ~/.inputrc.bak;\
+	fi
+	@echo "set echo-control-characters off" > ~/.inputrc
+unset:
+	@if [ -e ~/.inputrc ]; then \
+	rm ~/.inputrc;\
+	fi
+	@if [ -e ~/.inputrc.bak ]; then \
+	mv ~/.inputrc.bak ~/.inputrc;\
+	fi
 clean:
 	$(RM) -r $(OBJDIR)
 	make clean -C libmshell
 
-fclean: clean
+fclean: clean 
 	$(RM) $(NAME)
+	@make unset
 	make fclean -C libmshell
 	rm -f result
 
