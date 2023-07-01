@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/07/01 13:01:38 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/07/01 14:12:10 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static void	free_env(t_env *env)
 int	main(int argc, char **argv, char **envp)
 {
 	t_env		*env;
-	int			i;
 
 	(void)argv;
 	if (argc != 1)
@@ -73,6 +72,5 @@ int	main(int argc, char **argv, char **envp)
 	rl_outstream = stderr;
 	func_readline(&env, NULL, NULL, NULL);
 	free_env(env);
-	i = g_global.exit_status % 255;
-	return (i);
+	return (g_global.exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:55:38 by kyoda             #+#    #+#             */
-/*   Updated: 2023/07/01 12:13:03 by marai            ###   ########.fr       */
+/*   Updated: 2023/07/01 15:36:04 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,16 @@ int	exec(t_node *node, t_env **env, int fd1, int atty)
 	if (node->next == NULL)
 	{
 		waitpid(pid, &(d.status), 0);
-		g_global.exit_status = d.status;
-		if (WIFSIGNALED(d.status))
-			g_global.exit_status = 128 + d.status;
+		g_global.exit_status = calc_exit_status(d.status);
 	}
 	return (revert_free(node, d.argv, d.envp, d.rw));
+}
+
+int	calc_exit_status(int waitstatus)
+{
+	if (WIFSIGNALED(waitstatus))
+		waitstatus = 128 + waitstatus;
+	else if (255 < waitstatus)
+		waitstatus /= 256;
+	return (waitstatus);
 }

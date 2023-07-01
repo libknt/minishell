@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 12:49:59 by marai             #+#    #+#             */
-/*   Updated: 2023/07/01 11:57:36 by marai            ###   ########.fr       */
+/*   Updated: 2023/07/01 15:34:42 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ char			*exec_filename(char *prompt, char **envp);
 int				execve_simple_cmd(t_node *node, t_env **env);
 //execve.c
 int				exec(t_node *node, t_env **env, int fd1, int atty);
+int				calc_exit_status(int waitstatus);
 //execve2.c
 int				command_found(char **argv, char **envp);
 void			close_pipe(t_node *node, int rw[2], int fd1);
