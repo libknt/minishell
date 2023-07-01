@@ -1011,4 +1011,15 @@ assert 'exit 259'
 assert 'exit 260'
 assert 'exit 261'
 assert 'exit 262'
+
+assert 'ls | ./aaa'
+assert './aaa'
+assert 'a/aa'
+assert './a/aa'
+assert '/./aaa'
+assert './aa/a'
+assert './a/aa/'
+assert 'aaa/'
+assert 'aaa/.'
+
 cleanup
