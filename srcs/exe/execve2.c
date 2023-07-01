@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:55:38 by kyoda             #+#    #+#             */
-/*   Updated: 2023/07/01 10:54:49 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/07/01 12:59:55 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	command_found_utils(char **argv, char **envp)
 {
 	if (is_directory(argv[0]))
 	{
-		if(ft_strcmp(argv[0], ".") == 0)
+		if (ft_strcmp(argv[0], ".") == 0)
 			_err_period(argv[0]);
 		else if (ft_strcmp(argv[0], "..") == 0)
 			_err_cmd_not_found(argv[0]);
