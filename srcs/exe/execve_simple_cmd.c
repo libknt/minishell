@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/07/01 13:02:42 by marai            ###   ########.fr       */
+/*   Updated: 2023/07/01 15:35:06 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,7 @@ static int	execve_cmd(char **argv, char **envp, t_node *node)
 		execve(argv[0], argv, envp);
 	}
 	waitpid(pid, &waitstatus, 0);
-	g_global.exit_status = waitstatus;
-	if (WIFSIGNALED(waitstatus))
-		g_global.exit_status = 128 + waitstatus;
+	g_global.exit_status = calc_exit_status(waitstatus);
 	exec_action();
 	return (0);
 }
