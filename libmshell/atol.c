@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:47:59 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/25 13:00:14 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/07/01 15:30:21 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,11 @@ static long long	ft_overlong(const char *str, \
 		return (flag);
 	else if (result <= cutoff)
 	{
-		if (((result == cutoff) && (((unsigned long long)(*str - '0')) <= last))
-			|| (result < cutoff))
+		if (((result == cutoff) && ((((unsigned long long)(*str - '0')) <= last)&&((str[1] && (ft_isdigit(str[1]) != 0))|| (result < cutoff)))))
 		{
 			result *= (unsigned long long)base;
 			result += (unsigned long long)(*str - '0');
 			str++;
-			if (((result < cutoff)) && ft_isdigit(str[1]) == 0)
-				return (flag);
 		}
 		else
 			return (flag);
