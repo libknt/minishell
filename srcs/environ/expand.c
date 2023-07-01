@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masahito <masahito@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:36:02 by marai             #+#    #+#             */
-/*   Updated: 2023/06/30 14:33:36 by masahito         ###   ########.fr       */
+/*   Updated: 2023/07/01 17:11:52 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ char	*expand(char *line, t_env *env)
 			_err_malloc();
 		if (is_skip(line[i], &status))
 			i++;
-		else if (line[i] == '$' && status != SINGLE_QUOTE)
+		else if (line[i] == '$'
+			&& env_len(&(line[i + 1])) && status != SINGLE_QUOTE)
 			i += expand_env(str, &line[i], env);
 		else
 			i += add_char(str, &(line[i]));
