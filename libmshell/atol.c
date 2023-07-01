@@ -6,14 +6,30 @@
 /*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:47:59 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/25 13:00:14 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/07/01 15:44:31 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmshell.h"
 
-static long long	ft_overlong(const char *str, \
-		unsigned long long result, int base, long long flag)
+static bool	ft_is_over(unsigned long long result, unsigned long long cutoff,
+		unsigned long long last, const char *str)
+{
+	if (result == cutoff)
+	{
+		if ((((unsigned long long)(*str - '0')) <= last) && (str[1]
+				&& (ft_isdigit(str[1]) != 0)))
+			return (true);
+	}
+	if (result < cutoff)
+		return (true);
+	return (false);
+}
+
+static long long	ft_overlong(const char *str,
+								unsigned long long result,
+								int base,
+								long long flag)
 {
 	unsigned long long	cutoff;
 	unsigned long long	last;
@@ -24,14 +40,11 @@ static long long	ft_overlong(const char *str, \
 		return (flag);
 	else if (result <= cutoff)
 	{
-		if (((result == cutoff) && (((unsigned long long)(*str - '0')) <= last))
-			|| (result < cutoff))
+		if (ft_is_over(result, cutoff, last, str))
 		{
 			result *= (unsigned long long)base;
 			result += (unsigned long long)(*str - '0');
 			str++;
-			if (((result < cutoff)) && ft_isdigit(str[1]) == 0)
-				return (flag);
 		}
 		else
 			return (flag);
