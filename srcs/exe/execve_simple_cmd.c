@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_simple_cmd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:41:15 by keys              #+#    #+#             */
-/*   Updated: 2023/06/30 21:44:08 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/07/01 11:58:27 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	execve_cmd(char **argv, char **envp, t_node *node)
 	waitpid(pid, &waitstatus, 0);
 	g_global.exit_status = waitstatus;
 	if (WIFSIGNALED(waitstatus))
-		g_global.exit_status += 128;
+		g_global.exit_status = 128 + waitstatus;
 	exec_action();
 	return (0);
 }
