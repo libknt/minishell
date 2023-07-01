@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 00:30:45 by marai             #+#    #+#             */
-/*   Updated: 2023/06/25 13:02:11 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/07/01 17:26:09 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	ft_export(char *argv[], t_env **env, t_status *s)
 
 	s->f = true;
 	s->status = 0;
-	if (!argv[1])
+	if (!argv[1] || !argv[1][0])
 	{
 		envp = make_export_args(*env, 0, 0, 0);
 		envp = env_sort(envp);
