@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:55:38 by kyoda             #+#    #+#             */
-/*   Updated: 2023/06/30 21:44:54 by ubuntu2204       ###   ########.fr       */
+/*   Updated: 2023/07/01 10:54:49 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	command_found_utils(char **argv, char **envp)
 	{
 		if(ft_strcmp(argv[0], ".") == 0)
 			_err_period(argv[0]);
-		if (ft_strcmp(argv[0], "..") == 0)
+		else if (ft_strcmp(argv[0], "..") == 0)
 			_err_cmd_not_found(argv[0]);
 		else
 			_err_is_directory(argv[0]);
