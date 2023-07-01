@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/06/25 13:04:35 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/07/01 11:36:50 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void	free_env(t_env *env)
 int	main(int argc, char **argv, char **envp)
 {
 	t_env	*env;
+	int i;
 
 	(void)argv;
 	if (argc != 1)
@@ -72,5 +73,6 @@ int	main(int argc, char **argv, char **envp)
 	rl_outstream = stderr;
 	func_readline(&env, NULL, NULL, NULL);
 	free_env(env);
-	return (g_global.exit_status);
+	i = g_global.exit_status % 255;
+	return (i);
 }

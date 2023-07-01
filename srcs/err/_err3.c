@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _err3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 23:24:55 by keys              #+#    #+#             */
-/*   Updated: 2023/06/25 13:02:53 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/06/30 21:45:43 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,23 @@ void	_err_heredoc(char *m)
 {
 	ft_putstr_fd(m, STDERR_FILENO);
 	ft_putendl_fd(": warning: wanted `EOF'", STDERR_FILENO);
+}
+
+void	*_err_no_such_file(char *m)
+{
+	g_global.exit_status = 127;
+	ft_putstr_fd("minishell:", STDERR_FILENO);
+	ft_putstr_fd(m, STDERR_FILENO);
+	ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+	return (NULL);
+}
+
+void	*_err_period(char *m)
+{
+	g_global.exit_status = 2;
+	ft_putstr_fd("minishell:", STDERR_FILENO);
+	ft_putstr_fd(m, STDERR_FILENO);
+	ft_putendl_fd(": filename argument required", STDERR_FILENO);
+	ft_putendl_fd("usage: . filename [arguments]", STDERR_FILENO);
+	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu2204 <ubuntu2204@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 12:49:59 by marai             #+#    #+#             */
-/*   Updated: 2023/06/25 12:52:57 by marai            ###   ########.fr       */
+/*   Updated: 2023/06/30 21:43:00 by ubuntu2204       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ void			_err_minishell(char *m);
 void			_err_is_directory(char *m);
 void			_err_permission(char *m);
 void			_err_heredoc(char *m);
+void			*_err_no_such_file(char *m);
+void			*_err_period(char *m);
 
 /*exe*/
 //exec.c
