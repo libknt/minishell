@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_access.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 22:45:28 by keys              #+#    #+#             */
-/*   Updated: 2023/07/01 11:58:26 by marai            ###   ########.fr       */
+/*   Updated: 2023/07/01 13:02:59 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	is_file_accessible(char *str)
 
 	if (stat(str, &buf) < 0)
 	{
-		if(ft_strchr(str,'/') != 0)
+		if (ft_strchr(str, '/') != 0)
 		{
 			_err_no_such_file(str);
 			return (true);
