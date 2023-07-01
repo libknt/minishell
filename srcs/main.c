@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:54:10 by keys              #+#    #+#             */
-/*   Updated: 2023/07/01 11:36:50 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/07/01 13:01:38 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ static void	free_env(t_env *env)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_env	*env;
-	int i;
+	t_env		*env;
+	int			i;
 
 	(void)argv;
 	if (argc != 1)
