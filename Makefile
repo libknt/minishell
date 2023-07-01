@@ -33,6 +33,7 @@ SRCS				=	srcs/buildin/buildin.c \
 						srcs/err/_err1.c \
 						srcs/err/_err2.c \
 						srcs/err/_err3.c \
+						srcs/err/_err4.c \
 						srcs/err/_err_utils.c \
 						srcs/exe/exe.c \
 						srcs/exe/exec_filename.c \
