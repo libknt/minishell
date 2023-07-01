@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 22:45:28 by keys              #+#    #+#             */
-/*   Updated: 2023/07/01 14:35:17 by marai            ###   ########.fr       */
+/*   Updated: 2023/07/01 16:38:59 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ static void	check_str(char *str)
 	if (*str == '\0')
 		exit(2);
 	check_sign(str);
+	if(str[0] == '-' || str[0] == '+')
+		i++;
 	while (1)
 	{
 		if (str[i] == '\0')
 			return ;
 		else
 		{
-			if (ft_isalpha(str[i]) == 1)
+			if (ft_isdigit(str[i]) != 1)
 			{
 				ft_putendl_fd("exit", STDERR_FILENO);
 				ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
