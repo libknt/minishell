@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 23:24:55 by keys              #+#    #+#             */
-/*   Updated: 2023/06/25 13:02:51 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/07/01 16:46:55 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ bool	_err_syntax(char *m)
 	ft_putstr_fd("minishell: syntax error near unexpected token ", \
 	STDERR_FILENO);
 	ft_putendl_fd(m, STDERR_FILENO);
-	g_global.exit_status = 258;
+	g_global.exit_status = 2;
 	return (true);
 }
 
 void	_err_syntax_p(char *m, bool *r)
 {
 	*r = true;
-	g_global.exit_status = 258;
+	g_global.exit_status = 2;
 	ft_putstr_fd("minishell: syntax error near unexpected token ", \
 	STDERR_FILENO);
 	ft_putendl_fd(m, STDERR_FILENO);
@@ -35,7 +35,7 @@ void	_err_syntax_p(char *m, bool *r)
 void	_err_parse_p(char *m, bool *r)
 {
 	*r = true;
-	g_global.exit_status = 258;
+	g_global.exit_status = 2;
 	ft_putstr_fd("minishell: parse error near unexpected token ", \
 STDERR_FILENO);
 	ft_putendl_fd(m, STDERR_FILENO);
