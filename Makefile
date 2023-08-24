@@ -67,10 +67,11 @@ SRCS				=	srcs/buildin/buildin.c \
 						srcs/signal/signal2.c
 
 OBJDIR   			= 	obj
-OBJS  				= 	$(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
+SRCDIR   			= 	srcs
+OBJS  				= 	$(subst $(SRCDIR), $(OBJDIR), $(SRCS:.c=.o))
 
-$(OBJDIR)/%.o: %.c
-	@mkdir -p $$(dirname $@)
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(dir $@)
 	$(CC) $(INCLUDE) $(INCLUDE_READLINE) $(CFLAGS) -o $@ -c $<
 
 all: $(NAME)
@@ -95,11 +96,11 @@ unset:
 	@if [ -e ~/.inputrc.bak ]; then \
 	mv ~/.inputrc.bak ~/.inputrc;\
 	fi
-clean:
+clean: 
 	$(RM) -r $(OBJDIR)
 	make clean -C libmshell
 
-fclean: clean 
+fclean: clean
 	$(RM) $(NAME)
 	@make unset
 	make fclean -C libmshell

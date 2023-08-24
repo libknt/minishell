@@ -6,7 +6,7 @@
 /*   By: marai <marai@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:44:10 by keys              #+#    #+#             */
-/*   Updated: 2023/07/01 12:37:50 by marai            ###   ########.fr       */
+/*   Updated: 2023/08/24 21:21:59 by marai            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	set_signal(void)
 	sig_int.sa_flags = 0;
 	sigaction(SIGINT, &sig_int, NULL);
 	sigemptyset(&sig_quit.sa_mask);
-	sig_quit.sa_handler = sig_handler;
+	sig_quit.sa_handler = SIG_IGN;
 	sig_int.sa_flags = 0;
 	sigaction(SIGQUIT, &sig_quit, NULL);
 }
